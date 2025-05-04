@@ -1,0 +1,88 @@
+{
+  "id": "ml-swiper-v3",
+  "displayName": "ml-swiper-v3 抖音短视频",
+  "version": "1.3.3",
+  "description": "仿抖音短视频（超高性能）H5、APP、小程序全端支持，可0配置，仿抖音短视频，丝滑切换视频效果 ，无限数据加载不卡顿，进度条、m3u8、全屏、自动切换等",
+  "keywords": [
+    "ml-swiper",
+    "H5|APP|小程序",
+    "仿抖音",
+    "短视频",
+    "无限滑动|自动切换"
+],
+  "repository": "",
+  "engines": {
+    "HBuilderX": "^4.0"
+  },
+"dcloudext": {
+    "type": "component-vue",
+    "sale": {
+      "regular": {
+        "price": "19.99"
+      },
+      "sourcecode": {
+        "price": "29.99"
+      }
+    },
+    "contact": {
+      "qq": "910494429"
+    },
+    "declaration": {
+      "ads": "无",
+      "data": "插件不采集任何数据",
+      "permissions": "APP端需要配置manifest.json -> App模块配置 -> 勾选VideoPlay(视频播放)。"
+    },
+    "npmurl": ""
+  },
+  "uni_modules": {
+    "dependencies": [],
+    "encrypt": [],
+    "platforms": {
+      "cloud": {
+        "tcb": "y",
+        "aliyun": "y",
+        "alipay": "y"
+      },
+      "client": {
+        "Vue": {
+          "vue2": "y",
+          "vue3": "y"
+        },
+        "App": {
+            "app-vue": "y",
+            "app-nvue": "y",
+            "app-uvue": "u",
+            "app-harmony": "u"
+        },
+        "H5-mobile": {
+          "Safari": "y",
+          "Android Browser": "y",
+          "微信浏览器(Android)": "y",
+          "QQ浏览器(Android)": "y"
+        },
+        "H5-pc": {
+          "Chrome": "y",
+          "IE": "y",
+          "Edge": "y",
+          "Firefox": "y",
+          "Safari": "y"
+        },
+        "小程序": {
+          "微信": "y",
+          "阿里": "u",
+          "百度": "u",
+          "字节跳动": "u",
+          "QQ": "u",
+          "钉钉": "u",
+          "快手": "u",
+          "飞书": "u",
+          "京东": "u"
+        },
+        "快应用": {
+          "华为": "u",
+          "联盟": "u"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,139 @@
+@use './scss/_variables.scss' as *;
+@use './scss/iconFont.scss' as *;
+@font-face {
+  font-family: 'PingFangSC-Medium';
+  src: url('@/assets/font/PingFangSC-Medium.otf');
+}
+@font-face {
+  font-family: 'PingFangSC-Regular';
+  src: url('@/assets/font/PingFangSC-Regular.otf');
+}
+@font-face {
+  font-family: 'PingFangTC-Medium';
+  src: url('@/assets/font/PingFangTC-Medium.otf');
+}
+@font-face {
+  font-family: 'PingFangTC-Regular';
+  src: url('@/assets/font/PingFangTC-Regular.otf');
+}
+@font-face {
+  font-family: 'Yuanti TC';
+  src: url('@/assets/font/Yuanti TC Regular.ttf');
+}
+:root {
+  --primary-color: #907bff;
+  --secondary-color: #c1bbf9;
+  --tertiary-color: #4e25ff;
+
+  --text-color: #000;
+  --text-color-primary: #000;
+  --text-color-secondary: #fff;
+  --text-color-tertiary: #f5f5f6;
+  --text-color-quaternary: #9d9d9e;
+  --text-color-quinary: #383838;
+  --text-color-senary: #2991bf;
+  --text-color-septenary: #c6c8c8;
+  --text-color-octonary: #dbdbdb;
+  --text-color-nonary: #c6c8c8;
+  --text-color-denary: #f1f1f1;
+  --text-color-error: #ff0000;
+
+  --input-border-color: #717071;
+  --data-color-up: #90c182;
+  --data-color-down: #cc4a30;
+  --link-color: #0868aa;
+  --favorite-color: #ffd939;
+  --play-progress-color: #595757;
+  --play-sponsor-color: #7c7c7c;
+  --play-sponsor-color-primary: #9ae8e6;
+  --play-sponsor-color-secondary: #86db86;
+  --play-sponsor-color-tertiary: #ffedcc;
+  --play-sponsor-color-quaternary: #ef7b91;
+  // 背景色 與 背景1 / 背景2
+  --background-color: #ffffff;
+  --background-color-dark: #040000;
+  --background-color-light: #ffffff;
+  --background-color-gray: #252525;
+  --background-color-grayLight: #f6f6f6;
+  --background-color-orange: #cc4a30;
+  --background-color-blue: #82beda;
+
+  --z-index-bottom-nav: 10000;
+}
+// 主題色
+html,
+body {
+  &.dark {
+    --background-color: #000000;
+    --background-color-dark: #ff0000;
+    --background-color-light: #ffffff;
+  }
+
+  &.light {
+    --background-color: #ffffff;
+    --background-color-dark: #000;
+    --background-color-light: #ffffff;
+  }
+}
+
+// ✅ 全站預設樣式
+html,
+body {
+  font-family:
+    'Noto Sans TC', 'PingFangTC-Regular', 'PingFangSC-Regular', 'PingFangTC-Medium',
+    'PingFangSC-Medium', 'Helvetica', 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  line-height: 1.5;
+}
+
+// ✅ 常用樣式重置
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+// .icon {
+//   width: 24rpx;
+//   height: 24rpx;
+// }
+
+/* 輸入欄位 */
+
+// 錯誤提示
+.error-text {
+  margin-top: 8rpx;
+  color: var(--text-color-error);
+  padding-left: 16rpx;
+}
+// 輸入提示
+.input-tip {
+  margin-top: 8rpx;
+  padding-left: 16rpx;
+  font-size: 24rpx;
+  color: var(--text-color-quaternary);
+}
+// 分析圖表標題
+.chart-title {
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+}

@@ -1,0 +1,154 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^u-charts$": "@/uni_modules/ucharts/components/qiun-$1/qiun-$1.vue",
+      "^ml-swiper-(.*)": "@/uni_modules/ml-swiper-v3/components/ml-swiper-v3/ml-swiper-$1.vue",
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
+      "^c-(.*)": "@/components/common/c-$1.vue",
+      "^charts-(.*)": "@/components/charts/charts-$1.vue",
+      "^post-(.*)": "@/components/posts/post-$1.vue",
+      "^play-(.*)": "@/components/plays/play-$1.vue"
+    }
+  },
+  "pages": [
+    {
+      "path": "pages/launch/loading",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+
+    {
+      "path": "pages/auth/login",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/auth/register",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/auth/verify-phone",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+
+    {
+      "path": "pages/play/index",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-dark)"
+      }
+    },
+    {
+      "path": "pages/play/article-gallery",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+
+    {
+      "path": "pages/post/media-preview",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/post/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/post/tagPeople",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+
+    {
+      "path": "pages/search/index",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-dark)"
+      }
+    },
+
+    {
+      "path": "pages/wallet/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/wallet/pay",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-gray)"
+      }
+    },
+
+    {
+      "path": "pages/creator/home",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/creator/subscription-setting",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-grayLight)"
+      }
+    },
+    {
+      "path": "pages/creator/subscription-edit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-grayLight)"
+      }
+    },
+    {
+      "path": "pages/creator/statistics",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-grayLight)"
+      }
+    },
+    {
+      "path": "pages/creator/favorites",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/creator/following",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    }
+  ],
+  "subPackages": [],
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#018fff",
+    "backgroundColor": "#ffffff",
+    "list": []
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "FanceNew",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  }
+}

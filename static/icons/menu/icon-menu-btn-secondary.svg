@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_圖層_2" data-name="圖層 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.9 45.9">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ebce40;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: #f5eb96;
+      }
+
+      .cls-4 {
+        fill: #e9c72c;
+      }
+    </style>
+  </defs>
+  <g id="_圖層_1-2" data-name="圖層 1">
+    <g>
+      <g id="Group-8">
+        <circle id="Oval" class="cls-1" cx="22.95" cy="22.95" r="22.95"/>
+        <circle id="Oval-2" class="cls-3" cx="22.95" cy="22.95" r="20.66"/>
+        <circle id="Oval-3" class="cls-2" cx="22.95" cy="22.95" r="16.83"/>
+      </g>
+      <g>
+        <rect class="cls-4" x="14.36" y="14.36" width="7.93" height="7.93" rx="1.98" ry="1.98"/>
+        <rect class="cls-4" x="23.61" y="14.36" width="7.93" height="7.93" rx="1.98" ry="1.98"/>
+        <rect class="cls-4" x="14.36" y="23.61" width="7.93" height="7.93" rx="1.98" ry="1.98"/>
+        <path class="cls-4" d="M30.88,26.92h-2.64v-2.64c0-.37-.3-.66-.66-.66s-.66.3-.66.66v2.64h-2.64c-.37,0-.66.3-.66.66s.3.66.66.66h2.64v2.64c0,.37.3.66.66.66s.66-.3.66-.66v-2.64h2.64c.37,0,.66-.3.66-.66s-.3-.66-.66-.66Z"/>
+      </g>
+    </g>
+  </g>
+</svg>

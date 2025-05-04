@@ -21,12 +21,13 @@
 		</view>
 		<!-- 开始使用组件  -->
 		<view class="play-swiper-container">
-			<ml-swiper-v3 v-if="list.length > 0" :list="list" :startIndex="startIndex" :force="force" :useSwiper="useSwiper"
-				:touch="touch" :options="options" @onchange="change" @transition="transition" @animationfinish="animationfinish"
-				@loadmore="loadmore" @longTap="longTap" @onclick="onclick" @ondblclick="ondblclick" @onplay="onplay"
-				@onpause="onpause" @onended="onended" @changing="changing" @changed="changed" @timeupdate="timeupdate"
-				@onwaiting="waiting" @fullscreenchange="fullscreenchange" @fullscreenclick="fullscreenclick"
-				@loadedmetadata="loadedmetadata" @onerror="error" @noTrigger="noTrigger" ref="mlSwiper">
+			<ml-swiper-v3 class="ml-swiper-v3-custom" v-if="list.length > 0" :list="list" :startIndex="startIndex"
+				:force="force" :useSwiper="useSwiper" :touch="touch" :options="options" @onchange="change"
+				@transition="transition" @animationfinish="animationfinish" @loadmore="loadmore" @longTap="longTap"
+				@onclick="onclick" @ondblclick="ondblclick" @onplay="onplay" @onpause="onpause" @onended="onended"
+				@changing="changing" @changed="changed" @timeupdate="timeupdate" @onwaiting="waiting"
+				@fullscreenchange="fullscreenchange" @fullscreenclick="fullscreenclick" @loadedmetadata="loadedmetadata"
+				@onerror="error" @noTrigger="noTrigger" ref="mlSwiper">
 				<!-- #ifndef H5 -->
 				<!-- 自定义 video 组件 根據 config.useVideo boolean 決定是否使用-->
 				<!-- <template #video="{ item, index }" v-if="!options.useVideo">
@@ -898,10 +899,24 @@ pages {
 
 /* 底部影音資訊 */
 .play-swiper-container {
+	.ml-swiper-v3-custom {}
+
 	::v-deep(.uni-swiper-slides) {
-		.swiper-video {
+		uni-swiper-item {
+			// height: calc(100vh - 1vh - 68px) !important;
+		}
+
+		.swiper-video,
+		uni-image[class="ml-scroll-img"] {
+			// width: 100% !important;
+			height: calc(100vh - 1vh - 68px) !important;
 			width: 100% !important;
-			height: 100% !important;
+			object-fit: cover;
+
+			// video {
+			// 	height: 100% !important;
+
+			// }
 		}
 
 		// 影音資訊區塊 + 進度條 + 底部導航列高

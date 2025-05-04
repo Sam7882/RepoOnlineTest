@@ -6,6 +6,11 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   base: mode === 'production' ? '/RepoOnlineTest/' : '/',
+  define: {
+    __VUE_I18N_FULL_INSTALL__: true,
+    __VUE_I18N_LEGACY_API__: true,     // ✅ 要啟用 legacy API，才能支援 Option API
+    __INTLIFY_PROD_DEVTOOLS__: false,
+  },
   plugins: [
     uni(),
     AutoImport({

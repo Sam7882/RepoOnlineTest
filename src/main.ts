@@ -12,7 +12,8 @@ import '@/assets/styles/tailwind/tailwind.css';
 import '@/assets/styles/global.scss';
 
 const i18n = createI18n({
-  legacy: false,
+  legacy: false,         // ✅ 關閉 legacy 模式
+  globalInjection: true, // ✅ 讓 $t() 能用於 Options API
   locale: 'zh_TW',
   fallbackLocale: 'en-US',
   messages,

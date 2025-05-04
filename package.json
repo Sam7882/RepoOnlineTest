@@ -55,6 +55,7 @@
     "@dcloudio/uni-ui": "^1.5.7",
     "animejs": "^4.0.2",
     "hls.js": "^1.6.2",
+    "i": "^0.3.7",
     "ml-swiper-v3": "file:uni_modules/ml-swiper-v3",
     "pinia": "^3.0.2",
     "ucharts": "^0.0.0",

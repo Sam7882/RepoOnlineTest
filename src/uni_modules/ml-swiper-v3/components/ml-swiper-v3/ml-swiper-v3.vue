@@ -348,7 +348,10 @@ export default {
         codec: "software",
         /** 0：普通模式，1：平滑播放模式（降级），2： M3U8优化模式 */
         playStrategy: 1
-      }
+      },
+      _autoPlayPending: false,     // 加載完成後，預期應該自動播放
+      _hasAutoPlayed: false,       // 是否真的成功播放
+      _pausedByPolicy: false       // 被瀏覽器策略擋住
     };
   },
   computed: {
@@ -806,24 +809,39 @@ export default {
     fullscreenclick(event) {
       this.$emit("fullscreenclick", event.detail);
     },
+    safePlay(index = this.current) {
+      setTimeout(() => {
+        const context = this.getContext(index);
+        // #ifdef H5
+        const player = this.player || document.getElementById(`video_${index}`);
+        // #endif
+
+        // 判斷是否可播放
+        const canContextPlay = context && typeof context.play === 'function';
+        const canPlayerPlay = player && typeof player.play === 'function';
+
+        if (canContextPlay) {
+          context.play();
+        }
+
+        // #ifdef H5
+        if (canPlayerPlay) {
+          player.play().catch((err) => {
+            console.warn('[safePlay] H5 播放補救失敗：', err);
+          });
+        }
+        // #endif
+      }, 100);
+    },
     loadedmetadata(event) {
       this.$emit("loadedmetadata", event);
 
-      // 延遲檢查是否真的播放
-      setTimeout(() => {
-        if (!this.playing) {
-          const context = this.getContext(this.current);
-          if (context && context.play) {
-            context.play();
-          }
-          // #ifdef H5
-          if (this.player && this.player.play) {
-            this.player.play().catch(err => {
-            });
-          }
-          // #endif
-        }
-      }, 500); // 延遲一點讓瀏覽器先嘗試自動播放
+      this._autoPlayPending = true;
+      this._hasAutoPlayed = false;
+      this._pausedByPolicy = false;
+
+      // 使用封裝的 safePlay
+      this.safePlay(this.current);
     },
     onerror(_e) {
       this.playing = false;

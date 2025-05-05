@@ -18,7 +18,7 @@
         :current-item-id="`s${current}`" @touchstart="start" @touchmove="move" @touchend="end"
         @animationfinish="animationfinish">
         <swiper-item ref="ani" :style="full" v-for="(item, index) in datas" :key="index" :item-id="`s${index}`">
-          <view class="ml-swiper-v3-item" :style="full" @longpress="longpress(item)">
+          <view class="ml-swiper-v3-item" :style="full" @longpress="longpress(item)" @load="">
             <template v-if="item.imgList && Array.isArray(item.imgList) && item.imgList.length > 0">
               <view :style="full" @tap="onclick(item)">
                 <ml-swiper-image :imgList="item.imgList" :width="config.width" :height="config.height"
@@ -808,6 +808,22 @@ export default {
     },
     loadedmetadata(event) {
       this.$emit("loadedmetadata", event);
+
+      // 延遲檢查是否真的播放
+      setTimeout(() => {
+        if (!this.playing) {
+          const context = this.getContext(this.current);
+          if (context && context.play) {
+            context.play();
+          }
+          // #ifdef H5
+          if (this.player && this.player.play) {
+            this.player.play().catch(err => {
+            });
+          }
+          // #endif
+        }
+      }, 500); // 延遲一點讓瀏覽器先嘗試自動播放
     },
     onerror(_e) {
       this.playing = false;

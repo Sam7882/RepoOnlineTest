@@ -296,7 +296,7 @@ const options = reactive({
 		text: "全屏观看", // 按钮显示的内容
 	},
 	direction: -90, // 0=正常竖向、90=屏幕逆时针90度、-90=屏幕顺时针90度 【APP特有属性】
-	loading: false, // 是否显示loading控件 【APP特有属性】
+	loading: true, // 是否显示loading控件 【APP特有属性】
 	useVideo: true, // 是否使用默认的video组件，为 false 时可以自定义 video，提供有 video 插槽 【APP特有属性】
 	duration: 300, // swiper 滑动动画时长
 	objectFit: "contain", // contain：包含，fill：填充，cover：覆盖
@@ -391,6 +391,11 @@ function ondblclick(event) {
 function onplay(event) {
 	playing.value = event.playing;
 	console.log(" == onplay == ", event);
+	console.log("🚀 ~ onplay ~ onplay:", onplay)
+	uni.showToast({
+		title: "開始播放",
+		icon: "none"
+	});
 }
 
 /** 暂停事件 */
@@ -398,11 +403,16 @@ function onpause(event) {
 	playing.value = event.playing;
 	console.log("🚀 ~ onpause ~ event:", event)
 	console.log(" == onpause == ", event);
+	uni.showToast({
+		title: "暂停事件",
+		icon: "none"
+	});
 }
 
 /** 结束事件 */
 function onended(event) {
 	console.log(" == onended == ", event);
+
 }
 
 /** 进度条拖动事件 */
@@ -438,11 +448,20 @@ function fullscreenclick(event) {
 /** 资源初始化完成事件 */
 function loadedmetadata(event) {
 	console.log(" == loadedmetadata == ", event);
+	console.log("🚀 ~ loadedmetadata ~ event:", event)
+	uni.showToast({
+		title: "資源初始化完成",
+		icon: "none"
+	});
 }
 
 /** 资源播放出错事件 */
 function error(event) {
 	console.log(" == error == ", event);
+	uni.showToast({
+		title: "資源播放出錯",
+		icon: "none"
+	});
 }
 
 /** 获取数据列表 */

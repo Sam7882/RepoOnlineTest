@@ -105,8 +105,9 @@ const handleClickToPage = (page) => {
 <style lang="scss" scoped>
 /* 底部導航列 */
 .bottom-nav-spacer {
-	height: 120rpx;
-	margin-top: 32rpx;
+	--bottom-nav-spacer-height: 136rpx;
+	height: var(--bottom-nav-spacer-height);
+	padding-top: 32rpx;
 }
 
 .bottom-nav-container {
@@ -115,6 +116,7 @@ const handleClickToPage = (page) => {
 	left: 0;
 	z-index: var(--z-index-bottom-nav);
 	width: 100%;
+	height: var(--bottom-nav-spacer-height);
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;

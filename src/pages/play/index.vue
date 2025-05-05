@@ -140,9 +140,9 @@
 				<template #fullscreen="{ fullScreen }" v-if="!options.showFullScreen">
 					<!-- 播放狀態按鈕 -->
 					<view class="play-status-container">
-						<uni-icons v-if="playing" class="icon icon-video-play" type="icon-video-play" custom-prefix="icon" size="18"
-							color="#fff" />
-						<uni-icons v-else class="icon icon-stander-pause2" type="icon-stander-pause2" custom-prefix="icon" size="18"
+						<uni-icons v-if="playing" class="icon icon-stander-pause2" type="icon-stander-pause2" custom-prefix="icon"
+							size="18" color="#fff" />
+						<uni-icons v-else class="icon icon-video-play" type="icon-video-play" custom-prefix="icon" size="18"
 							color="#fff" />
 					</view>
 					<!-- 全螢幕按鈕 -->
@@ -162,7 +162,7 @@
 			</ml-swiper-v3>
 		</view>
 		<!-- 底部導航 -->
-		<c-bottomNav class="bottom-nav" :bgColor="'var(--background-color-dark)'" :iconColor="'var(--text-color-secondary)'"
+		<c-bottomNav :bgColor="'var(--background-color-dark)'" :iconColor="'var(--text-color-secondary)'"
 			:primaryMenu="'primary'" />
 		<play-popMessage ref="videoPopMessage"></play-popMessage>
 		<play-popSponsor ref="videoPopSponsor"></play-popSponsor>
@@ -282,9 +282,10 @@ const touch = reactive({
 });
 
 /** 组件配置  */
+// NOTE: 影音頁 播放器高度無法自動偵測組件的高度，需要直接寫死數值才能正確渲染
 const options = reactive({
 	// width: uni.getSystemInfoSync().windowWidth, // 组件宽度
-	height: uni.getSystemInfoSync().windowHeight - uni.getSystemInfoSync().statusBarHeight - uni.getSystemInfoSync().safeAreaInsets.bottom, // 组件高度(适配安全距离)
+	height: uni.getSystemInfoSync().windowHeight - uni.getSystemInfoSync().statusBarHeight - uni.getSystemInfoSync().safeAreaInsets.bottom - 68, // 组件高度(适配安全距离)
 	loadingText: "加载中...", // 初始化时的提示内容
 	criticalVal: 2, // 临界值
 	showProgress: true, // 是否显示进度条
@@ -646,13 +647,12 @@ pages {
 }
 
 // bottom-nav
-.bottom-nav {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	z-index: 100;
-
-}
+// .bottom-nav {
+// 	position: absolute;
+// 	bottom: 0;
+// 	left: 0;
+// 	z-index: 100;
+// }
 
 /* 右側工具欄 */
 .right {
@@ -899,6 +899,10 @@ pages {
 
 /* 底部影音資訊 */
 .play-swiper-container {
+	--bottomNav-margin-height: 32rpx; // 與底部導航的間距
+	--progress-bar-margin-height: 54rpx; // 影音進度條與底部導航的間距
+	--info-margin-height: 48rpx; // 影音資訊區塊與底部導航的間距
+
 	.ml-swiper-v3-custom {}
 
 	::v-deep(.uni-swiper-slides) {
@@ -909,8 +913,8 @@ pages {
 		.swiper-video,
 		uni-image[class="ml-scroll-img"] {
 			// width: 100% !important;
-			height: calc(100vh - 1vh - 68px) !important;
-			width: 100% !important;
+			// height: calc(100vh - 1vh - 68px) !important;
+			// width: 100% !important;
 			object-fit: cover;
 
 			// video {
@@ -921,7 +925,7 @@ pages {
 
 		// 影音資訊區塊 + 進度條 + 底部導航列高
 		.ml-swiper-v3-bottom {
-			bottom: calc(112rpx + 6rpx + 136rpx);
+			bottom: calc(var(--bottomNav-margin-height) + var(--progress-bar-margin-height) + var(--info-margin-height));
 			padding: 0 40rpx;
 			display: flex;
 			flex-direction: column;
@@ -967,12 +971,12 @@ pages {
 
 		// 圖文多張進度條
 		.ml-scroll-img-dot {
-			bottom: calc(6rpx + 54rpx + 136rpx) !important;
+			bottom: calc(var(--bottomNav-margin-height) + var(--progress-bar-margin-height)) !important;
 		}
 
 		// 影音進度條
 		.ml-swiper-v3-progress-view {
-			bottom: calc(6rpx + 54rpx + 136rpx) !important;
+			bottom: calc(var(--bottomNav-margin-height) + var(--progress-bar-margin-height)) !important;
 			background: transparent;
 
 			.uni-slider-handle-wrapper {
@@ -998,7 +1002,7 @@ pages {
 		// 全螢幕按鈕 16rpx 與底部導航 間距 全螢幕按鈕為 38+16=54rpx
 		.ml-swiper-v3-fullscreen-view {
 			z-index: 100;
-			bottom: calc(136rpx + 16rpx) !important;
+			bottom: calc(var(--bottomNav-margin-height)) !important;
 			width: 100% !important;
 			display: flex;
 			justify-content: space-between;

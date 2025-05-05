@@ -4,5 +4,131 @@
 		"src/i18n/locales",
 		"src/assets/images/lang",
 		"src/static/images/lang"
-	]
+	],
+	"explorer.confirmDragAndDrop": false,
+	"security.workspace.trust.untrustedFiles": "open",
+	"bracketPairColorizer.depreciation-notice": false,
+	"liveServer.settings.donotShowInfoMsg": true,
+	"emmet.triggerExpansionOnTab": true,
+	"[javascript]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features"
+	},
+	"[vue]": {
+		"editor.defaultFormatter": "Vue.volar"
+	},
+	"liveSassCompile.settings.formats": [
+		{
+			"format": "expanded",
+			"extensionName": ".css",
+			"savePath": "~/../css",
+			"savePathReplacementPairs": null
+		}
+	],
+	"explorer.confirmDelete": false,
+	"[scss]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[css]": {
+		"editor.defaultFormatter": "vscode.css-language-features"
+	},
+	"workbench.editor.showTabs": "multiple",
+	"workbench.editor.enablePreview": false,
+	"editor.tabSize": 2,
+	"gutterpreview.imagePreviewMaxHeight": 100,
+	"gutterpreview.imagePreviewMaxWidth": 100,
+	"gutterpreview.paths": {},
+	"gutterpreview.showImagePreviewOnGutter": false,
+	"todo-tree.highlights.customHighlight": {
+		"TODO": {
+			"foreground": "#FFEB38",
+			"type": "line"
+		},
+		"BUG": {
+			"icon": "bug",
+			"foreground": "#F56C6C",
+			"type": "line"
+		},
+		"HACK": {
+			"icon": "versions",
+			"foreground": "#E040FB",
+			"type": "line"
+		},
+		"FIXME": {
+			"icon": "flame",
+			"foreground": "#E91E63",
+			"type": "line"
+		},
+		"XXX": {
+			"icon": "unverified",
+			"foreground": "#E91E63",
+			"type": "line"
+		},
+		"TEMP": {
+			"icon": "cloud",
+			"foreground": "#3ad4ff",
+			"type": "line"
+		},
+		"NOTE": {
+			"icon": "note",
+			"foreground": "#6df22a",
+			"type": "line"
+		},
+		"TAG": {
+			"icon": "tag",
+			"foreground": "#00ff4c",
+			"type": "line"
+		},
+		"[?]": {
+			"icon": "question",
+			"foreground": "#ffb300",
+			"type": "line"
+		},
+		"[API]": {
+			"icon": "copilot",
+			"foreground": "#8772fe",
+			"type": "line"
+		}
+	},
+	"todo-tree.highlights.defaultHighlight": {},
+	"todo-tree.general.tags": [
+		"BUG",
+		"HACK",
+		"FIXME",
+		"TODO",
+		"XXX",
+		"[ ]",
+		"[x]",
+		"TEMP",
+		"NOTE",
+		"TAG",
+		"[?]",
+		"[API]"
+	],
+	"todo-tree.general.tagGroups": {},
+	"editor.guides.bracketPairs": true,
+	"editor.stickyScroll.enabled": false,
+	"editor.accessibilitySupport": "on",
+	"files.associations": {
+		"*.vue": "vue"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	},
+	"[yaml]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"workbench.activityBar.orientation": "vertical",
+	"workbench.colorTheme": "Default Dark+",
+	"cSpell.language": "",
+	"editor.insertSpaces": false,
+	"editor.formatOnSave": true,
+	"update.releaseTrack": "prerelease",
+	"editor.dropIntoEditor.enabled": false,
+	"terminal.integrated.enableMultiLinePasteWarning": false
 }

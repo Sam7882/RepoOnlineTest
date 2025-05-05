@@ -27,7 +27,7 @@
 				@onclick="onclick" @ondblclick="ondblclick" @onplay="onplay" @onpause="onpause" @onended="onended"
 				@changing="changing" @changed="changed" @timeupdate="timeupdate" @onwaiting="waiting"
 				@fullscreenchange="fullscreenchange" @fullscreenclick="fullscreenclick" @loadedmetadata="loadedmetadata"
-				@onerror="error" @noTrigger="noTrigger" ref="mlSwiper">
+				@onerror="error" @noTrigger="noTrigger" @onmute="onmute" ref="mlSwiper">
 				<!-- #ifndef H5 -->
 				<!-- 自定义 video 组件 根據 config.useVideo boolean 決定是否使用-->
 				<!-- <template #video="{ item, index }" v-if="!options.useVideo">
@@ -36,7 +36,7 @@
 			</template> -->
 				<!-- #endif -->
 				<!-- 右侧工具栏插槽 -->
-				<template #right="{ item }">
+				<template #right="{ item, soundMute }">
 					<view class="right">
 						<!-- 頭像 -->
 						<view class="right-tool-avatar-container-wrapper">
@@ -52,11 +52,13 @@
 						<view class="right-tool-item-container">
 							<!-- 聲音 -->
 							<view class="right-tool-item-container-item sound-container" :class="{ active: soundMute }"
-								@click="switchSound">
-								<uni-icons class="icon icon-video-sound-off" v-if="soundMute" type="icon-stander-volume-medium"
+								@click="toggleMute(soundMute)">
+								<!--  靜音標示 -->
+								<uni-icons class="icon icon-video-sound-off" v-if="soundMute" type="icon-stander-volume-mute2"
 									custom-prefix="icon" size="24" />
-								<uni-icons class="icon icon-video-sound-on" v-else type="icon-stander-volume-mute2" custom-prefix="icon"
-									size="24" />
+								<!--  非靜音標示 -->
+								<uni-icons class="icon icon-video-sound-on" v-else type="icon-stander-volume-medium"
+									custom-prefix="icon" size="24" />
 							</view>
 							<!-- 喜歡 -->
 							<view class="right-tool-item-container-item" :class="{ active: isFavorite }" @click="likeThis">
@@ -178,7 +180,6 @@ import { toSearchHome, toCreatorHome, toPlayArticleGallery } from '@/utils/route
 
 /* NOTE:非播放組件  */
 // 右側工具欄位
-const soundMute = ref(true); // 音量控制
 const isFavorite = ref(false); // 是否喜歡
 const isCollect = ref(false); // 是否收藏
 const videoPopMessage = ref(null) // 留言彈跳窗口
@@ -214,10 +215,10 @@ const toSubscription = () => {
 const likeThis = () => {
 	isFavorite.value = !isFavorite.value;
 }
-// 聲音
-const switchSound = () => {
-	soundMute.value = !soundMute.value;
-	console.log("🚀 == 聲音 == ")
+// 聲音 靜音開關
+const toggleMute = (soundMute) => {
+	mlSwiper.value.toggleMute(soundMute)
+	console.log("🚀 == 聲音 == ", soundMute)
 }
 // 留言
 const openPopMessage = () => {
@@ -249,13 +250,13 @@ const setFilter = () => {
 }
 // 底部按鈕
 const openImageFullScreen = () => {
-	console.log("🚀 == 開啟圖片全螢幕 == ")
+	console.log("🚀 == 圖片全螢幕 == ")
 	imageFullScreenImgs.value = list.value[0].imgList
 	videoPopImgFullScreen.value?.open()
 }
 
 const triggerFullScreen = () => {
-	console.log("🚀 ~ 我要全螢幕啦");
+	console.log("🚀 ~ 影音全螢幕");
 	mlSwiper.value?.fullScreen?.(); // 呼叫子組件方法
 }
 
@@ -382,6 +383,11 @@ function onclick(event) {
 	console.log(" == onclick == ", event);
 }
 
+/** 靜音事件 */
+function onmute(event) {
+	console.log(" == onmute == ", event);
+}
+
 /** 双击事件 */
 function ondblclick(event) {
 	console.log(" == ondblclick == ", event);
@@ -391,28 +397,17 @@ function ondblclick(event) {
 function onplay(event) {
 	playing.value = event.playing;
 	console.log(" == onplay == ", event);
-	console.log("🚀 ~ onplay ~ onplay:", onplay)
-	uni.showToast({
-		title: "開始播放",
-		icon: "none"
-	});
 }
 
 /** 暂停事件 */
 function onpause(event) {
 	playing.value = event.playing;
 	console.log("🚀 ~ onpause ~ event:", event)
-	console.log(" == onpause == ", event);
-	uni.showToast({
-		title: "暂停事件",
-		icon: "none"
-	});
 }
 
 /** 结束事件 */
 function onended(event) {
 	console.log(" == onended == ", event);
-
 }
 
 /** 进度条拖动事件 */
@@ -448,11 +443,6 @@ function fullscreenclick(event) {
 /** 资源初始化完成事件 */
 function loadedmetadata(event) {
 	console.log(" == loadedmetadata == ", event);
-	console.log("🚀 ~ loadedmetadata ~ event:", event)
-	uni.showToast({
-		title: "資源初始化完成",
-		icon: "none"
-	});
 }
 
 /** 资源播放出错事件 */
@@ -468,35 +458,21 @@ function error(event) {
 function getList() {
 	return [
 		{
-			title: "0、图片列表",
-			poster: 'http://gips2.baidu.com/it/u=195724436,3554684702&fm=3028',
-			imgList: [
-				'http://gips2.baidu.com/it/u=195724436,3554684702&fm=3028',
-				'http://gips3.baidu.com/it/u=3886271102,3123389489&fm=3028',
-				'http://gips0.baidu.com/it/u=3602773692,1512483864&fm=3028',
-				'http://gips3.baidu.com/it/u=119870705,2790914505&fm=3028',
-				'http://gips0.baidu.com/it/u=2298867753,3464105574&fm=3028',
-				'http://gips2.baidu.com/it/u=3944689179,983354166&fm=3028'
-			],
-			ageChecked: false,
-			locked: false
-		},
-		{
-			title: "1、小狗、JKwu",
-			poster: 'http://gips2.baidu.com/it/u=195724436,3554684702&fm=3028',
-			url: "https://txmov2.a.yximgs.com/upic/2020/11/08/19/BMjAyMDExMDgxOTQxNTlfNTIzNDczMzQ0XzM4OTQ1MDk5MTI4XzFfMw==_b_Bc770a92f0cf153407d60a2eddffeae2a.mp4",
-			ageChecked: false,
-			locked: true
-		},
-		{
 			title: "2、w_girl、御",
 			poster: 'http://gips3.baidu.com/it/u=3886271102,3123389489&fm=3028',
 			url: "https://txmov2.a.yximgs.com/upic/2020/10/02/09/BMjAyMDEwMDIwOTAwMDlfMTIyMjc0NTk0Ml8zNjk3Mjg0NjcxOF8xXzM=_b_B28a4518e86e2cf6155a6c1fc9cf79c6d.mp4",
-			ageChecked: true,
+			ageChecked: false,
 			locked: false
 		},
 		{
-			title: "3、图片列表",
+			title: "0、小狗、JKwu",
+			poster: 'http://gips2.baidu.com/it/u=195724436,3554684702&fm=3028',
+			url: "https://txmov2.a.yximgs.com/upic/2020/11/08/19/BMjAyMDExMDgxOTQxNTlfNTIzNDczMzQ0XzM4OTQ1MDk5MTI4XzFfMw==_b_Bc770a92f0cf153407d60a2eddffeae2a.mp4",
+			ageChecked: false,
+			locked: false
+		},
+		{
+			title: "1、图片列表",
 			poster: 'http://gips2.baidu.com/it/u=195724436,3554684702&fm=3028',
 			imgList: [
 				'http://gips2.baidu.com/it/u=195724436,3554684702&fm=3028',
@@ -513,6 +489,13 @@ function getList() {
 			title: "4、猫耳朵、多",
 			poster: 'http://gips0.baidu.com/it/u=3602773692,1512483864&fm=3028',
 			url: "https://alimov2.a.yximgs.com/upic/2020/07/02/14/BMjAyMDA3MDIxNDUyMDlfOTExMjIyMjRfMzE1OTEwNjAxNTRfMV8z_b_Bf3005d42ce9c01c0687147428c28d7e6.mp4",
+			ageChecked: false,
+			locked: true
+		},
+		{
+			title: "7、虎、JKwu",
+			poster: 'http://gips0.baidu.com/it/u=2298867753,3464105574&fm=3028',
+			url: "https://txmov2.a.yximgs.com/upic/2020/11/08/19/BMjAyMDExMDgxOTQxNTlfNTIzNDczMzQ0XzM4OTQ1MDk5MTI4XzFfMw==_b_Bc770a92f0cf153407d60a2eddffeae2a.mp4",
 			ageChecked: true,
 			locked: false
 		},
@@ -520,9 +503,24 @@ function getList() {
 			title: "5、花、白衣服wu",
 			poster: 'http://gips3.baidu.com/it/u=119870705,2790914505&fm=3028',
 			url: "https://txmov6.a.yximgs.com/upic/2020/08/23/00/BMjAyMDA4MjMwMDMyNDRfMTYzMzY5MDA0XzM0ODI4MDcyMzQ5XzFfMw==_b_B9a1c9d4e3a090bb2815994d7f33a906a.mp4",
-			ageChecked: true,
+			ageChecked: false,
 			locked: false
 		},
+		{
+			title: "3、图片列表",
+			poster: 'http://gips2.baidu.com/it/u=195724436,3554684702&fm=3028',
+			imgList: [
+				'http://gips2.baidu.com/it/u=195724436,3554684702&fm=3028',
+				'http://gips3.baidu.com/it/u=3886271102,3123389489&fm=3028',
+				'http://gips0.baidu.com/it/u=3602773692,1512483864&fm=3028',
+				'http://gips3.baidu.com/it/u=119870705,2790914505&fm=3028',
+				'http://gips0.baidu.com/it/u=2298867753,3464105574&fm=3028',
+				'http://gips2.baidu.com/it/u=3944689179,983354166&fm=3028'
+			],
+			ageChecked: false,
+			locked: false
+		},
+
 		{
 			title: "6、图片列表",
 			poster: 'http://gips2.baidu.com/it/u=195724436,3554684702&fm=3028',
@@ -537,13 +535,7 @@ function getList() {
 			ageChecked: true,
 			locked: false
 		},
-		{
-			title: "7、虎、JKwu",
-			poster: 'http://gips0.baidu.com/it/u=2298867753,3464105574&fm=3028',
-			url: "https://txmov2.a.yximgs.com/upic/2020/11/08/19/BMjAyMDExMDgxOTQxNTlfNTIzNDczMzQ0XzM4OTQ1MDk5MTI4XzFfMw==_b_Bc770a92f0cf153407d60a2eddffeae2a.mp4",
-			ageChecked: true,
-			locked: false
-		},
+
 		{
 			title: "8、c_girl、御",
 			poster: 'http://gips2.baidu.com/it/u=3944689179,983354166&fm=3028',

@@ -33,7 +33,7 @@
               <!-- #ifndef H5 & WEB -->
               <video class="swiper-video" :key="`${videoKey}_${index}`" :ref="`video_${index}`" :id="`video_${index}`"
                 :src="item.url" :title="item.title" :poster="item.poster" :controls="pagedatas.fullScreen"
-                :autoplay="false" :loop="!config.autoChange" :muted="false" show-center-play-btn
+                :autoplay="false" :loop="!config.autoChange" :muted="true" show-center-play-btn
                 :show-loading="config.loading" :duration="item.duration || 0" :initial-time="item.initialTime || 0"
                 :object-fit="config.objectFit" :codec="config.codec" play-btn-position="center" @play="onplay"
                 @pause="onpause" @ended="onended" @timeupdate="ontimeupdate" @waiting="onwaiting" @error="onerror"
@@ -96,7 +96,7 @@
               <slot name="default" :item="item" :index="listIndex"></slot>
             </view>
             <view class="ml-swiper-v3-right" :style="`height:${maxHeight}px;`">
-              <slot name="right" :item="item" :index="listIndex"></slot>
+              <slot name="right" :item="item" :index="listIndex" :soundMute="soundMute"></slot>
             </view>
             <view class="ml-swiper-v3-bottom" :style="`width:${maxWidth}px;`">
               <slot name="bottom" :item="item" :index="listIndex"></slot>
@@ -270,7 +270,7 @@ export default {
       required: false
     }
   },
-  emits: ['onchange', 'transition', 'animationfinish', 'loadmore', 'longTap', 'onclick', 'ondblclick', 'onplay', 'onpause', 'onended', 'changing', 'changed', 'timeupdate', 'onwaiting', 'fullscreenchange', 'fullscreenclick', 'loadedmetadata', 'onerror', 'noTrigger'],
+  emits: ['onchange', 'transition', 'animationfinish', 'loadmore', 'longTap', 'onclick', 'ondblclick', 'onplay', 'onpause', 'onended', 'changing', 'changed', 'timeupdate', 'onwaiting', 'fullscreenchange', 'fullscreenclick', 'loadedmetadata', 'onerror', 'noTrigger', 'onmute'],
   data() {
     return {
       index: 0,
@@ -312,6 +312,7 @@ export default {
         timingFunction: 'ease-in',
         transformOrigin: '50% 50%'
       },
+      player: null,
       config: {
         /** 组件宽度 */
         width: uni.getSystemInfoSync().windowWidth,
@@ -349,9 +350,7 @@ export default {
         /** 0：普通模式，1：平滑播放模式（降级），2： M3U8优化模式 */
         playStrategy: 1
       },
-      _autoPlayPending: false,     // 加載完成後，預期應該自動播放
-      _hasAutoPlayed: false,       // 是否真的成功播放
-      _pausedByPolicy: false       // 被瀏覽器策略擋住
+      soundMute: true, // 預設為靜音
     };
   },
   computed: {
@@ -490,6 +489,8 @@ export default {
         that.isChange = false;
         that.disabledChange = false;
         that.initVideoContext(that.current);
+        // 當切換的時候，將靜音關閉 ，切換=>用戶行為 故可以播放中關閉靜音
+        that.toggleMute(true);
         if (that.currentItem && that.currentItem.playTime > 1) {
           that.setSeek(that.currentItem.playTime);
         }
@@ -809,39 +810,8 @@ export default {
     fullscreenclick(event) {
       this.$emit("fullscreenclick", event.detail);
     },
-    safePlay(index = this.current) {
-      setTimeout(() => {
-        const context = this.getContext(index);
-        // #ifdef H5
-        const player = this.player || document.getElementById(`video_${index}`);
-        // #endif
-
-        // 判斷是否可播放
-        const canContextPlay = context && typeof context.play === 'function';
-        const canPlayerPlay = player && typeof player.play === 'function';
-
-        if (canContextPlay) {
-          context.play();
-        }
-
-        // #ifdef H5
-        if (canPlayerPlay) {
-          player.play().catch((err) => {
-            console.warn('[safePlay] H5 播放補救失敗：', err);
-          });
-        }
-        // #endif
-      }, 100);
-    },
     loadedmetadata(event) {
       this.$emit("loadedmetadata", event);
-
-      this._autoPlayPending = true;
-      this._hasAutoPlayed = false;
-      this._pausedByPolicy = false;
-
-      // 使用封裝的 safePlay
-      this.safePlay(this.current);
     },
     onerror(_e) {
       this.playing = false;
@@ -914,6 +884,29 @@ export default {
         context.exitFullScreen();
       }
     },
+    toggleMute(status) {
+      try {
+        if (this.isImgList || !this.config.useVideo) { return; }
+        const context = this.getContext(this.current);
+        // #ifdef H5
+        if (this.player && this.player.play) {
+          this.player.pause();
+          this.player.muted = !status;
+          this.soundMute = this.player.muted;
+          this.player.play();
+        }
+        // #endif
+        if (context && context.play) {
+          context.pause();
+          context.mute = !status;
+          this.soundMute = context.mute;
+          context.play();
+        }
+        this.$emit('onmute', { status: !status });
+      } catch (e) {
+        console.error(e);
+      }
+    },
     play() {
       try {
         if (this.isImgList || !this.config.useVideo) { return; }
@@ -980,7 +973,7 @@ export default {
       const autoChange = this.config.autoChange;
       const src = item.url || item.src || "";
       return `<video id="video_${index}" src="${src}" poster="${item.poster}" title="${item.title}"
-              class="dplayer-video dplayer-video-current swiper-video" loop="${!autoChange}" muted="${false}"
+              class="dplayer-video dplayer-video-current swiper-video" loop="${!autoChange}" muted="${true}"
               preload="auto" x5-video-orientation="portrait" enable-progress-gesture="false" webkit-playsinline="true"
               playsinline="true" x-webkit-airplay="allow" x5-video-player-type="h5-page" objectFit="contain"
               style="${this.videoFull};pointer-events:auto !important;object-position: center;" key="${this.videoKey}">
@@ -1052,13 +1045,16 @@ export default {
         this.player = document.getElementById(this.playerId);
       }
       if (!this.player) return;
-      this.player.muted = false;
-      this.player.autoplay = this.listIndex > 0 && !this.config.autoChange;
       this.player.loop = !this.config.autoChange;
       let currentItem = this.currentItem;
       this.player.src = currentItem.url;
       this.player.title = currentItem.title;
       this.player.poster = currentItem.poster;
+      this.player.muted = true;
+      // 初始化聲音狀態 為靜音 true
+      this.soundMute = this.player.muted;
+      // 才可播放
+      this.player.play()
     },
     // #endif
     reset() {

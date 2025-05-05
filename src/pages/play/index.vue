@@ -346,6 +346,10 @@ function selected(index) {
 function change(index) {
 	current.value = index;
 	console.log(" == 滑动事件 == ", index);
+	uni.showToast({
+		title: "滑动事件",
+		icon: "none"
+	});
 }
 
 /** 加载更多 */
@@ -361,6 +365,10 @@ function loadmore() {
 /** 未触发事件 */
 function noTrigger(event) {
 	console.warn(event);
+	uni.showToast({
+		title: "未觸發事件",
+		icon: "none"
+	});
 }
 
 /** 滑动动画：APP端需要useSwiper为true生效，其他端正常 */
@@ -397,12 +405,20 @@ function ondblclick(event) {
 function onplay(event) {
 	playing.value = event.playing;
 	console.log(" == onplay == ", event);
+	uni.showToast({
+		title: "開始播放",
+		icon: "none"
+	});
 }
 
 /** 暂停事件 */
 function onpause(event) {
 	playing.value = event.playing;
 	console.log("🚀 ~ onpause ~ event:", event)
+	uni.showToast({
+		title: "暫停播放",
+		icon: "none"
+	});
 }
 
 /** 结束事件 */
@@ -459,6 +475,20 @@ function getList() {
 	return [
 		{
 			title: "2、w_girl、御",
+			poster: 'http://gips3.baidu.com/it/u=3886271102,3123389489&fm=3028',
+			url: "https://txmov2.a.yximgs.com/upic/2020/10/02/09/BMjAyMDEwMDIwOTAwMDlfMTIyMjc0NTk0Ml8zNjk3Mjg0NjcxOF8xXzM=_b_B28a4518e86e2cf6155a6c1fc9cf79c6d.mp4",
+			ageChecked: false,
+			locked: false
+		},
+		{
+			title: "2、w_girl、御-2",
+			poster: 'http://gips3.baidu.com/it/u=3886271102,3123389489&fm=3028',
+			url: "https://txmov2.a.yximgs.com/upic/2020/10/02/09/BMjAyMDEwMDIwOTAwMDlfMTIyMjc0NTk0Ml8zNjk3Mjg0NjcxOF8xXzM=_b_B28a4518e86e2cf6155a6c1fc9cf79c6d.mp4",
+			ageChecked: false,
+			locked: false
+		},
+		{
+			title: "2、w_girl、御-3",
 			poster: 'http://gips3.baidu.com/it/u=3886271102,3123389489&fm=3028',
 			url: "https://txmov2.a.yximgs.com/upic/2020/10/02/09/BMjAyMDEwMDIwOTAwMDlfMTIyMjc0NTk0Ml8zNjk3Mjg0NjcxOF8xXzM=_b_B28a4518e86e2cf6155a6c1fc9cf79c6d.mp4",
 			ageChecked: false,

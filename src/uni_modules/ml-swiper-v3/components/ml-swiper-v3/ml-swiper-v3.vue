@@ -17,7 +17,8 @@
         :disable-touch="touchable" :duration="config.duration" touchable @change="change" @transition="transition"
         :current-item-id="`s${current}`" @touchstart="start" @touchmove="move" @touchend="end"
         @animationfinish="animationfinish">
-        <swiper-item ref="ani" :style="full" v-for="(item, index) in datas" :key="index" :item-id="`s${index}`">
+        <swiper-item ref="ani" :style="full" class="" data-dom="swiperItem" v-for="(item, index) in datas" :key="index"
+          :item-id="`s${index}`">
           <view class="ml-swiper-v3-item" :style="full" @longpress="longpress(item)" @load="">
             <template v-if="item.imgList && Array.isArray(item.imgList) && item.imgList.length > 0">
               <view :style="full" @tap="onclick(item)">
@@ -490,7 +491,10 @@ export default {
         that.disabledChange = false;
         that.initVideoContext(that.current);
         // 當切換的時候，將靜音關閉 ，切換=>用戶行為 故可以播放中關閉靜音
+        const test = document.querySelectorAll(".swiper-item[data-dom='swiperItem']")
+        console.log("🚀 ~ this.lockedTimer=setTimeout ~ toggleMute:", test)
         that.toggleMute(true);
+        that.player.play()
         if (that.currentItem && that.currentItem.playTime > 1) {
           that.setSeek(that.currentItem.playTime);
         }

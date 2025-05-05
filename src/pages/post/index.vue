@@ -144,6 +144,7 @@ const toTagPages = () => {
 <style lang="scss" scoped>
 .publish-page {
 	padding: 32rpx;
+	padding-top: 0;
 }
 
 .publish-media-container {

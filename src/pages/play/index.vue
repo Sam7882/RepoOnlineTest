@@ -346,10 +346,6 @@ function selected(index) {
 function change(index) {
 	current.value = index;
 	console.log(" == 滑动事件 == ", index);
-	uni.showToast({
-		title: "滑动事件",
-		icon: "none"
-	});
 }
 
 /** 加载更多 */
@@ -365,10 +361,6 @@ function loadmore() {
 /** 未触发事件 */
 function noTrigger(event) {
 	console.warn(event);
-	uni.showToast({
-		title: "未觸發事件",
-		icon: "none"
-	});
 }
 
 /** 滑动动画：APP端需要useSwiper为true生效，其他端正常 */
@@ -405,20 +397,12 @@ function ondblclick(event) {
 function onplay(event) {
 	playing.value = event.playing;
 	console.log(" == onplay == ", event);
-	uni.showToast({
-		title: "開始播放",
-		icon: "none"
-	});
 }
 
 /** 暂停事件 */
 function onpause(event) {
 	playing.value = event.playing;
 	console.log("🚀 ~ onpause ~ event:", event)
-	uni.showToast({
-		title: "暫停播放",
-		icon: "none"
-	});
 }
 
 /** 结束事件 */

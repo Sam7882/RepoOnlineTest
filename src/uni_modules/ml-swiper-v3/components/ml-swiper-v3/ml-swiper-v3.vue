@@ -485,14 +485,12 @@ export default {
       this.playerId = `video_${this.current}`;
       this.videoKey = Date.now();
       const that = this;
-      this.lockedTimer = setTimeout(() => {
+      this.lockedTimer = setTimeout(async () => {
         that.endTouchTop = 0;
         that.isChange = false;
         that.disabledChange = false;
-        that.initVideoContext(that.current);
+        await that.initVideoContext(that.current);
         // 當切換的時候，將靜音關閉 ，切換=>用戶行為 故可以播放中關閉靜音
-        const test = document.querySelectorAll(".swiper-item[data-dom='swiperItem']")
-        console.log("🚀 ~ this.lockedTimer=setTimeout ~ toggleMute:", test)
         that.toggleMute(true);
         that.player.play()
         if (that.currentItem && that.currentItem.playTime > 1) {
@@ -894,17 +892,17 @@ export default {
         const context = this.getContext(this.current);
         // #ifdef H5
         if (this.player && this.player.play) {
-          this.player.pause();
+          // this.player.pause();
           this.player.muted = !status;
           this.soundMute = this.player.muted;
-          this.player.play();
+          // this.player.play();
         }
         // #endif
         if (context && context.play) {
-          context.pause();
+          // context.pause();
           context.mute = !status;
           this.soundMute = context.mute;
-          context.play();
+          // context.play();
         }
         this.$emit('onmute', { status: !status });
       } catch (e) {
@@ -1043,6 +1041,7 @@ export default {
         this.bindHlsPlayer();
       }
     },
+    // 初始化播放器設置
     setPlayer() {
       if (this.isImgList) { return; }
       if (!this.player) {
@@ -1050,11 +1049,11 @@ export default {
       }
       if (!this.player) return;
       this.player.loop = !this.config.autoChange;
-      let currentItem = this.currentItem;
-      this.player.src = currentItem.url;
-      this.player.title = currentItem.title;
-      this.player.poster = currentItem.poster;
-      this.player.muted = true;
+      let currentItem = this.currentItem; // 當前頁數資源
+      this.player.src = currentItem.url; // 資源路徑
+      this.player.title = currentItem.title; // 資源標題
+      this.player.poster = currentItem.poster; // 預覽圖
+      this.player.muted = true; // 強制設置為靜音
       // 初始化聲音狀態 為靜音 true
       this.soundMute = this.player.muted;
       // 才可播放
@@ -1115,9 +1114,9 @@ export default {
         this.player = document.getElementById(this.playerId);
       }
       // #endif
-      return context;
+      return document.getElementById(context);
     },
-    initVideoContext(index) {
+    async initVideoContext(index) {
       if (this.isImgList || !this.config.useVideo) {
         this.context = null; this.player = null;
         return { play() { }, pause() { }, seek() { } };

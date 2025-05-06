@@ -27,7 +27,7 @@
 				@onclick="onclick" @ondblclick="ondblclick" @onplay="onplay" @onpause="onpause" @onended="onended"
 				@changing="changing" @changed="changed" @timeupdate="timeupdate" @onwaiting="waiting"
 				@fullscreenchange="fullscreenchange" @fullscreenclick="fullscreenclick" @loadedmetadata="loadedmetadata"
-				@onerror="error" @noTrigger="noTrigger" @onmute="onmute" ref="mlSwiper">
+				@onloadeddata="onloadeddata" @onerror="error" @noTrigger="noTrigger" @onmute="onmute" ref="mlSwiper">
 				<!-- #ifndef H5 -->
 				<!-- 自定义 video 组件 根據 config.useVideo boolean 決定是否使用-->
 				<!-- <template #video="{ item, index }" v-if="!options.useVideo">
@@ -396,13 +396,21 @@ function ondblclick(event) {
 /** 播放事件 */
 function onplay(event) {
 	playing.value = event.playing;
-	console.log(" == onplay == ", event);
+	console.log("🚀 == onplay == ", event);
+	uni.showToast({
+		title: "開始播放",
+		icon: "none"
+	});
 }
 
 /** 暂停事件 */
 function onpause(event) {
 	playing.value = event.playing;
 	console.log("🚀 ~ onpause ~ event:", event)
+	uni.showToast({
+		title: "暫停播放",
+		icon: "none"
+	});
 }
 
 /** 结束事件 */
@@ -442,7 +450,20 @@ function fullscreenclick(event) {
 
 /** 资源初始化完成事件 */
 function loadedmetadata(event) {
-	console.log(" == loadedmetadata == ", event);
+	console.log("🚀 == loadedmetadata == ", event);
+	uni.showToast({
+		title: "資源初始化完成",
+		icon: "none"
+	});
+}
+
+/** 资源加载完成事件 */
+function onloadeddata(event) {
+	console.log("🚀 == onloadeddata == ", event);
+	uni.showToast({
+		title: "資源加載完成",
+		icon: "none"
+	});
 }
 
 /** 资源播放出错事件 */
@@ -458,9 +479,9 @@ function error(event) {
 function getList() {
 	return [
 		{
-			title: "2、w_girl、御",
-			poster: 'http://gips3.baidu.com/it/u=3886271102,3123389489&fm=3028',
-			url: "https://txmov2.a.yximgs.com/upic/2020/10/02/09/BMjAyMDEwMDIwOTAwMDlfMTIyMjc0NTk0Ml8zNjk3Mjg0NjcxOF8xXzM=_b_B28a4518e86e2cf6155a6c1fc9cf79c6d.mp4",
+			title: "4、猫耳朵、多",
+			poster: 'http://gips0.baidu.com/it/u=3602773692,1512483864&fm=3028',
+			url: "https://alimov2.a.yximgs.com/upic/2020/07/02/14/BMjAyMDA3MDIxNDUyMDlfOTExMjIyMjRfMzE1OTEwNjAxNTRfMV8z_b_Bf3005d42ce9c01c0687147428c28d7e6.mp4",
 			ageChecked: false,
 			locked: false
 		},

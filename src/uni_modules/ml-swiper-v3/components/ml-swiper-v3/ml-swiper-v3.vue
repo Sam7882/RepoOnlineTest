@@ -19,7 +19,7 @@
         @animationfinish="animationfinish">
         <swiper-item ref="ani" :style="full" class="" data-dom="swiperItem" v-for="(item, index) in datas" :key="index"
           :item-id="`s${index}`">
-          <view class="ml-swiper-v3-item" :style="full" @longpress="longpress(item)" @load="">
+          <view class="ml-swiper-v3-item" :style="full" @longpress="longpress(item)">
             <template v-if="item.imgList && Array.isArray(item.imgList) && item.imgList.length > 0">
               <view :style="full" @tap="onclick(item)">
                 <ml-swiper-image :imgList="item.imgList" :width="config.width" :height="config.height"
@@ -271,7 +271,7 @@ export default {
       required: false
     }
   },
-  emits: ['onchange', 'transition', 'animationfinish', 'loadmore', 'longTap', 'onclick', 'ondblclick', 'onplay', 'onpause', 'onended', 'changing', 'changed', 'timeupdate', 'onwaiting', 'fullscreenchange', 'fullscreenclick', 'loadedmetadata', 'onerror', 'noTrigger', 'onmute'],
+  emits: ['onchange', 'transition', 'animationfinish', 'loadmore', 'longTap', 'onclick', 'ondblclick', 'onplay', 'onpause', 'onended', 'changing', 'changed', 'timeupdate', 'onwaiting', 'fullscreenchange', 'fullscreenclick', 'loadedmetadata', 'onerror', 'noTrigger', 'onmute', 'onloadeddata'],
   data() {
     return {
       index: 0,
@@ -456,12 +456,19 @@ export default {
   },
   mounted() {
     const that = this;
+    // 用意是為了判斷第一個是否為圖片，如果是圖片則不進行靜音播放
     if (this.isImgList) return;
     that.$nextTick(() => {
       // #ifdef APP
       that.animation = useAnimation.createAnimation(that.aniOption, that);
       // #endif
-      setTimeout(() => that.initVideoContext(that.current)?.play(), 300);
+      setTimeout(() => {
+        that.initVideoContext(that.current)
+        // 確保 pagedata 有資料，才進行靜音播放
+        that.getContext(that.current).muted = true
+        that.getContext(that.current).play()
+          , 500
+      });
     });
   },
   methods: {
@@ -491,8 +498,16 @@ export default {
         that.disabledChange = false;
         await that.initVideoContext(that.current);
         // 當切換的時候，將靜音關閉 ，切換=>用戶行為 故可以播放中關閉靜音
-        that.toggleMute(true);
-        that.player.play()
+        setTimeout(() => {
+          if (that.playing) {
+            that.player.play();
+            that.toggleMute(true);
+          } else {
+            that.toggleMute(false);
+            that.player.play();
+            that.toggleMute(true);
+          }
+        }, 300);
         if (that.currentItem && that.currentItem.playTime > 1) {
           that.setSeek(that.currentItem.playTime);
         }
@@ -815,6 +830,9 @@ export default {
     loadedmetadata(event) {
       this.$emit("loadedmetadata", event);
     },
+    onloadeddata(event) {
+      this.$emit("onloadeddata", event);
+    },
     onerror(_e) {
       this.playing = false;
       this.resetprogressItem();
@@ -992,6 +1010,8 @@ export default {
         player.removeEventListener("error", this.onerror);
         player.removeEventListener("waiting", this.onwaiting);
         player.removeEventListener("loadedmetadata", this.loadedmetadata);
+        player.removeEventListener("loadeddata", this.onloadeddata);
+        player.removeEventListener("load", this.fullscreenchange);
       }
     },
     bindEvents() {
@@ -1004,6 +1024,7 @@ export default {
         this.player.addEventListener("error", this.onerror);
         this.player.addEventListener("waiting", this.onwaiting);
         this.player.addEventListener("loadedmetadata", this.loadedmetadata);
+        this.player.addEventListener("loadeddata", this.onloadeddata);
       }
     },
     bindHlsPlayer() {
@@ -1054,10 +1075,11 @@ export default {
       this.player.title = currentItem.title; // 資源標題
       this.player.poster = currentItem.poster; // 預覽圖
       this.player.muted = true; // 強制設置為靜音
+      this.player.autoplay = true; // 強制設置為靜音
       // 初始化聲音狀態 為靜音 true
       this.soundMute = this.player.muted;
       // 才可播放
-      this.player.play()
+      // this.player.play()
     },
     // #endif
     reset() {

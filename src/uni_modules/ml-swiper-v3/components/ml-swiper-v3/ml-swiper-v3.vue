@@ -28,19 +28,33 @@
             </template>
             <template v-else>
               <!-- #ifdef H5 | WEB -->
-              <view class="swiper-video" @tap="onclick(item)" v-html='createVideo(item, index)' :style="videoFull">
+              <view class="swiper-video" :style="videoFull" v-if="config.useVideo">
+                <!-- 替換為用陣列渲染的方式 -->
+                <template v-if="item">
+                  <video :id="`video_${index}`" :src="`${item.url || item.src || ''}`" :poster="`${item.poster}`"
+                    :title="`${item.title}`" class="dplayer-video dplayer-video-current swiper-video"
+                    :loop="`${!config.autoChange}`" :muted="true" preload="auto" x5-video-orientation="portrait"
+                    enable-progress-gesture="false" webkit-playsinline="true" playsinline="true"
+                    x-webkit-airplay="allow" x5-video-player-type="h5-page" :object-fit="config.objectFit"
+                    controlsList="nodownload" :codec="config.codec" play-btn-position="center"
+                    :style="`${videoFull}z-index:0;;pointer-events:auto !important;object-position: center;`"
+                    :key="`${videoKey}`" :controls="pagedatas.fullScreen" :autoplay="false" show-center-play-btn
+                    :show-loading="config.loading" :duration="item.duration || 0" :initial-time="item.initialTime || 0"
+                    @play="onplay" :play-strategy="config.playStrategy" @pause="onpause" @ended="onended"
+                    @timeupdate="ontimeupdate" @waiting="onwaiting" @error="onerror" @tap="onclick(item)"
+                    @loadedmetadata="loadedmetadata" :http-cache="false" @fullscreenchange="fullscreenchange"
+                    :direction="config.direction" @fullscreenclick="fullscreenclick">
+                    <!-- 
+                    <video id="video_${index}" src="${src}" poster="${item.poster}" title="${item.title}"
+              class="dplayer-video dplayer-video-current swiper-video" loop="${!autoChange}" muted="${true}"
+              preload="auto" x5-video-orientation="portrait" enable-progress-gesture="false" webkit-playsinline="true"
+              playsinline="true" x-webkit-airplay="allow" x5-video-player-type="h5-page" objectFit="contain"
+              style="${this.videoFull};pointer-events:auto !important;object-position: center;" key="${this.videoKey}">
+              </video>
+                    -->
+                  </video>
+                </template>
               </view>
-              <!-- #endif -->
-              <!-- #ifndef H5 & WEB -->
-              <video class="swiper-video" :key="`${videoKey}_${index}`" :ref="`video_${index}`" :id="`video_${index}`"
-                :src="item.url" :title="item.title" :poster="item.poster" :controls="pagedatas.fullScreen"
-                :autoplay="false" :loop="!config.autoChange" :muted="true" show-center-play-btn
-                :show-loading="config.loading" :duration="item.duration || 0" :initial-time="item.initialTime || 0"
-                :object-fit="config.objectFit" :codec="config.codec" play-btn-position="center" @play="onplay"
-                @pause="onpause" @ended="onended" @timeupdate="ontimeupdate" @waiting="onwaiting" @error="onerror"
-                @tap="onclick(item)" @loadedmetadata="loadedmetadata" :http-cache="false"
-                @fullscreenchange="fullscreenchange" :direction="config.direction" @fullscreenclick="fullscreenclick"
-                :style="`${videoFull}z-index:0;`" v-if="config.useVideo" :play-strategy="config.playStrategy" />
               <slot name="video" :item="item" :index="listIndex" v-else></slot>
               <!-- #endif -->
               <!-- #ifdef MP-WEIXIN -->
@@ -720,6 +734,7 @@ export default {
       this.$emit("longTap", this.emitParam());
     },
     onclick(_row) {
+      console.log("🚀 ~ onclick ~ _row:", _row)
       if (this.longpressLocked) return;
       if (this.playing) {
         this.pause();
@@ -930,12 +945,15 @@ export default {
         if (this.isImgList || !this.config.useVideo) { return; }
         const context = this.getContext(this.current);
         // #ifdef H5
+        console.log("🚀 ~ play ~ this.player && this.player.play:", this.player && this.player.play)
         if (this.player && this.player.play) {
           this.player.play();
         }
         // #endif
+        console.log("🚀 ~ play ~ context && context.play:", context)
         if (context && context.play) {
           context.play();
+          context.mute = false;
         }
         this.playing = true;
       } catch (e) {
@@ -1050,8 +1068,9 @@ export default {
     initPlayer() {
       if (this.isImgList) { return; }
       if (!this.currentItem || !this.currentItem.url) { return; }
+      console.log("🚀 ~ initPlayer ~ this.player:", this.player)
       if (!this.player) {
-        this.player = document.getElementById(this.playerId);
+        this.player = document.querySelector(`#${this.playerId} video`);
       }
       this.setPlayer();
       this.bindEvents();
@@ -1063,10 +1082,12 @@ export default {
     // 初始化播放器設置
     setPlayer() {
       if (this.isImgList) { return; }
+      console.log("🚀 ~ setPlayer ~ this.playerId:", this.playerId)
       if (!this.player) {
-        this.player = document.getElementById(this.playerId);
+        this.player = document.querySelector(`#${this.playerId} video`);
       }
       if (!this.player) return;
+      console.log("🚀 ~ setPlayer ~ this.player:", this.player)
       this.player.loop = !this.config.autoChange;
       let currentItem = this.currentItem; // 當前頁數資源
       this.player.src = currentItem.url; // 資源路徑
@@ -1077,7 +1098,7 @@ export default {
       // 初始化聲音狀態 為靜音 true
       this.soundMute = this.player.muted;
       // 才可播放
-      this.player.play()
+      // this.player.play()
     },
     // #endif
     reset() {
@@ -1131,7 +1152,7 @@ export default {
       }
       // #ifdef H5 | WEB
       if (!this.player) {
-        this.player = document.getElementById(this.playerId);
+        this.player = document.querySelector(`#${this.playerId} video`);
       }
       // #endif
       return document.getElementById(context);
@@ -1146,7 +1167,7 @@ export default {
       let videocontext = uni.createVideoContext(key, this);
       this.pagedatas[key] = videocontext;
       // #ifdef H5
-      this.player = document.getElementById(this.playerId);
+      this.player = document.querySelector(`#${this.playerId} video`);
       this.initPlayer();
       this.bindAutoChange(this.playerId);
       // #endif

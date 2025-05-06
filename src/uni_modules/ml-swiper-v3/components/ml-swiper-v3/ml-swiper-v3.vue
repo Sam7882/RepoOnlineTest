@@ -500,10 +500,8 @@ export default {
         // 當切換的時候，將靜音關閉 ，切換=>用戶行為 故可以播放中關閉靜音
         setTimeout(() => {
           if (that.playing) {
-            that.player.play();
             that.toggleMute(true);
           } else {
-            that.toggleMute(false);
             that.player.play();
             that.toggleMute(true);
           }
@@ -1075,11 +1073,11 @@ export default {
       this.player.title = currentItem.title; // 資源標題
       this.player.poster = currentItem.poster; // 預覽圖
       this.player.muted = true; // 強制設置為靜音
-      this.player.autoplay = true; // 強制設置為靜音
+      // this.player.autoplay = true; // 強制設置為靜音
       // 初始化聲音狀態 為靜音 true
       this.soundMute = this.player.muted;
       // 才可播放
-      // this.player.play()
+      this.player.play()
     },
     // #endif
     reset() {

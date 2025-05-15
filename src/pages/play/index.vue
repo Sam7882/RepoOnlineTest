@@ -85,6 +85,7 @@
 							</view>
 						</view>
 					</view>
+					<!-- 敏感內容 -->
 					<view class="mask-container" v-if="item.ageChecked">
 						<view class="mask-container-item">
 							<view class="mask-container-item-icon-container">
@@ -103,6 +104,7 @@
 										size="16" />
 									<text>{{ $t('play.watch') }}</text>
 								</button>
+								<!-- 停用過濾器 -->
 								<button type="button" class="mask-container-item-button-item" @click="setFilter">
 									<uni-icons class="mask-container-item-button-item-icon" type="icon-common-gear" custom-prefix="icon"
 										size="16" />
@@ -111,6 +113,7 @@
 							</view>
 						</view>
 					</view>
+					<!-- 鎖住 -->
 					<view class="locked-container" v-if="item.locked">
 						<view class="locked-container-item">
 							<uni-icons class="locked-container-item-icon" type="icon-common-locked" custom-prefix="icon" size="16" />
@@ -166,6 +169,7 @@
 		<!-- 底部導航 -->
 		<c-bottomNav :bgColor="'var(--background-color-dark)'" :iconColor="'var(--text-color-secondary)'"
 			:primaryMenu="'primary'" />
+		<c-confirmPopUp ref="confirmModal" />
 		<play-popMessage ref="videoPopMessage"></play-popMessage>
 		<play-popSponsor ref="videoPopSponsor"></play-popSponsor>
 		<play-popSubscription ref="videoPopSubscription"></play-popSubscription>
@@ -188,6 +192,9 @@ const videoPopSubscription = ref(null) // 訂閱彈跳窗口
 const videoPopImgFullScreen = ref(null) // 圖片全螢幕彈跳窗口
 const playing = ref(true); // 是否播放
 const imageFullScreenImgs = ref([]) // 圖片全螢幕圖片列表
+// POPUP確認窗口
+const confirmModal = ref(null)
+
 // 頂部header fn
 const toFocus = () => {
 	console.log("🚀 == 關注中 == ")
@@ -247,6 +254,13 @@ const closeFilter = (item) => {
 }
 const setFilter = () => {
 	console.log("🚀 == 過濾器 == ")
+	confirmModal.value.open({
+		title: '停用過濾器',
+		content: '過濾令您不適或冒犯的內容，您將較少看到類似圖片和影片。',
+		onConfirm: () => {
+			console.log('使用者按下確定')
+		}
+	})
 }
 // 底部按鈕
 const openImageFullScreen = () => {
@@ -482,7 +496,7 @@ function getList() {
 			title: "4、猫耳朵、多",
 			poster: 'http://gips0.baidu.com/it/u=3602773692,1512483864&fm=3028',
 			url: "https://alimov2.a.yximgs.com/upic/2020/07/02/14/BMjAyMDA3MDIxNDUyMDlfOTExMjIyMjRfMzE1OTEwNjAxNTRfMV8z_b_Bf3005d42ce9c01c0687147428c28d7e6.mp4",
-			ageChecked: false,
+			ageChecked: true,
 			locked: false
 		},
 		{

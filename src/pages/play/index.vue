@@ -44,9 +44,19 @@
 								<image class="right-tool-avatar" src="/static/images/template/img-template-03.png" mode="widthFix">
 								</image>
 							</view>
-							<view class="right-tool-avatar-tip" @click="toSubscription">
-								<uni-icons class="right-tool-avatar-tip-icon" type="icon-common-plus" custom-prefix="icon" size="16"
+							<view class="right-tool-avatar-tip" :class="{ active: isFollow }" @click="toSubscription">
+								<uni-icons v-if="!isFollow" class="right-tool-avatar-tip-icon" type="icon-common-plus"
+									custom-prefix="icon" size="16" color="var(--text-color-secondary)" />
+								<uni-icons v-else class="right-tool-avatar-tip-icon icon-tick" type="icon-common-tick"
+									custom-prefix="icon" size="16" color="var(--text-color-secondary)" />
+							</view>
+							<!-- Tooltip 提示 -->
+							<view class="tooltip" v-if="isTipVisible">
+								<uni-icons class="tooltip-icon" type="icon-common-tick" custom-prefix="icon" size="16"
 									color="var(--text-color-secondary)" />
+								<text class="tooltip-text">
+									已關注
+								</text>
 							</view>
 						</view>
 						<view class="right-tool-item-container">
@@ -214,10 +224,37 @@ const toCreator = () => {
 	toCreatorHome()
 }
 // 訂閱
+const isFollow = ref(false)
+const isTipVisible = ref(false) // 提示是否訂閱
+let timer = null // 訂閱提示計時器
 const toSubscription = () => {
 	console.log("🚀 == 訂閱 == ")
-	videoPopSubscription.value?.open()
+	// 訂閱狀態
+	if (!isFollow.value) {
+		isFollow.value = true
+		if (isFollow.value) {
+			isTipVisible.value = true
+			timer = setTimeout(() => {
+				isTipVisible.value = false
+			}, 2000)
+		}
+	}
+	else {
+		/* TODO:語系須補 */
+		confirmModal.value.open({
+			title: '不再關注該作者?',
+			confirmBtnText: '不再關注',
+			onConfirm: () => {
+				isFollow.value = false
+				// 訂閱提示
+				isTipVisible.value = false
+				clearTimeout(timer)
+				console.log('使用者按下確定')
+			}
+		})
+	}
 }
+// videoPopSubscription.value?.open()
 // 喜歡
 const likeThis = () => {
 	isFavorite.value = !isFavorite.value;

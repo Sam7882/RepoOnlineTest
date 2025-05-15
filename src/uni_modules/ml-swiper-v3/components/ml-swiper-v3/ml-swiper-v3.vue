@@ -1283,7 +1283,7 @@ export default {
   top: 0;
   /* #ifndef APP-NVUE */
   display: flex;
-  overflow: hidden;
+  overflow: visible;
   padding: 1vh 0.5vh;
   color: #fff;
   text-align: center;

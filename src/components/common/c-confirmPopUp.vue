@@ -4,8 +4,8 @@
       <view class="popup-title">{{ title }}</view>
       <view class="popup-content">{{ content }}</view>
       <view class="popup-actions">
-        <button class="btn confirm-btn" @click="handleConfirm">確定</button>
-        <button class="btn cancel-btn" @click="close">取消</button>
+        <button class="btn confirm-btn" @click="handleConfirm">{{ confirmBtnText }}</button>
+        <button class="btn cancel-btn" @click="close">{{ cancelBtnText }}</button>
       </view>
     </view>
   </uni-popup>
@@ -14,15 +14,19 @@
 <script setup>
 import { ref, defineExpose } from 'vue'
 import uniPopup from '@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'
-
+/* TODO:語系須補 */
 const popup = ref(null)
 const title = ref('提示')
-const content = ref('您確定要執行這個操作嗎？')
+const content = ref('')
+const confirmBtnText = ref('確定')
+const cancelBtnText = ref('取消')
 let onConfirm = () => { }
 
 function open(options = {}) {
   title.value = options.title || '提示'
-  content.value = options.content || '您確定要執行這個操作嗎？'
+  content.value = options.content || ''
+  confirmBtnText.value = options.confirmBtnText || '確定'
+  cancelBtnText.value = options.cancelBtnText || '取消'
   onConfirm = options.onConfirm || (() => { })
   popup.value.open()
 }
@@ -53,7 +57,7 @@ defineExpose({
 }
 
 .popup-title {
-  font-weight: bold;
+  font-weight: 500;
   font-size: 34rpx;
   margin-bottom: 20rpx;
   color: var(--popTxt-color-title);

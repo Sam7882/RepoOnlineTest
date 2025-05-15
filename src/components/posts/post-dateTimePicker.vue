@@ -89,6 +89,9 @@ defineExpose({ open, close })
 
 <style scoped lang="scss">
 ::v-deep(.uni-popup) {
+  & {
+    z-index: var(--z-index-max) !important;
+  }
 
   // 需同時有圓弧，才能有效果
   uni-view[name="content"] {

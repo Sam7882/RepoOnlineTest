@@ -88,6 +88,12 @@
 							<view class="right-tool-item-container-item" :class="{ active: isCollect }" @click="toCollect">
 								<uni-icons class="icon icon-input-upload-file" type="icon-input-upload-file" custom-prefix="icon"
 									size="16" />
+								<!-- Tooltip 提示 -->
+								<view class="tooltip collect-tooltip" v-if="isCollectTipVisible">
+									<text class="tooltip-text">
+										已收藏
+									</text>
+								</view>
 							</view>
 							<!-- 禮物 -->
 							<view class="right-tool-item-container-item" @click="openPopSponsor">
@@ -184,6 +190,7 @@
 		<play-popSponsor ref="videoPopSponsor"></play-popSponsor>
 		<play-popSubscription ref="videoPopSubscription"></play-popSubscription>
 		<play-popImgFullScreen ref="videoPopImgFullScreen" :imgs="imageFullScreenImgs"></play-popImgFullScreen>
+		<c-sharePopUp ref="sharePopUp"></c-sharePopUp>
 	</view>
 </template>
 
@@ -270,15 +277,29 @@ const openPopMessage = () => {
 	videoPopMessage.value?.open()
 }
 // 分享
+const sharePopUp = ref(null)
 const toShare = () => {
 	console.log("🚀 == 分享 == ")
+	sharePopUp.value?.open()
 	/* NOTE:暫代 去往該圖文的總攬 */
-	toPlayArticleGallery()
+	// toPlayArticleGallery()
 }
 // 收藏
+const isCollectTipVisible = ref(false)
+const timerCollectTip = null
 const toCollect = () => {
 	isCollect.value = !isCollect.value;
 	console.log("🚀 == 收藏 == ")
+	if (isCollect.value) {
+		isCollectTipVisible.value = true
+		timerCollectTip = setTimeout(() => {
+			isCollectTipVisible.value = false
+		}, 2000)
+	}
+	else {
+		isCollectTipVisible.value = false
+		clearTimeout(timerCollectTip)
+	}
 }
 // 打賞
 const openPopSponsor = () => {
@@ -752,6 +773,7 @@ pages {
 // }
 
 /* 右側工具欄 */
+
 .right {
 	/* #ifndef APP-NVUE */
 	display: flex;
@@ -821,7 +843,18 @@ pages {
 				color: var(--text-color-secondary);
 			}
 
+			&.active {
+				padding: 11rpx 11.5rpx;
+
+				.right-tool-avatar-tip-icon {
+					font-size: 12rpx !important;
+				}
+			}
+
 		}
+
+
+
 	}
 
 	.right-tool-item-container {
@@ -832,6 +865,7 @@ pages {
 
 
 		.right-tool-item-container-item {
+			position: relative;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -1175,5 +1209,33 @@ pages {
 		color: #8ecbff;
 		text-align: center;
 	}
+}
+
+.tooltip {
+	position: absolute;
+	top: calc(100% + 32rpx);
+	right: 0;
+	display: flex;
+	align-items: center;
+	gap: 12rpx;
+	padding: 16rpx 38rpx;
+	background-color: var(--background-color-dark-opacity85);
+	border-radius: 20rpx;
+
+	.tooltip-text {
+		font-size: 24rpx;
+		color: var(--text-color-secondary);
+		white-space: nowrap;
+	}
+
+	.tooltip-icon {
+		font-size: 16rpx !important;
+		color: var(--text-color-secondary) !important;
+	}
+}
+
+.collect-tooltip {
+	top: 100%;
+	z-index: 10;
 }
 </style>

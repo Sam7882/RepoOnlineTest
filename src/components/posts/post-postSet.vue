@@ -1,41 +1,44 @@
 <template>
-  <uni-popup ref="popupRef" type="bottom" background-color="#f6f6f6" @change="handlePopupChange">
+  <uni-popup ref="popupRef" type="bottom" borderRadius="60rpx 60rpx 0 0" background-color="#f6f6f6"
+    @change="handlePopupChange">
     <view class="popup-container">
       <!-- 標題與關閉 -->
       <view class="popup-header">
         <text class="popup-title">{{ $t('post.publishSetting') }}</text>
-        <uni-icons type="close" size="24" @click="close" />
+        <uni-icons class="popup-close" type="closeempty" size="24" @click="close" />
       </view>
+      <view class="popup-content">
+        <!-- 提示 -->
+        <view class="popup-subtitle">{{ $t('post.publishWhoCanSee') }}</view>
 
-      <!-- 提示 -->
-      <view class="popup-subtitle">{{ $t('post.publishWhoCanSee') }}</view>
-
-      <!-- 選項列表 -->
-      <radio-group class="popup-options" @change="handleRadioChange">
-        <label class="popup-option" v-for="(item, index) in options" :key="index">
-          <view class="popup-option-main">
-            <text class="popup-option-title">{{ item.label }}</text>
-            <text class="popup-option-desc" v-if="item.desc">{{ item.desc }}</text>
-          </view>
-          <view class="popup-option-radio-container">
-            <!-- opacity 0 radio 不顯示 -->
-            <radio class="popup-option-radio" :value="item.value" color="#937CFF" :checked="selected === item.value" />
-            <!-- radio 無法替換勾選圖標樣式，故使用自定義圖標覆蓋 -->
-            <view class="popup-option-custom-checked" v-if="selected === item.value">
-              <image class="popup-option-custom-checked-image" src="/static/icons/input/icon-input-checkbox-active.png"
-                mode="widthFix" />
+        <!-- 選項列表 -->
+        <radio-group class="popup-options" @change="handleRadioChange">
+          <label class="popup-option" v-for="(item, index) in options" :key="index">
+            <view class="popup-option-main">
+              <text class="popup-option-title">{{ item.label }}</text>
+              <text class="popup-option-desc" v-if="item.desc">{{ item.desc }}</text>
             </view>
-            <view class="popup-option-custom-checked" v-else>
-              <image class="popup-option-custom-checked-image" src="/static/icons/input/icon-input-checkbox-2.png"
-                mode="widthFix" />
+            <view class="popup-option-radio-container">
+              <!-- opacity 0 radio 不顯示 -->
+              <radio class="popup-option-radio" :value="item.value" color="#937CFF"
+                :checked="selected === item.value" />
+              <!-- radio 無法替換勾選圖標樣式，故使用自定義圖標覆蓋 -->
+              <view class="popup-option-custom-checked" v-if="selected === item.value">
+                <image class="popup-option-custom-checked-image"
+                  src="/static/icons/input/icon-input-checkbox-active.png" mode="widthFix" />
+              </view>
+              <view class="popup-option-custom-checked" v-else>
+                <image class="popup-option-custom-checked-image" src="/static/icons/input/icon-input-checkbox-2.png"
+                  mode="widthFix" />
+              </view>
             </view>
-          </view>
-        </label>
-      </radio-group>
+          </label>
+        </radio-group>
 
-      <!-- 確認按鈕 -->
-      <view class="popup-confirm-container">
-        <button class="popup-confirm" @click="confirm">{{ $t('common.confirm') }}</button>
+        <!-- 確認按鈕 -->
+        <view class="popup-confirm-container">
+          <button class="popup-confirm" @click="confirm">{{ $t('common.confirm') }}</button>
+        </view>
       </view>
     </view>
   </uni-popup>
@@ -109,30 +112,48 @@ defineExpose({ open, close })
 </script>
 
 <style scoped lang="scss">
+::v-deep(.uni-popup) {
+  & {
+    z-index: var(--z-index-max) !important;
+  }
+}
+
 .popup-container {
   padding: 32rpx;
   border-radius: 32rpx 32rpx 0 0;
-  background-color: #fff;
+  background-color: var(background-color-grayLight2)
 }
 
 .popup-header {
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding-bottom: 24rpx;
-  border-bottom: 1px solid #eee;
   margin-bottom: 24rpx;
+  width: 100%;
+}
+
+.popup-close {
+  position: absolute;
+  right: 0;
+  top: 25%;
+  transform: translateY(-50%);
 }
 
 .popup-title {
   font-size: 32rpx;
-  font-weight: bold;
+}
+
+.popup-content {
+  background-color: var(--background-color-light);
+  padding: 40rpx;
+  border-radius: 40rpx;
 }
 
 .popup-subtitle {
   font-size: 24rpx;
   margin-bottom: 16rpx;
-  color: #666;
+  color: var(--text-color-primary);
 }
 
 .popup-options {
@@ -157,13 +178,13 @@ defineExpose({ open, close })
 
 
 .popup-option-title {
-  font-size: 28rpx;
-  color: #111;
+  font-size: 32rpx;
+  color: var(--text-color-primary);
 }
 
 .popup-option-desc {
-  font-size: 20rpx;
-  color: #999;
+  font-size: 24rpx;
+  color: var(--text-color-quaternary);
 }
 
 .popup-option-radio-container {
@@ -200,9 +221,9 @@ defineExpose({ open, close })
 
 .popup-confirm {
   display: inline-block;
-  background-color: #937CFF;
+  background-color: var(--primary-color);
   color: #fff;
-  border-radius: 28rpx;
+  border-radius: 20rpx;
   padding: 24rpx 96rpx;
   font-size: 28rpx;
   line-height: 1;

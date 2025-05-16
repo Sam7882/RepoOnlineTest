@@ -93,7 +93,14 @@
       "path": "pages/wallet/pay",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-gray)"
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/creditCardSelect",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
       }
     },
 

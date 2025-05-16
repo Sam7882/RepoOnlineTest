@@ -172,7 +172,7 @@ export default {
     couponCode: "優惠碼",
     couponCodePlaceholder: "請輸入優惠碼",
     currentPayment: "當次付款",
-    salesTax: "銷售稅",
+    salesTax: "銷售稅付",
     totalAmount: "今日應付總額",
     confirmPayment: "確認付款",
     amount: "金額",

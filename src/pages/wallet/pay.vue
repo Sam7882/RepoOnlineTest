@@ -1,8 +1,9 @@
 <template>
 	<view class="pay-page">
-		<view class="pay-page-title">
+		<c-headerNav :title="$t('wallet.paymentDetails')" />
+		<!-- <view class="pay-page-title">
 			<text>{{ $t('wallet.paymentDetails') }}</text>
-		</view>
+		</view> -->
 		<view class="pay-page-content">
 			<uni-forms ref="form" :model="formData" :rules="formRules" label-position="top">
 				<!-- name => 對應 uni-forms 的 表單參數名稱 , 與 規則名皆須一致 -->
@@ -10,13 +11,96 @@
 					<view class="pay-page-content-item-input-amount-container">
 						<text>{{ $t('wallet.singlePayment') }}</text>
 						<view class="pay-page-content-item-input-amount">
-							<uni-data-checkbox class="pay-page-content-item-input" mode="tag" v-model="formData.payAmount"
-								:localdata="payAmount.range"></uni-data-checkbox>
+							<text>{{ formData.payAmount }}</text>
 						</view>
 					</view>
 				</uni-forms-item>
+
+				<!-- 訂單內容 -->
+				<view class="pay-page-title">
+					<text>{{ '訂單內容' }}</text>
+				</view>
+				<view class="pay-order-container">
+					<view class="pay-page-content-item">
+						<view class="pay-page-content-item-order-content">
+							<!-- 圓形邊框圖片 -->
+							<view class="pay-page-content-item-order-content-img">
+								<image src="@/static/images/template/img-template-03.png" mode="widthFix"></image>
+							</view>
+							<!-- 垂直排序，名稱與帳號 -->
+							<view class="pay-page-content-item-order-content-text">
+								<text class="pay-page-content-item-order-content-text-name">名稱</text>
+								<text class="pay-page-content-item-order-content-text-account">@888888.888</text>
+							</view>
+						</view>
+					</view>
+					<view class="pay-page-content-item-line"></view>
+					<!-- 優惠馬 摺疊版 -->
+					<view class="coupon-wrapper">
+						<uni-collapse v-model="activeCollapse">
+							<uni-collapse-item title="優惠碼" name="coupon">
+								<view class="collapse-content">
+									<uni-easyinput v-model="couponCode" :placeholder="$t('wallet.couponCodePlaceholder')"
+										class="input-box" />
+									<button type="button" class="confirm-btn" @click="applyCoupon">{{ $t('common.confirm') }}</button>
+								</view>
+							</uni-collapse-item>
+						</uni-collapse>
+					</view>
+					<!-- 一行的左右兩側文字 -->
+					<view class="pay-page-content-item pay-page-content-item-order-content-spacebetween">
+						<text>{{ $t('wallet.currentPayment') }}</text>
+						<text class="amount">{{ finalPayment.amount }}</text>
+					</view>
+					<view class="pay-page-content-item pay-page-content-item-order-content-spacebetween">
+						<text>{{ $t('wallet.salesTax') }}</text>
+						<text class="amount">{{ finalPayment.tax }}</text>
+					</view>
+					<view class="pay-page-content-item pay-page-content-item-order-content-spacebetween">
+						<text>{{ $t('wallet.totalAmount') }}</text>
+						<text class="amount">{{ finalPaymentAmount }}</text>
+					</view>
+					<view class="tip-container">
+						<text class="tip-container-text">*此筆為 自動續訂，今天是 2025 年 5 月 11 日，系統將於 2025 年 5 月 15 日自動扣款完成續訂。</text>
+						<text class="tip-container-text">若您不希望自動續訂，可前往「個人帳號 > 訂閱管理」頁面手動取消，避免下期繼續收費。</text>
+					</view>
+				</view>
+
+				<!-- 信用卡 -->
+				<view class="pay-page-title">
+					<text>{{ '信用卡' }}</text>
+				</view>
+				<view class="subscription-setting-page-list-item-container">
+					<view class="subscription-setting-page-list-item-container-left">
+						<view class="subscription-setting-page-list-item-container-left-img-container">
+							<image class="subscription-setting-page-list-item-container-left-img"
+								src="/static/icons/wallet/icon-wallet-visa.png" mode="aspectFit" />
+						</view>
+						<view class="subscription-setting-page-list-item-container-left-name">
+							<text class="subscription-setting-page-list-item-container-left-name-text">
+								{{ '中華郵政公司' }}
+							</text>
+							<view class="subscription-setting-page-list-item-container-left-name-default">
+								<text class="subscription-setting-page-list-item-container-left-name-default-text">預設</text>
+							</view>
+						</view>
+					</view>
+					<!-- 該筆啟用切換按鈕 -->
+					<view class="subscription-setting-page-list-item-container-right">
+						<view class="subscription-setting-page-list-item-container-right-tick-container">
+							<uni-icons class="subscription-setting-page-list-item-container-right-tick-container-tick"
+								type="icon-common-tick" custom-prefix="icon" size="12" />
+						</view>
+						<text class="subscription-setting-page-list-item-container-right-number">
+							{{ '*1122' }}
+						</text>
+					</view>
+				</view>
+
+				<view class="pay-page-content-item-line " style="scale: 1.2;"></view>
+
 				<!-- 付款方式 -->
-				<uni-forms-item ref="payMethodItem" class="pay-page-content-item" label="付款方式" label-width="150"
+				<!-- <uni-forms-item ref="payMethodItem" class="pay-page-content-item" label="付款方式" label-width="150"
 					name="payMethod" required>
 					<view class="pay-page-content-item-input-container">
 						<radio-group class="pay-page-content-item-radio-group" @change="payMethodChange">
@@ -30,8 +114,37 @@
 							</label>
 						</radio-group>
 					</view>
-				</uni-forms-item>
+				</uni-forms-item> -->
 
+				<!-- 卡片詳情 -->
+				<view class="pay-page-title creditCard-template-title">
+					<text>{{ '卡片詳情' }}</text>
+					<view class="creditCard-template">
+						<image class="subscription-setting-page-list-item-container-left-img"
+							src="/static/icons/wallet/icon-wallet-visa.png" mode="heightFix" />
+						<image class="subscription-setting-page-list-item-container-left-img"
+							src="/static/icons/wallet/icon-wallet-masterCard.png" mode="heightFix" />
+					</view>
+				</view>
+
+
+				<!-- 信用卡資料 -->
+				<uni-forms-item class="pay-page-content-item-cardTop" :label="$t('wallet.creditCardData')" name="cardNumber"
+					label-width="150" required>
+					<uni-easyinput type="number" :placeholder="$t('wallet.creditCardNumber')" v-model="formData.cardNumber"
+						class="pay-page-content-item-input" :trim="true" :clearable="false" />
+				</uni-forms-item>
+				<view class="pay-page-content-item-cardbottom">
+					<uni-forms-item class="pay-page-content-item-cardLeft" name="cardExpiry" :label="'到期日(MM/YY)'"
+						label-width="150">
+						<uni-easyinput type="number" :placeholder="$t('wallet.cardExpiry')" v-model="formData.cardExpiry"
+							class="pay-page-content-item-input" :trim="true" :clearable="false" />
+					</uni-forms-item>
+					<uni-forms-item class="pay-page-content-item-cardRight" name="cardCvv" :label="'安全驗證碼'" label-width="150">
+						<uni-easyinput type="number" placeholder="cvv" v-model="formData.cardCvv"
+							class="pay-page-content-item-input" :trim="true" :clearable="false" />
+					</uni-forms-item>
+				</view>
 				<!-- 持卡人姓名 -->
 				<uni-forms-item class="pay-page-content-item" :label="$t('wallet.creditCardName')" label-width="150"
 					name="creditCardName" required>
@@ -40,25 +153,16 @@
 							:clearable="false" />
 					</view>
 				</uni-forms-item>
-				<!-- 信用卡資料 -->
-				<uni-forms-item class="pay-page-content-item-cardTop forms-item-errorTop" :label="$t('wallet.creditCardData')"
-					name="cardNumber" label-width="150" required>
-					<uni-easyinput type="number" :placeholder="$t('wallet.creditCardNumber')" v-model="formData.cardNumber"
-						class="pay-page-content-item-input" :trim="true" :clearable="false" />
-				</uni-forms-item>
-				<view class="pay-page-content-item-cardbottom">
-					<uni-forms-item class="pay-page-content-item-cardLeft label-hidden" name="cardExpiry">
-						<uni-easyinput type="number" :placeholder="$t('wallet.cardExpiry')" v-model="formData.cardExpiry"
-							class="pay-page-content-item-input" :trim="true" :clearable="false" />
-					</uni-forms-item>
-					<uni-forms-item class="pay-page-content-item-cardRight label-hidden" name="cardCvv">
-						<uni-easyinput type="number" placeholder="cvv" v-model="formData.cardCvv"
-							class="pay-page-content-item-input" :trim="true" :clearable="false" />
-					</uni-forms-item>
+
+				<view class="pay-page-content-item-line " style="scale: 1.2;"></view>
+
+				<view class="pay-page-title">
+					<text>{{ $t('wallet.creditCardAddress') }}</text>
 				</view>
+
 				<!-- 帳單地址 -->
-				<uni-forms-item class="pay-page-content-item" :label="$t('wallet.creditCardAddress')" label-width="150"
-					name="creditCardAddress" required>
+				<uni-forms-item class="pay-page-content-item" :label="'信用卡帳單地址'" label-width="150" name="creditCardAddress"
+					required>
 					<view class="pay-page-content-item-input-container">
 						<uni-easyinput v-model="formData.creditCardAddress" class="pay-page-content-item-input" :trim="true"
 							:clearable="false" />
@@ -79,52 +183,7 @@
 					</view>
 				</uni-forms-item>
 
-				<!-- 訂單內容 -->
-				<view class="pay-page-title">
-					<text>{{ $t('wallet.paymentDetails') }}</text>
-				</view>
-				<view class="pay-page-content-item">
-					<view class="pay-page-content-item-order-content">
-						<!-- 圓形邊框圖片 -->
-						<view class="pay-page-content-item-order-content-img">
-							<image src="@/static/images/template/img-template-03.png" mode="widthFix"></image>
-						</view>
-						<!-- 垂直排序，名稱與帳號 -->
-						<view class="pay-page-content-item-order-content-text">
-							<text class="pay-page-content-item-order-content-text-name">名稱</text>
-							<text class="pay-page-content-item-order-content-text-account">@888888.888</text>
-						</view>
-					</view>
-				</view>
-				<!-- 優惠馬 摺疊版 -->
-				<view class="coupon-wrapper">
-					<uni-collapse v-model="activeCollapse">
-						<uni-collapse-item title="優惠碼" name="coupon">
-							<view class="collapse-content">
-								<uni-easyinput v-model="couponCode" :placeholder="$t('wallet.couponCodePlaceholder')"
-									class="input-box" />
-								<button type="button" class="confirm-btn" @click="applyCoupon">{{ $t('common.confirm') }}</button>
-							</view>
-						</uni-collapse-item>
-					</uni-collapse>
-				</view>
-				<!-- 一行的左右兩側文字 -->
-				<!-- 行分隔線 -->
-				<view class="pay-page-content-item-line"></view>
-				<view class="pay-page-content-item pay-page-content-item-order-content-spacebetween">
-					<text>{{ $t('wallet.currentPayment') }}</text>
-					<text>{{ finalPayment.amount }}</text>
-				</view>
-				<view class="pay-page-content-item pay-page-content-item-order-content-spacebetween">
-					<text>{{ $t('wallet.salesTax') }}</text>
-					<text>{{ finalPayment.tax }}</text>
-				</view>
-				<!-- 行分隔線 -->
-				<view class="pay-page-content-item-line"></view>
-				<view class="pay-page-content-item pay-page-content-item-order-content-spacebetween">
-					<text>{{ $t('wallet.totalAmount') }}</text>
-					<text>{{ finalPaymentAmount }}</text>
-				</view>
+
 				<!-- 確認送出按鈕 -->
 				<view class="pay-page-content-item">
 					<button type="button" class="submit-btn " :class="{ 'is-disabled': submitDisabled }" @click="submitForm">{{
@@ -132,12 +191,13 @@
 				</view>
 				<!-- 說明中心 -->
 				<view class="pay-page-content-item pay-page-content-gap">
-					<text>{{ $t('common.center') }}</text>
+					<text class="caption" @click="openCaption">{{ $t('common.center') }}</text>
 					<text>$ TWD</text>
 				</view>
 			</uni-forms>
 
 		</view>
+		<c-bottomPopUp ref="bottomPopUpRef" />
 	</view>
 </template>
 
@@ -154,7 +214,7 @@ const { t } = useI18n()
 const form = ref(null)
 // 付款表單資料
 const formData = ref({
-	payAmount: '0', // 付款金額預設
+	payAmount: '418.95', // 付款金額預設
 	payMethod: '0', // 付款方式預設
 	creditCardName: null,
 	cardNumber: null,
@@ -298,6 +358,15 @@ const submitForm = () => {
 	});
 }
 
+const bottomPopUpRef = ref(null)
+const openCaption = () => {
+	bottomPopUpRef.value.open({
+		title: '說明中心',
+		content: '您可前往管理付款資訊頁面新增付款方式。 如欲了解詳情，請參考如何新增或更新付款方式。 若您想更改 Fance 付款方式，我們提供多種付款選項。'
+	})
+}
+
+
 onShow(() => {
 	// 檢查初始化
 	// checkInitData()
@@ -307,18 +376,234 @@ onShow(() => {
 
 <style lang="scss" scoped>
 page {
-	background-color: var(--background-color-gray);
-	color: var(--text-color-secondary);
+	background-color: var(--background-color-light);
+	color: var(--text-color-primary);
 }
 
 .pay-page {
 	padding: 32rpx;
 }
 
+/* 行分隔線 */
+.pay-page-content-item-line {
+	// height: 1px;
+	// background-color: var(--input-border-color);
+	border-bottom: 1px solid var(--background-color-grayLight2);
+	margin: 48rpx 0;
+}
+
 // 標題
 .pay-page-title {
-	font-size: 50rpx;
+	font-size: 32rpx;
 	margin-bottom: 32rpx;
+	color: var(--primary-color);
+}
+
+.pay-order-container {
+	padding: 40rpx 0;
+	background: var(--text-color-tertiary);
+	border-radius: 20rpx;
+	margin-bottom: 40rpx;
+
+	.pay-page-content-item,
+	.coupon-wrapper {
+		padding: 0 52rpx;
+		margin-bottom: 16rpx;
+	}
+
+	::v-deep(.uni-collapse-item__title) {
+		.uni-collapse-item__title-arrow {
+			margin: 0;
+		}
+	}
+
+	.pay-page-content-item-line {
+		border-color: var(--text-color-secondary);
+		margin: 40rpx 0;
+	}
+
+	.amount {
+		font-weight: bold;
+	}
+
+	.tip-container {
+		display: flex;
+		flex-direction: column;
+		gap: 16rpx;
+		padding: 0 52rpx;
+	}
+
+	.tip-container-text {
+		font-size: 20rpx;
+		color: var(--text-color-quaternary);
+		line-height: 1.2;
+	}
+}
+
+/* 優惠碼 */
+.coupon-wrapper {
+	background-color: transparent;
+	color: #fff;
+
+	.uni-collapse {
+		background-color: transparent;
+
+		::v-deep(.uni-collapse-item__title-wrap) {
+			.uni-collapse-item__title-box {
+				background: transparent;
+				color: var(--text-color-primary);
+				padding: 0;
+
+				.uni-collapse-item__title-text {
+					font-size: 32rpx;
+				}
+			}
+		}
+	}
+
+	::v-deep(.uni-collapse-item) {
+		.uni-collapse-item__title.uni-collapse-item-border {
+			border: 0 !important;
+		}
+
+		.uni-collapse-item__wrap {
+			background-color: transparent;
+
+			.uni-collapse-item__wrap-content.uni-collapse-item--border {
+				border: 0 !important;
+			}
+		}
+
+		.collapse-content {
+			display: flex;
+			align-items: center;
+			gap: 16rpx;
+
+			.input-box {
+				flex: 1;
+				background-color: transparent;
+				color: var(--text-color-primary) !important;
+
+				.is-input-border {
+					background: var(--background-color-light) !important;
+					// border-color: var(--input-border-color) !important;
+
+					&.is-focused {
+						border-color: var(--primary-color) !important;
+
+						.content-clear-icon {
+							color: var(--primary-color) !important;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.confirm-btn {
+		background-color: var(--primary-color);
+		color: var(--text-color-secondary);
+		border-radius: 8rpx;
+		padding: 2rpx 20rpx;
+		font-size: 28rpx;
+	}
+}
+
+uni-image {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+.creditCard-template-title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.creditCard-template {
+	display: flex;
+	gap: 16rpx;
+
+	.subscription-setting-page-list-item-container-left-img {
+		height: 16rpx;
+	}
+}
+
+.subscription-setting-page-list-item-container {
+	padding: 32rpx 40rpx 32rpx;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex: 1;
+
+	.subscription-setting-page-list-item-container-left {
+		display: flex;
+		align-items: center;
+		gap: 32rpx;
+		min-width: 40%;
+		flex: 1;
+
+		.subscription-setting-page-list-item-container-left-img-container {
+			width: 56rpx;
+			height: 56rpx;
+			// margin-right: 16rpx;
+		}
+
+		.subscription-setting-page-list-item-container-left-name {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.subscription-setting-page-list-item-container-left-name-text {
+			font-size: 32rpx;
+			color: var(--text-color-primary);
+		}
+
+		.subscription-setting-page-list-item-container-left-name-default {
+			position: absolute;
+			top: calc(100% + 4rpx);
+			left: 0;
+			display: flex;
+			justify-content: center;
+			padding: 4rpx 30rpx;
+			border-radius: 100rpx;
+			background-color: var(--text-color-denary);
+			width: fit-content;
+		}
+
+		.subscription-setting-page-list-item-container-left-name-default-text {
+			font-size: 20rpx;
+			line-height: 1;
+		}
+
+	}
+
+	.subscription-setting-page-list-item-container-right {
+		display: flex;
+		align-items: center;
+		gap: 8rpx;
+
+		.subscription-setting-page-list-item-container-right-number {
+			font-size: 32rpx;
+			font-weight: 400;
+			color: var(--text-color-primary);
+		}
+
+		.subscription-setting-page-list-item-container-right-tick-container {
+			display: flex;
+			opacity: 1;
+			background: var(--primary-color);
+			border-radius: 50%;
+			padding: 6rpx;
+		}
+
+		.subscription-setting-page-list-item-container-right-tick-container-tick {
+			font-size: 10rpx !important;
+			color: var(--text-color-secondary) !important;
+		}
+	}
 }
 
 .pay-page-content {
@@ -329,8 +614,8 @@ page {
 
 		::v-deep(.uni-forms-item) {
 			.uni-forms-item__label {
-				color: var(--text-color-secondary);
-				font-size: 32rpx;
+				color: var(--text-color-primary);
+				font-size: 30rpx;
 			}
 
 		}
@@ -351,12 +636,16 @@ page {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 30rpx;
+	padding: 56rpx 52rpx;
 	font-size: 28rpx;
-	border: 1rpx solid var(--input-border-color);
+	// border: 1rpx solid var(--input-border-color);
+	background: var(--text-color-tertiary);
 	border-radius: 24rpx;
 }
 
+.pay-page-content-item-input-amount {
+	font-weight: bold;
+}
 
 /* 單選框樣式 */
 .pay-page-content-item-radio-group {
@@ -376,7 +665,7 @@ page {
 	font-size: 32rpx;
 
 	&.active {
-		border-color: var(--text-color-secondary);
+		border-color: var(--text-color-primary);
 	}
 
 	::v-deep(.uni-radio-wrapper) {
@@ -387,7 +676,7 @@ page {
 		.icon {
 			padding-top: 8rpx;
 			margin-right: 16rpx;
-			color: var(--text-color-secondary) !important;
+			color: var(--text-color-primary) !important;
 		}
 	}
 }
@@ -403,7 +692,7 @@ page {
 			border-radius: 20rpx !important;
 
 			&.is--tag.is-checked {
-				border-color: var(--text-color-secondary) !important;
+				border-color: var(--text-color-primary) !important;
 			}
 		}
 	}
@@ -415,14 +704,14 @@ page {
 		margin-bottom: 0rpx;
 
 		&.is-input-border {
-			border: 1px solid var(--input-border-color) !important;
-			background: transparent !important;
-			border-radius: 24rpx;
+			border: none !important;
+			background: var(--text-color-tertiary) !important;
+			border-radius: 20rpx;
 			padding: 8rpx 32rpx;
-			color: var(--text-color-secondary);
+			color: var(--text-color-primary);
 
 			&.is-focused {
-				border: 1px solid var(--text-color-secondary) !important;
+				border: 1px solid var(--primary-color) !important;
 
 				.uniui-eye-filled {
 					color: var(--primary-color) !important;
@@ -460,44 +749,37 @@ page {
 
 /* 信用卡資料樣式組合 */
 .pay-page-content-item-cardTop {
-	margin-bottom: 0;
+	margin-bottom: 40rpx;
 
 	::v-deep(.uni-forms-item) {
 		.uni-forms-item__label {
-			color: var(--text-color-secondary);
+			color: var(--text-color-primary);
 			font-size: 32rpx;
 		}
 	}
 
 	::v-deep(.uni-easyinput) {
 		.is-input-border {
-			border: 1px solid var(--input-border-color) !important;
-			border-radius: 12px 12px 0 0;
+			border: none !important;
+			// border-radius: 12px 12px 0 0;
 		}
 	}
 }
 
 .pay-page-content-item-cardbottom {
 	display: flex;
-	margin-bottom: 48rpx;
-}
+	margin-bottom: 40rpx;
+	gap: 28rpx;
 
-.pay-page-content-item-cardLeft {
-	margin-bottom: 0;
-	flex: 1;
-
-	::v-deep(.uni-easyinput) {
-		.is-input-border {
-			border: none !important;
-			height: 90rpx;
-			border-left: 1px solid var(--input-border-color) !important;
-			border-bottom: 1px solid var(--input-border-color) !important;
-			border-right: 1px solid var(--input-border-color) !important;
-			border-radius: 0 0 0 12px;
+	::v-deep(.uni-forms-item) {
+		.uni-forms-item__label {
+			color: var(--text-color-primary);
 		}
 	}
+
 }
 
+.pay-page-content-item-cardLeft,
 .pay-page-content-item-cardRight {
 	margin-bottom: 0;
 	flex: 1;
@@ -505,13 +787,11 @@ page {
 	::v-deep(.uni-easyinput) {
 		.is-input-border {
 			height: 90rpx;
-			border: none !important;
-			// border-left: 1px solid var(--input-border-color) !important;
-			border-bottom: 1px solid var(--input-border-color) !important;
-			border-right: 1px solid var(--input-border-color) !important;
-			border-radius: 0 0 12px 0;
+			color: var(--text-color-primary);
 		}
 	}
+
+
 }
 
 
@@ -520,13 +800,14 @@ page {
 	::v-deep(.uni-stat-box) {
 		.uni-select {
 			height: 90rpx !important;
-			border: 1px solid var(--input-border-color) !important;
+			border: none !important;
+			background: var(--text-color-tertiary) !important;
 			border-radius: 24rpx;
 			padding: 8rpx 32rpx;
-			color: var(--text-color-secondary);
+			color: var(--text-color-primary);
 
 			.uni-select__input-text {
-				color: var(--text-color-secondary);
+				color: var(--text-color-primary);
 
 				&.uni-select__input-placeholder {
 					color: var(--text-color-quaternary);
@@ -536,20 +817,26 @@ page {
 
 		// 下拉選單
 		.uni-select__selector {
-			background-color: var(--background-color-gray);
-			border-color: var(--text-color-secondary);
+			background-color: var(--text-color-tertiary);
+			border-color: var(--text-color-primary);
+			border: none;
 
 			.uni-popper__arrow_bottom {
-				border-bottom-color: var(--text-color-secondary) !important;
+				border-bottom-color: var(--text-color-primary) !important;
 
 				&::after {
-					border-bottom-color: var(--text-color-secondary) !important;
+					border-bottom-color: var(--text-color-primary) !important;
 				}
 			}
 
 			// 選單分隔線
 			.uni-scroll-view-content>.uni-select__selector-item {
-				border-bottom: 1px solid var(--text-color-secondary);
+
+				// border-bottom: 1px solid var(--text-color-primary);
+				&:hover {
+					background-color: var(--primary-color) !important;
+					color: var(--text-color-secondary) !important;
+				}
 			}
 
 			.uni-scroll-view-content>.uni-select__selector-item:last-child {
@@ -594,7 +881,7 @@ page {
 
 		.pay-page-content-item-order-content-text-name {
 			font-size: 32rpx;
-			color: var(--text-color-secondary);
+			color: var(--text-color-primary);
 		}
 
 		.pay-page-content-item-order-content-text-account {
@@ -604,78 +891,8 @@ page {
 	}
 }
 
-/* 優惠碼 */
-.coupon-wrapper {
-	background-color: transparent;
-	color: #fff;
 
-	.uni-collapse {
-		background-color: transparent;
 
-		::v-deep(.uni-collapse-item__title-wrap) {
-			.uni-collapse-item__title-box {
-				background: transparent;
-				color: var(--text-color-secondary);
-				padding: 0;
-
-				.uni-collapse-item__title-text {
-					font-size: 32rpx;
-				}
-			}
-		}
-	}
-
-	::v-deep(.uni-collapse-item) {
-		.uni-collapse-item__title.uni-collapse-item-border {
-			border: 0 !important;
-		}
-
-		.uni-collapse-item__wrap {
-			background-color: transparent;
-
-			.uni-collapse-item__wrap-content.uni-collapse-item--border {
-				border: 0 !important;
-			}
-		}
-
-		.collapse-content {
-			display: flex;
-			align-items: center;
-			gap: 16rpx;
-
-			.input-box {
-				flex: 1;
-				background-color: transparent;
-				color: var(--text-color-secondary) !important;
-
-				.is-input-border {
-					background: var(--background-color-gray) !important;
-					border-color: var(--input-border-color) !important;
-
-					&.is-focused {
-						border-color: var(--text-color-secondary) !important;
-					}
-				}
-			}
-		}
-	}
-
-	.confirm-btn {
-		background-color: var(--text-color-secondary);
-		color: var(--text-color-primary);
-		border-radius: 8rpx;
-		padding: 2rpx 20rpx;
-		font-size: 28rpx;
-	}
-}
-
-/* 行分隔線 */
-.pay-page-content-item-line {
-	// height: 1px;
-	// background-color: var(--input-border-color);
-	border-bottom: 1px solid var(--input-border-color);
-	margin: 24rpx 0;
-}
 
 .pay-page-content-item-order-content-spacebetween {
 	display: flex;
@@ -685,18 +902,26 @@ page {
 
 /* 確認付款按鈕 */
 .submit-btn {
-	border-radius: 16px;
+	border-radius: 20rpx;
 	margin-top: 80rpx;
+	font-size: 30rpx;
+	padding: 24rpx 0;
+	line-height: 1;
 
 	&.is-disabled {
-		background-color: var(--text-color-quaternary);
-		color: var(--text-color-primary);
+		background-color: var(--primary-color);
+		color: var(--text-color-secondary);
 	}
+}
+
+.caption {
+	color: var(--primary-color);
 }
 
 /* 間距 */
 .pay-page-content-gap {
 	display: flex;
-	gap: 24rpx;
+	font-size: 24rpx;
+	gap: 26rpx;
 }
 </style>

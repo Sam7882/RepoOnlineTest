@@ -1,9 +1,6 @@
 <template>
 	<view class="pay-page">
 		<c-headerNav :title="$t('wallet.paymentDetails')" />
-		<!-- <view class="pay-page-title">
-			<text>{{ $t('wallet.paymentDetails') }}</text>
-		</view> -->
 		<view class="pay-page-content">
 			<uni-forms ref="form" :model="formData" :rules="formRules" label-position="top">
 				<!-- name => 對應 uni-forms 的 表單參數名稱 , 與 規則名皆須一致 -->
@@ -36,7 +33,7 @@
 					</view>
 					<view class="pay-page-content-item-line"></view>
 					<!-- 優惠馬 摺疊版 -->
-					<view class="coupon-wrapper">
+					<!-- <view class="coupon-wrapper">
 						<uni-collapse v-model="activeCollapse">
 							<uni-collapse-item title="優惠碼" name="coupon">
 								<view class="collapse-content">
@@ -46,7 +43,7 @@
 								</view>
 							</uni-collapse-item>
 						</uni-collapse>
-					</view>
+					</view> -->
 					<!-- 一行的左右兩側文字 -->
 					<view class="pay-page-content-item pay-page-content-item-order-content-spacebetween">
 						<text>{{ $t('wallet.currentPayment') }}</text>
@@ -56,6 +53,16 @@
 						<text>{{ $t('wallet.salesTax') }}</text>
 						<text class="amount">{{ finalPayment.tax }}</text>
 					</view>
+
+					<uni-forms-item class="pay-page-content-item coupon-wrapper" name="payAmount">
+						<text class="coupon-wrapper-text">優惠碼</text>
+						<view class="coupon-wrapper-input-container">
+							<uni-easyinput type="text" :trim="true" v-model="couponCode"
+								:placeholder="$t('wallet.couponCodePlaceholder')" class="input-box" />
+							<button type="button" class="confirm-btn" @click="applyCoupon">{{ $t('common.confirm') }}</button>
+						</view>
+					</uni-forms-item>
+					<view class="pay-page-content-item-line"></view>
 					<view class="pay-page-content-item pay-page-content-item-order-content-spacebetween">
 						<text>{{ $t('wallet.totalAmount') }}</text>
 						<text class="amount">{{ finalPaymentAmount }}</text>
@@ -442,70 +449,53 @@ page {
 
 /* 優惠碼 */
 .coupon-wrapper {
+	display: flex;
 	background-color: transparent;
 	color: #fff;
 
-	.uni-collapse {
-		background-color: transparent;
-
-		::v-deep(.uni-collapse-item__title-wrap) {
-			.uni-collapse-item__title-box {
-				background: transparent;
-				color: var(--text-color-primary);
-				padding: 0;
-
-				.uni-collapse-item__title-text {
-					font-size: 32rpx;
-				}
-			}
+	::v-deep(.uni-forms-item__content) {
+		.uni-forms-item__content {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 64rpx;
+			color: var(--text-color-primary);
 		}
 	}
 
-	::v-deep(.uni-collapse-item) {
-		.uni-collapse-item__title.uni-collapse-item-border {
-			border: 0 !important;
+	::v-deep(.uni-forms-item__label) {
+		.uni-forms-item__label {
+			display: none;
 		}
+	}
 
-		.uni-collapse-item__wrap {
-			background-color: transparent;
+	.coupon-wrapper-text {
+		white-space: nowrap;
+		font-size: 30rpx;
+	}
 
-			.uni-collapse-item__wrap-content.uni-collapse-item--border {
-				border: 0 !important;
-			}
+	::v-deep(.uni-easyinput) {
+		.is-input-border {
+			border-radius: 20rpx;
 		}
+	}
 
-		.collapse-content {
-			display: flex;
-			align-items: center;
-			gap: 16rpx;
-
-			.input-box {
-				flex: 1;
-				background-color: transparent;
-				color: var(--text-color-primary) !important;
-
-				.is-input-border {
-					background: var(--background-color-light) !important;
-					// border-color: var(--input-border-color) !important;
-
-					&.is-focused {
-						border-color: var(--primary-color) !important;
-
-						.content-clear-icon {
-							color: var(--primary-color) !important;
-						}
-					}
-				}
-			}
-		}
+	.coupon-wrapper-input-container {
+		display: flex;
+		// flex-direction: column;
+		align-items: center;
+		gap: 12rpx;
 	}
 
 	.confirm-btn {
 		background-color: var(--primary-color);
 		color: var(--text-color-secondary);
 		border-radius: 8rpx;
-		padding: 2rpx 20rpx;
+		padding: 16rpx 20rpx;
+		line-height: 1;
 		font-size: 28rpx;
+		width: fit-content;
+		margin: 0;
 	}
 }
 

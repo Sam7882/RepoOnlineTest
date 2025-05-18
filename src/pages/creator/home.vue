@@ -195,6 +195,17 @@
 					color="var(--text-color-nonary)"></uni-icons>
 			</view>
 		</view>
+		<!-- 分類欄 -->
+		<view class="type-container">
+			<scroll-view class="type-scroll-view" scroll-x="true">
+				<view class="type-item" v-for="(item, index) in 4" :key="index" @click="switchTypeIndex(index)"
+					:class="{ active: typeIndex === index }">
+					<uni-icons class="icon" type="icon-common-type" custom-prefix="icon" size="24"
+						color="var(--text-color-nonary)"></uni-icons>
+					<text class="type-item-text">一號分類</text>
+				</view>
+			</scroll-view>
+		</view>
 		<!-- 圖文區 卡片 水平排序，自動換行，一行三格 grid排版-->
 		<!-- <view class="creator-home-page-content-card-container">
 			<view class="creator-home-page-content-card-container-item">
@@ -369,6 +380,12 @@ const getElementHeight = (selector = '#target') => {
 
 const handleSubscription = () => {
 	toSubscription()
+}
+
+// 分類
+const typeIndex = ref(0)
+const switchTypeIndex = (index) => {
+	typeIndex.value = index
 }
 
 onMounted(() => {
@@ -687,11 +704,62 @@ page {
 	}
 }
 
+.type-container {
+	margin: 26rpx 0 16rpx;
+
+	::v-deep(.uni-scroll-view) {
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
+		.uni-scroll-view-content {
+			display: flex;
+			gap: 12rpx;
+		}
+	}
+
+
+	.type-item {
+		display: flex;
+		align-items: center;
+		gap: 16rpx;
+		padding: 16rpx 28rpx;
+		background: var(--text-color-denary);
+		border-radius: 10rpx;
+
+		&:first-child {
+			margin-left: 56rpx;
+		}
+
+		.icon {
+			font-size: 28rpx !important;
+			color: var(--text-color-quaternary) !important;
+		}
+
+		.type-item-text {
+			font-size: 32rpx;
+			white-space: nowrap;
+			color: var(--text-color-quaternary);
+			line-height: 1;
+		}
+
+		&.active {
+			background: unset;
+			border: 1px solid var(--text-color-primary);
+
+			.type-item-text {
+				color: var(--text-color-primary);
+			}
+		}
+	}
+}
+
+
+
 /* 圖文區 */
 .creator-home-page-content-type-container {
 	display: flex;
 	justify-content: center;
-	border-bottom: 1px solid var(--text-color-nonary);
 	margin-top: 16rpx;
 	padding: 0 24rpx;
 
@@ -699,7 +767,7 @@ page {
 		flex: 1;
 		position: relative;
 		padding: 0 8rpx;
-		padding-bottom: 16rpx;
+		padding-bottom: 8rpx;
 		display: flex;
 		align-items: center;
 		justify-content: center;

@@ -5,9 +5,12 @@
       <view class="creator-home-page-content-card-container-item" @click="handleClick(item)">
         <image class="creator-home-page-content-card-container-item-img" :src="item.src" :alt="item.alt"
           mode="widthFix"></image>
-        <uni-icons class="creator-home-page-content-card-container-item-icon" custom-prefix="icon" size="30"
-          color="var(--text-color-secondary)"
-          :type="item.type === 'photos' ? 'icon-common-copy' : item.type === 'video' ? 'icon-common-video' : ''" />
+        <view class="creator-home-page-content-card-container-item-icon-container">
+          <uni-icons class="creator-home-page-content-card-container-item-icon" custom-prefix="icon" size="30"
+            color="var(--text-color-secondary)"
+            :type="item.type === 'photos' ? 'icon-common-copy' : item.type === 'video' ? 'icon-common-video' : ''" />
+          <text class="creator-home-page-content-card-container-item-icon-text">1688</text>
+        </view>
       </view>
     </template>
   </view>
@@ -76,12 +79,25 @@ const handleClick = (item: { src: string; alt: string; type: string }) => {
       }
     }
 
-    .creator-home-page-content-card-container-item-icon {
+    .creator-home-page-content-card-container-item-icon-container {
       position: absolute;
       bottom: 8rpx;
       left: 16rpx;
       z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8rpx;
+    }
+
+    .creator-home-page-content-card-container-item-icon {
       font-size: 24rpx !important;
+      transform: translateY(2rpx);
+    }
+
+    .creator-home-page-content-card-container-item-icon-text {
+      font-size: 24rpx;
+      color: var(--text-color-secondary);
     }
   }
 }

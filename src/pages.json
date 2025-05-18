@@ -82,6 +82,20 @@
         "backgroundColor": "var(--background-color-dark)"
       }
     },
+    {
+      "path": "pages/search/searchVideo",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-dark)"
+      }
+    },
+    {
+      "path": "pages/search/searchTheme",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-dark)"
+      }
+    },
 
     {
       "path": "pages/wallet/index",

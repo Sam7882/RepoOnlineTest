@@ -165,3 +165,20 @@ img {
   border-bottom: 1px solid var(--background-color-grayLight2);
   margin: 20rpx 0 40rpx;
 }
+
+.btn-container {
+  .btn {
+    padding: 10rpx 22rpx;
+    line-height: 1;
+    font-size: 24rpx;
+    background: var(--primary-color);
+    color: var(--text-color-secondary);
+    border-radius: 20rpx;
+  }
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

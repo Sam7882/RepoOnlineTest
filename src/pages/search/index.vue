@@ -120,7 +120,7 @@
 						<uni-icons class="recommend-top-text-icon" type="right" size="30"></uni-icons>
 					</view>
 				</view>
-				<view class="recommend-top-more">
+				<view class="recommend-top-more" @click="handleMore">
 					<uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons>
 				</view>
 			</view>
@@ -154,7 +154,7 @@
 						<uni-icons class="recommend-top-text-icon" type="right" size="30"></uni-icons>
 					</view>
 				</view>
-				<view class="recommend-top-more">
+				<view class="recommend-top-more" @click="handleToTheme">
 					<uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons>
 				</view>
 			</view>
@@ -186,7 +186,7 @@
 						<uni-icons class="recommend-top-text-icon" type="right" size="30"></uni-icons>
 					</view>
 				</view>
-				<view class="recommend-top-more">
+				<view class="recommend-top-more" @click="handleMore">
 					<uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons>
 				</view>
 			</view>
@@ -235,6 +235,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
+import { toSearchVideo, toSearchTheme } from '@/utils/routers';
 const { t } = useI18n();
 // TEMP: 搜尋頁
 /* 滾動分類 */
@@ -401,6 +402,14 @@ const openShowArrow = () => {
 // 滾動到右側 隱藏箭頭
 const hideShowArrow = () => {
 	showArrow.value = false
+}
+
+const handleToTheme = () => {
+	toSearchTheme()
+}
+
+const handleMore = () => {
+	toSearchVideo()
 }
 
 // 點擊分類

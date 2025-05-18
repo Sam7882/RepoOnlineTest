@@ -96,6 +96,20 @@ export const toSearchHome = (params = {}) => {
 		url: '/pages/search/index' + queryStringify(params)
 	})
 }
+// 跳轉到搜尋視頻頁
+export const toSearchVideo = (params = {}) => {
+	safeSwitchTab('/pages/search/searchVideo')
+	uni.navigateTo({
+		url: '/pages/search/searchVideo' + queryStringify(params)
+	})
+}
+// 跳轉到搜尋主題頁
+export const toSearchTheme = (params = {}) => {
+	safeSwitchTab('/pages/search/searchTheme')
+	uni.navigateTo({
+		url: '/pages/search/searchTheme' + queryStringify(params)
+	})
+}
 
 /* 發佈 */
 // 跳轉到發佈頁

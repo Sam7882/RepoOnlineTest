@@ -120,7 +120,7 @@
             </template>
           </uni-list>
           <!-- 新增信用卡 -->
-          <view class="popup-content-item-creditCard-list-item-add">
+          <view class="popup-content-item-creditCard-list-item-add" @click="handleAddCreditCard">
             <uni-icons class="popup-content-item-creditCard-list-item-add-icon" type="icon-common-plus"
               custom-prefix="icon" size="16" />
           </view>
@@ -139,6 +139,7 @@
 
 <script setup lang="ts">
 import { toPay } from '@/utils/routers'
+import { toCreditCardSelect } from '@/utils/routers'
 const emit = defineEmits(['update:Data'])
 const popupRef = ref()
 
@@ -166,6 +167,10 @@ const selectCreditCard = (id: string) => {
     item.selected = item.id == id
   })
 }
+const handleAddCreditCard = () => {
+  toCreditCardSelect()
+}
+
 
 const close = () => {
   popupRef.value?.close()

@@ -103,6 +103,20 @@
         "backgroundColor": "var(--background-color-light)"
       }
     },
+    {
+      "path": "pages/wallet/creditCardSetting",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/creditCardSave",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
 
     {
       "path": "pages/creator/home",

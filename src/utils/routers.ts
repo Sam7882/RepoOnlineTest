@@ -187,3 +187,21 @@ export const toPay = (params = {}) => {
 		url: '/pages/wallet/pay' + queryStringify(params)
 	})
 }
+export const toCreditCardSelect = (params = {}) => {
+	safeSwitchTab('/pages/wallet/creditCardSelect')
+	uni.navigateTo({
+		url: '/pages/wallet/creditCardSelect' + queryStringify(params)
+	})
+}
+export const toCreditCardSetting = (params = {}) => {
+	safeSwitchTab('/pages/wallet/creditCardSetting')
+	uni.navigateTo({
+		url: '/pages/wallet/creditCardSetting' + queryStringify(params)
+	})
+}
+export const toCreditCardSave = (params = {}) => {
+	safeSwitchTab('/pages/wallet/creditCardSave')
+	uni.navigateTo({
+		url: '/pages/wallet/creditCardSave' + queryStringify(params)
+	})
+}

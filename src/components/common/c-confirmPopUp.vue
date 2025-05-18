@@ -56,6 +56,10 @@ defineExpose({
   padding: 48rpx 60rpx;
 }
 
+.uni-popup {
+  z-index: var(--z-index-max);
+}
+
 .popup-title {
   font-weight: 500;
   font-size: 34rpx;

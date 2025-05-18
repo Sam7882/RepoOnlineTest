@@ -1,36 +1,58 @@
 <template>
 	<view class="creator-home-page">
 		<!-- 頂部封面區 -->
-		<view class="creator-home-page-cover">
-			<!-- 封面圖片 -->
-			<view class="creator-home-page-cover-img-container">
+		<!-- <view class="creator-home-page-cover"> -->
+		<!-- 封面圖片 -->
+		<!-- <view class="creator-home-page-cover-img-container">
 				<image class="creator-home-page-cover-img" src="/static/images/template/img-template-04.png" mode="heightFix">
 				</image>
 			</view>
-		</view>
+		</view> -->
 
 		<!-- 創作者資料區 -->
+		<view class="creator-home-page-data-header-container">
+			<view class="creator-home-page-data-header-container-title">
+				<view class="creator-home-page-data-header-container-back-button" v-if="!isCreator">
+					<uni-icons class="header-nav-icon" type="left" size="20" color="var(--text-color-primary)"></uni-icons>
+				</view>
+				<text class="creator-home-page-data-header-container-title-text" @click="switchIsCreator" v-if="!isCreator">{{
+					'Jesiicatestid' }}</text>
+				<!-- 頭像側邊按鈕 -->
+				<view class="creator-home-page-data-item-top-menu-container">
+					<template v-if="!isCreator">
+						<view class="creator-home-page-data-item-container-item-top-menu">
+							<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-notice"
+								custom-prefix="icon" size="24" color="var(--text-color-nonary)"></uni-icons>
+						</view>
+						<view class="creator-home-page-data-item-container-item-top-menu">
+							<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-update"
+								custom-prefix="icon" size="24" color="var(--text-color-nonary)"></uni-icons>
+						</view>
+						<view class="creator-home-page-data-item-container-item-top-menu">
+							<uni-icons class="creator-home-page-data-item-container-item-icon" type="more-filled" size="24"
+								color="var(--text-color-nonary)"></uni-icons>
+						</view>
+					</template>
+					<template v-else>
+						<view class="creator-home-page-data-item-container-item-top-menu">
+							<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-plus"
+								custom-prefix="icon" size="24" color="var(--text-color-nonary)"></uni-icons>
+						</view>
+						<view class="creator-home-page-data-item-container-item-top-menu">
+							<uni-icons class="creator-home-page-data-item-container-item-icon" type="bars" size="24"
+								color="var(--text-color-nonary)"></uni-icons>
+						</view>
+					</template>
+				</view>
+			</view>
+		</view>
 		<view class="creator-home-page-data-container">
 			<!-- 絕對位置 頭像 -->
 			<view class="creator-home-page-avatar-container">
 				<image class="creator-home-page-avatar" src="/static/images/template/img-template-03.png" mode="widthFix">
 				</image>
 			</view>
-			<!-- 頭像側邊按鈕 -->
-			<view class="creator-home-page-data-item-top-menu-container">
-				<view class="creator-home-page-data-item-container-item-top-menu">
-					<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-notice"
-						custom-prefix="icon" size="24" color="var(--text-color-nonary)"></uni-icons>
-				</view>
-				<view class="creator-home-page-data-item-container-item-top-menu">
-					<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-update"
-						custom-prefix="icon" size="24" color="var(--text-color-nonary)"></uni-icons>
-				</view>
-				<view class="creator-home-page-data-item-container-item-top-menu">
-					<uni-icons class="creator-home-page-data-item-container-item-icon" type="more-filled" size="24"
-						color="var(--text-color-nonary)"></uni-icons>
-				</view>
-			</view>
+
 			<!-- 名稱與帳號 垂直排序 -->
 			<view class="creator-home-page-data-profile-container">
 				<!-- 創作者名稱與帳號 -->
@@ -51,36 +73,41 @@
 			<view class="creator-home-page-data-item-container">
 				<!-- 粉絲 -->
 				<view class="creator-home-page-data-item-container-item">
+					<view class="creator-home-page-data-item-container-item-text-container fans">
+						<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-badge"
+							custom-prefix="icon" size="24" color="var(--text-color-primary)"></uni-icons>
+						<text
+							class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-rank">168</text>
+					</view>
 					<text
 						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-number">16.1K</text>
 					<text
 						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-title">{{
 							$t('creator.fans') }}</text>
-					<text
-						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-rank">NO.168</text>
-				</view>
-				<view class="pay-page-content-item-line"></view>
-				<!-- 關注 -->
-				<view class="creator-home-page-data-item-container-item">
-					<text
-						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-number">168</text>
-					<text
-						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-title">{{
-							$t('creator.following') }}</text>
-					<text
-						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-rank">NO.168</text>
 				</view>
 				<view class="pay-page-content-item-line"></view>
 				<!-- 愛心 -->
 				<view class="creator-home-page-data-item-container-item">
+					<view class="creator-home-page-data-item-container-item-text-container ">
+						<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-badge"
+							custom-prefix="icon" size="24" color="var(--text-color-primary)"></uni-icons>
+						<text
+							class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-rank">168</text>
+					</view>
 					<text
 						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-number">100K</text>
 					<text
 						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-title">{{
 							$t('creator.like') }}</text>
+				</view>
+				<!-- 關注 -->
+				<view class="pay-page-content-item-line"></view>
+				<view class="creator-home-page-data-item-container-item">
 					<text
-						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-rank">NO.168</text>
-
+						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-number">100K</text>
+					<text
+						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-title">{{
+							$t('creator.following') }}</text>
 				</view>
 			</view>
 			<!-- 文案 -->
@@ -115,8 +142,11 @@
 					<image src="/static/icons/community/icon-community-facebook.png" mode="widthFix"></image>
 				</view>
 			</view>
+
+
 			<!-- 按鈕 -->
-			<view
+			<!-- 使用者觀看別人 -->
+			<view v-if="!isCreator"
 				class="creator-home-page-data-profile-container-item creator-home-page-data-profile-container-item-edit-button">
 				<view class="creator-home-page-data-profile-container-item-edit-button-top-container">
 					<!-- 關注 -->
@@ -131,6 +161,24 @@
 					@click="handleSubscription">
 					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
 						$t('creator.beMember') }}</button>
+				</view>
+			</view>
+			<!-- 使用者觀看自己 -->
+			<view v-else
+				class="creator-home-page-data-profile-container-item creator-home-page-data-profile-container-item-edit-button">
+				<view class="creator-home-page-data-profile-container-item-edit-button-top-container">
+					<!-- 關注 -->
+					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
+						'編輯資料' }}</button>
+					<!-- 訊息 -->
+					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
+						'分享檔案' }}</button>
+				</view>
+				<!-- 成為會員 -->
+				<view class="creator-home-page-data-profile-container-item-edit-button-bottom-container"
+					@click="handleSubscription">
+					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
+						'創作者中心' }}</button>
 				</view>
 			</view>
 		</view>
@@ -250,6 +298,11 @@ import { onPageScroll } from '@dcloudio/uni-app'
 import { toSubscription } from '@/utils/routers'
 const type = ref('all');
 const showSelect = ref(false);
+
+const isCreator = ref(false);
+const switchIsCreator = () => {
+	isCreator.value = !isCreator.value
+}
 // 用於計算 filterSelect 該顯示的位置
 const filterSelectShowTop = ref({})
 const filterSelectshowDeco = ref({})
@@ -442,19 +495,69 @@ page {
 	}
 }
 
+// HEADER
+.creator-home-page-data-header-container {
+	position: relative;
+	display: flex;
+	justify-content: flex-end;
+	// padding: 24rpx 0;
+	margin: 68rpx 40rpx 32rpx;
+	gap: 40rpx;
+
+	.creator-home-page-data-header-container-back-button {
+		position: absolute;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.creator-home-page-data-header-container-title-text {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.creator-home-page-data-header-container-title {
+		font-size: 32rpx;
+		font-weight: 500;
+	}
+}
+
+// 頭像側邊按鈕
+.creator-home-page-data-item-top-menu-container {
+	position: relative;
+	display: flex;
+	justify-content: flex-end;
+	// padding: 24rpx 0;
+	// padding: 68rpx 40rpx 32rpx;
+	gap: 28rpx;
+
+	.creator-home-page-data-item-container-item-top-menu {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 32rpx;
+
+		.creator-home-page-data-item-container-item-icon {
+			font-size: 36rpx !important;
+			color: var(--text-color-primary) !important;
+		}
+	}
+}
+
 //  創作者資料區 
 .creator-home-page-data-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	position: relative;
-	padding: 12rpx 48rpx;
+	padding: 12rpx 70rpx;
 
 
 	// 頭像
 	.creator-home-page-avatar-container {
-		position: absolute;
-		top: -3%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		z-index: 1;
+		position: relative;
 		width: 208rpx;
 		height: 208rpx;
 		border: 12rpx solid var(--primary-color);
@@ -489,24 +592,22 @@ page {
 		}
 	}
 
-	// 頭像側邊按鈕
-	.creator-home-page-data-item-top-menu-container {
+
+
+	.creator-home-page-data-item-container-item-text-container {
 		display: flex;
-		justify-content: flex-end;
-		// padding: 24rpx 0;
-		padding-top: 24rpx;
-		gap: 40rpx;
+		align-items: center;
+		gap: 8rpx;
+		padding: 6rpx 28rpx;
+		border-radius: 20rpx;
+		background: var(--favorite-color-secondary);
 
-		.creator-home-page-data-item-container-item-top-menu {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: 32rpx;
+		&.fans {
+			background: var(--favorite-color);
+		}
 
-			.creator-home-page-data-item-container-item-icon {
-				font-size: 40rpx !important;
-				color: var(--text-color-primary) !important;
-			}
+		.creator-home-page-data-item-container-item-icon {
+			font-size: 24rpx !important;
 		}
 	}
 
@@ -514,15 +615,19 @@ page {
 	.creator-home-page-data-item-container {
 		display: flex;
 		justify-content: center;
+		align-items: flex-end;
 		// margin-top: 12rpx;
 		margin-bottom: 16rpx;
 		gap: 48rpx;
+		width: 100%;
 
 		.creator-home-page-data-item-container-item {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			gap: 4rpx;
+			flex: 1;
+
 		}
 
 
@@ -539,12 +644,14 @@ page {
 
 			&.creator-home-page-data-item-container-item-text-title {
 				font-size: 24rpx;
-				color: var(--text-color-quaternary);
+				color: var(--text-color-gray);
 			}
 
 			&.creator-home-page-data-item-container-item-text-rank {
-				font-size: 24rpx;
-				color: var(--text-color-senary);
+				font-size: 28rpx;
+				font-weight: 500;
+				line-height: 1;
+				color: var(--text-color-primary);
 			}
 		}
 	}
@@ -555,7 +662,7 @@ page {
 		flex-direction: column;
 		align-items: center;
 		gap: 16rpx;
-		margin-bottom: 16rpx;
+		margin-bottom: 40rpx;
 
 		// gap: 4rpx;
 
@@ -656,6 +763,7 @@ page {
 		align-items: center;
 		gap: 24rpx;
 		padding: 0 16rpx;
+		width: 100%;
 
 		.creator-home-page-data-profile-container-item-edit-button-top-container,
 		.creator-home-page-data-profile-container-item-edit-button-bottom-container {

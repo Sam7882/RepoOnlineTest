@@ -115,19 +115,20 @@
 					<image src="/static/icons/community/icon-community-facebook.png" mode="widthFix"></image>
 				</view>
 			</view>
-			<!-- 編輯按鈕 -->
+			<!-- 按鈕 -->
 			<view
 				class="creator-home-page-data-profile-container-item creator-home-page-data-profile-container-item-edit-button">
 				<view class="creator-home-page-data-profile-container-item-edit-button-top-container">
-					<!-- 編輯個人資料 -->
+					<!-- 關注 -->
 					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
 						$t('creator.unFollowing') }}</button>
-					<!-- 編輯個人簡介 -->
+					<!-- 訊息 -->
 					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
 						$t('common.message') }}</button>
 				</view>
-				<!-- 申請創作者 -->
-				<view class="creator-home-page-data-profile-container-item-edit-button-bottom-container">
+				<!-- 成為會員 -->
+				<view class="creator-home-page-data-profile-container-item-edit-button-bottom-container"
+					@click="handleSubscription">
 					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
 						$t('creator.beMember') }}</button>
 				</view>
@@ -235,6 +236,7 @@
 <script setup>
 // TEMP: 創作者主頁
 import { onPageScroll } from '@dcloudio/uni-app'
+import { toSubscription } from '@/utils/routers'
 const type = ref('all');
 const showSelect = ref(false);
 // 用於計算 filterSelect 該顯示的位置
@@ -363,6 +365,10 @@ const getElementHeight = (selector = '#target') => {
 			filterSelectHeight.value = rect.height
 		}
 	}).exec()
+}
+
+const handleSubscription = () => {
+	toSubscription()
 }
 
 onMounted(() => {

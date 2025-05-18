@@ -144,3 +144,24 @@ img {
   font-size: 30rpx;
   margin-bottom: 20rpx;
 }
+
+// 標題
+.row-title {
+  line-height: 1;
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+  color: var(--text-color-primary);
+
+  &.bold {
+    font-weight: bold;
+  }
+  &.bold-50 {
+    font-weight: 500;
+  }
+}
+
+/* 行分隔線 */
+.deco-line {
+  border-bottom: 1px solid var(--background-color-grayLight2);
+  margin: 20rpx 0 40rpx;
+}

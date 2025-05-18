@@ -163,6 +163,13 @@ export const toFollowing = (params = {}) => {
 		url: '/pages/creator/following' + queryStringify(params)
 	})
 }
+// 跳轉到訂閱會員頁
+export const toSubscription = (params = {}) => {
+	safeSwitchTab('/pages/creator/subscription')
+	uni.navigateTo({
+		url: '/pages/creator/subscription' + queryStringify(params)
+	})
+}
 
 
 // 跳轉到信箱

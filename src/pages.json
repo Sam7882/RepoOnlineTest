@@ -157,6 +157,12 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    {
+      "path": "pages/creator/subscription",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "subPackages": [],

@@ -87,6 +87,7 @@
 </template>
 
 <script setup>
+// TEMP: 側邊欄
 import { toCreatorHome, toStatistics, toWallet, toFavorites, toFollowing, toLogin } from '@/utils/routers'
 const emit = defineEmits(['update:Data'])
 const popupRef = ref()

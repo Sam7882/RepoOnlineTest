@@ -16,6 +16,7 @@
 </template>
 
 <script setup>
+// TEMP: 底部上滑彈窗
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 // TEMP:發布頁-組件-發布設定底部上滑彈窗

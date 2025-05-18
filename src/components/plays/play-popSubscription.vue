@@ -89,6 +89,7 @@
 </template>
 
 <script setup lang="ts">
+// TEMP: 訂閱方案彈窗
 import { toPay } from '@/utils/routers'
 const emit = defineEmits(['update:Data'])
 const popupRef = ref()

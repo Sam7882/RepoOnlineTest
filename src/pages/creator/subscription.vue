@@ -120,6 +120,7 @@ const openCaption = () => {
 </script>
 
 <style scoped lang="scss">
+// TEMP: 訂閱方案頁面
 ::v-deep(.uni-popup) {
 
   // 需同時有圓弧，才能有效果

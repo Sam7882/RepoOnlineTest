@@ -84,7 +84,7 @@
 </template>
 
 <script setup>
-// TEMP: 付款詳情頁
+// TEMP: 信用卡新增設置頁
 import { onShow } from '@dcloudio/uni-app';
 import { useInitStore } from '@/stores/useInitDataStore'
 import { useI18n } from 'vue-i18n'

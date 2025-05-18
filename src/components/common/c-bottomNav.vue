@@ -49,6 +49,7 @@
 </template>
 
 <script setup>
+// TEMP: 底部導航列
 import { toPlayIndex, toFavorites, toPostIndex, toMessage, toPostPreview } from '@/utils/routers';
 const props = defineProps({
 	// 被景色

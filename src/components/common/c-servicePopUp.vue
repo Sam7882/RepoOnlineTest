@@ -16,6 +16,7 @@
 </template>
 
 <script setup>
+// TEMP: 聯繫客服彈窗
 import { ref, defineExpose } from 'vue'
 import uniPopup from '@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'
 /* TODO:語系須補 */

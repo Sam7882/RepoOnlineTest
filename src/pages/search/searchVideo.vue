@@ -63,12 +63,12 @@
 </template>
 
 <script setup lang="ts">
+// TEMP: 搜尋影片頁
 import { useI18n } from 'vue-i18n';
 import { toSearchTheme } from '@/utils/routers';
 import { router } from '@/utils/routers';
 const { back } = router;
 const { t } = useI18n();
-// TEMP: 搜尋頁
 /* 滾動分類 */
 const search = ref('')
 

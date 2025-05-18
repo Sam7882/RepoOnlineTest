@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-// TEMP: 訂閱項目 設定
+// TEMP: 信用卡選擇頁
 import { onShow } from '@dcloudio/uni-app';
 import { toCreditCardSetting, toCreditCardSave } from '@/utils/routers';
 import { useI18n } from 'vue-i18n';

@@ -41,12 +41,12 @@
 </template>
 
 <script setup lang="ts">
+// TEMP: 搜尋主題頁
 import { useI18n } from 'vue-i18n';
 import { router } from '@/utils/routers';
 const { back } = router;
 const { t } = useI18n();
 
-// TEMP: 搜尋頁
 /* 滾動分類 */
 const search = ref('')
 

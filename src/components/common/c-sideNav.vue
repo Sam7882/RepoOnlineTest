@@ -74,10 +74,19 @@
 
       </view>
     </view>
+
+    <teleport to='#app'>
+      <!-- 聯繫客服 -->
+      <c-servicePopUp ref="servicePopUp" />
+    </teleport>
+    <teleport to='#app'>
+      <!-- 聯繫客服 -->
+      <c-confirmPopUp ref="confirmPopUp" />
+    </teleport>
   </uni-popup>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { toCreatorHome, toStatistics, toWallet, toFavorites, toFollowing, toLogin } from '@/utils/routers'
 const emit = defineEmits(['update:Data'])
 const popupRef = ref()
@@ -97,32 +106,58 @@ const open = () => {
 }
 
 // 對應跳轉
-const clickToPage = (page: string) => {
-  close()
+const clickToPage = (page) => {
+
   switch (page) {
     case 'creatorHome':
       toCreatorHome()
+      close()
       break
     case 'statistics':
       toStatistics()
+      close()
       break
     case 'wallet':
       toWallet()
+      close()
       break
     case 'favorites':
       toFavorites()
+      close()
       break
     case 'following':
       toFollowing()
+      close()
       break
     case 'service':
       // 目前沒此頁面
-      // toPage()
+      openService()
       break
     case 'logout':
-      toLogin()
+      logout()
+      break
   }
 }
+
+const servicePopUp = ref(null)
+
+const openService = () => {
+  console.log("🚀 ~ openService ~ openService :")
+  servicePopUp.value.open()
+}
+
+const confirmPopUp = ref(null)
+const logout = () => {
+  confirmPopUp.value.open({
+    title: '登出',
+    content: '確認要登出?',
+    onConfirm: () => {
+      toLogin()
+    }
+  })
+
+}
+
 
 defineExpose({ open, close })
 </script>

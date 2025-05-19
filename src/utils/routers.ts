@@ -208,6 +208,31 @@ export const toPay = (params = {}) => {
 		url: '/pages/wallet/pay' + queryStringify(params)
 	})
 }
+export const toWidthdraw = (params = {}) => {
+	safeSwitchTab('/pages/wallet/widthdraw')
+	uni.navigateTo({
+		url: '/pages/wallet/widthdraw' + queryStringify(params)
+	})
+}
+export const toWidthdrawIn = (params = {}) => {
+	safeSwitchTab('/pages/wallet/widthdrawIn')
+	uni.navigateTo({
+		url: '/pages/wallet/widthdrawIn' + queryStringify(params)
+	})
+}
+export const toWidthdrawRecord = (params = {}) => {
+	safeSwitchTab('/pages/wallet/widthdraw-record')
+	uni.navigateTo({
+		url: '/pages/wallet/widthdraw-record' + queryStringify(params)
+	})
+}
+export const toWidthdrawApply = (params = {}) => {
+	safeSwitchTab('/pages/wallet/widthdraw-apply')
+	uni.navigateTo({
+		url: '/pages/wallet/widthdraw-apply' + queryStringify(params)
+	})
+}
+
 export const toCreditCardSelect = (params = {}) => {
 	safeSwitchTab('/pages/wallet/creditCardSelect')
 	uni.navigateTo({

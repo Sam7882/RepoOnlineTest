@@ -111,6 +111,20 @@
       }
     },
     {
+      "path": "pages/wallet/widthdraw",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/widthdrawIn",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
       "path": "pages/wallet/creditCardSelect",
       "style": {
         "navigationStyle": "custom",

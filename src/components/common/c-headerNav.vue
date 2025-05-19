@@ -24,6 +24,13 @@
 						color="var(--text-color-primary)"></uni-icons>
 				</view>
 			</template>
+			<!-- 右邊 設定按鈕 QA 絕對位置靠右-->
+			<template v-if="openQa">
+				<view class="header-nav-right-position header-gear-icon-container" @click="handleOpenQa">
+					<uni-icons class="header-gear-icon" type="icon-common-qa" custom-prefix="icon" size="20"
+						color="var(--text-color-primary)"></uni-icons>
+				</view>
+			</template>
 		</view>
 	</view>
 </template>
@@ -44,6 +51,10 @@ const props = defineProps({
 		type: Boolean,
 		default: false
 	},
+	openQa: {
+		type: Boolean,
+		default: false
+	},
 	backUrl: {
 		type: String,
 		default: ''
@@ -53,7 +64,7 @@ const props = defineProps({
 		default: 'var(--background-color)'
 	}
 })
-const emit = defineEmits(['search', 'openSetting'])
+const emit = defineEmits(['search', 'openSetting', 'openQa'])
 const { back, toPage } = router;
 const searchStatus = ref(false)
 // 新增處理函數
@@ -72,6 +83,10 @@ const switchSearch = () => {
 // 開啟設定
 const handleOpenSetting = () => {
 	emit('openSetting', true);
+}
+// 開啟 QA
+const handleOpenQa = () => {
+	emit('openQa', true);
 }
 
 </script>

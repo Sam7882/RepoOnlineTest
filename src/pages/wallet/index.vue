@@ -1,7 +1,7 @@
 <template>
 	<view class="wallet-page">
 		<!-- header 導航-->
-		<c-headerNav :title="$t('wallet.wallet')" />
+		<c-headerNav :title="'錢包管理'" :openQa="true" />
 		<!--內容容器 -->
 		<view class="wallet-content-container">
 			<view class="wallet-content-container-top">
@@ -57,7 +57,8 @@
 					</view>
 					<!-- 提領按鈕 -->
 					<view class="wallet-content-container-bottom-button-container">
-						<button type="button" class="wallet-content-container-bottom-button">{{ $t('wallet.withdrawal') }}</button>
+						<button type="button" class="wallet-content-container-bottom-button" @click="handleWidthdraw">{{
+							$t('wallet.withdrawal') }}</button>
 					</view>
 				</view>
 			</view>
@@ -65,8 +66,19 @@
 			<view class="wallet-content-container-bottom-record-container">
 				<!-- 標題 -->
 				<view class="wallet-content-container-bottom-record-title-container">
-					<text class="wallet-content-container-bottom-record-title">{{ $t('common.subscription') }}/{{
-						$t('wallet.purchaseRecord') }}</text>
+					<view class="listType-container">
+						<template v-for="(item, index) in listTypeData" :key="index">
+							<view class="listType-item" @click="changeListType(item.value)"
+								:class="{ active: listType === item.value }">
+								<text class="listType-text">{{ $t(item.text) }}</text>
+							</view>
+						</template>
+					</view>
+
+					<view class="type-select-container">
+						<uni-data-select class="type-select" v-model="localdata.value" :localdata="localdata.range" @change="change"
+							placement="top" :clear="false"></uni-data-select>
+					</view>
 				</view>
 				<!-- 紀錄列表 垂直排序 -->
 				<uni-list :border="false" class="wallet-content-container-bottom-record-list-container">
@@ -125,8 +137,39 @@
 <script setup>
 // TEMP: 我的錢包
 import { onShow } from '@dcloudio/uni-app';
-import { router } from '@/utils/routers';
+import { router, toWidthdraw } from '@/utils/routers';
+
 const { back } = router;
+
+const localdata = ref({
+	value: 0,
+	range: [
+		{ value: 0, text: "全部" },
+		{ value: 1, text: "訂閱" },
+		{ value: 2, text: "打賞" },
+		{ value: 3, text: "今日" },
+		{ value: 4, text: "本週" },
+		{ value: 5, text: "本月" },
+		{ value: 6, text: "今年" },
+	],
+})
+const listTypeData = ref([
+	{ value: 'subscription', text: "common.subscription" },
+	{ value: 'recommend', text: "common.recommend" },
+])
+const listType = ref('subscription')
+
+const changeListType = (value) => {
+	listType.value = value;
+}
+
+const change = (e) => {
+	console.log("e:", e);
+}
+
+const handleWidthdraw = () => {
+	toWidthdraw()
+}
 onShow(() => {
 	// 檢查初始化
 	// checkInitData()
@@ -168,13 +211,13 @@ page {
 }
 
 .wallet-content-container {
-	padding: 0 32rpx;
+	padding: 0 40rpx;
 }
 
 /* 錢包頁面 頂部容器 */
 .wallet-content-container-top {
 	padding: 0 64rpx;
-	margin-bottom: 96rpx;
+	margin-bottom: 118rpx;
 
 	// 錢包金額
 	.wallet-amount-container {
@@ -182,7 +225,7 @@ page {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		padding-bottom: 32rpx;
+		padding-bottom: 46rpx;
 
 		// padding: 0 64rpx;
 		&::after {
@@ -196,7 +239,8 @@ page {
 		}
 
 		.wallet-amount-item {
-			font-size: 48rpx;
+			font-size: 64rpx;
+			font-weight: 500;
 			color: var(--text-color-primary);
 		}
 	}
@@ -219,8 +263,8 @@ page {
 
 		// 頭像
 		.wallet-account-avatar-container {
-			width: 96rpx;
-			height: 96rpx;
+			width: 100rpx;
+			height: 100rpx;
 			border: 6rpx solid var(--primary-color);
 			background: var(--primary-color);
 			border-radius: 100%;
@@ -263,7 +307,7 @@ page {
 				justify-content: space-between;
 
 				.wallet-account-info-title {
-					font-size: 28rpx;
+					font-size: 34rpx;
 					color: var(--text-color-primary);
 				}
 
@@ -278,7 +322,7 @@ page {
 				height: fit-content;
 
 				.wallet-account-info-account {
-					font-size: 20rpx;
+					font-size: 24rpx;
 					color: var(--text-color-septenary);
 					line-height: 1;
 				}
@@ -288,7 +332,7 @@ page {
 
 	.wallet-account-total-amount-container {
 		margin-right: 32rpx;
-		font-size: 24rpx;
+		font-size: 30rpx;
 		color: var(--text-color-primary);
 		transform: translateY(-10rpx);
 	}
@@ -297,11 +341,11 @@ page {
 
 /* 錢包頁面 底部容器 */
 .wallet-content-container-bottom {
-	margin-top: 32rpx;
+	margin-top: 40rpx;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 32rpx;
+	gap: 42rpx;
 
 	/* 訂閱/關注人數 */
 	.wallet-content-container-bottom-data {
@@ -321,7 +365,7 @@ page {
 			background-color: var(--background-color-orange);
 			color: var(--text-color-secondary);
 			font-weight: normal;
-			padding: 16rpx 32rpx;
+			padding: 28rpx 64rpx;
 
 			&:last-child {
 				background-color: var(--background-color-blue);
@@ -329,12 +373,12 @@ page {
 			}
 
 			.wallet-content-container-bottom-data-item-title {
-				font-size: 16rpx;
+				font-size: 24rpx;
 			}
 
 			.wallet-content-container-bottom-data-item-value {
-				font-size: 40rpx;
-				font-weight: 300;
+				font-size: 44rpx;
+				font-weight: 500;
 			}
 		}
 	}
@@ -368,6 +412,8 @@ page {
 
 	.wallet-content-container-bottom-record-title-container {
 		display: flex;
+		justify-content: space-between;
+		align-items: center;
 		font-size: 24rpx;
 		color: var(--text-color-primary);
 	}
@@ -380,6 +426,96 @@ page {
 		.wallet-content-container-bottom-record-list-item-amount-icon {
 			font-size: 24rpx !important;
 			// padding-bottom: 4rpx;
+		}
+
+		.wallet-content-container-bottom-record-list-item-amount-value {
+			font-size: 32rpx;
+		}
+	}
+}
+
+.listType-container {
+	display: flex;
+	gap: 26rpx;
+
+	.listType-item {
+		position: relative;
+		padding: 4rpx 0;
+
+		.listType-text {
+			font-size: 28rpx;
+			color: var(--text-color-quaternary);
+		}
+
+		&.active {
+			border-bottom: 2px solid var(--primary-color);
+
+			.listType-text {
+				color: var(--text-color-primary);
+			}
+
+		}
+	}
+
+}
+
+.type-select-container {
+	min-width: 150rpx;
+	max-width: 50%;
+	padding: 8rpx 16rpx;
+
+	::v-deep(.uni-select) {
+		& {
+			border: unset;
+			background: var(--primary-color);
+			border-radius: 24rpx;
+			height: auto;
+		}
+
+		.uni-select {
+			height: auto;
+			border: none;
+		}
+
+		.uni-select__input-box {
+			width: fit-content;
+			height: auto;
+		}
+
+		.uni-select__input-text {
+			color: var(--text-color-secondary);
+		}
+
+		.uni-icons {
+			color: var(--text-color-secondary) !important;
+		}
+
+		.uni-select__selector {
+			width: fit-content;
+			color: var(--popTxt-color-content);
+			left: unset;
+			right: 0;
+
+			.uni-popper__arrow_bottom {
+				left: unset;
+				right: 10%;
+			}
+
+			.uni-select__selector-item {
+				padding: 0 46rpx;
+
+				uni-text {
+					white-space: nowrap;
+				}
+			}
+		}
+	}
+}
+
+.wallet-content-container-bottom-record-list-item {
+	::v-deep(.uni-list-item__container) {
+		.uni-list-item__container {
+			padding: 34rpx 0;
 		}
 	}
 }

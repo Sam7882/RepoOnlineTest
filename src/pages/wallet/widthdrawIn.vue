@@ -11,7 +11,7 @@
 				</view>
 				<view class="widthdrawIn-page-content-header-item" :class="{ 'active': typeStatus === 1 }"
 					@click="typeSwitch(1)">
-					<text>已撥款</text>
+					<text>已提領</text>
 				</view>
 			</view>
 
@@ -47,8 +47,11 @@
 			<view class="widthdrawIn-page-content-body-list">
 				<view class="widthdrawIn-page-content-body-list-item" v-for="(item, index) in 4" :key="index">
 					<view class="widthdrawIn-page-content-body-list-item-left">
-						<view class="widthdrawIn-page-content-body-list-item-left-icon">
-							<uni-icons class="widthdrawIn-icon" type="icon-wallet-withdraw-in" custom-prefix="icon"></uni-icons>
+						<view class="widthdrawIn-page-content-body-list-item-left-icon withdrawIn" v-if="typeStatus === 0">
+							<uni-icons class="widthdrawIn-icon " type="icon-wallet-withdraw-in" custom-prefix="icon"></uni-icons>
+						</view>
+						<view class="widthdrawIn-page-content-body-list-item-left-icon withdrawOut" v-if="typeStatus === 1">
+							<uni-icons class="widthdrawIn-icon " type="icon-wallet-withdraw-out" custom-prefix="icon"></uni-icons>
 						</view>
 
 						<view class="widthdrawIn-page-content-body-list-item-left-text">
@@ -226,13 +229,20 @@ uni-image {
 			gap: 38rpx;
 
 			.widthdrawIn-page-content-body-list-item-left-icon {
-				background: var(--background-color-blue2);
 				border-radius: 50%;
 				padding: 18rpx 26rpx;
 
 				.widthdrawIn-icon {
 					font-size: 34rpx !important;
 					color: var(--text-color-secondary) !important;
+				}
+
+				&.withdrawIn {
+					background: var(--background-color-green);
+				}
+
+				&.withdrawOut {
+					background: var(--background-color-blue2);
 				}
 			}
 

@@ -57,7 +57,7 @@
 					</view>
 					<!-- 提領按鈕 -->
 					<view class="wallet-content-container-bottom-button-container">
-						<button type="button" class="wallet-content-container-bottom-button" @click="handleWidthdraw">{{
+						<button type="button" class="wallet-content-container-bottom-button" @click="handlewithdraw">{{
 							$t('wallet.withdrawal') }}</button>
 					</view>
 				</view>
@@ -137,7 +137,7 @@
 <script setup>
 // TEMP: 我的錢包
 import { onShow } from '@dcloudio/uni-app';
-import { router, toWidthdraw } from '@/utils/routers';
+import { router, towithdraw } from '@/utils/routers';
 
 const { back } = router;
 
@@ -167,8 +167,8 @@ const change = (e) => {
 	console.log("e:", e);
 }
 
-const handleWidthdraw = () => {
-	toWidthdraw()
+const handlewithdraw = () => {
+	towithdraw()
 }
 onShow(() => {
 	// 檢查初始化

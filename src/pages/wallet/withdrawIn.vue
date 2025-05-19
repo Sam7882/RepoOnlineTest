@@ -1,32 +1,32 @@
 <template>
-	<view class="widthdrawIn-page">
+	<view class="withdrawIn-page">
 		<!-- header 導航-->
 		<c-headerNav :title="'我的進帳'" :openQa="true" />
 		<!-- 內容區塊 -->
-		<view class="widthdrawIn-page-content">
-			<view class="widthdrawIn-page-content-header">
-				<view class="widthdrawIn-page-content-header-item" :class="{ 'active': typeStatus === 0 }"
+		<view class="withdrawIn-page-content">
+			<view class="withdrawIn-page-content-header">
+				<view class="withdrawIn-page-content-header-item" :class="{ 'active': typeStatus === 0 }"
 					@click="typeSwitch(0)">
 					<text>即將撥款</text>
 				</view>
-				<view class="widthdrawIn-page-content-header-item" :class="{ 'active': typeStatus === 1 }"
+				<view class="withdrawIn-page-content-header-item" :class="{ 'active': typeStatus === 1 }"
 					@click="typeSwitch(1)">
 					<text>已提領</text>
 				</view>
 			</view>
 
-			<view class="widthdrawIn-page-content-body">
-				<view class="widthdrawIn-page-content-body-amount">
+			<view class="withdrawIn-page-content-body">
+				<view class="withdrawIn-page-content-body-amount">
 					<text>$1800</text>
 				</view>
 
-				<view class="widthdrawIn-page-content-body-text" v-if="typeStatus === 1">
+				<view class="withdrawIn-page-content-body-text" v-if="typeStatus === 1">
 					<text>撥款金額(2025年5月12日 - 2025年5月20日)</text>
 				</view>
 
 				<view class="deco-line"></view>
 
-				<view class="widthdrawIn-page-content-body-date" v-if="typeStatus === 1">
+				<view class="withdrawIn-page-content-body-date" v-if="typeStatus === 1">
 					<view class="date-item">
 						<uni-datetime-picker type="date" :clear-icon="false" v-model="startDate" :border="false"
 							@change="setDate('start', $event)" />
@@ -44,27 +44,27 @@
 				</view>
 			</view>
 
-			<view class="widthdrawIn-page-content-body-list">
-				<view class="widthdrawIn-page-content-body-list-item" v-for="(item, index) in 4" :key="index">
-					<view class="widthdrawIn-page-content-body-list-item-left">
-						<view class="widthdrawIn-page-content-body-list-item-left-icon withdrawIn" v-if="typeStatus === 0">
-							<uni-icons class="widthdrawIn-icon " type="icon-wallet-withdraw-in" custom-prefix="icon"></uni-icons>
+			<view class="withdrawIn-page-content-body-list">
+				<view class="withdrawIn-page-content-body-list-item" v-for="(item, index) in 4" :key="index">
+					<view class="withdrawIn-page-content-body-list-item-left">
+						<view class="withdrawIn-page-content-body-list-item-left-icon withdrawIn" v-if="typeStatus === 0">
+							<uni-icons class="withdrawIn-icon " type="icon-wallet-withdraw-in" custom-prefix="icon"></uni-icons>
 						</view>
-						<view class="widthdrawIn-page-content-body-list-item-left-icon withdrawOut" v-if="typeStatus === 1">
-							<uni-icons class="widthdrawIn-icon " type="icon-wallet-withdraw-out" custom-prefix="icon"></uni-icons>
+						<view class="withdrawIn-page-content-body-list-item-left-icon withdrawOut" v-if="typeStatus === 1">
+							<uni-icons class="withdrawIn-icon " type="icon-wallet-withdraw-out" custom-prefix="icon"></uni-icons>
 						</view>
 
-						<view class="widthdrawIn-page-content-body-list-item-left-text">
-							<view class="widthdrawIn-page-content-body-list-item-left-text-title">提領</view>
-							<view class="widthdrawIn-page-content-body-list-item-left-text-date">2025年４月５日</view>
-							<view class="widthdrawIn-page-content-body-list-item-left-text-status">已完成</view>
+						<view class="withdrawIn-page-content-body-list-item-left-text">
+							<view class="withdrawIn-page-content-body-list-item-left-text-title">提領</view>
+							<view class="withdrawIn-page-content-body-list-item-left-text-date">2025年４月５日</view>
+							<view class="withdrawIn-page-content-body-list-item-left-text-status">已完成</view>
 						</view>
 					</view>
 
-					<view class="widthdrawIn-page-content-body-list-item-right">
-						<view class="widthdrawIn-page-content-body-list-item-right-amount">-$450</view>
-						<view class="widthdrawIn-page-content-body-list-item-right-icon">
-							<uni-icons class="widthdrawIn-icon" type="right"></uni-icons>
+					<view class="withdrawIn-page-content-body-list-item-right">
+						<view class="withdrawIn-page-content-body-list-item-right-amount">-$450</view>
+						<view class="withdrawIn-page-content-body-list-item-right-icon">
+							<uni-icons class="withdrawIn-icon" type="right"></uni-icons>
 						</view>
 					</view>
 				</view>
@@ -76,7 +76,7 @@
 </template>
 
 <script setup>
-// TEMP: 信用卡選擇頁
+// TEMP: 我的進帳頁
 import { onShow } from '@dcloudio/uni-app';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
@@ -110,17 +110,17 @@ uni-image {
 	overflow: visible;
 }
 
-.widthdrawIn-page-content {
+.withdrawIn-page-content {
 	padding: 68rpx 40rpx 0;
 }
 
-.widthdrawIn-page-content-header {
+.withdrawIn-page-content-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	gap: 18rpx;
 
-	.widthdrawIn-page-content-header-item {
+	.withdrawIn-page-content-header-item {
 		flex: 1;
 		text-align: center;
 		line-height: 1;
@@ -144,25 +144,25 @@ uni-image {
 	border-color: var(--text-color-octonary);
 }
 
-.widthdrawIn-page-content-body {
+.withdrawIn-page-content-body {
 	margin-top: 58rpx;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 
-	.widthdrawIn-page-content-body-amount {
+	.withdrawIn-page-content-body-amount {
 		font-size: 64rpx;
 		font-weight: 500;
 		margin-bottom: 36rpx;
 	}
 
-	.widthdrawIn-page-content-body-text {
+	.withdrawIn-page-content-body-text {
 		font-size: 28rpx;
 		color: var(--popTxt-color-content);
 		margin-bottom: 58rpx;
 	}
 
-	.widthdrawIn-page-content-body-date {
+	.withdrawIn-page-content-body-date {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -211,11 +211,11 @@ uni-image {
 }
 
 
-.widthdrawIn-page-content-body-list {
+.withdrawIn-page-content-body-list {
 	display: flex;
 	flex-direction: column;
 
-	.widthdrawIn-page-content-body-list-item {
+	.withdrawIn-page-content-body-list-item {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -223,16 +223,16 @@ uni-image {
 		padding-right: 34rpx;
 		border-bottom: 1px solid var(--text-color-octonary);
 
-		.widthdrawIn-page-content-body-list-item-left {
+		.withdrawIn-page-content-body-list-item-left {
 			display: flex;
 			align-items: center;
 			gap: 38rpx;
 
-			.widthdrawIn-page-content-body-list-item-left-icon {
+			.withdrawIn-page-content-body-list-item-left-icon {
 				border-radius: 50%;
 				padding: 18rpx 26rpx;
 
-				.widthdrawIn-icon {
+				.withdrawIn-icon {
 					font-size: 34rpx !important;
 					color: var(--text-color-secondary) !important;
 				}
@@ -246,38 +246,38 @@ uni-image {
 				}
 			}
 
-			.widthdrawIn-page-content-body-list-item-left-text {
-				.widthdrawIn-page-content-body-list-item-left-text-title {
+			.withdrawIn-page-content-body-list-item-left-text {
+				.withdrawIn-page-content-body-list-item-left-text-title {
 					font-size: 28rpx;
 				}
 
-				.widthdrawIn-page-content-body-list-item-left-text-date {
+				.withdrawIn-page-content-body-list-item-left-text-date {
 					font-size: 24rpx;
 					color: var(--popTxt-color-conten);
 				}
 
-				.widthdrawIn-page-content-body-list-item-left-text-status {
+				.withdrawIn-page-content-body-list-item-left-text-status {
 					font-size: 16rpx;
 					color: var(--popTxt-color-content);
 				}
 			}
 		}
 
-		.widthdrawIn-page-content-body-list-item-right {
+		.withdrawIn-page-content-body-list-item-right {
 			display: flex;
 			justify-content: flex-end;
 			align-items: center;
 			gap: 24rpx;
 
-			.widthdrawIn-page-content-body-list-item-right-amount {
+			.withdrawIn-page-content-body-list-item-right-amount {
 				font-size: 30rpx;
 
 			}
 
-			.widthdrawIn-page-content-body-list-item-right-icon {
+			.withdrawIn-page-content-body-list-item-right-icon {
 				translate: 0 -4rpx;
 
-				.widthdrawIn-icon {
+				.withdrawIn-icon {
 					font-size: 24rpx !important;
 				}
 			}

@@ -1,9 +1,9 @@
 <template>
-	<view class="widthdraw-page">
+	<view class="withdraw-page">
 		<!-- header 導航-->
 		<c-headerNav :title="'提領'" :openQa="true" />
 		<!-- 內容區塊 -->
-		<view class="widthdraw-page-content">
+		<view class="withdraw-page-content">
 			<view class="withdraw-amount-container">
 				<view class="withdraw-amount-container-top">
 					<!--標題 -->
@@ -57,21 +57,21 @@
 </template>
 
 <script setup>
-// TEMP: 信用卡選擇頁
+// TEMP: 提款頁
 import { onShow } from '@dcloudio/uni-app';
-import { toWidthdrawIn, toWidthdrawRecord, toWidthdrawApply } from '@/utils/routers';
+import { towithdrawIn, toWithdrawRecord, toWithdrawApply } from '@/utils/routers';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 
 
 const handleWithdrawIn = () => {
-	toWidthdrawIn()
+	towithdrawIn()
 }
 
 const handleWithdrawRecord = () => {
-	toWidthdrawRecord()
+	toWithdrawRecord()
 }
-const withdrawStatus = ref(false)
+const withdrawStatus = ref(true)
 const handleWithdraw = () => {
 	if (!withdrawStatus.value) {
 		openAlertDialog()
@@ -111,7 +111,7 @@ uni-image {
 	overflow: visible;
 }
 
-.widthdraw-page-content {
+.withdraw-page-content {
 	padding: 70rpx 40rpx 0;
 }
 

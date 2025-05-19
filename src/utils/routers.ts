@@ -208,31 +208,42 @@ export const toPay = (params = {}) => {
 		url: '/pages/wallet/pay' + queryStringify(params)
 	})
 }
-export const toWidthdraw = (params = {}) => {
-	safeSwitchTab('/pages/wallet/widthdraw')
+export const towithdraw = (params = {}) => {
+	safeSwitchTab('/pages/wallet/withdraw')
 	uni.navigateTo({
-		url: '/pages/wallet/widthdraw' + queryStringify(params)
+		url: '/pages/wallet/withdraw' + queryStringify(params)
 	})
 }
-export const toWidthdrawIn = (params = {}) => {
-	safeSwitchTab('/pages/wallet/widthdrawIn')
+export const towithdrawIn = (params = {}) => {
+	safeSwitchTab('/pages/wallet/withdrawIn')
 	uni.navigateTo({
-		url: '/pages/wallet/widthdrawIn' + queryStringify(params)
+		url: '/pages/wallet/withdrawIn' + queryStringify(params)
 	})
 }
-export const toWidthdrawRecord = (params = {}) => {
-	safeSwitchTab('/pages/wallet/widthdraw-record')
+export const toWithdrawRecord = (params = {}) => {
+	safeSwitchTab('/pages/wallet/withdrawRecord')
 	uni.navigateTo({
-		url: '/pages/wallet/widthdraw-record' + queryStringify(params)
+		url: '/pages/wallet/withdrawRecord' + queryStringify(params)
 	})
 }
-export const toWidthdrawApply = (params = {}) => {
-	safeSwitchTab('/pages/wallet/widthdraw-apply')
+export const toWithdrawApply = (params = {}) => {
+	safeSwitchTab('/pages/wallet/withdrawApply')
 	uni.navigateTo({
-		url: '/pages/wallet/widthdraw-apply' + queryStringify(params)
+		url: '/pages/wallet/withdrawApply' + queryStringify(params)
 	})
 }
-
+export const toOrderDetail = (params = {}) => {
+	safeSwitchTab('/pages/wallet/orderDetail')
+	uni.navigateTo({
+		url: '/pages/wallet/orderDetail' + queryStringify(params)
+	})
+}
+export const toWithdrawDetail = (params = {}) => {
+	safeSwitchTab('/pages/wallet/withdrawDetail')
+	uni.navigateTo({
+		url: '/pages/wallet/withdrawDetail' + queryStringify(params)
+	})
+}
 export const toCreditCardSelect = (params = {}) => {
 	safeSwitchTab('/pages/wallet/creditCardSelect')
 	uni.navigateTo({
@@ -249,5 +260,12 @@ export const toCreditCardSave = (params = {}) => {
 	safeSwitchTab('/pages/wallet/creditCardSave')
 	uni.navigateTo({
 		url: '/pages/wallet/creditCardSave' + queryStringify(params)
+	})
+}
+
+export const toHelper = (params = {}) => {
+	safeSwitchTab('/pages/helper/index')
+	uni.navigateTo({
+		url: '/pages/helper/index' + queryStringify(params)
 	})
 }

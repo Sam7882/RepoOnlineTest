@@ -111,14 +111,42 @@
       }
     },
     {
-      "path": "pages/wallet/widthdraw",
+      "path": "pages/wallet/withdraw",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color-light)"
       }
     },
     {
-      "path": "pages/wallet/widthdrawIn",
+      "path": "pages/wallet/withdrawIn",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/withdrawRecord",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/orderDetail",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/withdrawDetail",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/withdrawApply",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color-light)"
@@ -188,6 +216,13 @@
     },
     {
       "path": "pages/creator/subscription",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+
+    {
+      "path": "pages/helper/index",
       "style": {
         "navigationStyle": "custom"
       }

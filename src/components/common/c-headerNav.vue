@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 // TEMP: 頁面頂部導航
-import { router } from '@/utils/routers';
+import { router, toHelper } from '@/utils/routers';
 const props = defineProps({
 	title: {
 		type: String,
@@ -84,11 +84,11 @@ const switchSearch = () => {
 const handleOpenSetting = () => {
 	emit('openSetting', true);
 }
-// 開啟 QA
+// 開啟幫助中心
 const handleOpenQa = () => {
+	toHelper()
 	emit('openQa', true);
 }
-
 </script>
 
 <style lang="scss" scoped>

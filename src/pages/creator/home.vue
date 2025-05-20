@@ -1,51 +1,9 @@
 <template>
 	<view class="creator-home-page">
-		<!-- 頂部封面區 -->
-		<!-- <view class="creator-home-page-cover"> -->
-		<!-- 封面圖片 -->
-		<!-- <view class="creator-home-page-cover-img-container">
-				<image class="creator-home-page-cover-img" src="/static/images/template/img-template-04.png" mode="heightFix">
-				</image>
-			</view>
-		</view> -->
 
-		<!-- 創作者資料區 -->
-		<view class="creator-home-page-data-header-container">
-			<view class="creator-home-page-data-header-container-title">
-				<view class="creator-home-page-data-header-container-back-button" v-if="!isCreator">
-					<uni-icons class="header-nav-icon" type="left" size="20" color="var(--text-color-primary)"></uni-icons>
-				</view>
-				<text class="creator-home-page-data-header-container-title-text" @click="switchIsCreator" v-if="!isCreator">{{
-					'Jesiicatestid' }}</text>
-				<!-- 頭像側邊按鈕 -->
-				<view class="creator-home-page-data-item-top-menu-container">
-					<template v-if="!isCreator">
-						<view class="creator-home-page-data-item-container-item-top-menu">
-							<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-notice"
-								custom-prefix="icon" size="24" color="var(--text-color-nonary)"></uni-icons>
-						</view>
-						<view class="creator-home-page-data-item-container-item-top-menu">
-							<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-update"
-								custom-prefix="icon" size="24" color="var(--text-color-nonary)"></uni-icons>
-						</view>
-						<view class="creator-home-page-data-item-container-item-top-menu">
-							<uni-icons class="creator-home-page-data-item-container-item-icon" type="more-filled" size="24"
-								color="var(--text-color-nonary)"></uni-icons>
-						</view>
-					</template>
-					<template v-else>
-						<view class="creator-home-page-data-item-container-item-top-menu">
-							<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-plus"
-								custom-prefix="icon" size="24" color="var(--text-color-nonary)"></uni-icons>
-						</view>
-						<view class="creator-home-page-data-item-container-item-top-menu">
-							<uni-icons class="creator-home-page-data-item-container-item-icon" type="bars" size="24"
-								color="var(--text-color-nonary)"></uni-icons>
-						</view>
-					</template>
-				</view>
-			</view>
-		</view>
+		<creator-header :isCreator="isCreator" />
+
+
 		<view class="creator-home-page-data-container">
 			<!-- 絕對位置 頭像 -->
 			<view class="creator-home-page-avatar-container">

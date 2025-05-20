@@ -103,7 +103,7 @@
 </template>
 
 <script setup>
-// TEMP: 創作者主頁
+// TEMP: 訊息頁
 import { router } from '@/utils/routers'
 const { back, toPage } = router;
 const handleBack = () => {

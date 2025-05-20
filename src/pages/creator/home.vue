@@ -111,8 +111,9 @@
 					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
 						$t('creator.unFollowing') }}</button>
 					<!-- 訊息 -->
-					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
-						$t('common.message') }}</button>
+					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button"
+						@click="handleMessage">{{
+							$t('common.message') }}</button>
 				</view>
 				<!-- 成為會員 -->
 				<view class="creator-home-page-data-profile-container-item-edit-button-bottom-container"
@@ -253,7 +254,7 @@
 <script setup>
 // TEMP: 創作者主頁
 import { onPageScroll } from '@dcloudio/uni-app'
-import { toSubscription } from '@/utils/routers'
+import { toSubscription, toCreatorMessage } from '@/utils/routers'
 const type = ref('all');
 const showSelect = ref(false);
 
@@ -399,6 +400,10 @@ const switchTypeIndex = (index) => {
 	typeIndex.value = index
 }
 
+// 跳轉到創作者訊息頁
+const handleMessage = () => {
+	toCreatorMessage()
+}
 onMounted(() => {
 	// 初始計算一次
 	updateRect()

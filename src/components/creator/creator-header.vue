@@ -2,7 +2,7 @@
 	<!-- 創作者HeaderNav -->
 	<view class="creator-home-page-data-header-container">
 		<view class="creator-home-page-data-header-container-title">
-			<view class="creator-home-page-data-header-container-back-button" v-if="!isCreator">
+			<view class="creator-home-page-data-header-container-back-button" v-if="!isCreator" @click="handleBack">
 				<uni-icons class="header-nav-icon" type="left" size="20" color="var(--text-color-primary)"></uni-icons>
 			</view>
 			<text class="creator-home-page-data-header-container-title-text" @click="switchIsCreator" v-if="!isCreator">{{
@@ -35,6 +35,11 @@
 	</view>
 </template>
 <script setup>
+import { router } from '@/utils/routers';
+const { back, toPage } = router;
+const handleBack = () => {
+	back();
+};
 const props = defineProps({
 	isCreator: {
 		type: Boolean,

@@ -142,6 +142,13 @@ export const toCreatorHome = (params = {}) => {
 		url: '/pages/creator/home' + queryStringify(params)
 	})
 }
+// 跳轉到創作者訊息頁
+export const toCreatorMessage = (params = {}) => {
+	safeSwitchTab('/pages/creator/message')
+	uni.navigateTo({
+		url: '/pages/creator/message' + queryStringify(params)
+	})
+}
 // 跳轉到訂閱頁設定
 export const toSubscriptionSetting = (params = {}) => {
 	safeSwitchTab('/pages/creator/subscription-setting')

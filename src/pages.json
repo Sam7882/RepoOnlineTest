@@ -183,6 +183,13 @@
       }
     },
     {
+      "path": "pages/creator/message",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
       "path": "pages/creator/subscription-setting",
       "style": {
         "navigationStyle": "custom",

@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-// TEMP: 頁面頂部導航
+// TEMP: 排行榜
 import { router, toHelper } from '@/utils/routers';
 const props = defineProps({
 	title: {
@@ -94,7 +94,7 @@ const handleOpenQa = () => {
 <style lang="scss" scoped>
 .header-nav-space {
 	position: relative;
-	--header-nav-space-height: 136rpx;
+	--header-nav-space-height: 120rpx;
 	height: var(--header-nav-space-height);
 	padding-top: 32rpx;
 }
@@ -108,22 +108,22 @@ const handleOpenQa = () => {
 	height: var(--header-nav-space-height);
 	display: flex;
 	justify-content: center;
-	padding: 32rpx;
-	padding-top: 48rpx;
+	padding: 68rpx 40rpx 20rpx;
 	border-bottom: 1px solid var(--text-color-octonary);
+	line-height: 1;
 
 	// 圖標容器
 	.header-nav-left-position {
 		position: absolute;
 		left: 48rpx;
 		top: 50%;
-		transform: translateY(-50%);
+		transform: translateY(-20%);
 		padding-top: 16rpx;
 	}
 
 	// 標題容器
 	.header-nav-title-container {
-		font-size: 32rpx;
+		font-size: 36rpx;
 		color: var(--text-color-primary);
 	}
 

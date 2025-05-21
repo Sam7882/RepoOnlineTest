@@ -184,6 +184,13 @@ export const toFollowing = (params = {}) => {
 		url: '/pages/creator/following' + queryStringify(params)
 	})
 }
+// 跳轉到排行榜
+export const toRank = (params = {}) => {
+	safeSwitchTab('/pages/creator/rank')
+	uni.navigateTo({
+		url: '/pages/creator/rank' + queryStringify(params)
+	})
+}
 // 跳轉到訂閱會員頁
 export const toSubscription = (params = {}) => {
 	safeSwitchTab('/pages/creator/subscription')

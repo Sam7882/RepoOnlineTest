@@ -31,7 +31,7 @@
 			<view class="creator-home-page-data-item-container">
 				<!-- 粉絲 -->
 				<view class="creator-home-page-data-item-container-item">
-					<view class="creator-home-page-data-item-container-item-text-container fans">
+					<view class="creator-home-page-data-item-container-item-text-container fans" @click="handleRank">
 						<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-badge"
 							custom-prefix="icon" size="24" color="var(--text-color-primary)"></uni-icons>
 						<text
@@ -48,7 +48,7 @@
 				<view class="pay-page-content-item-line"></view>
 				<!-- 愛心 -->
 				<view class="creator-home-page-data-item-container-item">
-					<view class="creator-home-page-data-item-container-item-text-container ">
+					<view class="creator-home-page-data-item-container-item-text-container " @click="handleRank">
 						<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-badge"
 							custom-prefix="icon" size="24" color="var(--text-color-primary)"></uni-icons>
 						<text
@@ -65,7 +65,7 @@
 				<!-- 關注 -->
 				<view class="pay-page-content-item-line"></view>
 				<view class="creator-home-page-data-item-container-item">
-					<!-- <view class="creator-home-page-data-item-container-item-text-container ">
+					<!-- <view class="creator-home-page-data-item-container-item-text-container " @click="handleRank">
 		<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-badge"
 			custom-prefix="icon" size="24" color="var(--text-color-primary)"></uni-icons>
 		<text
@@ -266,7 +266,7 @@
 <script setup>
 // TEMP: 創作者主頁
 import { onPageScroll } from '@dcloudio/uni-app'
-import { toSubscription, toCreatorMessage, toFollowing } from '@/utils/routers'
+import { toSubscription, toCreatorMessage, toFollowing, toRank } from '@/utils/routers'
 const type = ref('all');
 const showSelect = ref(false);
 
@@ -408,6 +408,10 @@ const handleSubscription = () => {
 // 跳到following頁
 const handleFollowing = () => {
 	toFollowing()
+}
+// 跳到rank頁
+const handleRank = () => {
+	toRank()
 }
 // 分類
 const typeIndex = ref(0)

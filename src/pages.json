@@ -223,6 +223,12 @@
       }
     },
     {
+      "path": "pages/creator/rank",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/creator/subscription",
       "style": {
         "navigationStyle": "custom"

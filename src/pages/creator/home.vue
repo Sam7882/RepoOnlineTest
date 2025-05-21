@@ -922,7 +922,7 @@ page {
 	width: fit-content;
 	height: fit-content;
 	border-radius: 12rpx;
-	background: #4f4f4fcd;
+	background: #040000d9;
 
 	.filter-select-fakeBg {
 		position: fixed;
@@ -940,7 +940,7 @@ page {
 		border-radius: 4rpx;
 		border-left: 10rpx solid transparent;
 		border-right: 10rpx solid transparent;
-		border-bottom: 15rpx solid #4f4f4fcd;
+		border-bottom: 15rpx solid #040000d9;
 		/* 三角形的顏色與方向 */
 		;
 	}

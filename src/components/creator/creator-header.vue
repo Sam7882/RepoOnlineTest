@@ -11,8 +11,11 @@
 			<view class="creator-home-page-data-item-top-menu-container">
 				<template v-if="!isCreator">
 					<view class="creator-home-page-data-item-container-item-top-menu">
-						<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-notice"
-							custom-prefix="icon" size="24" color="var(--text-color-nonary)"></uni-icons>
+						<uni-icons v-if="!isSubscribe" class="creator-home-page-data-item-container-item-icon"
+							type="icon-common-notice" custom-prefix="icon" size="24" color="var(--text-color-nonary)"
+							@click="handleSubscribe" />
+						<uni-icons v-else class="creator-home-page-data-item-container-item-icon" type="icon-common-notice-active"
+							custom-prefix="icon" size="24" color="var(--text-color-nonary)" @click="cancelSubscribe" />
 					</view>
 					<view class="creator-home-page-data-item-container-item-top-menu">
 						<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-update"
@@ -32,6 +35,9 @@
 				</template>
 			</view>
 		</view>
+
+
+		<c-confirmPopUp ref="confirmPopUpRef" />
 	</view>
 </template>
 <script setup>
@@ -49,6 +55,38 @@ const props = defineProps({
 const isCreator = ref(props.isCreator || false)
 const switchIsCreator = () => {
 	isCreator.value = !isCreator.value
+}
+
+// 訂閱
+const confirmPopUpRef = ref(null)
+const isSubscribe = ref(false)
+const handleSubscribe = () => {
+	confirmPopUpRef.value.open({
+		title: '開啟通知',
+		content: '在創作者最新發布時獲得通知',
+		confirmBtnText: '開啟設定',
+		cancelBtnText: '暫時不要',
+		onConfirm: () => {
+			console.log('確定')
+			isSubscribe.value = true
+			console.log("🚀 ~ handleSubscribe ~ isSubscribe.value:", isSubscribe.value)
+		},
+	})
+}
+
+
+const cancelSubscribe = () => {
+	confirmPopUpRef.value.open({
+		title: '取消通知',
+		content: '在創作者最新發布時不獲得通知',
+		confirmBtnText: '取消設定',
+		cancelBtnText: '暫時不要',
+		onConfirm: () => {
+			console.log('確定')
+			isSubscribe.value = false
+			console.log("🚀 ~ handleSubscribe ~ isSubscribe.value:", isSubscribe.value)
+		},
+	})
 }
 </script>
 <style lang="scss" scoped>

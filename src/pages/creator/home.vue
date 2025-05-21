@@ -37,11 +37,13 @@
 						<text
 							class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-rank">168</text>
 					</view>
-					<text
-						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-number">16.1K</text>
-					<text
-						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-title">{{
-							$t('creator.fans') }}</text>
+					<view class="bottom-item-text-container" @click="handleFollowing">
+						<text
+							class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-number">16.1K</text>
+						<text
+							class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-title">{{
+								$t('creator.fans') }}</text>
+					</view>
 				</view>
 				<view class="pay-page-content-item-line"></view>
 				<!-- 愛心 -->
@@ -52,20 +54,30 @@
 						<text
 							class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-rank">168</text>
 					</view>
-					<text
-						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-number">100K</text>
-					<text
-						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-title">{{
-							$t('creator.like') }}</text>
+					<view class="bottom-item-text-container" @click="handleFollowing">
+						<text
+							class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-number">100K</text>
+						<text
+							class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-title">{{
+								$t('creator.like') }}</text>
+					</view>
 				</view>
 				<!-- 關注 -->
 				<view class="pay-page-content-item-line"></view>
 				<view class="creator-home-page-data-item-container-item">
-					<text
-						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-number">100K</text>
-					<text
-						class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-title">{{
-							$t('creator.following') }}</text>
+					<!-- <view class="creator-home-page-data-item-container-item-text-container ">
+		<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-badge"
+			custom-prefix="icon" size="24" color="var(--text-color-primary)"></uni-icons>
+		<text
+			class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-rank">168</text>
+	</view> -->
+					<view class="bottom-item-text-container" @click="handleFollowing">
+						<text
+							class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-number">100K</text>
+						<text
+							class="creator-home-page-data-item-container-item-text creator-home-page-data-item-container-item-text-title">{{
+								$t('creator.following') }}</text>
+					</view>
 				</view>
 			</view>
 			<!-- 文案 -->
@@ -254,7 +266,7 @@
 <script setup>
 // TEMP: 創作者主頁
 import { onPageScroll } from '@dcloudio/uni-app'
-import { toSubscription, toCreatorMessage } from '@/utils/routers'
+import { toSubscription, toCreatorMessage, toFollowing } from '@/utils/routers'
 const type = ref('all');
 const showSelect = ref(false);
 
@@ -393,7 +405,10 @@ const getElementHeight = (selector = '#target') => {
 const handleSubscription = () => {
 	toSubscription()
 }
-
+// 跳到following頁
+const handleFollowing = () => {
+	toFollowing()
+}
 // 分類
 const typeIndex = ref(0)
 const switchTypeIndex = (index) => {
@@ -561,7 +576,7 @@ page {
 		display: flex;
 		align-items: center;
 		gap: 8rpx;
-		padding: 6rpx 28rpx;
+		padding: 4rpx 24rpx;
 		border-radius: 20rpx;
 		background: var(--favorite-color-secondary);
 
@@ -593,7 +608,12 @@ page {
 
 		}
 
-
+		.bottom-item-text-container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
 
 		.creator-home-page-data-item-container-item-text {
 			font-size: 24rpx;
@@ -601,7 +621,7 @@ page {
 
 			&.creator-home-page-data-item-container-item-text-number {
 				font-weight: 500;
-				font-size: 32rpx;
+				font-size: 36rpx;
 				color: var(--text-color-primary);
 			}
 

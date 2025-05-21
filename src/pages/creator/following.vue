@@ -1,7 +1,17 @@
 <template>
 	<view class="wallet-page">
 		<!-- header 導航-->
-		<c-headerNav :title="$t('creator.myFollowing')" :openSearch="true" @search="showSearch" />
+		<c-headerNav class="wallet-page-header" :title="'jesiicatestid'" :openSearch="true" @search="showSearch" />
+
+		<!-- 類別 -->
+		<view class="wallet-category-container">
+			<template v-for="(item, index) in categoryList" :key="index">
+				<view class="wallet-category-item" :class="{ active: categoryValue === item.value }"
+					@click="switchCategory(item.value)">
+					<text class="wallet-category-item-text">{{ item.name }} {{ item.num }}</text>
+				</view>
+			</template>
+		</view>
 
 		<!-- 搜尋容器 -->
 		<view class="wallet-search-container" v-if="searchStatus">
@@ -16,7 +26,7 @@
 				<uni-list :border="false" class="wallet-content-container-bottom-record-list-container">
 					<!-- 紀錄 space-between 左右排列 -->
 					<template v-for="(item, index) in renderFollowingList" :key="index">
-						<uni-list-item :border="true" class="wallet-content-container-bottom-record-list-item">
+						<uni-list-item :border="false" class="wallet-content-container-bottom-record-list-item">
 							<template #body>
 								<!-- 帳號頭像和錢包總額文字 水平排列 -->
 								<view class="wallet-account-container wallet-account-container-record">
@@ -45,8 +55,8 @@
 									<!-- 靠右按鈕 -->
 									<view class="wallet-content-container-bottom-following-list-item-button-container">
 										<!-- 關注按鈕 -->
-										<button tpye="button" class="wallet-content-container-bottom-following-list-item-button unActive"
-											@click="switchFollowing(item)">
+										<button tpye="button" class="wallet-content-container-bottom-following-list-item-button"
+											:class="{ 'unActive': item.following }" @click="switchFollowing(item)">
 											{{ item.following ? $t('creator.following') : $t('creator.unFollowing') }}
 										</button>
 									</view>
@@ -72,7 +82,7 @@ const followingList = ref([
 		account: '@88qwe8.88'
 	},
 	{
-		following: true,
+		following: false,
 		avatar: '/static/images/template/img-template-04.png',
 		name: 'a1',
 		account: '@881238.88'
@@ -84,19 +94,19 @@ const followingList = ref([
 		account: '@aaaew8.88'
 	},
 	{
-		following: true,
+		following: false,
 		avatar: '/static/images/template/img-template-02.png',
 		name: 'd',
 		account: '@853588.88'
 	},
 	{
-		following: true,
+		following: false,
 		avatar: '/static/images/template/img-template-03.png',
 		name: 'e',
 		account: '@aabb88.88'
 	},
 	{
-		following: true,
+		following: false,
 		avatar: '/static/images/template/img-template-03.png',
 		name: 'f',
 		account: '@bbcc88.88'
@@ -138,6 +148,29 @@ const renderFollowingList = computed(() => {
 	});
 })
 
+// 類別
+const categoryValue = ref('fans')
+const categoryList = ref([
+	{
+		name: '粉絲',
+		value: 'fans',
+		num: '1.6k'
+	},
+	{
+		name: '關注',
+		value: 'following',
+		num: '0.5k'
+	},
+	{
+		name: '愛心',
+		value: 'love',
+		num: '5.6M'
+	},
+])
+const switchCategory = (value: string) => {
+	categoryValue.value = value
+}
+
 // 切換關注
 const switchFollowing = (item: any) => {
 	item.following = !item.following
@@ -156,6 +189,7 @@ const handleSearch = (text: string) => {
 	searchText.value = text.trim()
 };
 
+
 onShow(() => {
 	// 檢查初始化
 	// checkInitData()
@@ -172,32 +206,41 @@ page {
 	// padding: 0 100rpx;
 }
 
-.header-nav-container {
-	position: relative;
+.wallet-page-header {
+	::v-deep(.header-nav-container) {
+		.header-nav-container {
+			border: none;
+		}
+	}
+}
+
+.wallet-category-container {
 	display: flex;
-	justify-content: center;
-	padding: 32rpx;
-	padding-top: 48rpx;
+	justify-content: space-between;
+	align-items: center;
 	border-bottom: 1px solid var(--text-color-octonary);
 
-	// 圖標容器
-	.header-nav-icon-container {
-		position: absolute;
-		left: 48rpx;
-		top: 50%;
-		transform: translateY(-50%);
-		padding-top: 16rpx;
-	}
-
-	// 標題容器
-	.header-nav-title-container {
+	.wallet-category-item {
+		flex: 1;
+		padding: 0 32rpx 20rpx;
 		font-size: 32rpx;
 		color: var(--text-color-primary);
+		text-align: center;
+
+		&.active {
+			border-bottom: 2px solid var(--text-color-primary);
+		}
 	}
 }
 
 .wallet-content-container {
-	padding: 0 32rpx;
+	padding: 0 44rpx;
+
+	::v-deep(.uni-list-item__container) {
+		.uni-list-item__container {
+			padding: 28rpx 0;
+		}
+	}
 }
 
 /* 錢包頁面 頂部容器 */
@@ -248,8 +291,8 @@ page {
 
 		// 頭像
 		.wallet-account-avatar-container {
-			width: 96rpx;
-			height: 96rpx;
+			width: 100rpx;
+			height: 100rpx;
 			border: 6rpx solid var(--primary-color);
 			background: var(--primary-color);
 			border-radius: 100%;
@@ -292,7 +335,7 @@ page {
 				justify-content: space-between;
 
 				.wallet-account-info-title {
-					font-size: 28rpx;
+					font-size: 34rpx;
 					color: var(--text-color-primary);
 				}
 
@@ -307,7 +350,7 @@ page {
 				height: fit-content;
 
 				.wallet-account-info-account {
-					font-size: 20rpx;
+					font-size: 24rpx;
 					color: var(--text-color-septenary);
 					line-height: 1;
 				}
@@ -392,7 +435,7 @@ page {
 		align-items: center;
 		flex: 1;
 		margin-bottom: unset;
-		padding: 16rpx 0;
+		padding: 0;
 	}
 
 	.wallet-content-container-bottom-record-title-container {
@@ -414,8 +457,9 @@ page {
 }
 
 .wallet-content-container-bottom-following-list-item-button {
-	border-radius: 18rpx;
-	padding: 16rpx 24rpx;
+	min-width: 160rpx;
+	border-radius: 10rpx;
+	padding: 20rpx 48rpx;
 	line-height: 1;
 	font-size: 20rpx;
 	background-color: var(--primary-color);

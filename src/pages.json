@@ -229,6 +229,12 @@
       }
     },
     {
+      "path": "pages/creator/tagRank",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/creator/subscription",
       "style": {
         "navigationStyle": "custom"

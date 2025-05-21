@@ -90,9 +90,10 @@
 				<!-- HASH TAG標籤 -->
 				<view
 					class="creator-home-page-data-profile-container-item creator-home-page-data-profile-container-item-hash-tag">
-					<text class="creator-home-page-data-profile-container-item-text">#娛樂</text>
-					<text class="creator-home-page-data-profile-container-item-text">#遊戲</text>
-					<text class="creator-home-page-data-profile-container-item-text">#美食</text>
+					<text class="creator-home-page-data-profile-container-item-text"
+						@click="handleTagRank('entertainment')">#娛樂</text>
+					<text class="creator-home-page-data-profile-container-item-text" @click="handleTagRank('game')">#遊戲</text>
+					<text class="creator-home-page-data-profile-container-item-text" @click="handleTagRank('food')">#美食</text>
 				</view>
 
 			</view>
@@ -266,7 +267,7 @@
 <script setup>
 // TEMP: 創作者主頁
 import { onPageScroll } from '@dcloudio/uni-app'
-import { toSubscription, toCreatorMessage, toFollowing, toRank } from '@/utils/routers'
+import { toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank } from '@/utils/routers'
 const type = ref('all');
 const showSelect = ref(false);
 
@@ -412,6 +413,10 @@ const handleFollowing = () => {
 // 跳到rank頁
 const handleRank = () => {
 	toRank()
+}
+// 跳到tagRank頁
+const handleTagRank = (tag) => {
+	toTagRank({ tag })
 }
 // 分類
 const typeIndex = ref(0)

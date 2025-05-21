@@ -191,6 +191,13 @@ export const toRank = (params = {}) => {
 		url: '/pages/creator/rank' + queryStringify(params)
 	})
 }
+// 跳轉到標籤排行榜
+export const toTagRank = (params = {}) => {
+	safeSwitchTab('/pages/creator/tagRank')
+	uni.navigateTo({
+		url: '/pages/creator/tagRank' + queryStringify(params)
+	})
+}
 // 跳轉到訂閱會員頁
 export const toSubscription = (params = {}) => {
 	safeSwitchTab('/pages/creator/subscription')

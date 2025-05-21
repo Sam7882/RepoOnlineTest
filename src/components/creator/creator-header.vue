@@ -19,7 +19,7 @@
 					</view>
 					<view class="creator-home-page-data-item-container-item-top-menu">
 						<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-update"
-							custom-prefix="icon" size="24" color="var(--text-color-nonary)"></uni-icons>
+							custom-prefix="icon" size="24" color="var(--text-color-nonary)" @click="toShare"></uni-icons>
 					</view>
 					<c-reportPopUp />
 				</template>
@@ -38,6 +38,7 @@
 
 
 		<c-confirmPopUp ref="confirmPopUpRef" />
+		<c-sharePopUp ref="sharePopUp"></c-sharePopUp>
 	</view>
 </template>
 <script setup>
@@ -73,8 +74,6 @@ const handleSubscribe = () => {
 		},
 	})
 }
-
-
 const cancelSubscribe = () => {
 	confirmPopUpRef.value.open({
 		title: '取消通知',
@@ -87,6 +86,15 @@ const cancelSubscribe = () => {
 			console.log("🚀 ~ handleSubscribe ~ isSubscribe.value:", isSubscribe.value)
 		},
 	})
+}
+
+// 分享
+const sharePopUp = ref(null)
+const toShare = () => {
+	console.log("🚀 == 分享 == ")
+	sharePopUp.value?.open()
+	/* NOTE:暫代 去往該圖文的總攬 */
+	// toPlayArticleGallery()
 }
 </script>
 <style lang="scss" scoped>

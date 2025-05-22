@@ -6,7 +6,7 @@
 
 		<view class="creator-home-page-data-container">
 			<!-- 絕對位置 頭像 -->
-			<view class="creator-home-page-avatar-container">
+			<view class="creator-home-page-avatar-container" @click="handleShortStory">
 				<image class="creator-home-page-avatar" src="/static/images/template/img-template-03.png" mode="widthFix">
 				</image>
 			</view>
@@ -268,7 +268,7 @@
 <script setup>
 // TEMP: 創作者主頁
 import { onPageScroll } from '@dcloudio/uni-app'
-import { toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank } from '@/utils/routers'
+import { toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory } from '@/utils/routers'
 const type = ref('all');
 const showSelect = ref(false);
 
@@ -430,6 +430,10 @@ const handleMessage = () => {
 	toCreatorMessage()
 }
 
+// 跳轉到限時動態
+const handleShortStory = () => {
+	toShortStory()
+}
 const noticePopUpRef = ref(null)
 const openNoticePopUp = () => {
 	noticePopUpRef.value.open({

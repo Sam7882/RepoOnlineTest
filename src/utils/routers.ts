@@ -133,6 +133,13 @@ export const toTagPeople = (params = {}) => {
 		url: '/pages/post/tagPeople' + queryStringify(params)
 	})
 }
+// 跳轉到限時動態
+export const toShortStory = (params = {}) => {
+	safeSwitchTab('/pages/post/shortStory')
+	uni.navigateTo({
+		url: '/pages/post/shortStory' + queryStringify(params)
+	})
+}
 
 /* 創作者 */
 // 跳轉到創作者首頁

@@ -1,130 +1,146 @@
 <template>
 	<view>
 		<view class="icon-item-container" @click="openReportConfirm">
-			<uni-icons class="icon-item" type="more-filled" size="24" color="var(--text-color-nonary)"></uni-icons>
+			<uni-icons class="icon-item" type="more-filled" size="24" :color="props.iconColor"></uni-icons>
 		</view>
 
 		<teleport to='#app'>
-			< <!-- 舉報確認窗 -->
-				<uni-popup class="reportConfirm" ref="reportConfirm" type="center">
-					<view class="popup-box">
-						<view class="popup-title">不再出現此創作者</view>
-						<view class="popup-content">您將不再收到此創作者發布的內容。</view>
-						<view class="deco-line"></view>
-						<view class="popup-actions">
-							<button class="btn primary-btn" @click="openReportPopUp">
-								<uni-icons class="btn-icon" type="icon-common-report" custom-prefix="icon" size="24"
-									color="var(--text-color-primary)" />
-								舉報
-							</button>
-							<uni-icons class="btn-icon btn-icon-next" type="right" size="24" @click="closeReportPopUp" />
-						</view>
-						<view class="deco-line"></view>
-						<view class="popup-actions">
-							<button class="btn primary-btn" @click="closeReportConfirm">
-								<uni-icons class="btn-icon" type="icon-common-uninterest" custom-prefix="icon" size="24"
-									color="var(--text-color-primary)" />
-								不感興趣
-							</button>
-						</view>
-						<view class="deco-line"></view>
-						<view class="popup-actions">
-							<button class="btn cancel-btn" @click="noInterest">暫時不要</button>
-						</view>
+			<!-- 舉報確認窗 -->
+			<uni-popup class="reportConfirm" ref="reportConfirm" type="center" @change="emitChange">
+				<view class="popup-box">
+					<view class="popup-title">不再出現此創作者</view>
+					<view class="popup-content">您將不再收到此創作者發布的內容。</view>
+					<view class="deco-line"></view>
+					<view class="popup-actions">
+						<button class="btn primary-btn" @click="openReportPopUp">
+							<uni-icons class="btn-icon" type="icon-common-report" custom-prefix="icon" size="24"
+								color="var(--text-color-primary)" />
+							舉報
+						</button>
+						<uni-icons class="btn-icon btn-icon-next" type="right" size="24" @click="closeReportPopUp" />
 					</view>
-				</uni-popup>
+					<view class="deco-line"></view>
+					<view class="popup-actions">
+						<button class="btn primary-btn" @click="closeReportConfirm">
+							<uni-icons class="btn-icon" type="icon-common-uninterest" custom-prefix="icon" size="24"
+								color="var(--text-color-primary)" />
+							不感興趣
+						</button>
+					</view>
+					<view class="deco-line"></view>
+					<view class="popup-actions">
+						<button class="btn cancel-btn" @click="noInterest">暫時不要</button>
+					</view>
+				</view>
+			</uni-popup>
 
-				<!-- 舉報 -->
-				<uni-popup class="reportPopUp" ref="reportPopUp" type="bottom" borderRadius="60rpx 60rpx 0 0"
-					background-color="#f6f6f6">
-					<!-- 舉報-1 -->
-					<view class="popup-container" v-if="reportPopUpStep === 1">
-						<!-- 標題與關閉 -->
-						<view class="popup-header">
-							<text class="popup-title">舉報</text>
-							<uni-icons class="popup-close" type="closeempty" size="24" @click="closeReportPopUp" />
+			<!-- 舉報 -->
+			<uni-popup class="reportPopUp" ref="reportPopUp" type="bottom" borderRadius="60rpx 60rpx 0 0"
+				background-color="#f6f6f6">
+				<!-- 舉報-1 -->
+				<view class="popup-container" v-if="reportPopUpStep === 1">
+					<!-- 標題與關閉 -->
+					<view class="popup-header">
+						<text class="popup-title">舉報</text>
+						<uni-icons class="popup-close" type="closeempty" size="24" @click="closeReportPopUp" />
+					</view>
+					<view class="deco-line"></view>
+					<view class="popup-content">
+						<!-- 社群 -->
+						<text class="popup-content-title">你想檢舉什麼內容？</text>
+						<text class="popup-content-text">你的舉報將匿名，且將不再收到此創作者發布的內容。</text>
+					</view>
+					<view class="deco-line"></view>
+					<view class="popup-content-list">
+						<view class="popup-content-item" @click="nextReportPopUpStep">
+							<text>特定貼文</text>
+							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
-						<view class="deco-line"></view>
-						<view class="popup-content">
-							<!-- 社群 -->
-							<text class="popup-content-title">你想檢舉什麼內容？</text>
-							<text class="popup-content-text">你的舉報將匿名，且將不再收到此創作者發布的內容。</text>
-						</view>
-						<view class="deco-line"></view>
-						<view class="popup-content-list">
-							<view class="popup-content-item" @click="nextReportPopUpStep">
-								<text>特定貼文</text>
-								<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
-							</view>
-							<view class="popup-content-item" @click="nextReportPopUpStep">
-								<text>有關這個帳號的內容</text>
-								<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
-							</view>
+						<view class="popup-content-item" @click="nextReportPopUpStep">
+							<text>有關這個帳號的內容</text>
+							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
 					</view>
-					<!-- 舉報-2 -->
-					<view class="popup-container" v-if="reportPopUpStep === 2">
-						<!-- 標題與關閉 -->
-						<view class="popup-header">
-							<uni-icons class="popup-prev" type="left" size="24" @click="prevReportPopUpStep" />
-							<text class="popup-title">舉報</text>
-							<uni-icons class="popup-close" type="closeempty" size="24" @click="closeReportPopUp" />
+				</view>
+				<!-- 舉報-2 -->
+				<view class="popup-container" v-if="reportPopUpStep === 2">
+					<!-- 標題與關閉 -->
+					<view class="popup-header">
+						<uni-icons class="popup-prev" type="left" size="24" @click="prevReportPopUpStep" />
+						<text class="popup-title">舉報</text>
+						<uni-icons class="popup-close" type="closeempty" size="24" @click="closeReportPopUp" />
+					</view>
+					<view class="deco-line"></view>
+					<view class="popup-content">
+						<!-- 社群 -->
+						<text class="popup-content-title">你想檢舉什麼內容？</text>
+						<text class="popup-content-text">你的舉報將匿名，且將不再收到此創作者發布的內容。</text>
+					</view>
+					<view class="deco-line"></view>
+					<view class="popup-content-list">
+						<view class="popup-content-item" @click="nextFeedback">
+							<text>自殺、自殘或飲食失調</text>
+							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
-						<view class="deco-line"></view>
-						<view class="popup-content">
-							<!-- 社群 -->
-							<text class="popup-content-title">你想檢舉什麼內容？</text>
-							<text class="popup-content-text">你的舉報將匿名，且將不再收到此創作者發布的內容。</text>
+						<view class="popup-content-item" @click="nextFeedback">
+							<text>暴力、仇恨或剝削</text>
+							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
-						<view class="deco-line"></view>
-						<view class="popup-content-list">
-							<view class="popup-content-item" @click="nextFeedback">
-								<text>自殺、自殘或飲食失調</text>
-								<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
-							</view>
-							<view class="popup-content-item" @click="nextFeedback">
-								<text>暴力、仇恨或剝削</text>
-								<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
-							</view>
-							<view class="popup-content-item" @click="nextFeedback">
-								<text>裸露或性行為</text>
-								<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
-							</view>
-							<view class="popup-content-item" @click="nextFeedback">
-								<text>侵犯智慧財產權</text>
-								<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
-							</view>
+						<view class="popup-content-item" @click="nextFeedback">
+							<text>裸露或性行為</text>
+							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
+						</view>
+						<view class="popup-content-item" @click="nextFeedback">
+							<text>侵犯智慧財產權</text>
+							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
 					</view>
-				</uni-popup>
+				</view>
+			</uni-popup>
 
-				<!-- 意見回饋窗 -->
-				<uni-popup class="feedbackPopUp" ref="feedbackPopUp" type="bottom" borderRadius="60rpx 60rpx 0 0"
-					background-color="#f6f6f6">
-					<view class="popup-container">
-						<!-- 標題與關閉 -->
-						<view class="popup-header">
-							<text class="popup-title">謝謝您的意見回饋</text>
-						</view>
-						<view class="popup-content">
-							<!-- 社群 -->
-							<text class="popup-content-text">我們已收到您的檢舉，系統會盡快進行審核。若確認違規，將依據相關規範進行處理。 感謝您協助我們維護社群安全與秩序。</text>
-						</view>
-						<view class="btn-container">
-							<button type="button" class="btn" @click="closeFeedbackPopUp">
-								完成
-							</button>
-						</view>
+			<!-- 意見回饋窗 -->
+			<uni-popup class="feedbackPopUp" ref="feedbackPopUp" type="bottom" borderRadius="60rpx 60rpx 0 0"
+				background-color="#f6f6f6">
+				<view class="popup-container">
+					<!-- 標題與關閉 -->
+					<view class="popup-header">
+						<text class="popup-title">謝謝您的意見回饋</text>
 					</view>
-				</uni-popup>
+					<view class="popup-content">
+						<!-- 社群 -->
+						<text class="popup-content-text">我們已收到您的檢舉，系統會盡快進行審核。若確認違規，將依據相關規範進行處理。 感謝您協助我們維護社群安全與秩序。</text>
+					</view>
+					<view class="btn-container">
+						<button type="button" class="btn" @click="closeFeedbackPopUp">
+							完成
+						</button>
+					</view>
+				</view>
+			</uni-popup>
 		</teleport>
 	</view>
 </template>
 
 <script setup>
 // TEMP: 檢舉元件
+const props = defineProps({
+	iconColor: {
+		type: String,
+		default: 'var(--text-color-primary)'
+	}
+})
+const emit = defineEmits(['open', 'close'])
+
 /* 舉報確認窗F */
 const reportConfirm = ref(null)
+// 回傳是否開啟
+const emitChange = (e) => {
+	if (e.show) {
+		emit('close')
+	} else {
+		emit('open')
+	}
+}
 const openReportConfirm = () => {
 	reportConfirm.value.open()
 }
@@ -183,7 +199,6 @@ const closeFeedbackPopUp = () => {
 
 	.icon-item {
 		font-size: 36rpx !important;
-		color: var(--text-color-primary) !important;
 	}
 }
 

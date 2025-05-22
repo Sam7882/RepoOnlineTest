@@ -210,7 +210,7 @@
 			</view>
 			<!-- 創作者商城 -->
 			<view class="creator-home-page-content-type-container-item" :class="{ active: type === 'shop' }"
-				@click="switchType('shop')">
+				@click="switchType('shop'), openNoticePopUp()">
 				<uni-icons class="icon" type="icon-common-shopy" custom-prefix="icon" size="24"
 					color="var(--text-color-nonary)"></uni-icons>
 			</view>
@@ -261,6 +261,7 @@
 		<!-- 底部導航列 -->
 		<c-bottomNav :bgColor="'var(--background-color-light)'" :iconColor="'var(--text-color-primary)'"
 			:primaryMenu="'primary'" />
+		<c-noticePopUp ref="noticePopUpRef" />
 	</view>
 </template>
 
@@ -427,6 +428,14 @@ const switchTypeIndex = (index) => {
 // 跳轉到創作者訊息頁
 const handleMessage = () => {
 	toCreatorMessage()
+}
+
+const noticePopUpRef = ref(null)
+const openNoticePopUp = () => {
+	noticePopUpRef.value.open({
+		title: '系統尚未開放',
+		content: '商店即將登場，敬請期待！',
+	})
 }
 onMounted(() => {
 	// 初始計算一次

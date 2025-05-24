@@ -230,6 +230,10 @@
 		<!-- 分類欄 -->
 		<view class="type-container">
 			<scroll-view class="type-scroll-view" scroll-x="true">
+				<view class="icon-container" @click="handleTypeEdit">
+					<uni-icons class="icon-gear" type="icon-common-gear" custom-prefix="icon" size="20"
+						color="var(--text-color-primary)"></uni-icons>
+				</view>
 				<view class="type-item" v-for="(item, index) in 4" :key="index" @click="switchTypeIndex(index)"
 					:class="{ active: typeIndex === index }">
 					<uni-icons class="icon" type="icon-common-type" custom-prefix="icon" size="24"
@@ -305,7 +309,7 @@
 <script setup>
 // TEMP: 創作者主頁
 import { onPageScroll } from '@dcloudio/uni-app'
-import { toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory, toCreatorEdit } from '@/utils/routers'
+import { toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory, toCreatorEdit, toCreatorSelectMedia } from '@/utils/routers'
 import { useInitStore } from '@/stores/useInitDataStore';
 const type = ref('all');
 const showSelect = ref(false);
@@ -487,6 +491,12 @@ const typeIndex = ref(0)
 const switchTypeIndex = (index) => {
 	typeIndex.value = index
 }
+// 分類編輯
+const handleTypeEdit = () => {
+	console.log('分類編輯')
+	toCreatorSelectMedia()
+}
+
 
 // 跳轉到創作者訊息頁
 const handleMessage = () => {
@@ -907,16 +917,35 @@ page {
 
 		.uni-scroll-view-content {
 			display: flex;
+			align-items: center;
 			gap: 12rpx;
 		}
 	}
 
+	.icon-container {
+		margin: auto 0 auto 32rpx;
+		border: 1px solid var(--text-color-primary);
+		border-radius: 10rpx;
+		padding: 5px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 68rpx;
+		height: 68rpx;
+		// height: fit-content;
+		aspect-ratio: 1/1;
+
+		.icon-gear {
+			font-size: 42rpx !important;
+		}
+	}
 
 	.type-item {
 		display: flex;
 		align-items: center;
 		gap: 16rpx;
-		padding: 16rpx 28rpx;
+		height: fit-content;
+		padding: 14rpx 28rpx;
 		background: var(--text-color-denary);
 		border-radius: 10rpx;
 
@@ -942,6 +971,10 @@ page {
 
 			.type-item-text {
 				color: var(--text-color-primary);
+			}
+
+			.icon {
+				color: var(--text-color-primary) !important;
 			}
 		}
 

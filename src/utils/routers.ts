@@ -219,6 +219,20 @@ export const toCreatorEdit = (params = {}) => {
 		url: '/pages/creator/profile-edit' + queryStringify(params)
 	})
 }
+// 跳轉到創作者選擇媒體頁作品
+export const toCreatorSelectMedia = (params = {}) => {
+	safeSwitchTab('/pages/creator/selectMedia')
+	uni.navigateTo({
+		url: '/pages/creator/selectMedia' + queryStringify(params)
+	})
+}
+// 跳轉到創作者分類編輯頁
+export const toCreatorClassificationEdit = (params = {}) => {
+	safeSwitchTab('/pages/creator/classification-edit')
+	uni.navigateTo({
+		url: '/pages/creator/classification-edit' + queryStringify(params)
+	})
+}
 // 跳轉到選擇頭像來源頁
 export const toSelectSource = (params = {}) => {
 	safeSwitchTab('/pages/common/select-source')

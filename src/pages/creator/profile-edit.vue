@@ -172,7 +172,7 @@ const handleSelectPhoto = (type) => {
 			},
 			fail: (err) => {
 				console.log('選擇照片失敗:', err)
-				uni.showToast({ title: '選擇照片失敗', icon: 'none' })
+				uni.showToast({ title: '選擇照片失敗', icon: 'none', })
 			}
 		})
 	}

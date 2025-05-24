@@ -12,6 +12,7 @@ interface PostState {
   content: string;
   media: string[];
   taggedUsers: TaggedUser[];
+  selectedMedia: any[]; // ✅ 新增：儲存選取的媒體資料
 }
 
 export const usePostData = defineStore('postData', {
@@ -19,6 +20,7 @@ export const usePostData = defineStore('postData', {
     content: '',
     media: [],
     taggedUsers: [],
+    selectedMedia: [] // ✅ 新增：儲存選取的媒體資料
   }),
 
   actions: {
@@ -34,5 +36,13 @@ export const usePostData = defineStore('postData', {
     reset() {
       this.$reset();
     },
+    // ✅ 新增：設定媒體資料
+    setSelectedMedia(mediaList: any[]) {
+      this.selectedMedia = mediaList
+    },
+    // ✅ 新增：清除媒體資料
+    clearSelectedMedia() {
+      this.selectedMedia = []
+    }
   },
 });

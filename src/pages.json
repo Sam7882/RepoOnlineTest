@@ -254,6 +254,20 @@
       }
     },
     {
+      "path": "pages/creator/selectMedia",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/creator/classification-edit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
       "path": "pages/common/select-source",
       "style": {
         "navigationStyle": "custom",

@@ -235,40 +235,19 @@
 						color="var(--text-color-nonary)"></uni-icons>
 					<text class="type-item-text">一號分類</text>
 				</view>
+				<view class="type-item">
+					<uni-icons class="icon" type="icon-common-type" custom-prefix="icon" size="24"
+						color="var(--text-color-nonary)"></uni-icons>
+					<text class="type-item-text">新增</text>
+					<view class="icon-container">
+						<uni-icons class="icon" type="icon-common-plus" custom-prefix="icon" size="24"
+							color="var(--text-color-nonary)"></uni-icons>
+					</view>
+				</view>
 			</scroll-view>
 		</view>
 
 		<!-- 圖文區 卡片 水平排序，自動換行，一行三格 grid排版-->
-		<!-- <view class="creator-home-page-content-card-container">
-			<view class="creator-home-page-content-card-container-item">
-				<image class="creator-home-page-content-card-container-item-img"
-					src="/static/images/template/img-template-01.png" mode="widthFix"></image>
-			</view>
-			<view class="creator-home-page-content-card-container-item">
-				<image class="creator-home-page-content-card-container-item-img"
-					src="/static/images/template/img-template-02.png" mode="widthFix"></image>
-			</view>
-			<view class="creator-home-page-content-card-container-item">
-				<image class="creator-home-page-content-card-container-item-img"
-					src="/static/images/template/img-template-01.png" mode="widthFix"></image>
-			</view>
-			<view class="creator-home-page-content-card-container-item">
-				<image class="creator-home-page-content-card-container-item-img"
-					src="/static/images/template/img-template-01.png" mode="widthFix"></image>
-			</view>
-			<view class="creator-home-page-content-card-container-item">
-				<image class="creator-home-page-content-card-container-item-img"
-					src="/static/images/template/img-template-03.png" mode="widthFix"></image>
-			</view>
-			<view class="creator-home-page-content-card-container-item">
-				<image class="creator-home-page-content-card-container-item-img"
-					src="/static/images/template/img-template-04.png" mode="widthFix"></image>
-			</view>
-			<view class="creator-home-page-content-card-container-item">
-				<image class="creator-home-page-content-card-container-item-img"
-					src="/static/images/template/img-template-01.png" mode="widthFix"></image>
-			</view>
-		</view> -->
 		<c-gridPhoto :data="gridPhotoData" />
 		<!-- 底部導航列 -->
 		<c-bottomNav :bgColor="'var(--background-color-light)'" :iconColor="'var(--text-color-primary)'"
@@ -939,7 +918,7 @@ page {
 			margin-left: 56rpx;
 		}
 
-		.icon {
+		&>.icon {
 			font-size: 28rpx !important;
 			color: var(--text-color-quaternary) !important;
 		}
@@ -957,6 +936,21 @@ page {
 
 			.type-item-text {
 				color: var(--text-color-primary);
+			}
+		}
+
+		.icon-container {
+			border-radius: 50%;
+			padding: 4rpx 6rpx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: var(--text-color-quaternary);
+
+			.icon {
+				transform: translateY(2rpx);
+				font-size: 20rpx !important;
+				color: var(--text-color-secondary) !important;
 			}
 		}
 	}

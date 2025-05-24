@@ -131,7 +131,7 @@ const handleSubmit = () => {
 	formRef.value.validate().then(res => {
 		console.log('送出資料:', form)
 		console.log('已選擇 tags:', selectedTags.value)
-		uni.showToast({ title: '已儲存', icon: 'success' })
+		uni.showToast({ title: '已儲存', icon: 'none' })
 	}).catch(err => {
 		console.log('表單驗證失敗:', err)
 	})

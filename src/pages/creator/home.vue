@@ -121,8 +121,19 @@
 				class="creator-home-page-data-profile-container-item creator-home-page-data-profile-container-item-edit-button">
 				<view class="creator-home-page-data-profile-container-item-edit-button-top-container">
 					<!-- 關注 -->
-					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
-						$t('creator.unFollowing') }}</button>
+					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button"
+						@click="setFallowing">
+						<template v-if="!isFollowing">
+							{{ $t('creator.unFollowing') }}
+						</template>
+						<template v-else>
+							<view class="icon-container">
+								<uni-icons class="icon" type="icon-common-tick" custom-prefix="icon" size="24"
+									color="var(--text-color-secondary)"></uni-icons>
+							</view>
+							{{ $t('creator.following') }}
+						</template>
+					</button>
 					<!-- 訊息 -->
 					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button"
 						@click="handleMessage">{{
@@ -226,6 +237,7 @@
 				</view>
 			</scroll-view>
 		</view>
+
 		<!-- 圖文區 卡片 水平排序，自動換行，一行三格 grid排版-->
 		<!-- <view class="creator-home-page-content-card-container">
 			<view class="creator-home-page-content-card-container-item">
@@ -262,6 +274,51 @@
 		<c-bottomNav :bgColor="'var(--background-color-light)'" :iconColor="'var(--text-color-primary)'"
 			:primaryMenu="'primary'" />
 		<c-noticePopUp ref="noticePopUpRef" />
+
+		<!-- 關注 -->
+		<c-bottomPopUp ref="followPopUpRef" class="followPopUp" @close="initfollowPopUp">
+			<template #content="close">
+				<view class="followPopUp-container">
+					<template v-if="followPopUpStep === 1">
+						<view class="followPopUp-container-item" @click="nextfollowPopUpStep">
+							<view class="followPopUp-container-item-content">
+								<view class="icon-container">
+									<uni-icons class="popup-icon" type="icom-common-edit" custom-prefix="icon" size="24"
+										color="var(--text-color-primary)"></uni-icons>
+								</view>
+								<text>自地對象名稱</text>
+							</view>
+							<view class="icon-container">
+								<uni-icons class="popup-icon" type="right" size="24" color="var(--text-color-primary)"></uni-icons>
+							</view>
+						</view>
+						<view class="deco-line"></view>
+						<view class="followPopUp-container-item" @click="cancelfollowPopUp">
+							<view class="followPopUp-container-item-content">
+								<view class="icon-container">
+									<uni-icons class="popup-icon" type="icon-common-cancelFollow" custom-prefix="icon" size="24"
+										color="var(--text-color-primary)"></uni-icons>
+								</view>
+								<text>取消關注</text>
+							</view>
+						</view>
+					</template>
+					<template v-if="followPopUpStep === 2">
+						<view class="followPopUp-container-item2">
+							<view class="followPopUp-container-item-content input-container">
+								<uni-easyinput v-model="followPopUpName" type="text" class="inputStyle popup-input"
+									placeholder="請輸入名稱" />
+							</view>
+						</view>
+						<view class="followPopUp-container-item2">
+							<view class="followPopUp-container-item-content btn-container">
+								<button type="button" class="btn popup-button" @click="confirmfollowPopUp">送出</button>
+							</view>
+						</view>
+					</template>
+				</view>
+			</template>
+		</c-bottomPopUp>
 	</view>
 </template>
 
@@ -410,6 +467,31 @@ const handleSubscription = () => {
 // 跳到following頁
 const handleFollowing = () => {
 	toFollowing()
+}
+const followPopUpRef = ref(null)
+const isFollowing = ref(false)
+const setFallowing = () => {
+	followPopUpRef.value.open({
+		title: 'jesiicatestid'
+	})
+}
+const followPopUpName = ref('')
+const followPopUpStep = ref(1)
+const nextfollowPopUpStep = () => {
+	followPopUpStep.value++
+}
+const initfollowPopUp = () => {
+	followPopUpStep.value = 1
+	followPopUpName.value = ''
+}
+const cancelfollowPopUp = () => {
+	isFollowing.value = false
+	followPopUpRef.value.close()
+}
+const confirmfollowPopUp = () => {
+	isFollowing.value = true
+	console.log("🚀 ~ 我關注對象 自訂名稱為: ", followPopUpName.value)
+	followPopUpRef.value.close()
 }
 // 跳到rank頁
 const handleRank = () => {
@@ -798,13 +880,17 @@ page {
 		}
 
 		.creator-home-page-data-profile-container-item-edit-button-item-button {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 12rpx;
 			height: fit-content;
 			padding: 24rpx 24rpx;
 			border: unset;
 			border-radius: 16rpx;
 			background: var(--text-color-octonary);
 			// white-space: nowrap;
-			font-size: 24rpx;
+			font-size: 32rpx;
 			flex: 1;
 			line-height: 1.2;
 			color: var(--text-color-primary);
@@ -812,6 +898,14 @@ page {
 
 			&::after {
 				display: none;
+			}
+
+			&>.icon-container {
+				.icon {
+					font-size: 16rpx !important;
+					color: var(--text-color-secondary) !important;
+					transform: translateY(2rpx);
+				}
 			}
 		}
 	}
@@ -1009,5 +1103,137 @@ page {
 	height: 70rpx;
 	border-left: 1px solid var(--text-color-quaternary);
 	margin-top: 12rpx;
+}
+
+
+/* 子元件-關注 */
+.followPopUp {
+	::v-deep(.popup-container) {
+		.popup-content {
+			padding: 0;
+		}
+
+		.popup-container {
+			padding-bottom: 0;
+		}
+
+		.popup-header {
+			.popup-title {
+				font-size: 32rpx;
+				font-weight: 500;
+			}
+
+			&~.popup-deco-line {
+				display: none;
+			}
+		}
+	}
+
+}
+
+.followPopUp-container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+
+	.deco-line {
+		width: 100%;
+		scale: 1.2;
+		margin: 0;
+	}
+}
+
+.followPopUp-container-item {
+	position: relative;
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	padding: 48rpx 0;
+
+	&>.icon-container {
+		position: absolute;
+		top: 50%;
+		right: 0;
+		transform: translate(0, -50%);
+
+
+		.popup-icon {
+			font-size: 28rpx !important;
+			color: var(--text-color-primary) !important;
+		}
+	}
+
+	.followPopUp-container-item-content {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 38rpx;
+		font-size: 30rpx;
+		color: var(--text-color-primary);
+
+		.popup-icon {
+			font-size: 28rpx !important;
+			color: var(--text-color-primary) !important;
+		}
+	}
+
+}
+
+.followPopUp-container-item-content {
+
+	.btn {
+		border-radius: 20rpx;
+		padding: 24rpx 0;
+	}
+}
+
+.followPopUp-container-item2 {
+	width: 100%;
+
+	&:first-child {
+		margin-bottom: 26rpx;
+	}
+}
+
+/* 輸入欄位 */
+// INPUT 輸入欄位
+.inputStyle {
+	::v-deep(.uni-easyinput__content) {
+		margin-bottom: 0rpx;
+
+		&.is-input-border {
+			border: none;
+			background: var(--text-color-tertiary) !important;
+			border-radius: 20rpx;
+			padding: 4rpx 32rpx;
+
+			&.is-focused {
+				border: 1px solid var(--primary-color) !important;
+
+				.uniui-eye-filled {
+					color: var(--primary-color) !important;
+				}
+			}
+		}
+
+		.uni-input-placeholder {
+			color: var(--text-color-quaternary) !important;
+			font-size: 28rpx;
+		}
+
+		.uni-easyinput__content-input {
+			color: var(--text-color-primary) !important;
+			font-size: 28rpx;
+		}
+	}
+
+	&.errorStyle ::v-deep(.uni-easyinput__content) {
+		&.is-input-border {
+			border: 1px solid var(--text-color-error) !important;
+		}
+	}
 }
 </style>

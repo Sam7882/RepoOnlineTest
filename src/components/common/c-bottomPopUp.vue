@@ -1,15 +1,19 @@
 <template>
-  <uni-popup ref="popupRef" type="bottom" borderRadius="60rpx 60rpx 0 0" background-color="#f6f6f6">
+  <uni-popup ref="popupRef" type="bottom" borderRadius="60rpx 60rpx 0 0" background-color="#f6f6f6"
+    @change="emitChange">
     <view class="popup-container">
       <!-- 標題與關閉 -->
       <view class="popup-header">
-        <text class="popup-title">{{ title }}</text>
-        <uni-icons class="popup-close" type="closeempty" size="24" @click="close" />
+        <slot name="header" :close="close">
+          <text class="popup-title">{{ title }}</text>
+          <uni-icons class="popup-close" type="closeempty" size="24" @click="close" />
+        </slot>
       </view>
       <view class="popup-deco-line"></view>
       <view class="popup-content">
-        <!-- 社群 -->
-        <text class="popup-content-text">{{ content }}</text>
+        <slot name="content" :close="close">
+          <text class="popup-content-text">{{ content }}</text>
+        </slot>
       </view>
     </view>
   </uni-popup>
@@ -24,7 +28,7 @@ const { t } = useI18n()
 const title = ref('提示')
 const content = ref('內文')
 
-const emit = defineEmits(['updata:postSet'])
+const emit = defineEmits(['updata:postSet', 'open', 'close'])
 const popupRef = ref()
 
 // 打開
@@ -38,6 +42,14 @@ const close = () => {
   popupRef.value.close()
 }
 
+// 回傳是否開啟
+const emitChange = (e) => {
+  if (e.show) {
+    emit('close')
+  } else {
+    emit('open')
+  }
+}
 
 defineExpose({ open, close })
 </script>

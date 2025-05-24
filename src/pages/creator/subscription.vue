@@ -113,7 +113,7 @@ const submitForm = () => {
 const bottomPopUpRef = ref(null)
 const openCaption = () => {
   bottomPopUpRef.value.open({
-    title: '說明中心',
+    title: '訂閱條款',
     content: '您可前往管理付款資訊頁面新增付款方式。 如欲了解詳情，請參考如何新增或更新付款方式。 若您想更改 Fance 付款方式，我們提供多種付款選項。'
   })
 }

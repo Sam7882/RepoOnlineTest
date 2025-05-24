@@ -150,14 +150,15 @@
 			<view v-else
 				class="creator-home-page-data-profile-container-item creator-home-page-data-profile-container-item-edit-button">
 				<view class="creator-home-page-data-profile-container-item-edit-button-top-container">
-					<!-- 關注 -->
-					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
-						'編輯資料' }}</button>
-					<!-- 訊息 -->
+					<!-- 編輯資料 -->
+					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button"
+						@click="handleProfileEdit()">{{
+							'編輯資料' }}</button>
+					<!-- 分享檔案 -->
 					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
 						'分享檔案' }}</button>
 				</view>
-				<!-- 成為會員 -->
+				<!-- 創作者中心 -->
 				<view class="creator-home-page-data-profile-container-item-edit-button-bottom-container"
 					@click="handleSubscription">
 					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
@@ -304,7 +305,7 @@
 <script setup>
 // TEMP: 創作者主頁
 import { onPageScroll } from '@dcloudio/uni-app'
-import { toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory } from '@/utils/routers'
+import { toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory, toCreatorEdit } from '@/utils/routers'
 import { useInitStore } from '@/stores/useInitDataStore';
 const type = ref('all');
 const showSelect = ref(false);
@@ -495,6 +496,11 @@ const handleMessage = () => {
 // 跳轉到限時動態
 const handleShortStory = () => {
 	toShortStory()
+}
+
+// 跳轉到創作者編輯頁
+const handleProfileEdit = () => {
+	toCreatorEdit()
 }
 const noticePopUpRef = ref(null)
 const openNoticePopUp = () => {

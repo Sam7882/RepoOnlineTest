@@ -212,6 +212,13 @@ export const toSubscription = (params = {}) => {
 		url: '/pages/creator/subscription' + queryStringify(params)
 	})
 }
+// 跳轉到創作者編輯頁
+export const toCreatorEdit = (params = {}) => {
+	safeSwitchTab('/pages/creator/profile-edit')
+	uni.navigateTo({
+		url: '/pages/creator/profile-edit' + queryStringify(params)
+	})
+}
 
 
 // 跳轉到信箱

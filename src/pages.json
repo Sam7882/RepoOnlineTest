@@ -246,6 +246,13 @@
         "navigationStyle": "custom"
       }
     },
+    {
+      "path": "pages/creator/profile-edit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
 
     {
       "path": "pages/helper/index",

@@ -253,6 +253,20 @@
         "backgroundColor": "var(--background-color-light)"
       }
     },
+    {
+      "path": "pages/common/select-source",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/common/crop-avatar",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
 
     {
       "path": "pages/helper/index",

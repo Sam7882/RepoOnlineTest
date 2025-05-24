@@ -219,6 +219,20 @@ export const toCreatorEdit = (params = {}) => {
 		url: '/pages/creator/profile-edit' + queryStringify(params)
 	})
 }
+// 跳轉到選擇頭像來源頁
+export const toSelectSource = (params = {}) => {
+	safeSwitchTab('/pages/common/select-source')
+	uni.navigateTo({
+		url: '/pages/common/select-source' + queryStringify(params)
+	})
+}
+// 跳轉到裁剪頭像頁
+export const toCropAvatar = (params = {}) => {
+	safeSwitchTab('/pages/common/crop-avatar')
+	uni.navigateTo({
+		url: '/pages/common/crop-avatar' + queryStringify(params)
+	})
+}
 
 
 // 跳轉到信箱

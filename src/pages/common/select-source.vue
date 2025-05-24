@@ -23,33 +23,29 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { onLoad } from '@dcloudio/uni-app'
+// TEMP: 客製化的選取資料來源頁(因為APP才有的功能，故不開發)
+import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 
-const mode = ref('default')         // avatar 或 post
-const next = ref('/pages/crop-avatar')
-const type = ref('image')           // image 或 media
+const route = useRoute()
+const mode = route.query.mode || 'default'         // avatar 或 post
+const next = route.query.next || '/pages/crop-avatar'
+const type = route.query.type || 'image'           // image 或 media
 
-const tabs = ref(['照片'])
-const showTabs = ref(false)
-const currentTab = ref('照片')
+const tabs = type === 'media' ? ['全部', '影片', '照片'] : ['照片']
+const showTabs = type === 'media'
+const currentTab = ref(tabs[0])
 const imageList = ref([])
 
-onLoad((options) => {
-	mode.value = options.mode || 'default'
-	next.value = options.next || '/pages/crop-avatar'
-	type.value = options.type || 'image'
+const goBack = () => uni.navigateBack()
 
-	if (type.value === 'media') {
-		tabs.value = ['全部', '影片', '照片']
-		showTabs.value = true
-		currentTab.value = '全部'
-	} else {
-		tabs.value = ['照片']
-		showTabs.value = false
-		currentTab.value = '照片'
-	}
+const selectImage = (src) => {
+	uni.navigateTo({
+		url: `${next}?src=${encodeURIComponent(src)}`
+	})
+}
 
+onMounted(() => {
 	uni.chooseImage({
 		count: 20,
 		sourceType: ['album'],
@@ -62,14 +58,6 @@ onLoad((options) => {
 		}
 	})
 })
-
-const goBack = () => uni.navigateBack()
-
-const selectImage = (src) => {
-	uni.navigateTo({
-		url: `${next.value}?src=${encodeURIComponent(src)}`
-	})
-}
 </script>
 
 <style scoped lang="scss">

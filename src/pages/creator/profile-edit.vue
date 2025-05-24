@@ -2,8 +2,8 @@
 	<view class="profile-edit">
 		<c-headerNav :title="'編輯資料'" />
 
-		<view class="profile-avatar" @click="openAvatarOptions">
-			<view class="avatar-container">
+		<view class="profile-avatar">
+			<view class="avatar-container" @click="openAvatarOptions">
 				<image src="/static/images/template/img-template-03.png" class="avatar-img" mode="aspectFill" />
 				<view class="icon-container avatar-camera">
 					<uni-icons class="icon-camera" type="camera" size="24" color="#fff" />
@@ -85,6 +85,8 @@
 </template>
 
 <script setup>
+// TEMP: 編輯資料
+import { toSelectSource, toCropAvatar } from '@/utils/routers'
 
 const avatarUrl = '/static/sample-avatar.jpg' // 假資料
 const form = reactive({
@@ -115,7 +117,7 @@ const allTags = [
 	'#娛樂', '#可愛', '#美食', '#帥氣', '#才藝', '#聊天', '#音樂', '#搞笑', '#Cosplay'
 ]
 const selectedTags = ref(['#娛樂', '#可愛', '#Cosplay'])
-
+const newTag = ref('')
 const toggleTag = (tag) => {
 	const i = selectedTags.value.indexOf(tag)
 	if (i >= 0) {
@@ -144,13 +146,13 @@ const handleSelectPhoto = (type) => {
 	// 啟動相機
 	if (type === 'camera') {
 		uni.chooseImage({
-			count: 1,
-			sourceType: ['camera'],
+			count: 1, // 限制選取 1 張圖片
+			sourceType: ['camera'], // 從相機選取
 			success: (res) => {
-				const imagePath = res.tempFilePaths[0]
+				const imagePath = res.tempFilePaths[0] // 取得選取的圖片路徑
 				// 跳轉到裁切頁，帶入圖片
-				uni.navigateTo({
-					url: `/pages/crop-avatar?src=${encodeURIComponent(imagePath)}`
+				toCropAvatar({
+					src: encodeURIComponent(imagePath) // 編碼圖片路徑
 				})
 			},
 			fail: (err) => {
@@ -159,15 +161,23 @@ const handleSelectPhoto = (type) => {
 			}
 		})
 	}
-	// 上傳相簿功能預留處理（可在此補上跳轉到自定圖片選擇頁）
+	// 直接從相簿挑選 1 張圖後進入裁切頁
 	else if (type === 'album') {
-		// TODO: 前往自定義圖片選取頁（step 2）
-		console.log('前往選擇圖片頁')
+		uni.chooseImage({
+			count: 1, // 限制選取 1 張圖片
+			sourceType: ['album'], // 從相簿選取
+			success: (res) => {
+				const imagePath = res.tempFilePaths[0] // 取得選取的圖片路徑
+				toCropAvatar({ src: encodeURIComponent(imagePath) }) // 編碼圖片路徑
+			},
+			fail: (err) => {
+				console.log('選擇照片失敗:', err)
+				uni.showToast({ title: '選擇照片失敗', icon: 'none' })
+			}
+		})
 	}
 }
 
-const goBack = () => uni.navigateBack()
-const goPreview = () => uni.showToast({ title: '預覽功能未實作', icon: 'none' })
 </script>
 
 <style scoped lang="scss">
@@ -417,6 +427,7 @@ const goPreview = () => uni.showToast({ title: '預覽功能未實作', icon: 'n
 		.popup-header {
 			&~.popup-deco-line {
 				display: none;
+				color: #0000001a;
 			}
 		}
 	}

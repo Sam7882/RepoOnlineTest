@@ -40,7 +40,7 @@
 					<view class="right">
 						<!-- 頭像 -->
 						<view class="right-tool-avatar-container-wrapper">
-							<view class="right-tool-avatar-container" @click="toCreator">
+							<view class="right-tool-avatar-container" @click="toCreator(item.id)">
 								<image class="right-tool-avatar" src="/static/images/template/img-template-03.png" mode="widthFix">
 								</image>
 							</view>
@@ -198,7 +198,9 @@
 // TEMP: 影音頁
 import { onShow, onHide } from '@dcloudio/uni-app'
 import { toSearchHome, toCreatorHome, toPlayArticleGallery } from '@/utils/routers'
-
+import { useInitStore } from '@/stores/useInitDataStore';
+const initStore = useInitStore();
+const { setCreatorId } = initStore;
 /* NOTE:非播放組件  */
 // 右側工具欄位
 const isFavorite = ref(false); // 是否喜歡
@@ -226,8 +228,9 @@ const toSearch = () => {
 
 // 右側工具欄位 fn
 // 創作者頭像
-const toCreator = () => {
-	console.log("🚀 == 創作者頭像 == ")
+const toCreator = (id) => {
+	console.log("🚀 == 創作者頭像 == ", id)
+	setCreatorId(id)
 	toCreatorHome()
 }
 // 訂閱
@@ -555,28 +558,32 @@ function getList() {
 			poster: 'http://gips0.baidu.com/it/u=3602773692,1512483864&fm=3028',
 			url: "https://alimov2.a.yximgs.com/upic/2020/07/02/14/BMjAyMDA3MDIxNDUyMDlfOTExMjIyMjRfMzE1OTEwNjAxNTRfMV8z_b_Bf3005d42ce9c01c0687147428c28d7e6.mp4",
 			ageChecked: true,
-			locked: false
+			locked: false,
+			id: 'test001'
 		},
 		{
 			title: "2、w_girl、御-2",
 			poster: 'http://gips3.baidu.com/it/u=3886271102,3123389489&fm=3028',
 			url: "https://txmov2.a.yximgs.com/upic/2020/10/02/09/BMjAyMDEwMDIwOTAwMDlfMTIyMjc0NTk0Ml8zNjk3Mjg0NjcxOF8xXzM=_b_B28a4518e86e2cf6155a6c1fc9cf79c6d.mp4",
 			ageChecked: false,
-			locked: false
+			locked: false,
+			id: 'test002'
 		},
 		{
 			title: "2、w_girl、御-3",
 			poster: 'http://gips3.baidu.com/it/u=3886271102,3123389489&fm=3028',
 			url: "https://txmov2.a.yximgs.com/upic/2020/10/02/09/BMjAyMDEwMDIwOTAwMDlfMTIyMjc0NTk0Ml8zNjk3Mjg0NjcxOF8xXzM=_b_B28a4518e86e2cf6155a6c1fc9cf79c6d.mp4",
 			ageChecked: false,
-			locked: false
+			locked: false,
+			id: 'test003'
 		},
 		{
 			title: "0、小狗、JKwu",
 			poster: 'http://gips2.baidu.com/it/u=195724436,3554684702&fm=3028',
 			url: "https://txmov2.a.yximgs.com/upic/2020/11/08/19/BMjAyMDExMDgxOTQxNTlfNTIzNDczMzQ0XzM4OTQ1MDk5MTI4XzFfMw==_b_Bc770a92f0cf153407d60a2eddffeae2a.mp4",
 			ageChecked: false,
-			locked: false
+			locked: false,
+			id: 'test004'
 		},
 		{
 			title: "1、图片列表",
@@ -590,28 +597,32 @@ function getList() {
 				'http://gips2.baidu.com/it/u=3944689179,983354166&fm=3028'
 			],
 			ageChecked: false,
-			locked: false
+			locked: false,
+			id: 'test005'
 		},
 		{
 			title: "4、猫耳朵、多",
 			poster: 'http://gips0.baidu.com/it/u=3602773692,1512483864&fm=3028',
 			url: "https://alimov2.a.yximgs.com/upic/2020/07/02/14/BMjAyMDA3MDIxNDUyMDlfOTExMjIyMjRfMzE1OTEwNjAxNTRfMV8z_b_Bf3005d42ce9c01c0687147428c28d7e6.mp4",
 			ageChecked: false,
-			locked: true
+			locked: true,
+			id: 'test006'
 		},
 		{
 			title: "7、虎、JKwu",
 			poster: 'http://gips0.baidu.com/it/u=2298867753,3464105574&fm=3028',
 			url: "https://txmov2.a.yximgs.com/upic/2020/11/08/19/BMjAyMDExMDgxOTQxNTlfNTIzNDczMzQ0XzM4OTQ1MDk5MTI4XzFfMw==_b_Bc770a92f0cf153407d60a2eddffeae2a.mp4",
 			ageChecked: true,
-			locked: false
+			locked: false,
+			id: 'test007'
 		},
 		{
 			title: "5、花、白衣服wu",
 			poster: 'http://gips3.baidu.com/it/u=119870705,2790914505&fm=3028',
 			url: "https://txmov6.a.yximgs.com/upic/2020/08/23/00/BMjAyMDA4MjMwMDMyNDRfMTYzMzY5MDA0XzM0ODI4MDcyMzQ5XzFfMw==_b_B9a1c9d4e3a090bb2815994d7f33a906a.mp4",
 			ageChecked: false,
-			locked: false
+			locked: false,
+			id: 'test008'
 		},
 		{
 			title: "3、图片列表",
@@ -625,7 +636,8 @@ function getList() {
 				'http://gips2.baidu.com/it/u=3944689179,983354166&fm=3028'
 			],
 			ageChecked: false,
-			locked: false
+			locked: false,
+			id: 'test009'
 		},
 
 		{
@@ -640,7 +652,8 @@ function getList() {
 				'http://gips2.baidu.com/it/u=3944689179,983354166&fm=3028'
 			],
 			ageChecked: true,
-			locked: false
+			locked: false,
+			id: 'test010'
 		},
 
 		{
@@ -648,63 +661,72 @@ function getList() {
 			poster: 'http://gips2.baidu.com/it/u=3944689179,983354166&fm=3028',
 			url: "https://txmov2.a.yximgs.com/upic/2020/10/02/09/BMjAyMDEwMDIwOTAwMDlfMTIyMjc0NTk0Ml8zNjk3Mjg0NjcxOF8xXzM=_b_B28a4518e86e2cf6155a6c1fc9cf79c6d.mp4",
 			ageChecked: true,
-			locked: false
+			locked: false,
+			id: 'test011'
 		},
 		{
 			title: "9、鱼、多",
 			poster: 'http://gips0.baidu.com/it/u=3560029307,576412274&fm=3028',
 			url: "https://alimov2.a.yximgs.com/upic/2020/07/02/14/BMjAyMDA3MDIxNDUyMDlfOTExMjIyMjRfMzE1OTEwNjAxNTRfMV8z_b_Bf3005d42ce9c01c0687147428c28d7e6.mp4",
 			ageChecked: false,
-			locked: false
+			locked: false,
+			id: 'test012'
 		},
 		{
 			title: "10、猫、白衣服wu",
 			poster: 'http://gips0.baidu.com/it/u=3822353666,2757632348&fm=3028',
 			url: "https://txmov6.a.yximgs.com/upic/2020/08/23/00/BMjAyMDA4MjMwMDMyNDRfMTYzMzY5MDA0XzM0ODI4MDcyMzQ5XzFfMw==_b_B9a1c9d4e3a090bb2815994d7f33a906a.mp4",
 			ageChecked: true,
-			locked: false
+			locked: false,
+			id: 'test013'
 		},
 		{
 			title: "11、海、JKwu",
 			poster: 'http://gips3.baidu.com/it/u=764883555,2569275522&fm=3028',
 			url: "https://txmov2.a.yximgs.com/upic/2020/11/08/19/BMjAyMDExMDgxOTQxNTlfNTIzNDczMzQ0XzM4OTQ1MDk5MTI4XzFfMw==_b_Bc770a92f0cf153407d60a2eddffeae2a.mp4",
 			ageChecked: true,
-			locked: false
+			locked: false,
+			id: 'test014'
 		},
 		{
 			title: "12、树、御",
 			poster: 'https://gips3.baidu.com/it/u=3732338995,3528391142&fm=3028',
 			url: "https://txmov2.a.yximgs.com/upic/2020/10/02/09/BMjAyMDEwMDIwOTAwMDlfMTIyMjc0NTk0Ml8zNjk3Mjg0NjcxOF8xXzM=_b_B28a4518e86e2cf6155a6c1fc9cf79c6d.mp4",
 			ageChecked: true,
-			locked: false
+			locked: false,
+			id: 'test015'
 		},
 		{
 			title: "13、城堡、多",
 			poster: 'https://gips0.baidu.com/it/u=1939859157,1111239881&fm=3028',
 			url: "https://alimov2.a.yximgs.com/upic/2020/07/02/14/BMjAyMDA3MDIxNDUyMDlfOTExMjIyMjRfMzE1OTEwNjAxNTRfMV8z_b_Bf3005d42ce9c01c0687147428c28d7e6.mp4",
 			ageChecked: false,
-			locked: false
+			locked: false,
+			id: 'test016'
 		},
 		{
 			title: "14、猫头鹰、白衣服wu",
 			poster: 'https://gips2.baidu.com/it/u=406595553,3023311630&fm=3028',
 			url: "https://txmov6.a.yximgs.com/upic/2020/08/23/00/BMjAyMDA4MjMwMDMyNDRfMTYzMzY5MDA0XzM0ODI4MDcyMzQ5XzFfMw==_b_B9a1c9d4e3a090bb2815994d7f33a906a.mp4",
 			ageChecked: true,
-			locked: false
+			locked: false,
+			id: 'test017'
 		},
 		{
 			title: "15、狗、JKwu",
 			poster: 'http://gips0.baidu.com/it/u=398917425,2942293409&fm=3028',
 			url: "https://txmov2.a.yximgs.com/upic/2020/11/08/19/BMjAyMDExMDgxOTQxNTlfNTIzNDczMzQ0XzM4OTQ1MDk5MTI4XzFfMw==_b_Bc770a92f0cf153407d60a2eddffeae2a.mp4",
 			ageChecked: true,
-			locked: false
+			locked: false,
+			id: 'test018'
 		},
 		{
 			title: "16、花——girl、御",
 			poster: 'http://gips3.baidu.com/it/u=1874299413,3253595329&fm=3028',
 			url: "https://txmov2.a.yximgs.com/upic/2020/10/02/09/BMjAyMDEwMDIwOTAwMDlfMTIyMjc0NTk0Ml8zNjk3Mjg0NjcxOF8xXzM=_b_B28a4518e86e2cf6155a6c1fc9cf79c6d.mp4",
 			ageChecked: true,
-			locked: false
+			locked: false,
+			id: 'test019'
 		}
 	];   // 這裡插入原有 getList 中的完整陣列資料即可
 }

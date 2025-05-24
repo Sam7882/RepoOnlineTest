@@ -68,7 +68,7 @@ import { toRegister, toPlayIndex } from '@/utils/routers'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const initStore = useInitStore()
-const { checkInitData } = initStore
+const { checkInitData, setUserInfo } = initStore
 
 // 記住我狀態
 const loginRemember = ref(false);
@@ -127,6 +127,13 @@ const handleLogin = () => {
 			// 跳轉首頁
 			toPlayIndex()
 			// 這裡可以進行 API 提交
+			/* NOTE: 測試用ID假資料 */
+			setUserInfo({
+				id: 'test001',
+				name: 'test001',
+				avatar: 'https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg',
+				token: 'test001'
+			})
 		}).catch(err => {
 			console.log('❌ 驗證失敗:', err);
 			// 顯示錯誤提示 請檢查是否輸入正確

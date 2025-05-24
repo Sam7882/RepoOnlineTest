@@ -7,6 +7,7 @@ interface InitState {
   siteInfo: {
     [key: string]: any;
   };
+  creatorId: string;
   userInfo: {
     id: string;
     name: string;
@@ -28,6 +29,7 @@ export const useInitStore = defineStore('init', {
   state: (): InitState => ({
     siteInfo: {
     },
+    creatorId: '',
     userInfo: {
       id: '',
       name: '',
@@ -44,6 +46,11 @@ export const useInitStore = defineStore('init', {
       deviceModel: '',
     },
   }),
+
+  getters: {
+    // 根據 creatorId 和 userInfo.id 是否一致自動判斷是否為創作者
+    isCreator: (state) => state.creatorId === state.userInfo.id,
+  },
 
   actions: {
     setSiteInfo(siteInfo: Partial<InitState['siteInfo']>) {
@@ -75,5 +82,10 @@ export const useInitStore = defineStore('init', {
     resetStore() {
       this.$reset();
     },
+    // 設置目前創作者頁觀看 id
+    setCreatorId(creatorId: string) {
+      console.log("🚀 == 設置目前創作者頁觀看 id == ", creatorId)
+      this.creatorId = creatorId;
+    }
   },
 });

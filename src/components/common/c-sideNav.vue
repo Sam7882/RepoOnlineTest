@@ -89,6 +89,9 @@
 <script setup>
 // TEMP: 側邊欄
 import { toCreatorHome, toStatistics, toWallet, toFavorites, toFollowing, toLogin } from '@/utils/routers'
+import { useInitStore } from '@/stores/useInitDataStore';
+const initStore = useInitStore();
+const { setCreatorId } = initStore;
 const emit = defineEmits(['update:Data'])
 const popupRef = ref()
 const props = defineProps({
@@ -111,6 +114,8 @@ const clickToPage = (page) => {
 
   switch (page) {
     case 'creatorHome':
+      /* NOTE: 測試用ID假資料 */
+      setCreatorId('test001')
       toCreatorHome()
       close()
       break

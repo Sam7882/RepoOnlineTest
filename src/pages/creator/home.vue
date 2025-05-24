@@ -326,13 +326,14 @@
 // TEMP: 創作者主頁
 import { onPageScroll } from '@dcloudio/uni-app'
 import { toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory } from '@/utils/routers'
+import { useInitStore } from '@/stores/useInitDataStore';
 const type = ref('all');
 const showSelect = ref(false);
 
-const isCreator = ref(false);
-const switchIsCreator = () => {
-	isCreator.value = !isCreator.value
-}
+const initStore = useInitStore();
+const isCreator = computed(() => initStore.isCreator);
+console.log("🚀 ~ isCreator:", isCreator.value)
+
 // 用於計算 filterSelect 該顯示的位置
 const filterSelectShowTop = ref({})
 const filterSelectshowDeco = ref({})

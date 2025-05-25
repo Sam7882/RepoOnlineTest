@@ -240,6 +240,13 @@ export const toCreatorClassificationEdit = (params = {}) => {
 		url: '/pages/creator/classification-edit' + queryStringify(params)
 	})
 }
+// 跳轉到創作者分享頁
+export const toShare = (params = {}) => {
+	safeSwitchTab('/pages/creator/share')
+	uni.navigateTo({
+		url: '/pages/creator/share' + queryStringify(params)
+	})
+}
 // 跳轉到選擇頭像來源頁
 export const toSelectSource = (params = {}) => {
 	safeSwitchTab('/pages/common/select-source')

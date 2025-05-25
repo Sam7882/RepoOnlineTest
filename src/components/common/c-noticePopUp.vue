@@ -20,9 +20,18 @@ const popup = ref(null)
 const title = ref('提示')
 const content = ref('')
 
+function setTimeClsoe(time = 2000) {
+  setTimeout(() => {
+    close()
+  }, time)
+}
+
 function open(options = {}) {
   title.value = options.title || ''
   content.value = options.content || ''
+  if (options.setTimeOut) {
+    setTimeClsoe(options.setTimeOut)
+  }
   popup.value.open()
 }
 
@@ -33,7 +42,8 @@ function close() {
 // 讓父層可以透過 ref 操作 open/close
 defineExpose({
   open,
-  close
+  close,
+  setTimeClsoe
 })
 </script>
 

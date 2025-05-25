@@ -3,12 +3,16 @@
   <view class="creator-home-page-content-card-container">
     <template v-for="(item, index) in props.data" :key="index">
       <view class="creator-home-page-content-card-container-item" @click="handleClick(item)">
-        <image class="creator-home-page-content-card-container-item-img" :src="item.src" :alt="item.alt"
+        <image v-if="item.type === 'image'" class="creator-home-page-content-card-container-item-img" :src="item.src"
           mode="widthFix"></image>
+        <view v-else class="media-thumbnail video-wrapper">
+          <image :src="item.cover || fallbackVideoCover" class="creator-home-page-content-card-container-item-img"
+            mode="aspectFill" />
+        </view>
         <view class="creator-home-page-content-card-container-item-icon-container">
           <uni-icons class="creator-home-page-content-card-container-item-icon" custom-prefix="icon" size="30"
             color="var(--text-color-secondary)"
-            :type="item.type === 'photos' ? 'icon-common-copy' : item.type === 'video' ? 'icon-common-video' : ''" />
+            :type="item.type === 'image' && item.dataNum > 1 ? 'icon-common-copy' : item.type === 'video' ? 'icon-common-video' : ''" />
           <text class="creator-home-page-content-card-container-item-icon-text">1688</text>
         </view>
       </view>
@@ -20,7 +24,7 @@
 // TEMP: 組件-三格圖片 格柵排版
 const props = defineProps({
   data: {
-    type: Array as PropType<{ src: string; alt: string; type: string }[]>,
+    type: Array as PropType<{ src: string; id: string; type: string; dataNum: number; num: string; cover: string }[]>,
     required: true,
   },
 });
@@ -39,6 +43,8 @@ const handleClick = (item: { src: string; alt: string; type: string }) => {
     console.log('其他');
   }
 };
+
+const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
 </script>
 
 <style lang="scss" scoped>
@@ -100,5 +106,17 @@ const handleClick = (item: { src: string; alt: string; type: string }) => {
       color: var(--text-color-secondary);
     }
   }
+}
+
+.media-thumbnail {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 8rpx;
+}
+
+.video-wrapper {
+  position: relative;
+  background: #000;
 }
 </style>

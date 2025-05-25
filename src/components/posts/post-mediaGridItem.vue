@@ -9,7 +9,7 @@
 				:type="item.type === 'image' ? 'icon-common-copy' : item.type === 'video' ? 'icon-stander-play2' : ''" />
 			<text class="info-icon-text">{{ item.num }}</text>
 		</view>
-		<view class="selected-indicator" :class="{ isSelected }"></view>
+		<view class="selected-indicator" :class="{ isSelected }" v-if="canTagging"></view>
 	</view>
 </template>
 
@@ -17,12 +17,18 @@
 // TEMP:九宮格選取圖片
 const props = defineProps({
 	item: Object,
-	isSelected: Boolean
+	isSelected: Boolean,
+	canTagging: {
+		type: Boolean,
+		default: true
+	}
 })
+
 
 const emit = defineEmits(['toggle-select'])
 
 const toggle = () => {
+	if (!props.canTagging) return
 	emit('toggle-select', props.item.id)
 	console.log("🚀 ~ toggle ~ toggle:", props.item.id)
 }
@@ -36,7 +42,7 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
 	position: relative;
 	width: 100%;
 	aspect-ratio: 1 / 1;
-	border-radius: 8rpx;
+	// border-radius: 8rpx;
 	overflow: hidden;
 }
 
@@ -44,7 +50,7 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
 	width: 100%;
 	height: 100%;
 	display: block;
-	border-radius: 8rpx;
+	// border-radius: 8rpx;
 }
 
 .video-wrapper {
@@ -65,7 +71,7 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
 	color: white;
 	background: rgba(0, 0, 0, 0.5);
 	padding: 4rpx 8rpx;
-	border-radius: 6rpx;
+	// border-radius: 6rpx;
 }
 
 .selected-indicator {

@@ -327,57 +327,25 @@ const filterList = ref({
 	range: [{ "value": '0', "text": "台灣" }, { "value": '1', "text": "美國" }, { "value": '2', "text": "中國" }, { "value": '3', "text": "日本" }, { "value": '4', "text": "韓國" }, { "value": '5', "text": "其他" }]
 });
 const gridPhotoData = ref([
-	{
-		src: '/static/images/template/img-template-01.png',
-		type: 'photos',
-		alt: '圖片1',
-	},
-	{
-		src: '/static/images/template/img-template-02.png',
-		type: 'single',
-		alt: '圖片2',
-	},
-	{
-		src: '/static/images/template/img-template-03.png',
-		type: 'video',
-		alt: '圖片3',
-	},
-	{
-		src: '/static/images/template/img-template-04.png',
-		type: 'photos',
-		alt: '圖片4',
-	},
-	{
-		src: '/static/images/template/img-template-01.png',
-		type: 'video',
-		alt: '圖片1',
-	},
-	{
-		src: '/static/images/template/img-template-02.png',
-		type: 'photos',
-		alt: '圖片2',
-	},
-	{
-		src: '/static/images/template/img-template-03.png',
-		type: 'video',
-		alt: '圖片3',
-	},
-	{
-		src: '/static/images/template/img-template-02.png',
-		type: 'video',
-		alt: '圖片2',
-	},
-	{
-		src: '/static/images/template/img-template-01.png',
-		type: 'photos',
-		alt: '圖片1',
-	},
-	{
-		src: '/static/images/template/img-template-04.png',
-		type: 'video',
-		alt: '圖片4',
-	},
-
+	{ id: '1', type: 'image', dataNum: 2, num: "1688", src: 'https://picsum.photos/id/1011/300/300' },
+	{ id: '2', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1012/300/300' },
+	{ id: '3', type: 'image', dataNum: 4, num: "1688", src: 'https://picsum.photos/id/1013/300/300' },
+	{ id: '4', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1014/300/300' },
+	{ id: '5', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1015/300/300' },
+	{ id: '6', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1016/300/300' },
+	{ id: '7', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1015/300/300' },
+	{ id: '8', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1018/300/300' },
+	{ id: '9', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1019/300/300' },
+	{ id: '10', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1011/300/300' },
+	{ id: '11', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1012/300/300' },
+	{ id: '12', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1012/300/300' },
+	{ id: '13', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1013/300/300' },
+	{ id: '14', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1014/300/300' },
+	{ id: '15', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1015/300/300' },
+	{ id: '16', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1016/300/300' },
+	{ id: '17', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1011/300/300' },
+	{ id: '18', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1018/300/300' },
+	{ id: '19', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1019/300/300' },
 ]);
 
 // 關閉篩選
@@ -979,8 +947,12 @@ page {
 		}
 
 		.icon-container {
+			width: auto;
+			height: auto;
+			border: unset;
+			margin: unset;
 			border-radius: 50%;
-			padding: 4rpx 6rpx;
+			padding: 4rpx 8rpx;
 			display: flex;
 			justify-content: center;
 			align-items: center;

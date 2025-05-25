@@ -2,7 +2,7 @@
 	<view class="select-media-page">
 		<view class="header">
 			<view class="header-container">
-				<view class="icon-container">
+				<view class="icon-container" @click="handleBack">
 					<uni-icons class="icon-close" type="closeempty" size="24" color="var(--text-color-primary)" />
 				</view>
 				<view class="header-title">選取作品</view>
@@ -34,43 +34,28 @@
 <script setup>
 // TEMP:選取作品
 import { usePostData } from '@/stores/usePostData'
-import { toCreatorClassificationEdit } from '@/utils/routers'
+import { toCreatorClassificationEdit, router } from '@/utils/routers'
+import { onLoad } from '@dcloudio/uni-app'
 const postDataStore = usePostData()
 const { setSelectedMedia } = postDataStore
+const { manageMedia, postData } = storeToRefs(postDataStore)
+const { back } = router
+console.log("🚀 ~ postDataStore:", postDataStore)
+console.log("🚀 ~ postDataStore:", manageMedia)
 const tabs = ['全部', '影片', '照片']
 const currentTab = ref('全部')
 const selectedIds = ref([])
 
-const mediaList = ref([
-	{ id: '1', type: 'image', num: "1688", src: 'https://picsum.photos/id/1011/300/300' },
-	{ id: '2', type: 'video', num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1012/300/300' },
-	{ id: '3', type: 'image', num: "1688", src: 'https://picsum.photos/id/1013/300/300' },
-	{ id: '4', type: 'video', num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1014/300/300' },
-	{ id: '5', type: 'image', num: "1688", src: 'https://picsum.photos/id/1015/300/300' },
-	{ id: '6', type: 'video', num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1016/300/300' },
-	{ id: '7', type: 'image', num: "1688", src: 'https://picsum.photos/id/1015/300/300' },
-	{ id: '8', type: 'video', num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1018/300/300' },
-	{ id: '9', type: 'image', num: "1688", src: 'https://picsum.photos/id/1019/300/300' },
-	{ id: '10', type: 'image', num: "1688", src: 'https://picsum.photos/id/1011/300/300' },
-	{ id: '11', type: 'video', num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1012/300/300' },
-	{ id: '12', type: 'video', num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1012/300/300' },
-	{ id: '13', type: 'image', num: "1688", src: 'https://picsum.photos/id/1013/300/300' },
-	{ id: '14', type: 'video', num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1014/300/300' },
-	{ id: '15', type: 'image', num: "1688", src: 'https://picsum.photos/id/1015/300/300' },
-	{ id: '16', type: 'video', num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1016/300/300' },
-	{ id: '17', type: 'image', num: "1688", src: 'https://picsum.photos/id/1011/300/300' },
-	{ id: '18', type: 'video', num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1018/300/300' },
-	{ id: '19', type: 'image', num: "1688", src: 'https://picsum.photos/id/1019/300/300' },
-])
+const renderMediaList = ref([])
 
 // 過濾列表
 const filteredList = computed(() => {
 	if (currentTab.value === '影片') {
-		return mediaList.value.filter((m) => m.type === 'video')
+		return renderMediaList.value.filter((m) => m.type === 'video')
 	} else if (currentTab.value === '照片') {
-		return mediaList.value.filter((m) => m.type === 'image')
+		return renderMediaList.value.filter((m) => m.type === 'image')
 	} else {
-		return mediaList.value
+		return renderMediaList.value
 	}
 })
 
@@ -80,18 +65,33 @@ const toggleSelect = (id) => {
 	if (index >= 0) {
 		selectedIds.value.splice(index, 1)
 	} else {
+		7
 		selectedIds.value.push(id)
 	}
 }
-
+const handleBack = () => {
+	back()
+}
 // 下一步
 const goNext = () => {
-	const selectedItems = mediaList.value.filter((m) => selectedIds.value.includes(m.id))
+	const selectedItems = renderMediaList.value.filter((m) => selectedIds.value.includes(m.id))
 	setSelectedMedia(selectedItems)
 	toCreatorClassificationEdit({
 		type: 'new',
 	})
 }
+
+onLoad((options) => {
+	console.log("🚀 ~ onLoad ~ options:", options)
+	if (options.type === 'manage') {
+		renderMediaList.value = manageMedia.value
+		console.log("🚀 ~ onLoad ~ renderMediaList.value:", renderMediaList.value)
+	}
+	else if (options.type === 'new') {
+		renderMediaList.value = postData.value
+		console.log("🚀 ~ onLoad ~ renderMediaList.value:", renderMediaList.value)
+	}
+})
 </script>
 
 <style scoped lang="scss">
@@ -103,7 +103,6 @@ const goNext = () => {
 .select-media-page {
 	display: flex;
 	flex-direction: column;
-	padding: 20rpx;
 }
 
 .header {

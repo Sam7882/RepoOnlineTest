@@ -10,27 +10,26 @@
 			<view class="header-nav-title-container">
 				<text class="header-nav-title">{{ props.title }}</text>
 			</view>
-			<!-- 右邊 搜尋 絕對位置靠右-->
-			<template v-if="openSearch">
-				<view class="header-nav-right-position header-search-icon-container" @click="switchSearch">
-					<uni-icons class="header-search-icon" type="icon-common-search" custom-prefix="icon" size="20"
-						color="var(--text-color-primary)"></uni-icons>
-				</view>
-			</template>
-			<!-- 右邊 設定按鈕gear 絕對位置靠右-->
-			<template v-if="openSetting">
-				<view class="header-nav-right-position header-gear-icon-container" @click="handleOpenSetting">
-					<uni-icons class="header-gear-icon" type="icon-common-gear" custom-prefix="icon" size="20"
-						color="var(--text-color-primary)"></uni-icons>
-				</view>
-			</template>
-			<!-- 右邊 設定按鈕 QA 絕對位置靠右-->
-			<template v-if="openQa">
-				<view class="header-nav-right-position header-gear-icon-container" @click="handleOpenQa">
-					<uni-icons class="header-gear-icon" type="icon-common-qa" custom-prefix="icon" size="20"
-						color="var(--text-color-primary)"></uni-icons>
-				</view>
-			</template>
+
+			<view class="header-nav-right-position header-search-icon-container">
+				<slot name="right">
+					<!-- 右邊 搜尋 絕對位置靠右-->
+					<template v-if="openSearch">
+						<uni-icons class="header-search-icon" type="icon-common-search" custom-prefix="icon" size="20"
+							color="var(--text-color-primary)" @click="switchSearch"></uni-icons>
+					</template>
+					<!-- 右邊 設定按鈕gear 絕對位置靠右-->
+					<template v-if="openSetting">
+						<uni-icons class="header-gear-icon" type="icon-common-gear" custom-prefix="icon" size="20"
+							color="var(--text-color-primary)" @click="handleOpenSetting"></uni-icons>
+					</template>
+					<!-- 右邊 設定按鈕 QA 絕對位置靠右-->
+					<template v-if="openQa">
+						<uni-icons class="header-gear-icon" type="icon-common-qa" custom-prefix="icon" size="20"
+							color="var(--text-color-primary)" @click="handleOpenQa"></uni-icons>
+					</template>
+				</slot>
+			</view>
 		</view>
 	</view>
 </template>
@@ -98,7 +97,7 @@ const handleOpenQa = () => {
 <style lang="scss" scoped>
 .header-nav-space {
 	position: relative;
-	--header-nav-space-height: 120rpx;
+	--header-nav-space-height: 130rpx;
 	height: var(--header-nav-space-height);
 	padding-top: 32rpx;
 }
@@ -109,7 +108,7 @@ const handleOpenQa = () => {
 	left: 0;
 	z-index: var(--z-index-header-nav);
 	width: 100%;
-	height: var(--header-nav-space-height);
+	// height: var(--header-nav-space-height);
 	display: flex;
 	justify-content: center;
 	padding: 68rpx 40rpx 20rpx;
@@ -136,8 +135,14 @@ const handleOpenQa = () => {
 		position: absolute;
 		right: 48rpx;
 		top: 50%;
-		transform: translateY(-50%);
+		transform: translateY(-20%);
 		padding-top: 16rpx;
+	}
+
+	.header-search-icon-container {
+		display: flex;
+		align-items: center;
+		gap: 24rpx;
 	}
 }
 </style>

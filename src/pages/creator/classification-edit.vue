@@ -17,7 +17,7 @@
 					<text>管理作品</text>
 				</template>
 				<template v-else>
-					<text>新增作品</text>
+					<text>新增</text>
 				</template>
 			</view>
 		</view>

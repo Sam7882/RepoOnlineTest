@@ -230,7 +230,7 @@
 		<!-- 分類欄 -->
 		<view class="type-container">
 			<scroll-view class="type-scroll-view" scroll-x="true">
-				<view class="icon-container" @click="handleTypeEdit">
+				<view class="icon-container" @click="handleClassificationEdit">
 					<uni-icons class="icon-gear" type="icon-common-gear" custom-prefix="icon" size="20"
 						color="var(--text-color-primary)"></uni-icons>
 				</view>
@@ -240,7 +240,7 @@
 						color="var(--text-color-nonary)"></uni-icons>
 					<text class="type-item-text">一號分類</text>
 				</view>
-				<view class="type-item">
+				<view class="type-item" @click="handleAddClassification">
 					<uni-icons class="icon" type="icon-common-type" custom-prefix="icon" size="24"
 						color="var(--text-color-nonary)"></uni-icons>
 					<text class="type-item-text">新增</text>
@@ -309,7 +309,7 @@
 <script setup>
 // TEMP: 創作者主頁
 import { onPageScroll } from '@dcloudio/uni-app'
-import { toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory, toCreatorEdit, toCreatorSelectMedia } from '@/utils/routers'
+import { toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory, toCreatorEdit, toCreatorSelectMedia, toCreatorClassification } from '@/utils/routers'
 import { useInitStore } from '@/stores/useInitDataStore';
 const type = ref('all');
 const showSelect = ref(false);
@@ -460,9 +460,15 @@ const switchTypeIndex = (index) => {
 	typeIndex.value = index
 }
 // 分類編輯
-const handleTypeEdit = () => {
+const handleClassificationEdit = () => {
 	console.log('分類編輯')
-	toCreatorSelectMedia()
+	toCreatorClassification()
+}
+const handleAddClassification = () => {
+	console.log('新增')
+	toCreatorSelectMedia({
+		type: 'new'
+	})
 }
 
 

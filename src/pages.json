@@ -261,6 +261,13 @@
       }
     },
     {
+      "path": "pages/creator/classification",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
       "path": "pages/creator/classification-edit",
       "style": {
         "navigationStyle": "custom",

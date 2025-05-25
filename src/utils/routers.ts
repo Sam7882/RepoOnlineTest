@@ -226,6 +226,13 @@ export const toCreatorSelectMedia = (params = {}) => {
 		url: '/pages/creator/selectMedia' + queryStringify(params)
 	})
 }
+// 跳轉到創作者分類頁
+export const toCreatorClassification = (params = {}) => {
+	safeSwitchTab('/pages/creator/classification')
+	uni.navigateTo({
+		url: '/pages/creator/classification' + queryStringify(params)
+	})
+}
 // 跳轉到創作者分類編輯頁
 export const toCreatorClassificationEdit = (params = {}) => {
 	safeSwitchTab('/pages/creator/classification-edit')

@@ -282,6 +282,27 @@
       }
     },
     {
+      "path": "pages/creator/setMenu",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/creator/setMenuEdit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/creator/blockadeEdit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
       "path": "pages/common/select-source",
       "style": {
         "navigationStyle": "custom",

@@ -3,9 +3,11 @@
 	<view class="header-nav-space">
 		<view class="header-nav-container" :style="{ 'background': props.bgColor }">
 			<!-- icon 圖標 絕對位置靠左-->
-			<view class="header-nav-left-position header-nav-icon-container" @click="handleBack" v-if="openBack">
-				<uni-icons class="header-nav-icon" type="left" size="20" color="var(--text-color-primary)"></uni-icons>
-			</view>
+			<slot name="left" :handleBack="handleBack">
+				<view class="header-nav-left-position header-nav-icon-container" @click="handleBack" v-if="openBack">
+					<uni-icons class="header-nav-icon" type="left" size="20" color="var(--text-color-primary)"></uni-icons>
+				</view>
+			</slot>
 			<!-- 標題 中央-->
 			<view class="header-nav-title-container">
 				<text class="header-nav-title">{{ props.title }}</text>

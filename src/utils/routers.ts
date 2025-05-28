@@ -247,6 +247,28 @@ export const toShare = (params = {}) => {
 		url: '/pages/creator/share' + queryStringify(params)
 	})
 }
+// 跳轉到創作者設定頁
+export const toCreatorSetMenu = (params = {}) => {
+	safeSwitchTab('/pages/creator/setMenu')
+	uni.navigateTo({
+		url: '/pages/creator/setMenu' + queryStringify(params)
+	})
+}
+// 跳轉到創作者設定頁編輯
+export const toCreatorSetMenuEdit = (params = {}) => {
+	safeSwitchTab('/pages/creator/setMenuEdit')
+	uni.navigateTo({
+		url: '/pages/creator/setMenuEdit' + queryStringify(params)
+	})
+}
+// 跳轉到創作者封鎖頁編輯
+export const toCreatorBlockadeEdit = (params = {}) => {
+	safeSwitchTab('/pages/creator/blockadeEdit')
+	uni.navigateTo({
+		url: '/pages/creator/blockadeEdit' + queryStringify(params)
+	})
+}
+
 // 跳轉到選擇頭像來源頁
 export const toSelectSource = (params = {}) => {
 	safeSwitchTab('/pages/common/select-source')

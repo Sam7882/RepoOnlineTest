@@ -28,7 +28,7 @@
 						<uni-icons class="creator-home-page-data-item-container-item-icon" type="icon-common-plus"
 							custom-prefix="icon" size="24" color="var(--text-color-nonary)"></uni-icons>
 					</view>
-					<view class="creator-home-page-data-item-container-item-top-menu">
+					<view class="creator-home-page-data-item-container-item-top-menu" @click="handleCreatorSetMenu">
 						<uni-icons class="creator-home-page-data-item-container-item-icon" type="bars" size="24"
 							color="var(--text-color-nonary)"></uni-icons>
 					</view>
@@ -42,7 +42,7 @@
 	</view>
 </template>
 <script setup>
-import { router } from '@/utils/routers';
+import { router, toCreatorSetMenu } from '@/utils/routers';
 const { back, toPage } = router;
 const handleBack = () => {
 	back();
@@ -95,6 +95,11 @@ const toShare = () => {
 	sharePopUp.value?.open()
 	/* NOTE:暫代 去往該圖文的總攬 */
 	// toPlayArticleGallery()
+}
+
+// 創作者設定
+const handleCreatorSetMenu = () => {
+	toCreatorSetMenu()
 }
 </script>
 <style lang="scss" scoped>

@@ -118,7 +118,7 @@ onMounted(() => {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background: linear-gradient(to bottom, #ffe87c, #f6c448);
+	// background: linear-gradient(to bottom, #ffe87c, #f6c448);
 	// min-height: 100vh;
 	// padding: 40rpx0;
 }

@@ -68,6 +68,11 @@
 			<!-- 靠左標題 -->
 			<view class="statistics-content-container-bottom-title-container">
 				<text>{{ $t('creator.yourFansData') }}</text>
+
+				<view class="type-select-container">
+					<uni-data-select class="type-select" v-model="localdata.value" :localdata="localdata.range" @change="change"
+						placement="bottom" :clear="false"></uni-data-select>
+				</view>
 			</view>
 			<!-- 數據欄位 -->
 			<view class="statistics-content-container-bottom-data">
@@ -120,6 +125,11 @@
 			<!-- 靠左標題 -->
 			<view class="statistics-content-container-bottom-title-container">
 				<text>{{ $t('creator.yourWatchData') }}</text>
+
+				<view class="type-select-container">
+					<uni-data-select class="type-select" v-model="localdata.value" :localdata="localdata.range" @change="change"
+						placement="bottom" :clear="false"></uni-data-select>
+				</view>
 			</view>
 			<!-- 數據欄位 -->
 			<view class="statistics-content-container-bottom-data">
@@ -171,6 +181,11 @@
 			<!-- 靠左標題 -->
 			<view class="statistics-content-container-bottom-title-container">
 				<text>{{ $t('creator.yourFansData') }}</text>
+
+				<view class="type-select-container">
+					<uni-data-select class="type-select" v-model="localdata.value" :localdata="localdata.range" @change="change"
+						placement="bottom" :clear="false"></uni-data-select>
+				</view>
 			</view>
 			<!-- 數據欄位 -->
 			<view class="statistics-content-container-bottom-data">
@@ -228,6 +243,22 @@ import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 const fanCheck = ref('up');
 const watchCheck = ref('down');
+
+/* 日期 */
+const localdata = ref({
+	value: 0,
+	range: [
+		{ value: 0, text: "全部" },
+		{ value: 1, text: "本月" },
+		{ value: 2, text: "近兩月" },
+		{ value: 3, text: "半年內" },
+	],
+})
+
+
+const change = (e) => {
+	console.log("e:", e);
+}
 
 /* 折線圖 */
 // 圓點顏色
@@ -554,6 +585,61 @@ page {
 
 }
 
+/* 日期選擇 */
+.type-select-container {
+	min-width: 150rpx;
+	max-width: 50%;
+	padding: 8rpx 16rpx;
+
+	::v-deep(.uni-select) {
+		& {
+			border: unset;
+			background: var(--primary-color);
+			border-radius: 24rpx;
+			height: auto;
+		}
+
+		.uni-select {
+			height: auto;
+			border: none;
+		}
+
+		.uni-select__input-box {
+			width: fit-content;
+			height: auto;
+		}
+
+		.uni-select__input-text {
+			color: var(--text-color-secondary);
+		}
+
+		.uni-icons {
+			color: var(--text-color-secondary) !important;
+		}
+
+		.uni-select__selector {
+			width: fit-content;
+			color: var(--popTxt-color-content);
+			left: unset;
+			right: 0;
+
+			.uni-popper__arrow_bottom {
+				left: unset;
+				right: 10%;
+			}
+
+			.uni-select__selector-item {
+				padding: 0 46rpx;
+
+				uni-text {
+					white-space: nowrap;
+				}
+			}
+		}
+	}
+}
+
+
 /* 錢包頁面 底部容器 */
 .statistics-content-container-bottom {
 	margin-top: 32rpx;
@@ -564,6 +650,9 @@ page {
 	padding: 0 32rpx;
 
 	.statistics-content-container-bottom-title-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 		width: 100%;
 		font-size: 28rpx;
 		color: var(--text-color-primary);

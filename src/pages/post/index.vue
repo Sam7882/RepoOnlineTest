@@ -25,7 +25,9 @@
 
 		<!-- 標記人 -->
 		<view class="publish-setting-item" @click="toTagPages">
-			<text>{{ $t('post.tagPeople') }}</text>
+			<view class="publish-setting-left">
+				<text>{{ $t('post.tagPeople') }}</text>
+			</view>
 			<uni-icons class="publish-setting-right" type="right" size="16" color="#999" />
 		</view>
 
@@ -50,7 +52,9 @@
 		<!-- 允許評論 -->
 		<view class="publish-setting-item">
 			<text>{{ $t('post.allowComment') }}</text>
-			<switch class="publish-setting-right-switch" :checked="true" color="#937CFF" @change="handleSwitchChange" />
+			<c-checkBox class="switch-btn-container" @update:modelValue="handleSwitchChange" />
+
+			<!-- <switch class="publish-setting-right-switch" :checked="true" color="#937CFF" @change="handleSwitchChange" /> -->
 		</view>
 
 		<!-- 底部操作按鈕 -->
@@ -256,6 +260,7 @@ const toTagPages = () => {
 	.publish-setting-left {
 		display: flex;
 		flex-direction: column;
+		font-size: 32rpx;
 
 		.desc {
 			font-size: 20rpx;
@@ -265,7 +270,7 @@ const toTagPages = () => {
 
 	.publish-setting-right {
 		font-size: 28rpx !important;
-		color: var(--text-color-primary) !important;
+		color: var(--text-color-gray3) !important;
 	}
 
 	.publish-setting-right-switch {
@@ -318,6 +323,32 @@ const toTagPages = () => {
 	.btn-draft {
 		background-color: #f0f0f0;
 		color: #000;
+	}
+}
+
+.switch-btn-container {
+	width: fit-content;
+	height: fit-content;
+
+	::v-deep(.switch) {
+		.switch {
+			width: fit-content;
+			height: fit-content;
+			padding: 20rpx 36rpx;
+
+			.switch-dot {
+				width: 30rpx;
+				height: 30rpx;
+				top: 50%;
+				translate: 0 -50%;
+			}
+
+			&.switch-checked {
+				.switch-dot {
+					left: calc(100% - 30rpx - 6rpx) !important;
+				}
+			}
+		}
 	}
 }
 </style>

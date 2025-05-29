@@ -20,8 +20,8 @@ const toggle = () => {
 
 <style scoped>
 .switch-wrapper {
-	width: 100rpx;
-	height: 60rpx;
+	width: fit-content;
+	height: fit-content;
 }
 
 .switch {

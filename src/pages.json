@@ -64,6 +64,12 @@
       }
     },
     {
+      "path": "pages/post/post-Preview",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/post/index",
       "style": {
         "navigationStyle": "custom"
@@ -77,6 +83,12 @@
     },
     {
       "path": "pages/post/shortStory",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/post/schedulePost",
       "style": {
         "navigationStyle": "custom"
       }
@@ -297,6 +309,20 @@
     },
     {
       "path": "pages/creator/blockadeEdit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/creator/center",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/creator/applyCreator",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color)"

@@ -94,6 +94,7 @@
 </template>
 
 <script setup>
+// TEMP: 訂閱方案頁面
 import { toPay } from '@/utils/routers'
 
 

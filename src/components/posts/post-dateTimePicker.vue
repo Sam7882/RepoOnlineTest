@@ -105,7 +105,7 @@ defineExpose({ open, close })
 }
 
 .popup-container {
-  padding: 32rpx;
+  padding: 32rpx 24rpx;
 }
 
 .popup-header {
@@ -136,6 +136,7 @@ defineExpose({ open, close })
 
 .popup-subtitle {
   font-size: 24rpx;
+  font-weight: 500;
   margin-bottom: 80rpx;
   color: #333;
 }
@@ -164,14 +165,14 @@ defineExpose({ open, close })
 }
 
 .date-value {
-  font-size: 32rpx;
-  font-weight: bold;
+  font-size: 24rpx;
+  // font-weight: bold;
   display: block;
   text-align: center;
 }
 
 .date-label {
-  font-size: 20rpx;
+  font-size: 24rpx;
   color: #999;
   display: block;
   text-align: center;

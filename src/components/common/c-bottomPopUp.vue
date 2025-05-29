@@ -30,7 +30,7 @@ const content = ref('內文')
 
 const emit = defineEmits(['updata:postSet', 'open', 'close'])
 const popupRef = ref()
-
+let onConfirm = () => { }
 // 打開
 const open = (options = {}) => {
   title.value = options.title || '提示'

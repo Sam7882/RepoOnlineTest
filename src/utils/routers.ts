@@ -126,6 +126,13 @@ export const toPostPreview = (params = {}) => {
 		url: '/pages/post/media-preview' + queryStringify(params)
 	})
 }
+// 跳轉到發佈頁預覽2
+export const toPostPreview2 = (params = {}) => {
+	safeSwitchTab('/pages/post/post-Preview')
+	uni.navigateTo({
+		url: '/pages/post/post-Preview' + queryStringify(params)
+	})
+}
 // 跳轉到標記頁面
 export const toTagPeople = (params = {}) => {
 	safeSwitchTab('/pages/post/tagPeople')
@@ -138,6 +145,13 @@ export const toShortStory = (params = {}) => {
 	safeSwitchTab('/pages/post/shortStory')
 	uni.navigateTo({
 		url: '/pages/post/shortStory' + queryStringify(params)
+	})
+}
+// 跳轉到限時動態
+export const toSchedulePost = (params = {}) => {
+	safeSwitchTab('/pages/post/schedulePost')
+	uni.navigateTo({
+		url: '/pages/post/schedulePost' + queryStringify(params)
 	})
 }
 
@@ -266,6 +280,20 @@ export const toCreatorBlockadeEdit = (params = {}) => {
 	safeSwitchTab('/pages/creator/blockadeEdit')
 	uni.navigateTo({
 		url: '/pages/creator/blockadeEdit' + queryStringify(params)
+	})
+}
+// 跳轉到創作者中心頁
+export const toCreatorCenter = (params = {}) => {
+	safeSwitchTab('/pages/creator/center')
+	uni.navigateTo({
+		url: '/pages/creator/center' + queryStringify(params)
+	})
+}
+// 跳轉到創作者申請頁
+export const toCreatorApply = (params = {}) => {
+	safeSwitchTab('/pages/creator/applyCreator')
+	uni.navigateTo({
+		url: '/pages/creator/applyCreator' + queryStringify(params)
 	})
 }
 

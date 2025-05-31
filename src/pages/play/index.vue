@@ -55,7 +55,7 @@
 								<uni-icons class="tooltip-icon" type="icon-common-tick" custom-prefix="icon" size="16"
 									color="var(--text-color-secondary)" />
 								<text class="tooltip-text">
-									已關注
+									{{ $t('creator.alreadyFollowing') }}
 								</text>
 							</view>
 						</view>
@@ -91,7 +91,7 @@
 								<!-- Tooltip 提示 -->
 								<view class="tooltip collect-tooltip" v-if="isCollectTipVisible">
 									<text class="tooltip-text">
-										已收藏
+										{{ $t('creator.alreadyCollect') }}
 									</text>
 								</view>
 							</view>
@@ -199,6 +199,8 @@
 import { onShow, onHide } from '@dcloudio/uni-app'
 import { toSearchHome, toCreatorHome, toPlayArticleGallery } from '@/utils/routers'
 import { useInitStore } from '@/stores/useInitDataStore';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 const initStore = useInitStore();
 const { setCreatorId } = initStore;
 /* NOTE:非播放組件  */
@@ -252,8 +254,8 @@ const toSubscription = () => {
 	else {
 		/* TODO:語系須補 */
 		confirmModal.value.open({
-			title: '不再關注該作者?',
-			confirmBtnText: '不再關注',
+			title: t('play.unFollowCreator'),
+			confirmBtnText: t('play.unFollowCreator'),
 			onConfirm: () => {
 				isFollow.value = false
 				// 訂閱提示
@@ -316,8 +318,8 @@ const closeFilter = (item) => {
 const setFilter = () => {
 	console.log("🚀 == 過濾器 == ")
 	confirmModal.value.open({
-		title: '停用過濾器',
-		content: '過濾令您不適或冒犯的內容，您將較少看到類似圖片和影片。',
+		title: t('play.disableFilter'),
+		content: t('play.disableFilterTip'),
 		onConfirm: () => {
 			console.log('使用者按下確定')
 		}
@@ -362,14 +364,14 @@ const touch = reactive({
 const options = reactive({
 	// width: uni.getSystemInfoSync().windowWidth, // 组件宽度
 	height: uni.getSystemInfoSync().windowHeight - uni.getSystemInfoSync().statusBarHeight - uni.getSystemInfoSync().safeAreaInsets.bottom - 68, // 组件高度(适配安全距离)
-	loadingText: "加载中...", // 初始化时的提示内容
+	loadingText: t('common.loading'), // 初始化时的提示内容
 	criticalVal: 2, // 临界值
 	showProgress: true, // 是否显示进度条
 	autoChange: false, // 是否自动切换
 	showFullScreen: false, // 是否显示默認全屏按钮 
 	fullScreenOption: {
 		bottom: 100, // 按钮距底部高度
-		text: "全屏观看", // 按钮显示的内容
+		text: t('play.fullScreenWatch'), // 按钮显示的内容
 	},
 	direction: -90, // 0=正常竖向、90=屏幕逆时针90度、-90=屏幕顺时针90度 【APP特有属性】
 	loading: true, // 是否显示loading控件 【APP特有属性】

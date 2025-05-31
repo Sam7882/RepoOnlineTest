@@ -1,7 +1,7 @@
 <template>
 	<view class="subscription-setting-page">
 		<!-- header 導航-->
-		<c-headerNav :title="'信用卡'" />
+		<c-headerNav :title="$t('wallet.creditCard')" />
 		<!-- 內容區塊 -->
 		<view class="subscription-setting-page-content-container">
 			<!-- 訂閱列表 -->
@@ -23,7 +23,8 @@
 											{{ item.bankName }}
 										</text>
 										<view v-if="item.default" class="subscription-setting-page-list-item-container-left-name-default">
-											<text class="subscription-setting-page-list-item-container-left-name-default-text">預設</text>
+											<text class="subscription-setting-page-list-item-container-left-name-default-text">{{
+												$t('common.default') }}</text>
 										</view>
 									</view>
 								</view>
@@ -47,7 +48,7 @@
 								</view>
 								<view class="subscription-setting-page-list-item-container-left-name">
 									<text class="subscription-setting-page-list-item-container-left-name-text">
-										增加新卡片
+										{{ $t('wallet.addCreditCard') }}
 									</text>
 								</view>
 							</view>

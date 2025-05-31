@@ -55,7 +55,7 @@
 					</view>
 
 					<uni-forms-item class="pay-page-content-item coupon-wrapper" name="payAmount">
-						<text class="coupon-wrapper-text">優惠碼</text>
+						<text class="coupon-wrapper-text">{{ $t('wallet.couponCode') }}</text>
 						<view class="coupon-wrapper-input-container">
 							<uni-easyinput type="text" :trim="true" v-model="couponCode"
 								:placeholder="$t('wallet.couponCodePlaceholder')" class="input-box" />
@@ -68,14 +68,17 @@
 						<text class="amount">{{ finalPaymentAmount }}</text>
 					</view>
 					<view class="tip-container">
-						<text class="tip-container-text">*此筆為 自動續訂，今天是 2025 年 5 月 11 日，系統將於 2025 年 5 月 15 日自動扣款完成續訂。</text>
-						<text class="tip-container-text">若您不希望自動續訂，可前往「個人帳號 > 訂閱管理」頁面手動取消，避免下期繼續收費。</text>
+						<text class="tip-container-text">*{{ $t("wallet.autoRenewalTip", {
+							today: new
+								Date().toLocaleDateString(), endDate: new Date().toLocaleDateString()
+						}) }}</text>
+						<text class="tip-container-text">{{ $t("wallet.autoRenewalTip2") }}</text>
 					</view>
 				</view>
 
 				<!-- 信用卡 -->
 				<view class="pay-page-title">
-					<text>{{ '信用卡' }}</text>
+					<text>{{ $t("wallet.creditCard") }}</text>
 				</view>
 				<view class="subscription-setting-page-list-item-container">
 					<view class="subscription-setting-page-list-item-container-left">
@@ -88,7 +91,8 @@
 								{{ '中華郵政公司' }}
 							</text>
 							<view class="subscription-setting-page-list-item-container-left-name-default">
-								<text class="subscription-setting-page-list-item-container-left-name-default-text">預設</text>
+								<text class="subscription-setting-page-list-item-container-left-name-default-text">{{
+									$t("common.default") }}</text>
 							</view>
 						</view>
 					</view>
@@ -125,7 +129,7 @@
 
 				<!-- 卡片詳情 -->
 				<view class="pay-page-title creditCard-template-title">
-					<text>{{ '卡片詳情' }}</text>
+					<text>{{ $t('wallet.cardDetails') }}</text>
 					<view class="creditCard-template">
 						<image class="subscription-setting-page-list-item-container-left-img"
 							src="/static/icons/wallet/icon-wallet-visa.png" mode="heightFix" />
@@ -142,12 +146,13 @@
 						class="pay-page-content-item-input" :trim="true" :clearable="false" />
 				</uni-forms-item>
 				<view class="pay-page-content-item-cardbottom">
-					<uni-forms-item class="pay-page-content-item-cardLeft" name="cardExpiry" :label="'到期日(MM/YY)'"
-						label-width="150">
+					<uni-forms-item class="pay-page-content-item-cardLeft" name="cardExpiry"
+						:label="`${$t('wallet.expirationDate')}(MM/YY)`" label-width="150">
 						<uni-easyinput type="number" :placeholder="$t('wallet.cardExpiry')" v-model="formData.cardExpiry"
 							class="pay-page-content-item-input" :trim="true" :clearable="false" />
 					</uni-forms-item>
-					<uni-forms-item class="pay-page-content-item-cardRight" name="cardCvv" :label="'安全驗證碼'" label-width="150">
+					<uni-forms-item class="pay-page-content-item-cardRight" name="cardCvv" :label="$t('wallet.securityCode')"
+						label-width="150">
 						<uni-easyinput type="number" placeholder="cvv" v-model="formData.cardCvv"
 							class="pay-page-content-item-input" :trim="true" :clearable="false" />
 					</uni-forms-item>
@@ -168,8 +173,8 @@
 				</view>
 
 				<!-- 帳單地址 -->
-				<uni-forms-item class="pay-page-content-item" :label="'信用卡帳單地址'" label-width="150" name="creditCardAddress"
-					required>
+				<uni-forms-item class="pay-page-content-item" :label="$t('wallet.creditCardAddress2')" label-width="150"
+					name="creditCardAddress" required>
 					<view class="pay-page-content-item-input-container">
 						<uni-easyinput v-model="formData.creditCardAddress" class="pay-page-content-item-input" :trim="true"
 							:clearable="false" />
@@ -178,8 +183,8 @@
 				<!-- 國家 -->
 				<uni-forms-item class="pay-page-content-item" :label="$t('common.country')" label-width="150" name="country"
 					required>
-					<uni-data-select placeholder="請選擇" class="pay-page-content-item-select" v-model="formData.country"
-						:localdata="country.range" :clear="false" placement="top"></uni-data-select>
+					<uni-data-select :placeholder="$t('common.pleaseSelect')" class="pay-page-content-item-select"
+						v-model="formData.country" :localdata="country.range" :clear="false" placement="top"></uni-data-select>
 				</uni-forms-item>
 				<!-- 郵遞區號 -->
 				<uni-forms-item class="pay-page-content-item" :label="$t('common.postalCode')" label-width="150"
@@ -233,56 +238,56 @@ const formData = ref({
 })
 // 表單規則
 const formRules = {
-	payAmount: {
-		rules: [
-			{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.amount') }) }
-		]
-	},
-	payMethod: {
-		rules: [
-			{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.paymentMethod') }) },
-		]
-	},
-	creditCardName: {
-		rules: [
-			{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.creditCardName') }) }
-		]
-	},
-	cardNumber: {
-		rules: [
-			{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.creditCardData') }) },
-		]
-	},
-	cardExpiry: {
-		rules: [
-			{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.timeError') }) },
-			{ pattern: /^[0-9]{2}\/[0-9]{2}$/, errorMessage: t('wallet.timeError') },
-		]
-	},
-	cardCvv: {
-		rules: [
-			{
-				required: true, errorMessage: { required: true, errorMessage: t('auth.pleaseEnter', { title: 'cvv' }) },
-			},
-			{ pattern: /^[0-9]{3}$/, errorMessage: t('auth.checkAright') },
+	// payAmount: {
+	// 	rules: [
+	// 		{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.amount') }) }
+	// 	]
+	// },
+	// payMethod: {
+	// 	rules: [
+	// 		{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.paymentMethod') }) },
+	// 	]
+	// },
+	// creditCardName: {
+	// 	rules: [
+	// 		{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.creditCardName') }) }
+	// 	]
+	// },
+	// cardNumber: {
+	// 	rules: [
+	// 		{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.creditCardData') }) },
+	// 	]
+	// },
+	// cardExpiry: {
+	// 	rules: [
+	// 		{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.timeError') }) },
+	// 		{ pattern: /^[0-9]{2}\/[0-9]{2}$/, errorMessage: t('wallet.timeError') },
+	// 	]
+	// },
+	// cardCvv: {
+	// 	rules: [
+	// 		{
+	// 			required: true, errorMessage: { required: true, errorMessage: t('auth.pleaseEnter', { title: 'cvv' }) },
+	// 		},
+	// 		{ pattern: /^[0-9]{3}$/, errorMessage: t('auth.checkAright') },
 
-		]
-	},
-	creditCardAddress: {
-		rules: [
-			{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.creditCardAddress') }) }
-		]
-	},
-	country: {
-		rules: [
-			{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('common.country') }) },
-		]
-	},
-	postalCode: {
-		rules: [
-			{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('common.postalCode') }) }
-		]
-	}
+	// 	]
+	// },
+	// creditCardAddress: {
+	// 	rules: [
+	// 		{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.creditCardAddress') }) }
+	// 	]
+	// },
+	// country: {
+	// 	rules: [
+	// 		{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('common.country') }) },
+	// 	]
+	// },
+	// postalCode: {
+	// 	rules: [
+	// 		{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('common.postalCode') }) }
+	// 	]
+	// }
 };
 /* 各項目資料 */
 // 付款方式 ref
@@ -295,7 +300,7 @@ const payAmount = ref({
 // 付款方式 僅信用卡與ATM兩種 radio-group
 const payMethods = ref({
 	value: '0',
-	range: [{ "value": '0', "text": "信用卡", icon: 'icon-wallet-creditCard' }, { "value": '1', "text": "ATM" }]
+	range: [{ "value": '0', "text": t('wallet.creditCard'), icon: 'icon-wallet-creditCard' }, { "value": '1', "text": 'ATM' }]
 });
 // 國家 下拉選單
 const country = ref({
@@ -339,11 +344,11 @@ const payMethodChange = (e) => {
 function applyCoupon() {
 	// 如果沒有輸入優惠碼，則顯示錯誤提示
 	if (!couponCode.value) {
-		uni.showToast({ title: '請輸入優惠碼', icon: 'none' });
+		uni.showToast({ title: t('wallet.couponCodePlaceholder'), icon: 'none' });
 		return;
 	}
 	// 提交訊息
-	uni.showToast({ title: `已套用：${couponCode.value}`, icon: 'success' });
+	uni.showToast({ title: `${t('wallet.applied')}:${couponCode.value}`, icon: 'success' });
 	// 計算最終金資訊
 	couponAmount.value = 100
 }
@@ -356,20 +361,19 @@ const submitForm = () => {
 	form.value.validate().then(() => {
 		console.log('✅ 驗證成功，送出資料:', formData.value);
 		// 顯示成功提示
-		uni.showToast({ title: '驗證成功', icon: 'success' });
+		uni.showToast({ title: t('common.verifySuccess'), icon: 'success' });
 		// 這裡可以進行 API 提交
 	}).catch(err => {
 		console.log('❌ 驗證失敗:', err);
 		// 顯示錯誤提示
-		uni.showToast({ title: '請檢查表單', icon: 'none' });
 	});
 }
 
 const bottomPopUpRef = ref(null)
 const openCaption = () => {
 	bottomPopUpRef.value.open({
-		title: '說明中心',
-		content: '您可前往管理付款資訊頁面新增付款方式。 如欲了解詳情，請參考如何新增或更新付款方式。 若您想更改 Fance 付款方式，我們提供多種付款選項。'
+		title: t('common.center'),
+		content: t('common.subscriptionAgreementTip2')
 	})
 }
 

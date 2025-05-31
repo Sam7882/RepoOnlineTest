@@ -248,10 +248,10 @@ const watchCheck = ref('down');
 const localdata = ref({
 	value: 0,
 	range: [
-		{ value: 0, text: "全部" },
-		{ value: 1, text: "本月" },
-		{ value: 2, text: "近兩月" },
-		{ value: 3, text: "半年內" },
+		{ value: 0, text: t('common.all') },
+		{ value: 1, text: t('common.thisMonth') },
+		{ value: 2, text: t('common.twoMonth') },
+		{ value: 3, text: t('common.halfYear') },
 	],
 })
 

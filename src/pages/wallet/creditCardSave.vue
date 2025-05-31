@@ -6,7 +6,7 @@
 
 				<!-- 卡片詳情 -->
 				<view class="pay-page-title creditCard-template-title">
-					<text>{{ '卡片詳情' }}</text>
+					<text>{{ $t('wallet.cardDetails') }}</text>
 					<view class="creditCard-template">
 						<image class="subscription-setting-page-list-item-container-left-img"
 							src="/static/icons/wallet/icon-wallet-masterCard.png" mode="heightFix" />
@@ -21,8 +21,8 @@
 				</uni-forms-item>
 
 				<!-- 信用卡銀行 -->
-				<uni-forms-item class="pay-page-content-item" :label="'信用卡銀行'" label-width="150" name="creditCardAddress"
-					required>
+				<uni-forms-item class="pay-page-content-item" :label="$t('wallet.creditCardBank')" label-width="150"
+					name="creditCardAddress" required>
 					<view class="pay-page-content-item-input-container">
 						<uni-easyinput v-model="formData.creditCardAddress" class="pay-page-content-item-input" :trim="true"
 							:clearable="false" disabled />
@@ -32,7 +32,7 @@
 				<!-- 設定為預設信用卡 -->
 				<uni-forms-item class="pay-page-content-item label-hidden" name="defaultCreditCard">
 					<view class="form-item default-credit-card">
-						<text>設定為預設信用卡</text>
+						<text>{{ $t('wallet.setAsDefaultCreditCard') }}</text>
 						<c-checkBox v-model="defaultCreditCard" />
 					</view>
 				</uni-forms-item>
@@ -40,7 +40,7 @@
 				<!-- 確認送出按鈕 -->
 				<view class="pay-page-content-item">
 					<button type="button" class="submit-btn " :class="{ 'is-disabled': submitDisabled }" @click="submitForm">{{
-						'移除信用卡' }}</button>
+						$t('wallet.removeCreditCard') }}</button>
 				</view>
 			</uni-forms>
 
@@ -102,9 +102,9 @@ const submitDisabled = ref(true)
 const confirmModal = ref(null)
 const openConfirmModal = () => {
 	confirmModal.value.open({
-		title: '刪除信用卡',
-		content: '您確定要刪除此信用卡嗎？',
-		confirmBtnText: '確定',
+		title: t('wallet.deleteCreditCard'),
+		content: t('wallet.deleteCreditCardTip'),
+		confirmBtnText: t('common.confirm'),
 		onConfirm: () => {
 			toCreditCardSelect()
 			console.log('使用者按下確定')

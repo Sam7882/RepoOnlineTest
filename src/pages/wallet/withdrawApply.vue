@@ -2,7 +2,7 @@
 	<view class="page">
 		<c-headerNav :title="'提款申請已送出'" />
 		<view class="tip-container">
-			<text>此次提領將於 2025年5月30日 到 2025年6月10日期間，匯入您的帳戶。</text>
+			<text>{{ $t("wallet.withdrawTip", { startDate: '2025年5月30日', endDate: '2025年6月10日' }) }}</text>
 		</view>
 		<view class="content-container">
 			<view class="amount-box">-${{ finalAmount }}</view>
@@ -11,12 +11,12 @@
 
 			<view class="section">
 				<view class="row">
-					<text class="label">撥款至</text>
+					<text class="label">{{ $t("wallet.withdrawTo") }}</text>
 					<text>中國信託商業銀行
 						*0965</text>
 				</view>
 				<view class="row">
-					<text class="label">轉帳金額</text>
+					<text class="label">{{ $t("wallet.transferAmount") }}</text>
 					<text>${{ fee }}</text>
 				</view>
 			</view>
@@ -25,18 +25,19 @@
 
 			<view class="section">
 				<view class="row">
-					<text class="label">提款編號</text>
+					<text class="label">{{ $t("wallet.withdrawNumber") }}</text>
 					<text>{{ orderId }}</text>
 				</view>
 				<view class="row">
-					<text class="label">申請時間</text>
+					<text class="label">{{ $t("wallet.applyTime") }}</text>
 					<text>{{ orderTime }}</text>
 				</view>
 			</view>
 
 			<view class="bottom btn-container">
-				<button type="primary" class="btn primary-btn active" v-if="canWithdraw">提領</button>
-				<button type="primary" class="btn primary-btn" @click="handleWithdrawRecord" v-else>返回我的錢包</button>
+				<button type="primary" class="btn primary-btn active" v-if="canWithdraw">{{ $t("wallet.withdraw") }}</button>
+				<button type="primary" class="btn primary-btn" @click="handleWithdrawRecord" v-else>{{ $t("wallet.returnWallet")
+					}}</button>
 			</view>
 
 		</view>

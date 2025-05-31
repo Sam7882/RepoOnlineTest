@@ -7,11 +7,11 @@
 			<view class="withdraw-amount-container">
 				<view class="withdraw-amount-container-top">
 					<!--標題 -->
-					<text class="withdraw-amount-container-top-title">可提領金額</text>
+					<text class="withdraw-amount-container-top-title">{{ $t("wallet.withdrawableAmount") }}</text>
 
 					<!-- 交易紀錄 -->
 					<view class="withdraw-amount-container-top-record" @click="handleWithdrawRecord">
-						<text class="withdraw-amount-container-top-record-text">交易紀錄</text>
+						<text class="withdraw-amount-container-top-record-text">{{ $t("wallet.transactionRecord") }}</text>
 						<uni-icons class="withdraw-icon" type="right" size="20" color="var(--text-color-primary)" />
 					</view>
 				</view>
@@ -31,7 +31,7 @@
 					<view class="withdraw-item-container-item-left">
 						<uni-icons class="withdraw-item-icon" type="icon-wallet-withdraw-in" custom-prefix="icon" size="20"
 							color="var(--text-color-senary)" />
-						<text>我的進帳</text>
+						<text>{{ $t("wallet.myIncome") }}</text>
 					</view>
 					<view class="withdraw-item-container-item-right">
 						<uni-icons class="withdraw-item-icon" type="right" size="20" color="var(--text-color-primary)" />
@@ -42,7 +42,7 @@
 
 		<!-- 提領按鈕 -->
 		<view class="btn-container withdraw-btn-container">
-			<button type="button" class="btn" @click="handleWithdraw">提領</button>
+			<button type="button" class="btn" @click="handleWithdraw">{{ $t("wallet.withdraw") }}</button>
 		</view>
 
 
@@ -84,7 +84,7 @@ const alertDialog = ref(null)
 
 const openAlertDialog = () => {
 	alertDialog.value.open({
-		content: '您沒有餘額可以提領',
+		content: t('wallet.noBalanceToWithdraw'),
 		confirmBtnText: 'OK',
 	})
 }

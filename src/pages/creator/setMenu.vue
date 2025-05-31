@@ -13,19 +13,19 @@
 			<!-- 第一層選單 -->
 			<view class="menu-list " v-if="menuIndex === '1'">
 				<view class="menu-item" @click="nextMenu('1-1')">
-					<text>帳號管理</text>
+					<text>{{ $t("creator.accountManagement") }}</text>
 					<view class="icon-container">
 						<uni-icons class="icon-right" type="right" size="16" color="#999" />
 					</view>
 				</view>
 				<view class="menu-item" @click="nextMenu('1-2')">
-					<text>隱私設定</text>
+					<text>{{ $t("creator.privacySetting") }}</text>
 					<view class="icon-container">
 						<uni-icons class="icon-right" type="right" size="16" color="#999" />
 					</view>
 				</view>
 				<view class="menu-item" @click="handleEdit('message')">
-					<text>消息設定</text>
+					<text>{{ $t("creator.messageSetting") }}</text>
 					<view class="icon-container">
 						<uni-icons class="icon-right" type="right" size="16" color="#999" />
 					</view>
@@ -34,20 +34,20 @@
 			<!-- 第二層選單 - 帳號管理 -->
 			<view class="menu-list " v-if="menuIndex === '1-1'">
 				<view class="menu-item" @click="handleEdit('phone')">
-					<text>手機號碼</text>
+					<text>{{ $t("creator.phoneNumber") }}</text>
 					<view class="icon-container">
 						<text>+886*******115</text>
 						<uni-icons class="icon-right" type="right" size="16" color="#999" />
 					</view>
 				</view>
 				<view class="menu-item" @click="handleEdit('password')">
-					<text>登入密碼</text>
+					<text>{{ $t("creator.loginPassword") }}</text>
 					<view class="icon-container">
 						<uni-icons class="icon-right" type="right" size="16" color="#999" />
 					</view>
 				</view>
 				<view class="menu-item" @click="handleEdit('email')">
-					<text>電子信箱</text>
+					<text>{{ $t("creator.email") }}</text>
 					<view class="icon-container">
 						<uni-icons class="icon-right" type="right" size="16" color="#999" />
 					</view>
@@ -56,13 +56,13 @@
 			<!-- 第二層選單 - 隱私設定 -->
 			<view class="menu-list " v-if="menuIndex === '1-2'">
 				<view class="menu-item" @click="handleEdit('blockade')">
-					<text>已封鎖</text>
+					<text>{{ $t("creator.blocked") }}</text>
 					<view class="icon-container">
 						<uni-icons class="icon-right" type="right" size="16" color="#999" />
 					</view>
 				</view>
 				<view class="menu-item" @click="handleEdit('favorite')">
-					<text>我的收藏</text>
+					<text>{{ $t("creator.myFavorites") }}</text>
 					<view class="icon-container">
 						<uni-icons class="icon-right" type="right" size="16" color="#999" />
 					</view>
@@ -73,16 +73,16 @@
 		<!-- 底部按鈕 -->
 		<view class="footer-container">
 			<view class="delete-account" v-if="menuIndex === '1-1'">
-				<text>刪除帳號</text>
+				<text>{{ $t("creator.deleteAccount") }}</text>
 			</view>
 			<view class="btn-container">
 				<button type="button" class="btn">
-					切換帳號
+					{{ $t("creator.switchAccount") }}
 				</button>
 			</view>
 			<view class="btn-container">
 				<button type="button" class="btn">
-					登出
+					{{ $t("auth.logout") }}
 				</button>
 			</view>
 		</view>
@@ -93,18 +93,19 @@
 <script setup>
 // TEMP: 創作者設定-選單頁面
 import { router, toCreatorSetMenuEdit, toCreatorBlockadeEdit } from '@/utils/routers';
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const { back } = router;
-
-const menuTitle = ref('設定')
+const menuTitle = ref(t('common.setting'))
 const menuIndex = ref('1')
 const nextMenu = (index) => {
 	menuIndex.value = index
 	switch (index) {
 		case '1-1':
-			menuTitle.value = '帳號管理'
+			menuTitle.value = t('creator.accountManagement')
 			break
 		case '1-2':
-			menuTitle.value = '隱私設定'
+			menuTitle.value = t('creator.privacySetting')
 	}
 }
 const prevMenu = () => {
@@ -114,7 +115,7 @@ const prevMenu = () => {
 		return
 	}
 	menuIndex.value = '1'
-	menuTitle.value = '設定'
+	menuTitle.value = t('common.setting')
 }
 const handleEdit = (index) => {
 	console.log("🚀 ~ handleEdit ~ index:", index)

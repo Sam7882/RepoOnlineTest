@@ -22,14 +22,14 @@
 											<button tpye="button"
 												class="btn classification-content-container-bottom-following-list-item-button"
 												@click="handleClassificationEdit">
-												編輯
+												{{ $t('common.edit') }}
 											</button>
 										</view>
 										<view class="btn-container">
 											<button tpye="button"
 												class="btn classification-content-container-bottom-following-list-item-button"
 												@click="deleteClassification(item)">
-												刪除
+												{{ $t('common.delete') }}
 											</button>
 										</view>
 									</view>
@@ -43,7 +43,7 @@
 
 		<!-- 底部按鈕 -->
 		<view class="btn-container footer-btn-container">
-			<button tpye="button" class="btn" @click="handleAddClassification">新增分類</button>
+			<button tpye="button" class="btn" @click="handleAddClassification">{{ $t("common.addClassification") }}</button>
 		</view>
 
 		<c-confirmPopUp ref="confirmPopUpRef" class="confirmPopUp"></c-confirmPopUp>
@@ -54,6 +54,8 @@
 // TEMP: 關注頁面
 import { onShow } from '@dcloudio/uni-app';
 import { router, toCreatorSelectMedia, toCreatorClassificationEdit } from '@/utils/routers';
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const classificationList = ref([
 	{
 		title: '一號分類',
@@ -110,8 +112,8 @@ const handleAddClassification = () => {
 const confirmPopUpRef = ref()
 const deleteClassification = () => {
 	confirmPopUpRef.value.open({
-		title: '刪除分類',
-		content: '確認要刪除分類?',
+		title: t('common.deleteClassification'),
+		content: t('common.deleteClassificationTip'),
 		onConfirm: () => {
 			console.log("🚀 ~ 刪除後跳轉:")
 		}

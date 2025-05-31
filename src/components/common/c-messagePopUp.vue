@@ -14,14 +14,15 @@
 
 <script setup>
 // TEMP: 組件-訊息OK彈窗
-import { ref, defineExpose } from 'vue'
 import uniPopup from '@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 /* TODO:語系須補 */
 const popup = ref(null)
-const title = ref('提示')
+const title = ref(t('common.tip'))
 const content = ref('')
-const confirmBtnText = ref('確定')
-const cancelBtnText = ref('取消')
+const confirmBtnText = ref(t('common.confirm'))
+const cancelBtnText = ref(t('common.cancel'))
 let onConfirm = () => { }
 
 function open(options = {}) {

@@ -7,28 +7,28 @@
 		<view class="content">
 			<view class="menu-list ">
 				<view class="menu-item" @click="handleEdit('beCreator')">
-					<text>成為創作者</text>
+					<text>{{ $t('creator.becomeCreator') }}</text>
 					<view class="icon-container">
 						<view class="status-container">
-							<text>未加入</text>
+							<text>{{ $t('common.notJoin') }}</text>
 						</view>
 						<uni-icons class="icon-right" type="right" size="16" color="#999" />
 					</view>
 				</view>
 				<view class="menu-item" @click="handleEdit('verifyCreator')">
-					<text>成為認證創作者</text>
+					<text>{{ $t('creator.becomeVerifyCreator') }}</text>
 					<view class="icon-container">
 						<uni-icons class="icon-right" type="right" size="16" color="#999" />
 					</view>
 				</view>
 				<view class="menu-item" @click="handleEdit('data')">
-					<text>個人數據</text>
+					<text>{{ $t('menu.statistics') }}</text>
 					<view class="icon-container">
 						<uni-icons class="icon-right" type="right" size="16" color="#999" />
 					</view>
 				</view>
 				<view class="menu-item" @click="handleEdit('schedule')">
-					<text>排定發布</text>
+					<text>{{ $t('post.schedulePost') }}</text>
 					<view class="icon-container">
 						<uni-icons class="icon-right" type="right" size="16" color="#999" />
 					</view>
@@ -41,9 +41,11 @@
 <script setup>
 // TEMP: 創作者設定-選單頁面
 import { router, toStatistics, toCreatorApply, toSchedulePost } from '@/utils/routers';
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const { back } = router;
 
-const menuTitle = ref('設定')
+const menuTitle = ref(t('common.setting'))
 
 const handleEdit = (index) => {
 	console.log("🚀 ~ handleEdit ~ index:", index)

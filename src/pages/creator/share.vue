@@ -1,7 +1,7 @@
 <template>
 	<view class="share-page">
 		<!-- 返回按鈕 -->
-		<c-headerNav title="分享" />
+		<c-headerNav :title="$t('common.share')" />
 
 		<!-- 大頭貼與名稱 -->
 		<view class="profile">
@@ -26,7 +26,7 @@
 					<view class="icon-container">
 						<uni-icons class="btn-icon" type="icon-common-copyLink" custom-prefix="icon" size="22" color="#fff" />
 					</view>
-					<text>複製連結</text>
+					<text>{{ $t('common.copyLink') }}</text>
 				</button>
 			</view>
 			<view class="divider"></view>
@@ -35,7 +35,7 @@
 					<view class="icon-container">
 						<uni-icons class="btn-icon" type="icon-common-update" custom-prefix="icon" size="22" color="#fff" />
 					</view>
-					<text>分享連結</text>
+					<text>{{ $t('common.shareLink') }}</text>
 				</button>
 			</view>
 		</view>
@@ -63,7 +63,8 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import UQRCode from '@uqrcode/js';
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const name = ref('我是名字我是名字')
 const username = ref('adkdjwee00')
 const avatar = ref('https://picsum.photos/100')
@@ -79,7 +80,7 @@ const copyLink = () => {
 		showToast: false,
 		success: () => {
 			noticePopUpRef.value.open({
-				title: '已複製，趕快分享給好友吧~',
+				title: t('common.copySuccessTip'),
 				// setTimeOut: 1500
 			})
 		}

@@ -2,7 +2,7 @@
 	<view class="select-source">
 		<view class="header">
 			<uni-icons type="close" size="24" @click="goBack" />
-			<text class="title">最近項目</text>
+			<text class="title">{{ $t('common.recentlyObject') }}</text>
 		</view>
 
 		<view class="tabs" v-if="showTabs">
@@ -26,13 +26,14 @@
 // TEMP: 客製化的選取資料來源頁(因為APP才有的功能，故不開發)
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const route = useRoute()
 const mode = route.query.mode || 'default'         // avatar 或 post
 const next = route.query.next || '/pages/crop-avatar'
 const type = route.query.type || 'image'           // image 或 media
 
-const tabs = type === 'media' ? ['全部', '影片', '照片'] : ['照片']
+const tabs = type === 'media' ? [t('common.all'), t('common.video'), t('common.photo')] : [t('common.photo')]
 const showTabs = type === 'media'
 const currentTab = ref(tabs[0])
 const imageList = ref([])
@@ -53,7 +54,7 @@ onMounted(() => {
 			imageList.value = res.tempFilePaths
 		},
 		fail: () => {
-			uni.showToast({ title: '未選取圖片', icon: 'none' })
+			uni.showToast({ title: t('common.noSelectedPhoto'), icon: 'none' })
 			uni.navigateBack()
 		}
 	})

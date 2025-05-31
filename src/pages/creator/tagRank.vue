@@ -2,7 +2,7 @@
 	<view class="select-source">
 		<view class="header">
 			<uni-icons type="close" size="24" @click="goBack" />
-			<text class="title">最近項目</text>
+			<text class="title">{{ $t('common.recentlyObject') }}</text>
 		</view>
 
 		<view class="tabs" v-if="showTabs">
@@ -25,14 +25,18 @@
 <script setup>
 import { ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 
 const mode = ref('default')         // avatar 或 post
 const next = ref('/pages/crop-avatar')
 const type = ref('image')           // image 或 media
 
-const tabs = ref(['照片'])
+const tabs = ref([t('common.photo')])
 const showTabs = ref(false)
-const currentTab = ref('照片')
+const currentTab = ref(t('common.photo'))
 const imageList = ref([])
 
 onLoad((options) => {
@@ -41,13 +45,13 @@ onLoad((options) => {
 	type.value = options.type || 'image'
 
 	if (type.value === 'media') {
-		tabs.value = ['全部', '影片', '照片']
+		tabs.value = [t('common.all'), t('common.video'), t('common.photo')]
 		showTabs.value = true
-		currentTab.value = '全部'
+		currentTab.value = t('common.all')
 	} else {
-		tabs.value = ['照片']
+		tabs.value = [t('common.photo')]
 		showTabs.value = false
-		currentTab.value = '照片'
+		currentTab.value = t('common.photo')
 	}
 
 	uni.chooseImage({
@@ -57,7 +61,7 @@ onLoad((options) => {
 			imageList.value = res.tempFilePaths
 		},
 		fail: () => {
-			uni.showToast({ title: '未選取圖片', icon: 'none' })
+			uni.showToast({ title: t('common.noSelectedPhoto'), icon: 'none' })
 			uni.navigateBack()
 		}
 	})

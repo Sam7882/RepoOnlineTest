@@ -1,6 +1,6 @@
 <template>
   <view class="container container-sponsor-confirm">
-    <c-headerNav title="訂閱" />
+    <c-headerNav :title="$t('common.subscription')" />
     <!-- 標題與關閉 -->
     <view class="content">
       <!-- 創作者資料區 -->
@@ -33,7 +33,7 @@
     <view class="comment-container">
 
       <view class="row-title bold">
-        <text>{{ '訂單內容' }}</text>
+        <text>{{ $t('common.orderContent') }}</text>
       </view>
       <!-- HASH TAG標籤 -->
       <view class="subscription-page-data-profile-container-item subscription-page-data-profile-container-item-tip">
@@ -72,18 +72,18 @@
       </view>
 
       <view class="row-title bold-50">
-        <text>{{ 'jesiicatestid' }} {{ '給會員的話' }}</text>
+        <text>{{ 'jesiicatestid' }}{{ $t('common.forMember') }}</text>
       </view>
       <view class="subscription-content" v-html="subscriptionContent">
       </view>
       <!-- 確認送出按鈕 -->
       <view class="btn-submit-container">
         <button type="button" class="submit-btn " @click="submitForm">{{
-          '成為會員' }}</button>
+          $t('creator.beMember') }}</button>
         <!-- 說明中心 -->
         <view class="caption-container">
-          <text>訂閱方案即表示你同意</text>
-          <text class="caption" @click="openCaption">{{ '《訂閱條款》' }}</text>
+          <text>{{ $t('common.subscriptionAgreementTip') }}</text>
+          <text class="caption" @click="openCaption">《{{ $t('common.subscriptionAgreement') }}》</text>
           。
         </view>
       </view>
@@ -96,6 +96,9 @@
 <script setup>
 // TEMP: 訂閱方案頁面
 import { toPay } from '@/utils/routers'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 
 const selectSubscription = (id) => {
@@ -114,8 +117,8 @@ const submitForm = () => {
 const bottomPopUpRef = ref(null)
 const openCaption = () => {
   bottomPopUpRef.value.open({
-    title: '訂閱條款',
-    content: '您可前往管理付款資訊頁面新增付款方式。 如欲了解詳情，請參考如何新增或更新付款方式。 若您想更改 Fance 付款方式，我們提供多種付款選項。'
+    title: t('common.subscriptionAgreement'),
+    content: t('common.subscriptionAgreementTip2', { title: 'Fance' })
   })
 }
 </script>

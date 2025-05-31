@@ -10,14 +10,14 @@
 						<uni-icons class="icon-del" type="icon-common-delete" size="24" custom-prefix="icon"
 							color="var(--text-color-primary)" />
 					</view>
-					<text class="previewPopup-text">刪除</text>
+					<text class="previewPopup-text">{{ $t('common.delete') }}</text>
 				</view>
 				<view class="previewPopup-container-item">
 					<view class="icon-container">
 						<uni-icons class="icon-save" type="icon-common-file" size="24" custom-prefix="icon"
 							color="var(--text-color-secondary)" />
 					</view>
-					<text class="previewPopup-text">儲存草稿</text>
+					<text class="previewPopup-text">{{ $t('post.saveDraft') }}</text>
 				</view>
 			</view>
 		</view>
@@ -65,7 +65,8 @@
 // TEMP:發布預覽頁
 import { usePostData } from '@/stores/usePostData'
 import { toPostIndex } from '@/utils/routers'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const postDataStore = usePostData()
 const { selectedMedia } = storeToRefs(postDataStore)
 const mediaList = computed(() => selectedMedia.value)
@@ -87,7 +88,7 @@ const messagePopUpRef = ref(null)
 const delMessagePopUp = () => {
 	handleClose()
 	messagePopUpRef.value.open({
-		content: '草稿已儲存',
+		content: t('post.saveDraftTip'),
 		confirmBtnText: 'OK',
 		onConfirm: () => {
 			messagePopUpRef.value.close()

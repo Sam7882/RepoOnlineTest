@@ -70,7 +70,7 @@
 		<view class="recommend-container">
 			<view class="recommend-top">
 				<view class="recommend-top-text">
-					<text class="recommend-top-text-tip">{{ '為您推薦' }}</text>
+					<text class="recommend-top-text-tip">{{ $t('search.recommend') }}</text>
 					<!-- <view class="recommend-top-text-title-container">
 						<text class="recommend-top-text-title">
 							{{ $t('search.recommendForYou') }}
@@ -125,7 +125,7 @@
 				<view class="recommend-top-text">
 					<view class="recommend-top-text-title-container">
 						<text class="recommend-top-text-title">
-							{{ '本週熱門' }}
+							{{ $t('search.hotRecommend') }}
 						</text>
 					</view>
 				</view>

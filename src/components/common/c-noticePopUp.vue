@@ -16,8 +16,10 @@
 
 <script setup>
 // TEMP: 組件-通知彈窗
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const popup = ref(null)
-const title = ref('提示')
+const title = ref(t('common.tip'))
 const content = ref('')
 
 function setTimeClsoe(time = 2000) {

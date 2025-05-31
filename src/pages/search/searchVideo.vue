@@ -19,7 +19,7 @@
 				</view>
 				<view class="btn-container">
 					<button type="button" class="btn" @click="handleAllThemeClick">{{
-						'探索所有主題' }}</button>
+						$t('search.exploreAllTheme') }}</button>
 				</view>
 			</view>
 			<view class="recommend-list-container">

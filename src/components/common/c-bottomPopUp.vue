@@ -24,8 +24,8 @@
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
-const title = ref('提示')
-const content = ref('內文')
+const title = ref(t('common.tip'))
+const content = ref(t('common.content'))
 
 const emit = defineEmits(['updata:postSet', 'open', 'close'])
 const popupRef = ref()

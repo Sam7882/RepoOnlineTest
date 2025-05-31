@@ -7,12 +7,12 @@
 		<view class="content">
 			<!-- 上傳按鈕 -->
 			<view class="btn-container">
-				<button class="btn " @click="onUpload">上傳</button>
+				<button class="btn " @click="onUpload">{{ $t('post.upload') }}</button>
 			</view>
 
 			<!-- 草稿標題 -->
 			<view class="section-title">
-				<text>草稿</text>
+				<text>{{ $t('post.draft') }}</text>
 			</view>
 
 			<!-- 草稿清單 -->
@@ -47,10 +47,10 @@
 			<template #content>
 				<view class="bottom-content">
 					<view class="btn-container">
-						<button type="button" class="btn btn-delete" @click="deleteDraft">刪除</button>
+						<button type="button" class="btn btn-delete" @click="deleteDraft">{{ $t('common.delete') }}</button>
 					</view>
 					<view class="btn-container">
-						<button type="button" class="btn btn-cancel" @click="closeCaption">取消</button>
+						<button type="button" class="btn btn-cancel" @click="closeCaption">{{ $t('common.cancel') }}</button>
 					</view>
 				</view>
 			</template>
@@ -62,6 +62,8 @@
 import { onLoad } from '@dcloudio/uni-app'
 import { toPostPreview } from '@/utils/routers'
 import { usePostData } from '@/stores/usePostData'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const postDataStore = usePostData()
 const { setSelectedMedia } = postDataStore
 const drafts = ref([
@@ -95,7 +97,7 @@ const onUpload = () => {
 			toPostPreview()
 		},
 		fail: (err) => {
-			uni.showToast({ title: '選擇失敗', icon: 'none' })
+			uni.showToast({ title: t('common.selectFailed'), icon: 'none' })
 		}
 	})
 }
@@ -110,8 +112,8 @@ const toCropAvatar = ({ src }) => {
 const bottomPopUpRef = ref(null)
 const openCaption = () => {
 	bottomPopUpRef.value.open({
-		title: '訂閱條款',
-		content: '您可前往管理付款資訊頁面新增付款方式。 如欲了解詳情，請參考如何新增或更新付款方式。 若您想更改 Fance 付款方式，我們提供多種付款選項。'
+		title: t('common.subscriptionAgreement'),
+		content: t('common.subscriptionAgreementTip2', { title: 'Fance' })
 	})
 }
 const closeCaption = () => {

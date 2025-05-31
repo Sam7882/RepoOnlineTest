@@ -1,12 +1,12 @@
 <template>
 	<view class="pay-page">
-		<c-headerNav :title="'信用卡'" />
+		<c-headerNav :title="$t('wallet.creditCard')" />
 		<view class="pay-page-content">
 			<uni-forms ref="form" :model="formData" :rules="formRules" label-position="top">
 
 				<!-- 卡片詳情 -->
 				<view class="pay-page-title creditCard-template-title">
-					<text>{{ '卡片詳情' }}</text>
+					<text>{{ $t('wallet.cardDetails') }}</text>
 					<view class="creditCard-template">
 						<image class="subscription-setting-page-list-item-container-left-img"
 							src="/static/icons/wallet/icon-wallet-visa.png" mode="heightFix" />
@@ -17,18 +17,19 @@
 
 
 				<!-- 信用卡資料 -->
-				<uni-forms-item class="pay-page-content-item-cardTop" :label="'信用卡號碼'" name="cardNumber" label-width="150"
-					required>
+				<uni-forms-item class="pay-page-content-item-cardTop" :label="$t('wallet.creditCardNumber')" name="cardNumber"
+					label-width="150" required>
 					<uni-easyinput type="number" :placeholder="$t('wallet.creditCardNumber')" v-model="formData.cardNumber"
 						class="pay-page-content-item-input" :trim="true" :clearable="false" />
 				</uni-forms-item>
 				<view class="pay-page-content-item-cardbottom">
-					<uni-forms-item class="pay-page-content-item-cardLeft" name="cardExpiry" :label="'到期日(MM/YY)'"
-						label-width="150">
+					<uni-forms-item class="pay-page-content-item-cardLeft" name="cardExpiry"
+						:label="`${$t('wallet.expirationDate')}MM/YY`" label-width="150">
 						<uni-easyinput type="number" :placeholder="$t('wallet.cardExpiry')" v-model="formData.cardExpiry"
 							class="pay-page-content-item-input" :trim="true" :clearable="false" />
 					</uni-forms-item>
-					<uni-forms-item class="pay-page-content-item-cardRight" name="cardCvv" :label="'安全驗證碼'" label-width="150">
+					<uni-forms-item class="pay-page-content-item-cardRight" name="cardCvv" :label="$t('wallet.securityCode')"
+						label-width="150">
 						<uni-easyinput type="number" placeholder="cvv" v-model="formData.cardCvv"
 							class="pay-page-content-item-input" :trim="true" :clearable="false" />
 					</uni-forms-item>
@@ -49,8 +50,8 @@
 				</view>
 
 				<!-- 帳單地址 -->
-				<uni-forms-item class="pay-page-content-item" :label="'信用卡帳單地址'" label-width="150" name="creditCardAddress"
-					required>
+				<uni-forms-item class="pay-page-content-item" :label="$t('wallet.creditCardAddress2')" label-width="150"
+					name="creditCardAddress" required>
 					<view class="pay-page-content-item-input-container">
 						<uni-easyinput v-model="formData.creditCardAddress" class="pay-page-content-item-input" :trim="true"
 							:clearable="false" />
@@ -59,8 +60,8 @@
 				<!-- 國家 -->
 				<uni-forms-item class="pay-page-content-item" :label="$t('common.country')" label-width="150" name="country"
 					required>
-					<uni-data-select placeholder="請選擇" class="pay-page-content-item-select" v-model="formData.country"
-						:localdata="country.range" :clear="false" placement="top"></uni-data-select>
+					<uni-data-select :placeholder="$t('common.pleaseSelect')" class="pay-page-content-item-select"
+						v-model="formData.country" :localdata="country.range" :clear="false" placement="top"></uni-data-select>
 				</uni-forms-item>
 				<!-- 郵遞區號 -->
 				<uni-forms-item class="pay-page-content-item" :label="$t('common.postalCode')" label-width="150"
@@ -75,7 +76,7 @@
 				<!-- 確認送出按鈕 -->
 				<view class="pay-page-content-item">
 					<button type="button" class="submit-btn " :class="{ 'is-disabled': submitDisabled }" @click="submitForm">{{
-						'儲存信用卡' }}</button>
+						$t('wallet.saveCreditCard') }}</button>
 				</view>
 			</uni-forms>
 
@@ -107,46 +108,46 @@ const formData = ref({
 })
 // 表單規則
 const formRules = {
-	creditCardName: {
-		rules: [
-			{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.creditCardName') }) }
-		]
-	},
-	cardNumber: {
-		rules: [
-			{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.creditCardData') }) },
-		]
-	},
-	cardExpiry: {
-		rules: [
-			{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.timeError') }) },
-			{ pattern: /^[0-9]{2}\/[0-9]{2}$/, errorMessage: t('wallet.timeError') },
-		]
-	},
-	cardCvv: {
-		rules: [
-			{
-				required: true, errorMessage: { required: true, errorMessage: t('auth.pleaseEnter', { title: 'cvv' }) },
-			},
-			{ pattern: /^[0-9]{3}$/, errorMessage: t('auth.checkAright') },
+	// creditCardName: {
+	// 	rules: [
+	// 		{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.creditCardName') }) }
+	// 	]
+	// },
+	// cardNumber: {
+	// 	rules: [
+	// 		{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.creditCardData') }) },
+	// 	]
+	// },
+	// cardExpiry: {
+	// 	rules: [
+	// 		{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.timeError') }) },
+	// 		{ pattern: /^[0-9]{2}\/[0-9]{2}$/, errorMessage: t('wallet.timeError') },
+	// 	]
+	// },
+	// cardCvv: {
+	// 	rules: [
+	// 		{
+	// 			required: true, errorMessage: { required: true, errorMessage: t('auth.pleaseEnter', { title: 'cvv' }) },
+	// 		},
+	// 		{ pattern: /^[0-9]{3}$/, errorMessage: t('auth.checkAright') },
 
-		]
-	},
-	creditCardAddress: {
-		rules: [
-			{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.creditCardAddress') }) }
-		]
-	},
-	country: {
-		rules: [
-			{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('common.country') }) },
-		]
-	},
-	postalCode: {
-		rules: [
-			{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('common.postalCode') }) }
-		]
-	}
+	// 	]
+	// },
+	// creditCardAddress: {
+	// 	rules: [
+	// 		{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('wallet.creditCardAddress') }) }
+	// 	]
+	// },
+	// country: {
+	// 	rules: [
+	// 		{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('common.country') }) },
+	// 	]
+	// },
+	// postalCode: {
+	// 	rules: [
+	// 		{ required: true, errorMessage: t('auth.pleaseEnter', { title: t('common.postalCode') }) }
+	// 	]
+	// }
 };
 /* 各項目資料 */
 // 國家 下拉選單
@@ -166,13 +167,12 @@ const submitForm = () => {
 	form.value.validate().then(() => {
 		console.log('✅ 驗證成功，送出資料:', formData.value);
 		// 顯示成功提示
-		uni.showToast({ title: '驗證成功', icon: 'success' });
+		uni.showToast({ title: t('common.verifySuccess'), icon: 'success' });
 		toCreditCardSelect()
 		// 這裡可以進行 API 提交
 	}).catch(err => {
 		console.log('❌ 驗證失敗:', err);
 		// 顯示錯誤提示
-		uni.showToast({ title: '請檢查表單', icon: 'none' });
 	});
 }
 

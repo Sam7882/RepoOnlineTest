@@ -10,13 +10,13 @@
 		<!-- 操作按鈕 -->
 		<view class="action-buttons">
 			<view class="btn-container">
-				<button class="btn" @click="handleSave">儲存</button>
+				<button class="btn" @click="handleSave">{{ $t('common.save2') }}</button>
 			</view>
 			<view class="btn-container">
-				<button class="btn" @click="handleRemove">移除照片</button>
+				<button class="btn" @click="handleRemove">{{ $t('common.delPhoto') }}</button>
 			</view>
 			<view class="btn-container">
-				<button class="btn" @click="goBack">取消</button>
+				<button class="btn" @click="goBack">{{ $t('common.cancel') }}</button>
 			</view>
 		</view>
 	</view>

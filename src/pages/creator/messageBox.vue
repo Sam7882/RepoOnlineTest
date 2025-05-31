@@ -1,7 +1,7 @@
 <template>
 	<view class="messsageBox-page">
 		<!-- header 導航-->
-		<c-headerNav class="page-header" :title="'訊息'" />
+		<c-headerNav class="page-header" :title="$t('common.message')" />
 
 		<!--內容容器 -->
 		<view class="content-container">

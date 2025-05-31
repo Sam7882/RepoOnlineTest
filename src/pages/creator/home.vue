@@ -250,7 +250,7 @@
 				<view class="type-item" @click="handleAddClassification">
 					<uni-icons class="icon" type="icon-common-type" custom-prefix="icon" size="24"
 						color="var(--text-color-nonary)"></uni-icons>
-					<text class="type-item-text">新增</text>
+					<text class="type-item-text">{{ $t("common.add") }}</text>
 					<view class="icon-container">
 						<uni-icons class="icon" type="icon-common-plus" custom-prefix="icon" size="24"
 							color="var(--text-color-nonary)"></uni-icons>
@@ -277,7 +277,7 @@
 									<uni-icons class="popup-icon" type="icom-common-edit" custom-prefix="icon" size="24"
 										color="var(--text-color-primary)"></uni-icons>
 								</view>
-								<text>自地對象名稱</text>
+								<text>{{ $t("creator.customObjectName") }}</text>
 							</view>
 							<view class="icon-container">
 								<uni-icons class="popup-icon" type="right" size="24" color="var(--text-color-primary)"></uni-icons>
@@ -290,7 +290,7 @@
 									<uni-icons class="popup-icon" type="icon-common-cancelFollow" custom-prefix="icon" size="24"
 										color="var(--text-color-primary)"></uni-icons>
 								</view>
-								<text>取消關注</text>
+								<text>{{ $t("creator.cancelFollowing") }}</text>
 							</view>
 						</view>
 					</template>
@@ -303,7 +303,8 @@
 						</view>
 						<view class="followPopUp-container-item2">
 							<view class="followPopUp-container-item-content btn-container">
-								<button type="button" class="btn popup-button" @click="confirmfollowPopUp">送出</button>
+								<button type="button" class="btn popup-button"
+									@click="confirmfollowPopUp">{{ $t("common.send") }}</button>
 							</view>
 						</view>
 					</template>
@@ -499,8 +500,8 @@ const handleProfileEdit = () => {
 const noticePopUpRef = ref(null)
 const openNoticePopUp = () => {
 	noticePopUpRef.value.open({
-		title: '系統尚未開放',
-		content: '商店即將登場，敬請期待！',
+		title: t('common.systemNotOpen'),
+		content: t('common.storeComingSoon'),
 	})
 }
 

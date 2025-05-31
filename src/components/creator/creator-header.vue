@@ -43,6 +43,8 @@
 <script setup>
 // TEMP: 組件-創作者主頁-HeaderNav
 import { router, toCreatorSetMenu } from '@/utils/routers';
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const { back, toPage } = router;
 const handleBack = () => {
 	back();
@@ -63,10 +65,10 @@ const confirmPopUpRef = ref(null)
 const isSubscribe = ref(false)
 const handleSubscribe = () => {
 	confirmPopUpRef.value.open({
-		title: '開啟通知',
-		content: '在創作者最新發布時獲得通知',
-		confirmBtnText: '開啟設定',
-		cancelBtnText: '暫時不要',
+		title: t('creator.openNotification'),
+		content: t('creator.notificationTip'),
+		confirmBtnText: t('common.openSetting'),
+		cancelBtnText: t('common.notYet'),
 		onConfirm: () => {
 			console.log('確定')
 			isSubscribe.value = true
@@ -76,10 +78,10 @@ const handleSubscribe = () => {
 }
 const cancelSubscribe = () => {
 	confirmPopUpRef.value.open({
-		title: '取消通知',
-		content: '在創作者最新發布時不獲得通知',
-		confirmBtnText: '取消設定',
-		cancelBtnText: '暫時不要',
+		title: t('creator.cancelNotification'),
+		content: t('creator.cancelNotificationTip'),
+		confirmBtnText: t('common.cancelSetting'),
+		cancelBtnText: t('common.notYet'),
 		onConfirm: () => {
 			console.log('確定')
 			isSubscribe.value = false

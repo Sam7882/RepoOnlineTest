@@ -7,11 +7,11 @@
 			<view class="withdrawIn-page-content-header">
 				<view class="withdrawIn-page-content-header-item" :class="{ 'active': typeStatus === 0 }"
 					@click="typeSwitch(0)">
-					<text>即將撥款</text>
+					<text>{{ $t('wallet.soonWithdraw') }}</text>
 				</view>
 				<view class="withdrawIn-page-content-header-item" :class="{ 'active': typeStatus === 1 }"
 					@click="typeSwitch(1)">
-					<text>已提領</text>
+					<text>{{ $t('wallet.alreadyWithdraw') }}</text>
 				</view>
 			</view>
 
@@ -21,7 +21,7 @@
 				</view>
 
 				<view class="withdrawIn-page-content-body-text" v-if="typeStatus === 1">
-					<text>撥款金額(2025年5月12日 - 2025年5月20日)</text>
+					<text>{{ $t('wallet.withdrawAmount2') }}(2025年5月12日 - 2025年5月20日)</text>
 				</view>
 
 				<view class="deco-line"></view>
@@ -55,9 +55,9 @@
 						</view>
 
 						<view class="withdrawIn-page-content-body-list-item-left-text">
-							<view class="withdrawIn-page-content-body-list-item-left-text-title">提領</view>
+							<view class="withdrawIn-page-content-body-list-item-left-text-title">{{ $t("wallet.withdraw") }}</view>
 							<view class="withdrawIn-page-content-body-list-item-left-text-date">2025年４月５日</view>
-							<view class="withdrawIn-page-content-body-list-item-left-text-status">已完成</view>
+							<view class="withdrawIn-page-content-body-list-item-left-text-status">{{ $t("common.completed") }}</view>
 						</view>
 					</view>
 

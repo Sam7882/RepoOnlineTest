@@ -1,7 +1,7 @@
 <template>
 	<view class="wallet-page">
 		<!-- header 導航-->
-		<c-headerNav :title="'錢包管理'" :openQa="true" />
+		<c-headerNav :title="$t('menu.wallet')" :openQa="true" />
 		<!--內容容器 -->
 		<view class="wallet-content-container">
 			<view class="wallet-content-container-top">
@@ -144,13 +144,11 @@ const { back } = router;
 const localdata = ref({
 	value: 0,
 	range: [
-		{ value: 0, text: "全部" },
-		{ value: 1, text: "訂閱" },
-		{ value: 2, text: "打賞" },
-		{ value: 3, text: "今日" },
-		{ value: 4, text: "本週" },
-		{ value: 5, text: "本月" },
-		{ value: 6, text: "今年" },
+		{ value: 0, text: "common.all" },
+		{ value: 3, text: "common.today" },
+		{ value: 4, text: "common.thisWeek" },
+		{ value: 5, text: "common.thisMonth" },
+		{ value: 6, text: "common.thisYear" },
 	],
 })
 const listTypeData = ref([

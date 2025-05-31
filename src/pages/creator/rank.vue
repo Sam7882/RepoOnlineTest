@@ -1,7 +1,7 @@
 <template>
 	<view class="rank-page">
 		<!-- header 導航-->
-		<c-headerNav class="rank-page-header" :title="'排行榜'" />
+		<c-headerNav class="rank-page-header" :title="$t('creator.rank')" />
 
 		<!-- 類別 -->
 		<view class="rank-category-container">
@@ -119,7 +119,7 @@
 		<view class="rank-bottom-myRank-container">
 			<view class="rank-bottom-myRank-item">
 				<view class="rank-bottom-myRank-title">
-					<text>你的排名</text>
+					<text>{{ $t('creator.yourRank') }}</text>
 				</view>
 				<!-- 帳號頭像和錢包總額文字 水平排列 -->
 				<view class="rank-account-container rank-account-container-record">
@@ -159,11 +159,11 @@
 						color="var(--text-color-primary)"></uni-icons>
 				</view>
 				<view class="distance-container">
-					<text>你的排名距離前一名 </text>
+					<text>{{ $t('creator.yourRankDistance') }} </text>
 				</view>
 				<view class="distance-num-container">
 					<text class="distance-num">4576</text>
-					<text class="distance-unit">粉絲</text>
+					<text class="distance-unit">{{ $t("creator.fans") }}</text>
 				</view>
 			</view>
 		</view>
@@ -174,6 +174,8 @@
 // TEMP: 關注頁面
 import { onShow } from '@dcloudio/uni-app';
 import { router } from '@/utils/routers';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 const rankList = ref([
 	{
 		following: true,
@@ -266,11 +268,11 @@ const searchStatus = ref(false)
 const categoryValue = ref('fans')
 const categoryList = ref([
 	{
-		name: '粉絲',
+		name: t('creator.fans'),
 		value: 'fans',
 	},
 	{
-		name: '愛心',
+		name: t('creator.like'),
 		value: 'love',
 	},
 ])
@@ -281,15 +283,15 @@ const switchCategory = (value: string) => {
 const dateCategoryValue = ref('day')
 const dateCategoryList = ref([
 	{
-		name: '日榜',
+		name: t('creator.dayRank'),
 		value: 'day',
 	},
 	{
-		name: '周榜',
+		name: t('creator.weekRank'),
 		value: 'week',
 	},
 	{
-		name: '月榜',
+		name: t('creator.monthRank'),
 		value: 'month',
 	},
 

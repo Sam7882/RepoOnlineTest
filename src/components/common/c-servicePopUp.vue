@@ -4,8 +4,9 @@
       <view class="popup-title">{{ '聯繫客服' }}</view>
       <view class="popup-content">
         <text class="popup-content-text">{{ $t('service.pleaseEnter') }}</text>
-        <uni-easyinput v-model="subject" type="textarea" placeholder="主題:" :inputBorder="false" />
-        <uni-easyinput v-model="description" type="textarea" placeholder="問題描述:" :inputBorder="false" />
+        <uni-easyinput v-model="subject" type="textarea" :placeholder="$t('service.theme')" :inputBorder="false" />
+        <uni-easyinput v-model="description" type="textarea" :placeholder="$t('service.problemDescription')"
+          :inputBorder="false" />
       </view>
       <view class="popup-actions">
         <button class="btn confirm-btn" @click="handleConfirm">{{ confirmBtnText }}</button>
@@ -19,10 +20,12 @@
 // TEMP: 組件-聯繫客服彈窗
 import { ref, defineExpose } from 'vue'
 import uniPopup from '@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 /* TODO:語系須補 */
 const popup = ref(null)
-const confirmBtnText = ref('確定')
-const cancelBtnText = ref('取消')
+const confirmBtnText = ref(t('common.confirm'))
+const cancelBtnText = ref(t('common.cancel'))
 const subject = ref('')
 const description = ref('')
 function open() {

@@ -19,7 +19,6 @@
 
 <script setup lang="ts">
 // TEMP: 組件-語言選擇器
-import { ref, computed } from 'vue';
 import { useInitStore } from '@/stores/useInitDataStore';
 import langData from '@/i18n/langData'; // 語系資料含有國旗
 import { useI18n } from 'vue-i18n';

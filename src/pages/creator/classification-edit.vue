@@ -14,10 +14,10 @@
 						color="var(--text-color-primary)"></uni-icons>
 				</view>
 				<template v-if="!canTagging">
-					<text>管理作品</text>
+					<text>{{ $t('creator.manageWorks') }}</text>
 				</template>
 				<template v-else>
-					<text>新增</text>
+					<text>{{ $t('creator.addWorks') }}</text>
 				</template>
 			</view>
 		</view>
@@ -40,9 +40,9 @@
 			</view>
 			<view class="btn-container">
 				<text>
-					已選取 {{ selectedIds.length }}
+					{{ $t('common.selected') }} {{ selectedIds.length }}
 				</text>
-				<button class="btn next-btn" @click="deleteSelected">移除</button>
+				<button class="btn next-btn" @click="deleteSelected">{{ $t('common.remove') }}</button>
 			</view>
 		</view>
 
@@ -61,7 +61,7 @@
 									<uni-icons class="popup-icon" type="icom-common-edit" custom-prefix="icon" size="24"
 										color="var(--text-color-primary)"></uni-icons>
 								</view>
-								<text>變更名稱</text>
+								<text>{{ $t('common.changeName') }}</text>
 							</view>
 							<view class="icon-container">
 								<uni-icons class="popup-icon" type="right" size="24" color="var(--text-color-primary)"></uni-icons>
@@ -74,21 +74,22 @@
 									<uni-icons class="popup-icon" type="icon-common-cancelclassName" custom-prefix="icon" size="24"
 										color="var(--text-color-primary)"></uni-icons>
 								</view>
-								<text>刪除分類</text>
+								<text>{{ $t("common.deleteClassification") }}</text>
 							</view>
 						</view>
 					</template>
 					<template v-if="classNamePopUpStep === 2">
 						<view class="classNamePopUp-container-item2">
 							<view class="classNamePopUp-container-item-content input-container">
-								<text class="title">名稱</text>
+								<text class="title">{{ $t("common.name") }}</text>
 								<uni-easyinput v-model="classNamePopUpName" type="text" class="inputStyle popup-input"
 									placeholder="請輸入名稱" />
 							</view>
 						</view>
 						<view class="classNamePopUp-container-item2">
 							<view class="classNamePopUp-container-item-content btn-container">
-								<button type="button" class="btn popup-button" @click="confirmclassNamePopUp">確認</button>
+								<button type="button" class="btn popup-button" @click="confirmclassNamePopUp">{{ $t("common.confirm")
+									}}</button>
 							</view>
 						</view>
 					</template>
@@ -106,12 +107,14 @@
 import { onLoad } from '@dcloudio/uni-app'
 import { usePostData } from '@/stores/usePostData'
 import { toCreatorSelectMedia } from '@/utils/routers'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const postDataStore = usePostData()
 const { manageMedia, selectedMedia } = storeToRefs(postDataStore)
 
 const renderMediaList = ref(manageMedia.value)
 const classTitle = ref('一號分類')
-const popupTitle = ref('編輯')
+const popupTitle = ref(t('common.edit'))
 const selectedIds = ref([])
 const alertDialog = ref(null)
 // 選取作品

@@ -13,31 +13,32 @@
 		<view class="form-container">
 			<view class="deco-line"></view>
 			<uni-forms :model="form" :rules="formRules" ref="formRef" label-position="top">
-				<uni-forms-item label="姓名" name="name">
-					<uni-easyinput class="inputStyle" v-model="form.name" placeholder="請輸入姓名" :clearable="false" />
-					<text class="form-tip">您在 14 天內只能變更兩次姓名。</text>
+				<uni-forms-item :label="$t('auth.name')" name="name">
+					<uni-easyinput class="inputStyle" v-model="form.name"
+						:placeholder="$t('auth.pleaseEnter', { title: $t('auth.name') })" :clearable="false" />
+					<text class="form-tip">{{ $t("creator.nameChangeTip") }}</text>
 				</uni-forms-item>
 
-				<uni-forms-item label="用戶名稱">
+				<uni-forms-item :label="$t('auth.username')" name="username">
 					<uni-easyinput class="inputStyle" v-model="form.username" disabled :clearable="false" />
 				</uni-forms-item>
 
-				<uni-forms-item label="性別">
+				<uni-forms-item :label="$t('auth.gender')" name="gender">
 					<uni-easyinput class="inputStyle" v-model="form.gender" disabled :clearable="false" />
 				</uni-forms-item>
 
-				<uni-forms-item label="生日">
+				<uni-forms-item :label="$t('auth.birthday')" name="birthday">
 					<uni-easyinput class="inputStyle" v-model="form.birthday" disabled :clearable="false" />
 				</uni-forms-item>
 
-				<uni-forms-item label="簡介" name="bio" class="textarea-container">
+				<uni-forms-item :label="$t('auth.bio')" name="bio" class="textarea-container">
 					<uni-easyinput class="inputStyle" type="textarea" autoHeight maxlength="150" v-model="form.bio"
 						:clearable="false" />
 					<view class="textarea-count">
 						<text>150</text>
 					</view>
 					<view class="form-tip-container">
-						<text class="form-tip">您的簡介會向所有用戶和非用戶顯示。</text>
+						<text class="form-tip">{{ $t("creator.nameChangeTip2") }}</text>
 					</view>
 				</uni-forms-item>
 
@@ -57,7 +58,7 @@
 					</view>
 				</view>
 				<view class="btn-container">
-					<button class="btn save-btn" type="primary" @click="handleSubmit">儲存</button>
+					<button class="btn save-btn" type="primary" @click="handleSubmit">{{ $t("common.save2") }}</button>
 				</view>
 			</uni-forms>
 		</view>
@@ -65,18 +66,18 @@
 		<!-- 底部選擇頭像方式彈窗 -->
 		<c-bottomPopUp ref="avatarPopRef" class="avatar-pop-up">
 			<template #header>
-				<text class="popup-title">更換大頭貼</text>
+				<text class="popup-title">{{ $t("creator.changePhoto") }}</text>
 			</template>
 			<template #content>
 				<view class="popup-btn-group">
 					<view class="btn-container">
-						<button class="btn popup-btn" @click="handleSelectPhoto('camera')">拍照</button>
+						<button class="btn popup-btn" @click="handleSelectPhoto('camera')">{{ $t("creator.takePhoto") }}</button>
 					</view>
 					<view class="btn-container">
-						<button class="btn popup-btn" @click="handleSelectPhoto('album')">上傳照片</button>
+						<button class="btn popup-btn" @click="handleSelectPhoto('album')">{{ $t("creator.uploadPhoto") }}</button>
 					</view>
 					<view class="btn-container">
-						<button class="btn popup-cancel" @click="avatarPopRef.close()">取消</button>
+						<button class="btn popup-cancel" @click="avatarPopRef.close()">{{ $t("common.cancel") }}</button>
 					</view>
 				</view>
 			</template>
@@ -87,6 +88,9 @@
 <script setup>
 // TEMP: 編輯資料
 import { toSelectSource, toCropAvatar } from '@/utils/routers'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const avatarUrl = '/static/sample-avatar.jpg' // 假資料
 const form = reactive({
@@ -100,17 +104,17 @@ const form = reactive({
 const formRef = ref(null)
 
 const formRules = {
-	name: {
-		rules: [
-			{ required: true, errorMessage: '姓名為必填項' },
-			{ maxLength: 20, errorMessage: '姓名不可超過 20 字' }
-		]
-	},
-	bio: {
-		rules: [
-			{ maxLength: 150, errorMessage: '簡介不可超過 150 字' }
-		]
-	}
+	// name: {
+	// 	rules: [
+	// 		{ required: true, errorMessage: '姓名為必填項' },
+	// 		{ maxLength: 20, errorMessage: '姓名不可超過 20 字' }
+	// 	]
+	// },
+	// bio: {
+	// 	rules: [
+	// 		{ maxLength: 150, errorMessage: '簡介不可超過 150 字' }
+	// 	]
+	// }
 }
 
 const allTags = [
@@ -131,7 +135,7 @@ const handleSubmit = () => {
 	formRef.value.validate().then(res => {
 		console.log('送出資料:', form)
 		console.log('已選擇 tags:', selectedTags.value)
-		uni.showToast({ title: '已儲存', icon: 'none' })
+		uni.showToast({ title: $t('common.saved'), icon: 'none' })
 	}).catch(err => {
 		console.log('表單驗證失敗:', err)
 	})
@@ -139,7 +143,7 @@ const handleSubmit = () => {
 
 const avatarPopRef = ref()
 const openAvatarOptions = () => {
-	avatarPopRef.value.open({ title: '更換大頭貼' })
+	avatarPopRef.value.open({ title: t('creator.changePhoto') })
 }
 const handleSelectPhoto = (type) => {
 	avatarPopRef.value.close()
@@ -157,7 +161,7 @@ const handleSelectPhoto = (type) => {
 			},
 			fail: (err) => {
 				console.log('拍照失敗:', err)
-				uni.showToast({ title: '啟用相機失敗', icon: 'none' })
+				uni.showToast({ title: t('creator.cameraFailed'), icon: 'none' })
 			}
 		})
 	}
@@ -172,7 +176,7 @@ const handleSelectPhoto = (type) => {
 			},
 			fail: (err) => {
 				console.log('選擇照片失敗:', err)
-				uni.showToast({ title: '選擇照片失敗', icon: 'none', })
+				uni.showToast({ title: t('creator.selectPhotoFailed'), icon: 'none', })
 			}
 		})
 	}

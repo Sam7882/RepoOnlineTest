@@ -33,20 +33,22 @@
 // TEMP: 創作者設定-選單頁面
 import { onLoad } from '@dcloudio/uni-app'
 import { router, toStatistics, toCreatorBlockadeEdit } from '@/utils/routers';
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const { back } = router;
 
-const menuTitle = ref('成為創作者')
-const content = ref('歡迎您一起成為優秀的創作者！')
+const menuTitle = ref(t('auth.becomeCreator'))
+const content = ref(t('auth.welcomeToBecomeCreator'))
 const btnStatus = ref('')
 const btnText = computed(() => {
 	if (btnStatus.value === 'waiting') {
-		return '等待審核中'
+		return t('common.waiting')
 	} else if (btnStatus.value === 'already') {
-		return '已認證'
+		return t('common.already')
 	} else if (btnStatus.value === 'apply') {
-		return '申請'
+		return t('common.apply')
 	} else {
-		return '加入'
+		return t('common.join')
 	}
 })
 const type = ref('creator')
@@ -55,7 +57,7 @@ const type = ref('creator')
 const messagePopUpRef = ref(null)
 const openMessagePopUp = () => {
 	messagePopUpRef.value.open({
-		content: '很抱歉，未審核通過。',
+		content: t('auth.sorryNoPasss'),
 		confirmBtnText: 'OK',
 		onConfirm: () => {
 			messagePopUpRef.value.close()
@@ -70,13 +72,13 @@ onLoad((options) => {
 
 	switch (type.value) {
 		case 'creator':
-			menuTitle.value = '成為創作者'
-			content.value = '歡迎您一起成為優秀的創作者！'
+			menuTitle.value = t('auth.becomeCreator')
+			content.value = t('auth.welcomeToBecomeCreator')
 			btnStatus.value = ''
 			break
 		case 'verifyCreator':
-			menuTitle.value = '成為認證創作者'
-			content.value = '加入百萬創作者橫列，\n獲得專屬認證。'
+			menuTitle.value = t('auth.becomeVerifyCreator')
+			content.value = t('auth.welcomeToBecomeVerifyCreator')
 			btnStatus.value = 'apply'
 			break
 	}

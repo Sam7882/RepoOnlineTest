@@ -2,7 +2,7 @@
 	<view class="page">
 		<c-headerNav :title="'訂單明細'" />
 		<view class="tip-container">
-			<text>預計 2025年5月30日 15:50 可提領。</text>
+			<text>{{ $t("wallet.expectedWithdrawTime", { time: '2025年5月30日 15:50' }) }}</text>
 		</view>
 		<view class="content-container">
 			<view class="amount-box">+${{ finalAmount }}</view>
@@ -11,15 +11,15 @@
 
 			<view class="section">
 				<view class="row">
-					<text class="label">訂單金額</text>
+					<text class="label">{{ $t("wallet.orderAmount") }}</text>
 					<text>${{ orderAmount }}</text>
 				</view>
 				<view class="row">
-					<text class="label">手續費</text>
+					<text class="label">{{ $t("wallet.fee") }}</text>
 					<text>-${{ fee }}</text>
 				</view>
 				<view class="row">
-					<text class="label">最終訂單進帳</text>
+					<text class="label">{{ $t("wallet.finalOrderAmount") }}</text>
 					<text>${{ finalAmount }}</text>
 				</view>
 			</view>
@@ -50,22 +50,23 @@
 
 			<view class="section">
 				<view class="row">
-					<text class="label">訂單編號</text>
+					<text class="label">{{ $t("wallet.orderNumber") }}</text>
 					<text>{{ orderId }}</text>
 				</view>
 				<view class="row">
-					<text class="label">訂單時間</text>
+					<text class="label">{{ $t("wallet.orderTime") }}</text>
 					<text>{{ orderTime }}</text>
 				</view>
 				<view class="row">
-					<text class="label">付款時間</text>
+					<text class="label">{{ $t("wallet.paymentTime") }}</text>
 					<text>{{ payTime }}</text>
 				</view>
 			</view>
 
 			<view class="bottom btn-container">
-				<button type="primary" class="btn primary-btn active" v-if="canWithdraw">提領</button>
-				<button type="primary" class="btn primary-btn" @click="handleWithdrawRecord" v-else>返回我的錢包</button>
+				<button type="primary" class="btn primary-btn active" v-if="canWithdraw">{{ $t("wallet.withdraw") }}</button>
+				<button type="primary" class="btn primary-btn" @click="handleWithdrawRecord" v-else>{{ $t("wallet.returnWallet")
+					}}</button>
 			</view>
 
 		</view>

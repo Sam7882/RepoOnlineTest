@@ -74,6 +74,8 @@
 // TEMP: 關注頁面
 import { onShow } from '@dcloudio/uni-app';
 import { router } from '@/utils/routers';
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const followingList = ref([
 	{
 		following: true,
@@ -152,17 +154,17 @@ const renderFollowingList = computed(() => {
 const categoryValue = ref('fans')
 const categoryList = ref([
 	{
-		name: '粉絲',
+		name: t('creator.fans'),
 		value: 'fans',
 		num: '1.6k'
 	},
 	{
-		name: '關注',
+		name: t('creator.unFollowing'),
 		value: 'following',
 		num: '0.5k'
 	},
 	{
-		name: '愛心',
+		name: t('creator.like'),
 		value: 'love',
 		num: '5.6M'
 	},

@@ -5,7 +5,7 @@
 				<view class="icon-container" @click="handleBack">
 					<uni-icons class="icon-close" type="closeempty" size="24" color="var(--text-color-primary)" />
 				</view>
-				<view class="header-title">選取作品</view>
+				<view class="header-title">{{ $t("creator.selectWorks") }}</view>
 			</view>
 			<!-- 分類 tabs -->
 			<view class="tabs">
@@ -25,7 +25,7 @@
 		<!-- 下一步按鈕 -->
 		<view class="footer">
 			<view class="btn-container">
-				<button class="btn next-btn" @click="goNext">新增作品({{ selectedIds.length }})</button>
+				<button class="btn next-btn" @click="goNext">{{ $t("creator.addWorks") }} ({{ selectedIds.length }})</button>
 			</view>
 		</view>
 	</view>
@@ -36,23 +36,25 @@
 import { usePostData } from '@/stores/usePostData'
 import { toCreatorClassificationEdit, router } from '@/utils/routers'
 import { onLoad } from '@dcloudio/uni-app'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const postDataStore = usePostData()
 const { setSelectedMedia } = postDataStore
 const { manageMedia, postData } = storeToRefs(postDataStore)
 const { back } = router
 console.log("🚀 ~ postDataStore:", postDataStore)
 console.log("🚀 ~ postDataStore:", manageMedia)
-const tabs = ['全部', '影片', '照片']
-const currentTab = ref('全部')
+const tabs = [t('creator.all'), t('creator.video'), t('creator.photo')]
+const currentTab = ref(t('creator.all'))
 const selectedIds = ref([])
 
 const renderMediaList = ref([])
 
 // 過濾列表
 const filteredList = computed(() => {
-	if (currentTab.value === '影片') {
+	if (currentTab.value === t('creator.video')) {
 		return renderMediaList.value.filter((m) => m.type === 'video')
-	} else if (currentTab.value === '照片') {
+	} else if (currentTab.value === t('creator.photo')) {
 		return renderMediaList.value.filter((m) => m.type === 'image')
 	} else {
 		return renderMediaList.value

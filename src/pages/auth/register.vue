@@ -34,8 +34,8 @@
 			<uni-forms-item name="gender" required>
 				<view class="form-item">
 					<view class="form-item-label" @click="handleGender"></view>
-					<uni-easyinput v-model="formData.genderText" class="inputStyle" :placeholder="$t('auth.gender')" :trim="true"
-						:clearable="false" />
+					<uni-easyinput disabled v-model="formData.gender" class="inputStyle" :placeholder="$t('auth.gender')"
+						:trim="true" :clearable="false" />
 					<uni-icons class="form-input-icon" type="icon-input-gender" custom-prefix="icon" size="24" color="#999" />
 					<uni-popup ref="genderPopup" type="bottom" background-color="#fff">
 						<view class="popup-content">
@@ -119,7 +119,8 @@ const closeGenderPopup = () => {
 const selectGender = (value) => {
 	gender.value = value;
 	genderText.value = gender.value === 0 ? t('auth.male') : t('auth.female');
-	formData.genderText = genderText.value;
+	formData.gender = genderText.value;
+	console.log("🚀 ~ selectGender ~ formData.genderText:", formData.gender)
 	closeGenderPopup();
 }
 
@@ -186,6 +187,7 @@ const formRules = {
 	}
 };
 const handleRegister = () => {
+	console.log("🚀 ~ formRef.value.validate ~ formRef.value:", formRef.value)
 	formRef.value.validate().then((res) => {
 		console.log('✅ 驗證成功，送出資料:', res);
 		toPhoneVerify()

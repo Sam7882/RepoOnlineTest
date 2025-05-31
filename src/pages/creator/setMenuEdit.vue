@@ -8,18 +8,20 @@
 				<uni-forms-item class="form-item" name="phone" required>
 					<view class="phone-input-row">
 						<uni-data-select class="country-select" v-model="selectedCountry" :localdata="countryList" :clear="false"
-							:placeholder="'國碼'" />
-						<uni-easyinput class="inputStyle phone-input" v-model="formData.phone" :placeholder="'請輸入手機號碼'" :trim="true"
-							:clearable="false" type="number" />
+							:placeholder="$t('creator.countryCode')" />
+						<uni-easyinput class="inputStyle phone-input" v-model="formData.phone"
+							:placeholder="$t('auth.pleaseEnter', { title: $t('creator.phone') })" :trim="true" :clearable="false"
+							type="number" />
 					</view>
 				</uni-forms-item>
 				<uni-forms-item class="verifyCode-container" name="verifyCode" required>
 					<view class="form-item">
-						<uni-easyinput v-model="formData.verifyCode" class="inputStyle" type="text" :placeholder="'請輸入驗證碼'"
-							:trim="true" :clearable="false" />
+						<uni-easyinput v-model="formData.verifyCode" class="inputStyle" type="text"
+							:placeholder="$t('auth.pleaseEnter', { title: $t('auth.verifyCode') })" :trim="true" :clearable="false" />
 					</view>
 					<view class="btn-container">
-						<button type="button" class="btn" @click="verifyCodeSend">{{ verifyStatus ? `${verifyTime}秒 重新發送` : '發送'
+						<button type="button" class="btn" @click="verifyCodeSend">{{ verifyStatus ?
+							`${verifyTime}${$t("common.second")} ${$t("common.resendCode")}` : $t('common.sendCode')
 						}}</button>
 					</view>
 				</uni-forms-item>
@@ -30,17 +32,17 @@
 				:rules="formRules.password" ref="formRef">
 				<uni-forms-item class="form-item" name="password" required>
 					<view class="form-item">
-						<uni-easyinput v-model="formData.password" class="inputStyle" type="password" :placeholder="'請輸入密碼'"
-							:trim="true" :clearable="false" />
+						<uni-easyinput v-model="formData.password" class="inputStyle" type="password"
+							:placeholder="$t('auth.pleaseEnter', { title: $t('auth.password') })" :trim="true" :clearable="false" />
 					</view>
 				</uni-forms-item>
 				<uni-forms-item class="form-item" name="confirmPassword" required>
 					<view class="form-item">
-						<uni-easyinput v-model="formData.confirmPassword" class="inputStyle" type="password"
-							:placeholder="'請再輸入一次密碼'" :trim="true" :clearable="false" />
+						<uni-easyinput v-model="formData.confirmPassword" class="inputStyle" type="password" :placeholder="$t("
+							auth.confirmPassword")" :trim="true" :clearable="false" />
 					</view>
 					<view class="form-item-tip">
-						<text>請輸入6-20位由數字、字母和符號任意2種組合的密碼。</text>
+						<text>{{ $t("auth.rules.password.pattern") }}</text>
 					</view>
 				</uni-forms-item>
 			</uni-forms>
@@ -50,17 +52,18 @@
 			<uni-forms class="form" v-else-if="type === 'email'" :model="formData" :rules="formRules.email" ref="formRef">
 				<uni-forms-item class="form-item" name="email" required>
 					<view class="form-item">
-						<uni-easyinput v-model="formData.email" class="inputStyle" type="text" :placeholder="'請輸入電子信箱'" :trim="true"
-							:clearable="false" />
+						<uni-easyinput v-model="formData.email" class="inputStyle" type="text"
+							:placeholder="$t('auth.pleaseEnter', { title: $t('creator.email') })" :trim="true" :clearable="false" />
 					</view>
 				</uni-forms-item>
 				<uni-forms-item class="verifyCode-container" name="verifyCode" required>
 					<view class="form-item">
-						<uni-easyinput v-model="formData.verifyCode" class="inputStyle" type="text" :placeholder="'請輸入驗證碼'"
-							:trim="true" :clearable="false" />
+						<uni-easyinput v-model="formData.verifyCode" class="inputStyle" type="text"
+							:placeholder="$t('auth.pleaseEnter', { title: $t('auth.verifyCode') })" :trim="true" :clearable="false" />
 					</view>
 					<view class="btn-container">
-						<button type="button" class="btn" @click="verifyCodeSend">{{ verifyStatus ? `${verifyTime}秒 重新發送` : '發送'
+						<button type="button" class="btn" @click="verifyCodeSend">{{ verifyStatus ?
+							`${verifyTime}${$t("common.second")} ${$t("common.resendCode")}` : $t('common.sendCode')
 						}}</button>
 					</view>
 				</uni-forms-item>
@@ -72,24 +75,24 @@
 			<view v-if="type === 'favorite'" class="switch-list">
 				<view class="switch-item">
 					<view class="switch-item-content">
-						<view class="switch-title">公開我的收藏</view>
+						<view class="switch-title">{{ $t("creator.publicMyFavorites") }}</view>
 						<c-checkBox class="switch-btn-container" v-model="formData.publicFavorite" />
 					</view>
-					<view class="switch-desc">關閉後，他人將無法檢視您的所有收藏。</view>
+					<view class="switch-desc">{{ $t("creator.publicMyFavoritesTip") }}</view>
 				</view>
 				<view class="switch-item">
 					<view class="switch-item-content">
-						<view class="switch-title">公開我的愛心</view>
+						<view class="switch-title">{{ $t("creator.publicMyHeart") }}</view>
 						<c-checkBox class="switch-btn-container" v-model="formData.publicLike" />
 					</view>
-					<view class="switch-desc">關閉後，他人將無法檢視您的所有愛心。</view>
+					<view class="switch-desc">{{ $t("creator.publicMyHeartTip") }}</view>
 				</view>
 				<view class="switch-item">
 					<view class="switch-item-content">
-						<view class="switch-title">公開我的分類</view>
+						<view class="switch-title">{{ $t("creator.publicMyCategory") }}</view>
 						<c-checkBox class="switch-btn-container" v-model="formData.publicCategory" />
 					</view>
-					<view class="switch-desc">關閉後，他人將無法檢視您的所有分類。</view>
+					<view class="switch-desc">{{ $t("creator.publicMyCategoryTip") }}</view>
 				</view>
 			</view>
 
@@ -97,21 +100,21 @@
 			<view v-if="type === 'message'" class="switch-list">
 				<view class="switch-item">
 					<view class="switch-item-content">
-						<view class="switch-title">貼文、限時動態和留言</view>
+						<view class="switch-title">{{ $t("creator.postStoryComment") }}</view>
 						<c-checkBox class="switch-btn-container" v-model="formData.postNotice" />
 					</view>
 					<view class="switch-desc"></view>
 				</view>
 				<view class="switch-item">
 					<view class="switch-item-content">
-						<view class="switch-title">訊息</view>
+						<view class="switch-title">{{ $t("common.message") }}</view>
 						<c-checkBox class="switch-btn-container" v-model="formData.message" />
 					</view>
 					<view class="switch-desc"></view>
 				</view>
 				<view class="switch-item">
 					<view class="switch-item-content">
-						<view class="switch-title">全部暫停</view>
+						<view class="switch-title">{{ $t("common.allPause") }}</view>
 						<c-checkBox class="switch-btn-container" v-model="formData.allPause" />
 					</view>
 					<view class="switch-desc"></view>
@@ -122,12 +125,12 @@
 		<!-- 發送按鈕 -->
 		<view class="footer" v-if="type === 'favorite' || type === 'message'">
 			<view class="btn-container">
-				<button type="button" class="btn" @click="submitForm('switch')">儲存</button>
+				<button type="button" class="btn" @click="submitForm('switch')">{{ $t("common.save2") }}</button>
 			</view>
 		</view>
 
 		<view class="btn-container" v-else>
-			<button type="button" class="btn" @click="submitForm('switch')">確認</button>
+			<button type="button" class="btn" @click="submitForm('switch')">{{ $t("common.confirm") }}</button>
 		</view>
 	</view>
 </template>
@@ -137,15 +140,16 @@
 import { ref, computed, onMounted } from 'vue'
 import { onLoad } from '@dcloudio/uni-app';
 import countryData from '@/assets/country/country.json'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const type = ref('')
 const typeTitle = computed(() => {
 	switch (type.value) {
-		case 'phone': return '手機綁定'
-		case 'password': return '登入密碼'
-		case 'email': return '信箱綁定'
-		case 'favorite': return '收藏隱私設定'
-		case 'message': return '通知設定'
+		case 'phone': return t('creator.phoneBind')
+		case 'password': return t('creator.loginPassword')
+		case 'email': return t('creator.emailBind')
+		case 'favorite': return t('creator.favoritePrivacySetting')
+		case 'message': return t('creator.notificationSetting')
 		default: return ''
 	}
 })
@@ -172,40 +176,40 @@ const formData = ref({
 const formRef = ref(null)
 
 const formRules = {
-	phone: {
-		phone: [
-			{ required: true, message: '請輸入手機號碼', trigger: 'blur' },
-			{ pattern: /^[0-9]{6,15}$/, message: '手機號碼格式錯誤', trigger: 'blur' }
-		],
-		verifyCode: [
-			{ required: true, message: '請輸入驗證碼', trigger: 'blur' }
-		]
-	},
-	password: {
-		password: [
-			{ required: true, message: '請輸入新密碼', trigger: 'blur' },
-			{ min: 6, message: '密碼至少6位', trigger: 'blur' }
-		],
-		confirmPassword: [
-			{ required: true, message: '請再次輸入新密碼', trigger: 'blur' },
-			{
-				validator: (rule, value, callback) => {
-					if (value !== formData.value.password) {
-						callback(new Error('兩次密碼不一致'))
-					} else {
-						callback()
-					}
-				},
-				trigger: 'blur'
-			}
-		]
-	},
-	email: {
-		email: [
-			{ required: true, message: '請輸入電子信箱', trigger: 'blur' },
-			{ pattern: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/, message: '信箱格式錯誤', trigger: 'blur' }
-		]
-	}
+	// phone: {
+	// 	phone: [
+	// 		{ required: true, message: '請輸入手機號碼', trigger: 'blur' },
+	// 		{ pattern: /^[0-9]{6,15}$/, message: '手機號碼格式錯誤', trigger: 'blur' }
+	// 	],
+	// 	verifyCode: [
+	// 		{ required: true, message: '請輸入驗證碼', trigger: 'blur' }
+	// 	]
+	// },
+	// password: {
+	// 	password: [
+	// 		{ required: true, message: '請輸入新密碼', trigger: 'blur' },
+	// 		{ min: 6, message: '密碼至少6位', trigger: 'blur' }
+	// 	],
+	// 	confirmPassword: [
+	// 		{ required: true, message: '請再次輸入新密碼', trigger: 'blur' },
+	// 		{
+	// 			validator: (rule, value, callback) => {
+	// 				if (value !== formData.value.password) {
+	// 					callback(new Error('兩次密碼不一致'))
+	// 				} else {
+	// 					callback()
+	// 				}
+	// 			},
+	// 			trigger: 'blur'
+	// 		}
+	// 	]
+	// },
+	// email: {
+	// 	email: [
+	// 		{ required: true, message: '請輸入電子信箱', trigger: 'blur' },
+	// 		{ pattern: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/, message: '信箱格式錯誤', trigger: 'blur' }
+	// 	]
+	// }
 }
 
 const verifyStatus = ref(false)

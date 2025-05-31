@@ -69,7 +69,7 @@
 
 						<view class="btn-container">
 							<button type="button" class="btn">
-								關注
+								{{ $t("creator.unFollowing") }}
 							</button>
 						</view>
 					</view>

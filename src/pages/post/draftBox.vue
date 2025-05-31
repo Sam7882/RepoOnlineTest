@@ -7,7 +7,7 @@
 					<uni-icons v-if="!onDelete" class="header-nav-icon" type="left" size="20" color="var(--text-color-primary)"
 						@click="handleBack"></uni-icons>
 					<text v-else @click="cancelDeleteAll">
-						取消選取
+						{{ $t('common.cancelSelect') }}
 					</text>
 				</view>
 			</template>
@@ -15,14 +15,14 @@
 				<uni-icons v-if="!onDelete" class="header-gear-icon" type="icon-common-delete" custom-prefix="icon" size="20"
 					color="var(--text-color-primary)" @click="turnOnDelete" />
 				<text v-else @click="turnOffDelete">
-					取消
+					{{ $t('common.cancel') }}
 				</text>
 			</template>
 		</c-headerNav>
 		<view class="header">
 			<view class="tab">
 				<template v-if="!canTagging">
-					<text>草稿為未公開，只有您自己能看到。</text>
+					<text>{{ $t('post.draftTip') }}</text>
 				</template>
 			</view>
 		</view>
@@ -45,7 +45,8 @@
 				<uni-icons class="popup-icon" type="closeempty" size="24" color="var(--text-color-primary)" />
 			</view>
 			<view class="btn-container">
-				<button class="btn next-btn" @click="deleteConfirmPopUp">刪除({{ selectedIds.length }})</button>
+				<button class="btn next-btn" @click="deleteConfirmPopUp">{{ $t("common.delete") }}({{ selectedIds.length
+					}})</button>
 			</view>
 		</view>
 
@@ -59,13 +60,15 @@
 import { onLoad } from '@dcloudio/uni-app'
 import { usePostData } from '@/stores/usePostData'
 import { router, toCreatorSelectMedia } from '@/utils/routers'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const { back, toPage } = router;
 const postDataStore = usePostData()
 const { manageMedia, selectedMedia } = storeToRefs(postDataStore)
 
 const renderMediaList = ref(manageMedia.value)
 const classTitle = ref('一號分類')
-const popupTitle = ref('編輯')
+const popupTitle = ref(t('common.edit'))
 const selectedIds = ref([])
 const alertDialog = ref(null)
 
@@ -109,10 +112,10 @@ const closeTagging = () => {
 const confirmPopUpRef = ref(null)
 const deleteConfirmPopUp = () => {
 	confirmPopUpRef.value.open({
-		title: '刪除草稿？',
+		title: t('post.deleteDraft'),
 		// content: '',
-		confirmBtnText: '刪除',
-		cancelBtnText: '保留',
+		confirmBtnText: t('common.delete'),
+		cancelBtnText: t('common.keep'),
 		onConfirm: () => {
 			console.log("🚀 ~ 刪除:")
 			confirmPopUpRef.value.close()

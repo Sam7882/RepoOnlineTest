@@ -1,7 +1,7 @@
 <template>
 	<view class="blockade-page">
 		<!-- header 導航-->
-		<c-headerNav class="blockade-page-header" :title="'封鎖名單'" :openSearch="true" @search="showSearch" />
+		<c-headerNav class="blockade-page-header" :title="t('auth.blockadeList')" :openSearch="true" @search="showSearch" />
 
 		<!-- 搜尋容器 -->
 		<view v-if="searchStatus">
@@ -45,7 +45,7 @@
 										<!-- 按鈕 -->
 										<button tpye="button" class="content-container-bottom-blockade-list-item-button"
 											@click="deleteBlockade(item)">
-											{{ '移除' }}
+											{{ $t('common.remove') }}
 										</button>
 									</view>
 
@@ -60,7 +60,7 @@
 		<!-- 發送按鈕 -->
 		<view class="footer">
 			<view class="btn-container">
-				<button type="button" class="btn" @click="confirmSave">儲存</button>
+				<button type="button" class="btn" @click="confirmSave">{{ $t('common.save2') }}</button>
 			</view>
 		</view>
 
@@ -71,6 +71,8 @@
 <script setup lang="ts">
 // TEMP: 創作者設定-封鎖頁編輯
 import { onShow } from '@dcloudio/uni-app';
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const blockadeList = ref([
 	{
 		avatar: '/static/images/template/img-template-03.png',
@@ -139,8 +141,8 @@ const renderBlockadeList = computed(() => {
 // 切換關注
 const deleteBlockade = (item: any) => {
 	confirmPopUp.value.open({
-		title: '移除',
-		content: `確定要移除 ${item.name} 嗎?`,
+		title: t('common.remove'),
+		content: t('common.checkForRemove', { name: item.name }),
 		onConfirm: () => {
 			blockadeList.value = blockadeList.value.filter(user => user.account !== item.account)
 			console.log("🚀 ~ 移除 ~ item:", item.name)
@@ -165,8 +167,8 @@ const handleSearch = (text: string) => {
 const confirmPopUp = ref()
 const confirmSave = () => {
 	confirmPopUp.value.open({
-		title: '儲存',
-		content: '將目前名單進行保存?',
+		title: t('common.save2'),
+		content: t('auth.saveBlockadeList'),
 		onConfirm: () => {
 			console.log('成功移除')
 		}

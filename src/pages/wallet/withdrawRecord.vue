@@ -1,7 +1,7 @@
 <template>
 	<view class="withdrawIn-page">
 		<!-- header 導航-->
-		<c-headerNav :title="'交易紀錄'" :openQa="true" />
+		<c-headerNav :title="$t('wallet.transactionRecord')" :openQa="true" />
 		<!-- 內容區塊 -->
 		<view class="withdrawIn-page-content">
 			<view class="withdrawIn-page-content-header">
@@ -61,20 +61,20 @@ const { t } = useI18n();
 const withdrawTypeSelect = ref({
 	value: 0,
 	range: [
-		{ value: 0, text: "全部" },
-		{ value: 1, text: "可提領" },
-		{ value: 2, text: "我的進帳" },
-		{ value: 3, text: "即將撥款" },
+		{ value: 0, text: t('common.all') },
+		{ value: 1, text: t('wallet.canWithdraw') },
+		{ value: 2, text: t('wallet.myIncome') },
+		{ value: 3, text: t('wallet.soonWithdraw') },
 	],
 })
 const withdrawDateSelect = ref({
 	value: 0,
 	range: [
-		{ value: 0, text: "全部" },
-		{ value: 1, text: "本週" },
-		{ value: 2, text: "本月" },
-		{ value: 3, text: "近兩月" },
-		{ value: 4, text: "半年內" },
+		{ value: 0, text: t('common.all') },
+		{ value: 1, text: t('common.thisWeek') },
+		{ value: 2, text: t('common.thisMonth') },
+		{ value: 3, text: t('common.twoMonth') },
+		{ value: 4, text: t('common.halfYear') },
 	],
 })
 const change = (e) => {
@@ -86,22 +86,22 @@ const withdrawData = ref([
 		type: 0,
 		amount: '450',
 		date: '2025年4月5日',
-		name: 'f4542訂單款項',
-		status: '即將撥款',
+		name: 'f4542' + t('wallet.orderAmount'),
+		status: t('wallet.soonWithdraw'),
 	},
 	{
 		type: 1,
 		amount: '450',
 		date: '2025年4月5日',
-		name: '提領',
-		status: '已完成',
+		name: t('wallet.withdraw'),
+		status: t('common.completed'),
 	},
 	{
 		type: 2,
 		amount: '450',
 		date: '2025年4月5日',
-		name: 'f4544122訂單款項',
-		status: '已完成',
+		name: 'f4544122' + t('wallet.orderAmount'),
+		status: t('common.completed'),
 	}
 ])
 

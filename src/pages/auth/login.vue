@@ -34,7 +34,7 @@
 			<!-- 記住我 -->
 			<view class="form-item remember">
 				<text class="remember-text">{{ $t('auth.remember') }}</text>
-				<c-checkBox v-model="loginRemember" />
+				<c-checkBox class="switch-btn-container" v-model="loginRemember" />
 			</view>
 
 			<!-- 登入按鈕 -->
@@ -46,9 +46,9 @@
 		<!-- 第三方登入 -->
 		<view class="social-login">
 			<image class="social-icon" src="/static/icons/community/icon-community-facebook.png" />
-			<image class="social-icon" src="/static/icons/community/icon-community-facebook.png" />
-			<image class="social-icon" src="/static/icons/community/icon-community-facebook.png" />
-			<image class="social-icon" src="/static/icons/community/icon-community-facebook.png" />
+			<image class="social-icon" src="/static/icons/community/icon-community-line.png" />
+			<image class="social-icon" src="/static/icons/community/icon-community-google.png" />
+			<image class="social-icon" src="/static/icons/community/icon-community-wechat.png" />
 		</view>
 
 		<!-- 註冊連結 -->
@@ -316,6 +316,32 @@ page {
 	&.errorStyle ::v-deep(.uni-easyinput__content) {
 		&.is-input-border {
 			border: 1px solid var(--text-color-error) !important;
+		}
+	}
+}
+
+.switch-btn-container {
+	width: fit-content;
+	height: fit-content;
+
+	::v-deep(.switch) {
+		.switch {
+			width: fit-content;
+			height: fit-content;
+			padding: 20rpx 36rpx;
+
+			.switch-dot {
+				width: 30rpx;
+				height: 30rpx;
+				top: 50%;
+				translate: 0 -50%;
+			}
+
+			&.switch-checked {
+				.switch-dot {
+					left: calc(100% - 30rpx - 6rpx) !important;
+				}
+			}
 		}
 	}
 }

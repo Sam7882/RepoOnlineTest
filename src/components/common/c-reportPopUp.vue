@@ -8,14 +8,14 @@
 			<!-- 舉報確認窗 -->
 			<uni-popup class="reportConfirm" ref="reportConfirm" type="center" @change="emitChange">
 				<view class="popup-box">
-					<view class="popup-title">{{ t('report.hideCreator') }}</view>
-					<view class="popup-content">{{ t('report.hideCreatorTip') }}</view>
+					<view class="popup-title">{{ $t('report.hideCreator') }}</view>
+					<view class="popup-content">{{ $t('report.hideCreatorTip') }}</view>
 					<view class="deco-line"></view>
 					<view class="popup-actions">
 						<button class="btn primary-btn" @click="openReportPopUp">
 							<uni-icons class="btn-icon" type="icon-common-report" custom-prefix="icon" size="24"
 								color="var(--text-color-primary)" />
-							{{ t('report.report') }}
+							{{ $t('report.report') }}
 						</button>
 						<uni-icons class="btn-icon btn-icon-next" type="right" size="24" @click="closeReportPopUp" />
 					</view>
@@ -24,13 +24,13 @@
 						<button class="btn primary-btn" @click="closeReportConfirm">
 							<uni-icons class="btn-icon" type="icon-common-uninterest" custom-prefix="icon" size="24"
 								color="var(--text-color-primary)" />
-							{{ t('common.notInterest') }}
+							{{ $t('common.notInterest') }}
 						</button>
 					</view>
 					<view class="deco-line"></view>
 					<view class="popup-actions">
 						<button class="btn cancel-btn" @click="noInterest">
-							{{ t('common.notYet') }}
+							{{ $t('common.notYet') }}
 						</button>
 					</view>
 				</view>
@@ -43,23 +43,23 @@
 				<view class="popup-container" v-if="reportPopUpStep === 1">
 					<!-- 標題與關閉 -->
 					<view class="popup-header">
-						<text class="popup-title">{{ t('report.report') }}</text>
+						<text class="popup-title">{{ $t('report.report') }}</text>
 						<uni-icons class="popup-close" type="closeempty" size="24" @click="closeReportPopUp" />
 					</view>
 					<view class="deco-line"></view>
 					<view class="popup-content">
 						<!-- 社群 -->
-						<text class="popup-content-title">{{ t('report.reportQuestion') }}</text>
-						<text class="popup-content-text">{{ t('report.reportContentTip') }}</text>
+						<text class="popup-content-title">{{ $t('report.reportQuestion') }}</text>
+						<text class="popup-content-text">{{ $t('report.reportContentTip') }}</text>
 					</view>
 					<view class="deco-line"></view>
 					<view class="popup-content-list">
 						<view class="popup-content-item" @click="nextReportPopUpStep">
-							<text>{{ t('report.specificPost') }}</text>
+							<text>{{ $t('report.specificPost') }}</text>
 							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
 						<view class="popup-content-item" @click="nextReportPopUpStep">
-							<text>{{ t('report.aboutPostContent') }}</text>
+							<text>{{ $t('report.aboutPostContent') }}</text>
 							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
 					</view>
@@ -69,31 +69,31 @@
 					<!-- 標題與關閉 -->
 					<view class="popup-header">
 						<uni-icons class="popup-prev" type="left" size="24" @click="prevReportPopUpStep" />
-						<text class="popup-title">{{ t('report.report') }}</text>
+						<text class="popup-title">{{ $t('report.report') }}</text>
 						<uni-icons class="popup-close" type="closeempty" size="24" @click="closeReportPopUp" />
 					</view>
 					<view class="deco-line"></view>
 					<view class="popup-content">
 						<!-- 社群 -->
-						<text class="popup-content-title">{{ t('report.reportQuestion') }}</text>
-						<text class="popup-content-text">{{ t('report.reportContentTip') }}</text>
+						<text class="popup-content-title">{{ $t('report.reportQuestion') }}</text>
+						<text class="popup-content-text">{{ $t('report.reportContentTip') }}</text>
 					</view>
 					<view class="deco-line"></view>
 					<view class="popup-content-list">
 						<view class="popup-content-item" @click="nextFeedback">
-							<text>{{ t('report.reportContent1') }}</text>
+							<text>{{ $t('report.reportContent1') }}</text>
 							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
 						<view class="popup-content-item" @click="nextFeedback">
-							<text>{{ t('report.reportContent2') }}</text>
+							<text>{{ $t('report.reportContent2') }}</text>
 							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
 						<view class="popup-content-item" @click="nextFeedback">
-							<text>{{ t('report.reportContent3') }}</text>
+							<text>{{ $t('report.reportContent3') }}</text>
 							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
 						<view class="popup-content-item" @click="nextFeedback">
-							<text>{{ t('report.reportContent4') }}</text>
+							<text>{{ $t('report.reportContent4') }}</text>
 							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
 					</view>
@@ -106,15 +106,15 @@
 				<view class="popup-container">
 					<!-- 標題與關閉 -->
 					<view class="popup-header">
-						<text class="popup-title">{{ t('report.thankYouSuggest') }}</text>
+						<text class="popup-title">{{ $t('report.thankYouSuggest') }}</text>
 					</view>
 					<view class="popup-content">
 						<!-- 社群 -->
-						<text class="popup-content-text">{{ t('report.reportReply') }}</text>
+						<text class="popup-content-text">{{ $t('report.reportReply') }}</text>
 					</view>
 					<view class="btn-container">
 						<button type="button" class="btn" @click="closeFeedbackPopUp">
-							{{ t('common.done') }}
+							{{ $t('common.done') }}
 						</button>
 					</view>
 				</view>

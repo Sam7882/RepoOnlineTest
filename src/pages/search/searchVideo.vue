@@ -32,8 +32,10 @@
 								<view class="recommend-content-image-container">
 									<image class="recommend-content-image" src="/static/logo.png" mode="widthFix" :lazy-load="true">
 									</image>
+
 									<view class="recommend-content-image-cover">
-										<uni-icons class="recommend-content-image-cover-icon" type="more-filled" size="30"></uni-icons>
+										<c-reportPopUp :iconColor="'var(--text-color-secondary)'" />
+										<!-- <uni-icons class="recommend-content-image-cover-icon" type="more-filled" size="30"></uni-icons> -->
 									</view>
 								</view>
 							</template>

@@ -264,7 +264,7 @@ page {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		padding: 44rpx 0;
+		padding: 32rpx 0;
 		border-radius: 20rpx;
 		position: relative;
 

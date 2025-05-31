@@ -33,7 +33,7 @@
                 <view class="scroll-view-item-icon-container">
                   <uni-icons class="scroll-view-item-icon" type="icon-common-copyLink" custom-prefix="icon" size="24" />
                 </view>
-                <text class="scroll-view-item-text">{{ t('common.copyLink') }}</text>
+                <text class="scroll-view-item-text">{{ $t('common.copyLink') }}</text>
               </view>
               <view class="scroll-view-item">
                 <view class="scroll-view-item-icon-container">
@@ -41,7 +41,7 @@
                     size="24" />
                 </view>
                 <!-- TODO:語系須補-->
-                <text class="scroll-view-item-text">{{ t('post.addToStory') }}</text>
+                <text class="scroll-view-item-text">{{ $t('post.addToStory') }}</text>
               </view>
             </view>
           </scroll-view>

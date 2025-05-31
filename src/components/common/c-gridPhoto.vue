@@ -1,22 +1,21 @@
 <template>
   <!-- 圖文區 卡片 水平排序，自動換行，一行三格 grid排版-->
-  <view class="creator-home-page-content-card-container">
+  <view class="content-card-container">
     <template v-for="(item, index) in props.data" :key="index">
-      <view class="creator-home-page-content-card-container-item" @click="handleClick(item)">
-        <image v-if="item.type === 'image'" class="creator-home-page-content-card-container-item-img" :src="item.src"
-          mode="widthFix"></image>
+      <view class="content-card-container-item" @click="handleClick(item)">
+        <image v-if="item.type === 'image'" class="content-card-container-item-img" :src="item.src" mode="widthFix">
+        </image>
         <view v-else class="media-thumbnail video-wrapper">
-          <image :src="item.cover || fallbackVideoCover" class="creator-home-page-content-card-container-item-img"
-            mode="aspectFill" />
+          <image :src="item.cover || fallbackVideoCover" class="content-card-container-item-img" mode="aspectFill" />
         </view>
         <view v-if="item.draft > 0" class="draft-container" @click="handleDraftBox">
           <text>草稿(2)</text>
         </view>
-        <view class="creator-home-page-content-card-container-item-icon-container">
-          <uni-icons class="creator-home-page-content-card-container-item-icon" custom-prefix="icon" size="30"
+        <view class="content-card-container-item-icon-container">
+          <uni-icons class="content-card-container-item-icon" custom-prefix="icon" size="30"
             color="var(--text-color-secondary)"
             :type="item.type === 'image' && item.dataNum > 1 ? 'icon-common-copy' : item.type === 'video' ? 'icon-common-video' : ''" />
-          <text class="creator-home-page-content-card-container-item-icon-text">1688</text>
+          <text class="content-card-container-item-icon-text">1688</text>
         </view>
       </view>
     </template>
@@ -57,19 +56,19 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
 
 <style lang="scss" scoped>
 /* 卡片區 */
-.creator-home-page-content-card-container {
+.content-card-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   // gap: 16rpx;
 
-  .creator-home-page-content-card-container-item {
+  .content-card-container-item {
     position: relative;
     padding: 2rpx;
     width: 100%;
     height: 100%;
     aspect-ratio: 1/1.2;
 
-    ::v-deep(.creator-home-page-content-card-container-item-img) {
+    ::v-deep(.content-card-container-item-img) {
       uni-image {
         width: 100% !important;
         height: 100% !important;
@@ -109,7 +108,7 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
       font-size: 24rpx;
     }
 
-    .creator-home-page-content-card-container-item-icon-container {
+    .content-card-container-item-icon-container {
       position: absolute;
       bottom: 8rpx;
       left: 16rpx;
@@ -120,12 +119,12 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
       gap: 8rpx;
     }
 
-    .creator-home-page-content-card-container-item-icon {
+    .content-card-container-item-icon {
       font-size: 24rpx !important;
       transform: translateY(2rpx);
     }
 
-    .creator-home-page-content-card-container-item-icon-text {
+    .content-card-container-item-icon-text {
       font-size: 24rpx;
       color: var(--text-color-secondary);
     }

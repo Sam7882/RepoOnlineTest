@@ -56,13 +56,6 @@
         "navigationStyle": "custom"
       }
     },
-
-    {
-      "path": "pages/post/media-preview",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
     {
       "path": "pages/post/post-Preview",
       "style": {

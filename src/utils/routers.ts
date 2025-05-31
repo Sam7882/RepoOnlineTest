@@ -119,15 +119,8 @@ export const toPostIndex = (params = {}) => {
 		url: '/pages/post/index' + queryStringify(params)
 	})
 }
-// 跳轉到發佈頁預覽
-export const toPostPreview = (params = {}) => {
-	safeSwitchTab('/pages/post/media-preview')
-	uni.navigateTo({
-		url: '/pages/post/media-preview' + queryStringify(params)
-	})
-}
 // 跳轉到發佈頁預覽2
-export const toPostPreview2 = (params = {}) => {
+export const toPostPreview = (params = {}) => {
 	safeSwitchTab('/pages/post/post-Preview')
 	uni.navigateTo({
 		url: '/pages/post/post-Preview' + queryStringify(params)

@@ -60,7 +60,7 @@
 <script setup>
 // TEMP: 發布頁-排定發布
 import { onLoad } from '@dcloudio/uni-app'
-import { toPostPreview2 } from '@/utils/routers'
+import { toPostPreview } from '@/utils/routers'
 import { usePostData } from '@/stores/usePostData'
 const postDataStore = usePostData()
 const { setSelectedMedia } = postDataStore
@@ -92,7 +92,7 @@ const onUpload = () => {
 				src
 			}))
 			setSelectedMedia(fileList)
-			toPostPreview2()
+			toPostPreview()
 		},
 		fail: (err) => {
 			uni.showToast({ title: '選擇失敗', icon: 'none' })

@@ -23,60 +23,17 @@
 				</uni-list>
 			</scroll-view>
 			<!-- 右邊箭頭 -->
-			<view v-if="showArrow" class="right-arrow">
+			<!-- <view v-if="showArrow" class="right-arrow">
 				<uni-icons type="right" size="30"></uni-icons>
-			</view>
+			</view> -->
 		</view>
 
-		<!-- 滾動用戶 -->
-		<view class="user-container">
-			<!-- 橫向可滾動的分類 -->
-			<scroll-view scroll-x :show-scrollbar="false" class="scroll-container" ref="searchTagScroll" :lower-threshold="1"
-				@scrolltolower="hideShowArrow" :upper-threshold="1" @scrolltoupper="openShowArrow">
-				<uni-list :border="false">
-					<template v-for="(user, key) in userList" :key="key">
-						<uni-list-item :border="false" clickable @click="handleUserClick(user)">
-							<!-- 左側圖像 -->
-							<template #header>
-								<image class="slot-image" src="/static/logo.png" mode="aspectFill" :lazy-load="true"></image>
-							</template>
-							<!-- 用戶名 -->
-							<template #body>
-								<view class="user-name">
-									{{ user.userName }}
-								</view>
-							</template>
-							<!-- 右側更多 -->
-							<template #footer>
-								<uni-icons class="more-icon" type="more-filled" size="30"></uni-icons>
-							</template>
-						</uni-list-item>
-					</template>
-				</uni-list>
-			</scroll-view>
-		</view>
-
-		<!-- 關注推薦 -->
-		<view class="recommend-container">
-			<view class="recommend-top">
-				<view class="recommend-top-text">
-					<text class="recommend-top-text-tip">{{ $t('search.basedOnYourFollowing') }}</text>
-					<view class="recommend-top-text-title-container">
-						<text class="recommend-top-text-title">
-							{{ $t('search.recommendForYou') }}
-						</text>
-						<uni-icons class="recommend-top-text-icon" type="right" size="30"></uni-icons>
-					</view>
-				</view>
-				<view class="recommend-top-more">
-					<uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons>
-				</view>
-			</view>
+		<view class="recommend-container recommend-container-small ">
 			<view class="recommend-list">
 				<!-- 橫向可滾動的分類 -->
 				<scroll-view scroll-x :show-scrollbar="false" class="scroll-container" ref="searchTagScroll">
 					<uni-list :border="false">
-						<template v-for="(user, key) in recommendList" :key="key">
+						<template v-for="(user, key) in newCreatorList" :key="key">
 							<uni-list-item :border="false" clickable @click="handleUserClick(user)" direction="column">
 								<!-- 創作縮圖 -->
 								<template #header>
@@ -84,7 +41,7 @@
 										<image class="recommend-content-image" src="/static/logo.png" mode="aspectFill" :lazy-load="true">
 										</image>
 										<view class="recommend-content-image-cover">
-											<uni-icons class="recommend-content-image-cover-icon" type="more-filled" size="30"></uni-icons>
+											<c-reportPopUp :iconColor="'var(--text-color-secondary)'" />
 										</view>
 									</view>
 								</template>
@@ -109,40 +66,106 @@
 			</view>
 		</view>
 
-		<!-- 本週熱門推薦 -->
-		<view class="hot-recommend-container">
+		<!-- 為您推薦 -->
+		<view class="recommend-container">
+			<view class="recommend-top">
+				<view class="recommend-top-text">
+					<text class="recommend-top-text-tip">{{ '為您推薦' }}</text>
+					<!-- <view class="recommend-top-text-title-container">
+						<text class="recommend-top-text-title">
+							{{ $t('search.recommendForYou') }}
+						</text>
+						<uni-icons class="recommend-top-text-icon" type="right" size="30"></uni-icons>
+					</view> -->
+				</view>
+				<!-- <view class="recommend-top-more">
+					<uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons>
+				</view> -->
+			</view>
+			<view class="recommend-list">
+				<!-- 橫向可滾動的分類 -->
+				<scroll-view scroll-x :show-scrollbar="false" class="scroll-container" ref="searchTagScroll">
+					<uni-list :border="false">
+						<template v-for="(user, key) in recommendList" :key="key">
+							<uni-list-item :border="false" clickable @click="handleUserClick(user)" direction="column">
+								<!-- 創作縮圖 -->
+								<template #header>
+									<view class="recommend-content-image-container">
+										<image class="recommend-content-image" src="/static/logo.png" mode="aspectFill" :lazy-load="true">
+										</image>
+										<view class="recommend-content-image-cover">
+											<c-reportPopUp :iconColor="'var(--text-color-secondary)'" />
+										</view>
+									</view>
+								</template>
+								<!-- 推薦內容訊息 -->
+								<template #body>
+									<view class="recommend-content-container">
+										<!-- 創作者名 -->
+										<view class="recommend-content-name">
+											{{ user.userName }}
+										</view>
+										<!-- 推薦內容文字 -->
+										<view class="recommend-content-text">
+											{{ user.description }}
+										</view>
+									</view>
+								</template>
+
+							</uni-list-item>
+						</template>
+					</uni-list>
+				</scroll-view>
+			</view>
+		</view>
+
+		<!-- 本週熱門 -->
+		<view class="recommend-container recommend-container-small ">
 			<view class="recommend-top">
 				<view class="recommend-top-text">
 					<view class="recommend-top-text-title-container">
 						<text class="recommend-top-text-title">
-							{{ $t('search.hotRecommend') }}
+							{{ '本週熱門' }}
 						</text>
-						<uni-icons class="recommend-top-text-icon" type="right" size="30"></uni-icons>
 					</view>
-				</view>
-				<view class="recommend-top-more" @click="handleMore">
-					<uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons>
 				</view>
 			</view>
-			<scroll-view scroll-x :show-scrollbar="false" class="scroll-container" ref="searchTagScroll" :lower-threshold="1"
-				@scrolltolower="hideShowArrow" :upper-threshold="1" @scrolltoupper="openShowArrow">
-				<view class="hot-recommend-list-container">
-					<view class="hot-recommend-list-column" v-for="(colItems, colIndex) in columns" :key="colIndex">
-						<view class="hot-recommend-list-item" v-for="(item, index) in colItems" :key="index">
-							<image class="hot-recommend-list-item-avatar" :src="item.avatar" />
-							<view class="hot-recommend-list-item-info">
-								<text class="hot-recommend-list-item-info-name">{{ item.name }}</text>
-								<text class="hot-recommend-list-item-info-desc">{{ item.desc }}</text>
-							</view>
-							<view class="hot-recommend-list-item-icon">
-								<uni-icons class="hot-recommend-list-item-info-more" type="more-filled" size="30"></uni-icons>
-							</view>
-						</view>
-					</view>
-				</view>
-			</scroll-view>
-		</view>
+			<view class="recommend-list">
+				<!-- 橫向可滾動的分類 -->
+				<scroll-view scroll-x :show-scrollbar="false" class="scroll-container" ref="searchTagScroll">
+					<uni-list :border="false">
+						<template v-for="(user, key) in newCreatorList" :key="key">
+							<uni-list-item :border="false" clickable @click="handleUserClick(user)" direction="column">
+								<!-- 創作縮圖 -->
+								<template #header>
+									<view class="recommend-content-image-container">
+										<image class="recommend-content-image" src="/static/logo.png" mode="aspectFill" :lazy-load="true">
+										</image>
+										<view class="recommend-content-image-cover">
+											<c-reportPopUp :iconColor="'var(--text-color-secondary)'" />
+										</view>
+									</view>
+								</template>
+								<!-- 推薦內容訊息 -->
+								<template #body>
+									<view class="recommend-content-container">
+										<!-- 創作者名 -->
+										<view class="recommend-content-name">
+											{{ user.userName }}
+										</view>
+										<!-- 推薦內容文字 -->
+										<view class="recommend-content-text">
+											{{ user.description }}
+										</view>
+									</view>
+								</template>
 
+							</uni-list-item>
+						</template>
+					</uni-list>
+				</scroll-view>
+			</view>
+		</view>
 		<!-- 瀏覽主題 -->
 		<view class="theme-container">
 			<view class="recommend-top">
@@ -151,23 +174,28 @@
 						<text class="recommend-top-text-title">
 							{{ $t('search.theme') }}
 						</text>
-						<uni-icons class="recommend-top-text-icon" type="right" size="30"></uni-icons>
 					</view>
 				</view>
-				<view class="recommend-top-more" @click="handleToTheme">
-					<uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons>
+				<view class="recommend-top-more btn-container" @click="handleToTheme">
+					<button class="btn">
+						探索主題
+					</button>
+					<!-- <uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons> -->
 				</view>
 			</view>
 			<scroll-view scroll-x :show-scrollbar="false" class="scroll-container" ref="searchTagScroll" :lower-threshold="1"
 				@scrolltolower="hideShowArrow" :upper-threshold="1" @scrolltoupper="openShowArrow">
 				<view class="theme-list-container">
-					<view class="theme-list-column" v-for="(colItems, colIndex) in themeColumns" :key="colIndex">
-						<view class="theme-list-item" :style="{ 'background': item.themeColor }" v-for="(item, index) in colItems"
+					<view class="theme-list-column">
+						<view class="theme-list-item" :style="{ 'background': item.themeColor }" v-for="(item, index) in themeList"
 							:key="index">
 							<view class="theme-list-item-info">
 								<text class="theme-list-item-info-name">{{ item.title }}</text>
 							</view>
-							<image class="theme-list-item-avatar" :src="item.iconUrl" />
+							<view class="icon-container">
+								<uni-icons class="icon-theme" type="icon-common-theme" custom-prefix="icon" size="30"
+									color="var(--text-color-secondary)"></uni-icons>
+							</view>
 						</view>
 					</view>
 				</view>
@@ -176,7 +204,7 @@
 		</view>
 
 		<!-- 新FANCE創作者 -->
-		<view class="recommend-container">
+		<view class="recommend-container recommend-container-small ">
 			<view class="recommend-top">
 				<view class="recommend-top-text">
 					<view class="recommend-top-text-title-container">
@@ -202,7 +230,7 @@
 										<image class="recommend-content-image" src="/static/logo.png" mode="aspectFill" :lazy-load="true">
 										</image>
 										<view class="recommend-content-image-cover">
-											<uni-icons class="recommend-content-image-cover-icon" type="more-filled" size="30"></uni-icons>
+											<c-reportPopUp :iconColor="'var(--text-color-secondary)'" />
 										</view>
 									</view>
 								</template>
@@ -360,13 +388,21 @@ const themeList = [
 	{ title: '小說創作', iconUrl: 'https://picsum.photos/32', themeColor: 'linear-gradient(to bottom, #24ffc1, #6e45ff)' },
 	{ title: '漫畫創作', iconUrl: 'https://picsum.photos/32', themeColor: 'linear-gradient(to bottom, #e2e205, #e2e205)' },
 	{ title: '同人創作', iconUrl: 'https://picsum.photos/32', themeColor: '#ff24fb' },
+	{ title: '單機遊戲', iconUrl: 'https://picsum.photos/32', themeColor: '#24ffc1' },
+	{ title: '小說創作', iconUrl: 'https://picsum.photos/32', themeColor: 'linear-gradient(to bottom, #24ffc1, #6e45ff)' },
+	{ title: '漫畫創作', iconUrl: 'https://picsum.photos/32', themeColor: 'linear-gradient(to bottom, #e2e205, #e2e205)' },
+	{ title: '同人創作', iconUrl: 'https://picsum.photos/32', themeColor: '#ff24fb' },
+	{ title: '單機遊戲', iconUrl: 'https://picsum.photos/32', themeColor: '#24ffc1' },
+	{ title: '小說創作', iconUrl: 'https://picsum.photos/32', themeColor: 'linear-gradient(to bottom, #24ffc1, #6e45ff)' },
+	{ title: '漫畫創作', iconUrl: 'https://picsum.photos/32', themeColor: 'linear-gradient(to bottom, #e2e205, #e2e205)' },
+	{ title: '同人創作', iconUrl: 'https://picsum.photos/32', themeColor: '#ff24fb' },
 ];
 // 每列放 3 個
 const themeColumns = computed(() => {
-	const colCount = Math.ceil(themeList.length / 2);
+	const colCount = Math.ceil(themeList.length / 3);
 	const result = Array.from({ length: colCount }, () => []);
 	themeList.forEach((item, index) => {
-		const colIndex = Math.floor(index / 2);
+		const colIndex = Math.floor(index / 3);
 		result[colIndex].push(item);
 	});
 	return result;
@@ -444,7 +480,7 @@ page {
 		&.is-input-border {
 			border: none;
 			background: var(--text-color-quinary) !important;
-			border-radius: 64rpx;
+			border-radius: 10rpx;
 			padding: 8rpx 32rpx;
 
 			&.is-focused {
@@ -478,7 +514,7 @@ page {
 
 .searchTag-container {
 	position: relative;
-	margin-top: 32rpx;
+	margin-top: 76rpx;
 
 	.right-arrow {
 		position: absolute;
@@ -504,7 +540,7 @@ page {
 	// list
 	.uni-list {
 		flex-direction: row;
-		gap: 16rpx;
+		gap: 22rpx;
 		background-color: transparent;
 		// overflow: scroll;
 
@@ -515,28 +551,27 @@ page {
 		.uni-list-item {
 			width: fit-content;
 			background-color: var(--text-color-quinary) !important;
-			border-radius: 16rpx;
+			border-radius: 100rpx;
 
 			::v-deep(.uni-list-item__container) {
 				.uni-list-item__container {
 					flex: none;
 					white-space: nowrap;
-					padding: 18rpx;
+					padding: 12rpx 26rpx;
 
 					.searchTag-item {
 						white-space: nowrap;
 						font-size: 28rpx;
-						color: var(--text-color-quaternary);
+						color: var(--text-color-secondary);
 					}
 				}
 			}
 
 			&.active {
-				background-color: var(--text-color-secondary) !important;
+				background-color: var(--primary-color) !important;
 
 				.searchTag-item {
-					color: var(--text-color-primary) !important;
-					font-weight: bold;
+					color: var(--text-color-secondary) !important;
 				}
 			}
 		}
@@ -613,7 +648,21 @@ page {
 
 /* 關注推薦 */
 .recommend-container {
-	margin-top: 48rpx;
+	margin-top: 80rpx;
+
+	&.recommend-container-small {
+		uni-image {
+			width: 300rpx;
+			height: 300rpx;
+			border-radius: 32rpx;
+		}
+
+		.uni-list {
+			.uni-list-item {
+				width: 300rpx;
+			}
+		}
+	}
 
 	// list
 	.uni-list {
@@ -730,6 +779,10 @@ page {
 
 }
 
+.theme-container {
+	margin-top: 80rpx;
+}
+
 // 標題
 .recommend-top {
 	display: flex;
@@ -744,7 +797,7 @@ page {
 		color: var(--text-color-secondary);
 
 		.recommend-top-text-tip {
-			color: var(--text-color-quaternary);
+			color: var(--text-color-secondary);
 			font-size: 30rpx;
 		}
 
@@ -758,8 +811,7 @@ page {
 			display: flex;
 			align-items: center;
 			gap: 4rpx;
-			font-size: 40rpx;
-			font-weight: 500;
+			font-size: 32rpx;
 		}
 
 		.recommend-top-text-icon {
@@ -862,18 +914,32 @@ page {
 	.theme-list-column {
 		display: flex;
 		flex-direction: column;
+		flex-wrap: wrap;
 		margin-right: 20rpx;
-		width: 46%;
+		width: 100%;
+		max-height: 400rpx;
+		gap: 20rpx;
 		flex-shrink: 0;
 
 		.theme-list-item {
+			position: relative;
 			display: flex;
-			justify-content: space-between;
-			align-items: flex-end;
-			margin-bottom: 32rpx;
-			padding: 24rpx;
-			padding-top: 80rpx;
+			justify-content: center;
+			align-items: center;
+			padding: 32rpx 100rpx;
 			border-radius: 24rpx;
+
+			.icon-container {
+				position: absolute;
+				top: 10rpx;
+				right: 16rpx;
+
+				.icon-theme {
+					font-size: 26rpx !important;
+					color: rgba(255, 255, 255, 0.5) !important;
+				}
+
+			}
 
 			.theme-list-item-avatar {
 				width: 48rpx;
@@ -898,7 +964,7 @@ page {
 					color: #fff;
 					font-size: 32rpx;
 					max-height: 1.5em;
-					color: var(--text-color-secondary);
+					color: var(--text-color-primary);
 				}
 
 				.theme-list-item-info-desc {

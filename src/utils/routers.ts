@@ -289,6 +289,21 @@ export const toCreatorApply = (params = {}) => {
 		url: '/pages/creator/applyCreator' + queryStringify(params)
 	})
 }
+// 跳轉到信箱
+export const toMessage = (params = {}) => {
+	safeSwitchTab('/pages/creator/message')
+	uni.navigateTo({
+		url: '/pages/creator/message' + queryStringify(params)
+	})
+}
+// 跳轉到信箱
+export const toMessageBox = (params = {}) => {
+	safeSwitchTab('/pages/creator/messageBox')
+	uni.navigateTo({
+		url: '/pages/creator/messageBox' + queryStringify(params)
+	})
+}
+
 
 // 跳轉到選擇頭像來源頁
 export const toSelectSource = (params = {}) => {
@@ -305,14 +320,6 @@ export const toCropAvatar = (params = {}) => {
 	})
 }
 
-
-// 跳轉到信箱
-export const toMessage = (params = {}) => {
-	safeSwitchTab('/pages/creator/message')
-	uni.navigateTo({
-		url: '/pages/creator/message' + queryStringify(params)
-	})
-}
 
 /* WALLET */
 // 跳轉到錢包

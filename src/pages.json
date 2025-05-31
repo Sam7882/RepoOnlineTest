@@ -322,6 +322,13 @@
       }
     },
     {
+      "path": "pages/creator/messageBox",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
       "path": "pages/common/select-source",
       "style": {
         "navigationStyle": "custom",

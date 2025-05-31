@@ -1,7 +1,25 @@
 <template>
 	<view class="preview-page">
+		<view class="bg-mask" v-if="isPopup" @click="handleClose"></view>
 		<view class="preview-container">
-			<uni-icons class="preview-container-close-icon" type="left" size="24" color="var(--text-color-secondary)" />
+			<uni-icons class="preview-container-close-icon" type="left" size="24" color="var(--text-color-secondary)"
+				@click="handleClose" />
+			<view class="previewPopup-container" v-if="isPopup">
+				<view class="previewPopup-container-item" @click="delMessagePopUp">
+					<view class="icon-container">
+						<uni-icons class="icon-del" type="icon-common-delete" size="24" custom-prefix="icon"
+							color="var(--text-color-primary)" />
+					</view>
+					<text class="previewPopup-text">刪除</text>
+				</view>
+				<view class="previewPopup-container-item">
+					<view class="icon-container">
+						<uni-icons class="icon-save" type="icon-common-file" size="24" custom-prefix="icon"
+							color="var(--text-color-secondary)" />
+					</view>
+					<text class="previewPopup-text">儲存草稿</text>
+				</view>
+			</view>
 		</view>
 		<view class="content">
 			<view class="preview-container-image">
@@ -38,6 +56,8 @@
 				{{ $t('post.next') }}
 			</button>
 		</view>
+
+		<c-messagePopUp class="messagePopUp" ref="messagePopUpRef" />
 	</view>
 </template>
 
@@ -53,9 +73,26 @@ const isSingleImage = computed(() => mediaList.value.length === 1)
 
 const currentIndex = ref(0)
 
+const isPopup = ref(false)
+const handleClose = () => {
+	isPopup.value = !isPopup.value
+}
+
 const handleNext = () => {
 	toPostIndex()
 	console.log('next')
+}
+
+const messagePopUpRef = ref(null)
+const delMessagePopUp = () => {
+	handleClose()
+	messagePopUpRef.value.open({
+		content: '草稿已儲存',
+		confirmBtnText: 'OK',
+		onConfirm: () => {
+			messagePopUpRef.value.close()
+		}
+	})
 }
 </script>
 
@@ -78,6 +115,17 @@ page {
 	height: 100dvh;
 }
 
+.bg-mask {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100dvw;
+	height: 100dvh;
+	background-color: var(--background-color-dark-opacity70);
+
+}
+
 // 關閉按鈕
 .preview-container {
 	position: fixed;
@@ -87,6 +135,52 @@ page {
 
 	.preview-container-close-icon {
 		font-size: 40rpx !important;
+	}
+
+	.previewPopup-container {
+		position: absolute;
+		top: 100%;
+		left: 100%;
+		z-index: 10;
+		background-color: var(--background-color-light);
+		border-radius: 30rpx;
+		display: flex;
+		flex-direction: column;
+
+		.previewPopup-container-item {
+			display: flex;
+			align-items: center;
+			padding: 16rpx 48rpx;
+			gap: 20rpx;
+			border-bottom: 1rpx solid var(--background-color-grayLight2);
+
+			.previewPopup-text {
+				font-size: 30rpx;
+				white-space: nowrap;
+				line-height: 1;
+			}
+
+			&:first-child {
+				.previewPopup-text {
+					color: var(--favorite-color-secondary);
+				}
+			}
+
+			&:last-child {
+				border-bottom: none;
+			}
+
+			.icon-container {
+				.icon-del {
+					color: var(--favorite-color-secondary) !important;
+				}
+
+				.icon-save {
+					color: var(--text-color-primary) !important;
+				}
+			}
+		}
+
 	}
 }
 
@@ -249,6 +343,20 @@ page {
 	.preview-container-button-item-icon {
 		width: 40rpx;
 		// height: 40rpx;
+	}
+}
+
+.messagePopUp {
+	::v-deep(.popup-box) {
+		.popup-content {
+			font-size: 32rpx;
+			color: var(--text-color-primary);
+		}
+
+		.btn {
+			font-size: 30rpx;
+		}
+
 	}
 }
 </style>

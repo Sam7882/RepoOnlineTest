@@ -37,7 +37,7 @@
 
         <!-- 確認按鈕 -->
         <view class="popup-confirm-container">
-          <button class="popup-confirm" @click="confirm">{{ $t('common.confirm') }}</button>
+          <button class="popup-confirm" @click="confirm">{{ '確認發布' }}</button>
         </view>
       </view>
     </view>
@@ -202,8 +202,8 @@ defineExpose({ open, close })
   top: 2px;
 
   .popup-option-custom-checked-image {
-    width: 50rpx;
-    height: 50rpx !important;
+    width: 34rpx;
+    height: 34rpx !important;
   }
 
   ::v-deep(.popup-option-custom-checked-image) {
@@ -224,8 +224,8 @@ defineExpose({ open, close })
   background-color: var(--primary-color);
   color: #fff;
   border-radius: 20rpx;
-  padding: 24rpx 96rpx;
-  font-size: 28rpx;
+  padding: 20rpx 96rpx;
+  font-size: 32rpx;
   line-height: 1;
 }
 </style>

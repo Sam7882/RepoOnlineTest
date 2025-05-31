@@ -69,6 +69,7 @@
   --background-color-blue: #82beda;
   --background-color-blue2: #5db3d9;
   --background-color-dark-opacity85: #040000d9;
+  --background-color-dark-opacity70: rgba(77, 74, 74, 0.7);
 
   --z-index-bottom-nav: 10000;
   --z-index-header-nav: 10000;
@@ -188,4 +189,10 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* 提示 */
+#u-a-t {
+  .uni-toast {
+  }
 }

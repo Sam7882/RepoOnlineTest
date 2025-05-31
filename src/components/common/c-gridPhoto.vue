@@ -9,6 +9,9 @@
           <image :src="item.cover || fallbackVideoCover" class="creator-home-page-content-card-container-item-img"
             mode="aspectFill" />
         </view>
+        <view v-if="item.draft > 0" class="draft-container" @click="handleDraftBox">
+          <text>草稿(2)</text>
+        </view>
         <view class="creator-home-page-content-card-container-item-icon-container">
           <uni-icons class="creator-home-page-content-card-container-item-icon" custom-prefix="icon" size="30"
             color="var(--text-color-secondary)"
@@ -22,9 +25,10 @@
 
 <script setup lang="ts">
 // TEMP: 組件-三格圖片 格柵排版
+import { toDraftBox } from '@/utils/routers'
 const props = defineProps({
   data: {
-    type: Array as PropType<{ src: string; id: string; type: string; dataNum: number; num: string; cover: string }[]>,
+    type: Array as PropType<{ src: string; id: string; type: string; dataNum: number; num: string; cover: string; draft: number }[]>,
     required: true,
   },
 });
@@ -44,6 +48,10 @@ const handleClick = (item: { src: string; alt: string; type: string }) => {
   }
 };
 
+const handleDraftBox = () => {
+  toDraftBox()
+}
+
 const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
 </script>
 
@@ -59,7 +67,7 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
     padding: 2rpx;
     width: 100%;
     height: 100%;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1/1.2;
 
     ::v-deep(.creator-home-page-content-card-container-item-img) {
       uni-image {
@@ -83,6 +91,22 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
         object-fit: cover;
         object-position: center;
       }
+    }
+
+    .draft-container {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 4rpx);
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #666666, #D0D0D0);
+      color: var(--text-color-white2);
+      padding: 6rpx 0;
+      font-size: 24rpx;
     }
 
     .creator-home-page-content-card-container-item-icon-container {

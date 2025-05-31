@@ -147,6 +147,13 @@ export const toSchedulePost = (params = {}) => {
 		url: '/pages/post/schedulePost' + queryStringify(params)
 	})
 }
+// 跳轉到草稿箱
+export const toDraftBox = (params = {}) => {
+	safeSwitchTab('/pages/post/draftBox')
+	uni.navigateTo({
+		url: '/pages/post/draftBox' + queryStringify(params)
+	})
+}
 
 /* 創作者 */
 // 跳轉到創作者首頁

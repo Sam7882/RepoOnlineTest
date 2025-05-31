@@ -6,9 +6,16 @@
 
 		<view class="creator-home-page-data-container">
 			<!-- 絕對位置 頭像 -->
-			<view class="creator-home-page-avatar-container" @click="handleShortStory">
-				<image class="creator-home-page-avatar" src="/static/images/template/img-template-03.png" mode="widthFix">
-				</image>
+			<view class="avatar-container">
+				<view class="creator-home-page-avatar-container" @click="handleShortStory">
+					<image class="creator-home-page-avatar" src="/static/images/template/img-template-03.png" mode="widthFix">
+					</image>
+
+				</view>
+				<view class="icon-container">
+					<uni-icons class="icon" type="icon-common-plus" custom-prefix="icon" size="24"
+						color="var(--text-color-nonary)" @click="onUpload"></uni-icons>
+				</view>
 			</view>
 
 			<!-- 名稱與帳號 垂直排序 -->
@@ -309,8 +316,11 @@
 <script setup>
 // TEMP: 創作者主頁
 import { onPageScroll } from '@dcloudio/uni-app'
-import { toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory, toCreatorEdit, toCreatorSelectMedia, toCreatorClassification } from '@/utils/routers'
+import { toPostPreview, toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory, toCreatorEdit, toCreatorSelectMedia, toCreatorClassification } from '@/utils/routers'
 import { useInitStore } from '@/stores/useInitDataStore';
+import { usePostData } from '@/stores/usePostData'
+const postDataStore = usePostData()
+const { setSelectedMedia } = postDataStore
 const type = ref('all');
 const showSelect = ref(false);
 
@@ -327,25 +337,25 @@ const filterList = ref({
 	range: [{ "value": '0', "text": "台灣" }, { "value": '1', "text": "美國" }, { "value": '2', "text": "中國" }, { "value": '3', "text": "日本" }, { "value": '4', "text": "韓國" }, { "value": '5', "text": "其他" }]
 });
 const gridPhotoData = ref([
-	{ id: '1', type: 'image', dataNum: 2, num: "1688", src: 'https://picsum.photos/id/1011/300/300' },
-	{ id: '2', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1012/300/300' },
-	{ id: '3', type: 'image', dataNum: 4, num: "1688", src: 'https://picsum.photos/id/1013/300/300' },
-	{ id: '4', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1014/300/300' },
-	{ id: '5', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1015/300/300' },
-	{ id: '6', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1016/300/300' },
-	{ id: '7', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1015/300/300' },
-	{ id: '8', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1018/300/300' },
-	{ id: '9', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1019/300/300' },
-	{ id: '10', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1011/300/300' },
-	{ id: '11', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1012/300/300' },
-	{ id: '12', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1012/300/300' },
-	{ id: '13', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1013/300/300' },
-	{ id: '14', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1014/300/300' },
-	{ id: '15', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1015/300/300' },
-	{ id: '16', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1016/300/300' },
-	{ id: '17', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1011/300/300' },
-	{ id: '18', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1018/300/300' },
-	{ id: '19', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1019/300/300' },
+	{ id: '1', type: 'image', dataNum: 2, draft: 2, num: "1688", src: 'https://picsum.photos/id/1011/300/300' },
+	{ id: '2', type: 'video', dataNum: 1, draft: 3, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1012/300/300' },
+	{ id: '3', type: 'image', dataNum: 4, draft: 0, num: "1688", src: 'https://picsum.photos/id/1013/300/300' },
+	{ id: '4', type: 'video', dataNum: 1, draft: 0, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1014/300/300' },
+	{ id: '5', type: 'image', dataNum: 1, draft: 0, num: "1688", src: 'https://picsum.photos/id/1015/300/300' },
+	{ id: '6', type: 'video', dataNum: 1, draft: 0, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1016/300/300' },
+	{ id: '7', type: 'image', dataNum: 1, draft: 0, num: "1688", src: 'https://picsum.photos/id/1015/300/300' },
+	{ id: '8', type: 'video', dataNum: 1, draft: 0, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1018/300/300' },
+	{ id: '9', type: 'image', dataNum: 1, draft: 0, num: "1688", src: 'https://picsum.photos/id/1019/300/300' },
+	{ id: '10', type: 'image', dataNum: 1, draft: 0, num: "1688", src: 'https://picsum.photos/id/1011/300/300' },
+	{ id: '11', type: 'video', dataNum: 1, draft: 0, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1012/300/300' },
+	{ id: '12', type: 'video', dataNum: 1, draft: 0, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1012/300/300' },
+	{ id: '13', type: 'image', dataNum: 1, draft: 0, num: "1688", src: 'https://picsum.photos/id/1013/300/300' },
+	{ id: '14', type: 'video', dataNum: 1, draft: 0, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1014/300/300' },
+	{ id: '15', type: 'image', dataNum: 1, draft: 0, num: "1688", src: 'https://picsum.photos/id/1015/300/300' },
+	{ id: '16', type: 'video', dataNum: 1, draft: 0, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1016/300/300' },
+	{ id: '17', type: 'image', dataNum: 1, draft: 0, num: "1688", src: 'https://picsum.photos/id/1011/300/300' },
+	{ id: '18', type: 'video', dataNum: 1, draft: 0, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1018/300/300' },
+	{ id: '19', type: 'image', dataNum: 1, draft: 0, num: "1688", src: 'https://picsum.photos/id/1019/300/300' },
 ]);
 
 // 關閉篩選
@@ -493,6 +503,27 @@ const openNoticePopUp = () => {
 		content: '商店即將登場，敬請期待！',
 	})
 }
+
+// 上傳圖片
+const onUpload = () => {
+	uni.chooseImage({
+		count: 15,
+		sourceType: ['album'],
+		success: (res) => {
+			const fileList = res.tempFilePaths.map((src, index) => ({
+				id: `${Date.now()}-${index}`,
+				type: 'image',
+				src
+			}))
+			setSelectedMedia(fileList)
+			toPostPreview()
+		},
+		fail: (err) => {
+			uni.showToast({ title: '選擇失敗', icon: 'none' })
+		}
+	})
+}
+
 onMounted(() => {
 	// 初始計算一次
 	updateRect()
@@ -608,39 +639,62 @@ page {
 
 
 	// 頭像
-	.creator-home-page-avatar-container {
+	.avatar-container {
 		position: relative;
-		width: 208rpx;
-		height: 208rpx;
-		border: 12rpx solid var(--primary-color);
-		background: var(--primary-color);
-		border-radius: 100%;
-		overflow: hidden;
+
+		.icon-container {
+			position: absolute;
+			bottom: 8rpx;
+			right: 16rpx;
+			z-index: 1;
+			background: var(--text-color-primary);
+			border-radius: 100%;
+			padding: 12rpx;
+			width: 44rpx;
+			height: 44rpx;
+
+			.icon {
+				font-size: 24rpx !important;
+				color: var(--text-color-secondary) !important;
+			}
+		}
+
+		.creator-home-page-avatar-container {
+			position: relative;
+			width: 208rpx;
+			height: 208rpx;
+			border: 12rpx solid var(--primary-color);
+			background: var(--primary-color);
+			border-radius: 100%;
+			overflow: hidden;
 
 
-		// transform: translate(-50%, -50%);
-		::v-deep(.creator-home-page-avatar) {
-			uni-image {
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				width: 110% !important;
-				height: 110% !important;
+			// transform: translate(-50%, -50%);
+			::v-deep(.creator-home-page-avatar) {
+				uni-image {
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					width: 110% !important;
+					height: 110% !important;
+				}
+
+				// 背景圖
+				uni-image>div {
+					background-position: center !important;
+					background-size: cover !important;
+				}
+
+				// 圖片佔位
+				uni-image>img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+				}
 			}
 
-			// 背景圖
-			uni-image>div {
-				background-position: center !important;
-				background-size: cover !important;
-			}
 
-			// 圖片佔位
-			uni-image>img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				object-position: center;
-			}
 		}
 	}
 

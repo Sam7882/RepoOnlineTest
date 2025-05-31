@@ -86,6 +86,12 @@
         "navigationStyle": "custom"
       }
     },
+    {
+      "path": "pages/post/draftBox",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
 
     {
       "path": "pages/search/index",

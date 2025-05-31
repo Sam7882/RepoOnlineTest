@@ -1,5 +1,5 @@
 <template>
-	<view class="media-item" @click="toggle">
+	<view class="media-item" @click="handleToPost">
 		<image v-if="item.type === 'image'" :src="item.src" mode="aspectFill" class="media-thumbnail" />
 		<view v-else class="media-thumbnail video-wrapper">
 			<image :src="item.cover || fallbackVideoCover" mode="aspectFill" />
@@ -9,23 +9,44 @@
 				:type="item.type === 'image' ? 'icon-common-copy' : item.type === 'video' ? 'icon-stander-play2' : ''" />
 			<text class="info-icon-text">{{ item.num }}</text>
 		</view>
-		<view class="selected-indicator" :class="{ isSelected }" v-if="canTagging"></view>
+		<view class="selected-indicator" :class="{ isSelected }" v-if="canTagging">{{ isSelected ?
+			selectIndex + 1 : '' }}
+		</view>
 	</view>
 </template>
 
 <script setup>
 // TEMP:九宮格選取圖片
+import { toPostIndex } from '@/utils/routers'
 const props = defineProps({
 	item: Object,
 	isSelected: Boolean,
 	canTagging: {
 		type: Boolean,
 		default: true
+	},
+	selectIndex: {
+		type: Number,
+		default: 0
+	},
+	onDelete: {
+		type: Boolean,
+		default: false
 	}
 })
 
 
 const emit = defineEmits(['toggle-select'])
+
+const handleToPost = () => {
+	if (props.onDelete) {
+		toggle()
+		return
+	}
+	toPostIndex({
+		id: props.item.id
+	})
+}
 
 const toggle = () => {
 	if (!props.canTagging) return
@@ -83,6 +104,11 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
 	border-radius: 50%;
 	background: transparent;
 	border: 2rpx solid white;
+	font-size: 16rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--text-color-secondary);
 
 	&.isSelected {
 		background: var(--primary-color);

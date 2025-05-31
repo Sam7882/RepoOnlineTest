@@ -33,7 +33,7 @@
                 <view class="scroll-view-item-icon-container">
                   <uni-icons class="scroll-view-item-icon" type="icon-common-copyLink" custom-prefix="icon" size="24" />
                 </view>
-                <text class="scroll-view-item-text">複製連結</text>
+                <text class="scroll-view-item-text">{{ t('common.copyLink') }}</text>
               </view>
               <view class="scroll-view-item">
                 <view class="scroll-view-item-icon-container">
@@ -41,7 +41,7 @@
                     size="24" />
                 </view>
                 <!-- TODO:語系須補-->
-                <text class="scroll-view-item-text">新增到限時動態</text>
+                <text class="scroll-view-item-text">{{ t('post.addToStory') }}</text>
               </view>
             </view>
           </scroll-view>
@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-// TEMP: 分享彈窗
+// TEMP: 組件-分享彈窗
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 // TEMP:發布頁-組件-發布設定底部上滑彈窗

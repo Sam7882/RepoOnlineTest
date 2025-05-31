@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-// TEMP: 訊息OK彈窗
+// TEMP: 組件-訊息OK彈窗
 import { ref, defineExpose } from 'vue'
 import uniPopup from '@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'
 /* TODO:語系須補 */

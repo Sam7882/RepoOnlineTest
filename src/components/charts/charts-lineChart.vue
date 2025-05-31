@@ -19,6 +19,7 @@
 </template>
 
 <script setup lang="ts">
+// TEMP: 數據分析組件-折線圖
 import { defineProps } from 'vue';
 const props = defineProps({
 	chartData: Object,

@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-// TEMP: 發布-組件-自動發佈設定
+// TEMP: 組件-自動發佈設定
 const emit = defineEmits(['update:autoDate'])
 const popupRef = ref()
 const date = ref('2025-02-25 19:18')

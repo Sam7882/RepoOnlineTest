@@ -8,14 +8,14 @@
 			<!-- 舉報確認窗 -->
 			<uni-popup class="reportConfirm" ref="reportConfirm" type="center" @change="emitChange">
 				<view class="popup-box">
-					<view class="popup-title">不再出現此創作者</view>
-					<view class="popup-content">您將不再收到此創作者發布的內容。</view>
+					<view class="popup-title">{{ t('report.hideCreator') }}</view>
+					<view class="popup-content">{{ t('report.hideCreatorTip') }}</view>
 					<view class="deco-line"></view>
 					<view class="popup-actions">
 						<button class="btn primary-btn" @click="openReportPopUp">
 							<uni-icons class="btn-icon" type="icon-common-report" custom-prefix="icon" size="24"
 								color="var(--text-color-primary)" />
-							舉報
+							{{ t('report.report') }}
 						</button>
 						<uni-icons class="btn-icon btn-icon-next" type="right" size="24" @click="closeReportPopUp" />
 					</view>
@@ -24,12 +24,14 @@
 						<button class="btn primary-btn" @click="closeReportConfirm">
 							<uni-icons class="btn-icon" type="icon-common-uninterest" custom-prefix="icon" size="24"
 								color="var(--text-color-primary)" />
-							不感興趣
+							{{ t('common.notInterest') }}
 						</button>
 					</view>
 					<view class="deco-line"></view>
 					<view class="popup-actions">
-						<button class="btn cancel-btn" @click="noInterest">暫時不要</button>
+						<button class="btn cancel-btn" @click="noInterest">
+							{{ t('common.notYet') }}
+						</button>
 					</view>
 				</view>
 			</uni-popup>
@@ -41,23 +43,23 @@
 				<view class="popup-container" v-if="reportPopUpStep === 1">
 					<!-- 標題與關閉 -->
 					<view class="popup-header">
-						<text class="popup-title">舉報</text>
+						<text class="popup-title">{{ t('report.report') }}</text>
 						<uni-icons class="popup-close" type="closeempty" size="24" @click="closeReportPopUp" />
 					</view>
 					<view class="deco-line"></view>
 					<view class="popup-content">
 						<!-- 社群 -->
-						<text class="popup-content-title">你想檢舉什麼內容？</text>
-						<text class="popup-content-text">你的舉報將匿名，且將不再收到此創作者發布的內容。</text>
+						<text class="popup-content-title">{{ t('report.reportQuestion') }}</text>
+						<text class="popup-content-text">{{ t('report.reportContentTip') }}</text>
 					</view>
 					<view class="deco-line"></view>
 					<view class="popup-content-list">
 						<view class="popup-content-item" @click="nextReportPopUpStep">
-							<text>特定貼文</text>
+							<text>{{ t('report.specificPost') }}</text>
 							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
 						<view class="popup-content-item" @click="nextReportPopUpStep">
-							<text>有關這個帳號的內容</text>
+							<text>{{ t('report.aboutPostContent') }}</text>
 							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
 					</view>
@@ -67,31 +69,31 @@
 					<!-- 標題與關閉 -->
 					<view class="popup-header">
 						<uni-icons class="popup-prev" type="left" size="24" @click="prevReportPopUpStep" />
-						<text class="popup-title">舉報</text>
+						<text class="popup-title">{{ t('report.report') }}</text>
 						<uni-icons class="popup-close" type="closeempty" size="24" @click="closeReportPopUp" />
 					</view>
 					<view class="deco-line"></view>
 					<view class="popup-content">
 						<!-- 社群 -->
-						<text class="popup-content-title">你想檢舉什麼內容？</text>
-						<text class="popup-content-text">你的舉報將匿名，且將不再收到此創作者發布的內容。</text>
+						<text class="popup-content-title">{{ t('report.reportQuestion') }}</text>
+						<text class="popup-content-text">{{ t('report.reportContentTip') }}</text>
 					</view>
 					<view class="deco-line"></view>
 					<view class="popup-content-list">
 						<view class="popup-content-item" @click="nextFeedback">
-							<text>自殺、自殘或飲食失調</text>
+							<text>{{ t('report.reportContent1') }}</text>
 							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
 						<view class="popup-content-item" @click="nextFeedback">
-							<text>暴力、仇恨或剝削</text>
+							<text>{{ t('report.reportContent2') }}</text>
 							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
 						<view class="popup-content-item" @click="nextFeedback">
-							<text>裸露或性行為</text>
+							<text>{{ t('report.reportContent3') }}</text>
 							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
 						<view class="popup-content-item" @click="nextFeedback">
-							<text>侵犯智慧財產權</text>
+							<text>{{ t('report.reportContent4') }}</text>
 							<uni-icons class="popup-content-icon" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
 					</view>
@@ -104,15 +106,15 @@
 				<view class="popup-container">
 					<!-- 標題與關閉 -->
 					<view class="popup-header">
-						<text class="popup-title">謝謝您的意見回饋</text>
+						<text class="popup-title">{{ t('report.thankYouSuggest') }}</text>
 					</view>
 					<view class="popup-content">
 						<!-- 社群 -->
-						<text class="popup-content-text">我們已收到您的檢舉，系統會盡快進行審核。若確認違規，將依據相關規範進行處理。 感謝您協助我們維護社群安全與秩序。</text>
+						<text class="popup-content-text">{{ t('report.reportReply') }}</text>
 					</view>
 					<view class="btn-container">
 						<button type="button" class="btn" @click="closeFeedbackPopUp">
-							完成
+							{{ t('common.done') }}
 						</button>
 					</view>
 				</view>
@@ -122,7 +124,7 @@
 </template>
 
 <script setup>
-// TEMP: 檢舉元件
+// TEMP: 組件-檢舉元件
 const props = defineProps({
 	iconColor: {
 		type: String,

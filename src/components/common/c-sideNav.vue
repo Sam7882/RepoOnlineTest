@@ -87,7 +87,7 @@
 </template>
 
 <script setup>
-// TEMP: 側邊欄
+// TEMP: 組件-側邊欄
 import { toCreatorHome, toStatistics, toWallet, toFavorites, toFollowing, toLogin } from '@/utils/routers'
 import { useInitStore } from '@/stores/useInitDataStore';
 const initStore = useInitStore();

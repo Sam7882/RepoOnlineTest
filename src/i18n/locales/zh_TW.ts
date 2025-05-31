@@ -42,7 +42,10 @@ export default {
     send: "送出",
     close: "關閉",
     postContent: "請輸入內容",
-
+    done: "完成",
+    notYet: "暫時不要",
+    notInterest: "不感興趣",
+    copyLink: "複製連結",
   },
   auth: {
     birthday: "生日",
@@ -131,6 +134,7 @@ export default {
     draft: "草稿",
     publishTip: "發佈成功",
     publishTip2: "發佈成功，將會在24小時內審核",
+    addToStory: "新增到限時動態",
     story: "限時動態",
     yourStory: "你的限時動態",
     next: "下一步",
@@ -199,6 +203,9 @@ export default {
     service: "聯繫客服",
     logout: "登出",
   },
+  service: {
+    pleaseEnter: "請輸入您的問題或需求，我們會盡快回覆您：",
+  },
   sponsor: {
     sponsor: "打賞贊助",
     sponsorAmount: "打賞金額",
@@ -216,5 +223,20 @@ export default {
     subscriptionTip1: "完全訪問此創作者所有訂閱內容",
     subscriptionTip2: "優先享有創作者舉辦活動",
     subscriptionPlanChoose: "請選擇以下方案進行解鎖",
+  },
+  report: {
+    report: "舉報",
+    hideCreator: "不再出現此創作者",
+    hideCreatorTip: "您將不再收到此創作者發布的內容。",
+    reportContentTip: "你的舉報將匿名，且將不再收到此創作者發布的內容。",
+    specificPost: "特定貼文",
+    reportQuestion: "你想檢舉什麼內容？",
+    aboutPostContent: "有關這個帳號的內容",
+    reportContent1: "自殺、自殘或飲食失調",
+    reportContent2: "暴力、仇恨或剝削",
+    reportContent3: "裸露或性行為",
+    reportContent4: "侵犯智慧財產權",
+    thankYouSuggest: "謝謝您的意見回饋",
+    reportReply: "我們已收到您的檢舉，系統會盡快進行審核。若確認違規，將依據相關規範進行處理。 感謝您協助我們維護社群安全與秩序。",
   }
 };

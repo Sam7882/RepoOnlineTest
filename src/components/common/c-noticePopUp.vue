@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-// TEMP: 通知彈窗
+// TEMP: 組件-通知彈窗
 const popup = ref(null)
 const title = ref('提示')
 const content = ref('')

@@ -42,6 +42,7 @@
 	</view>
 </template>
 <script setup>
+// TEMP: 組件-創作者主頁-HeaderNav
 import { router, toCreatorSetMenu } from '@/utils/routers';
 const { back, toPage } = router;
 const handleBack = () => {

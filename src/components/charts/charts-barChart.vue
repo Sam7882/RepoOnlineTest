@@ -7,8 +7,8 @@
 </template>
 
 <script setup lang="ts">
+// TEMP: 數據分析組件-柱狀圖
 import { defineProps } from 'vue';
-
 const props = defineProps({
 	chartData: Object,
 	opts: Object

@@ -138,7 +138,7 @@
 </template>
 
 <script setup lang="ts">
-// TEMP: 打賞付款選擇彈窗
+// TEMP: 組件-打賞付款選擇彈窗
 import { toPay } from '@/utils/routers'
 import { toCreditCardSelect } from '@/utils/routers'
 const emit = defineEmits(['update:Data'])

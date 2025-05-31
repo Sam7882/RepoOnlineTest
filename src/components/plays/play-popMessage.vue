@@ -125,7 +125,7 @@
 </template>
 
 <script setup lang="ts">
-// TEMP: 影音頁的留言彈跳窗口
+// TEMP: 組件-留言彈跳窗口
 const emit = defineEmits(['update:autoDate'])
 const popupRef = ref()
 

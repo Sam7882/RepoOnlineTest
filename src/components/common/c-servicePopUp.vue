@@ -3,7 +3,7 @@
     <view class="popup-box">
       <view class="popup-title">{{ '聯繫客服' }}</view>
       <view class="popup-content">
-        <text class="popup-content-text">請輸入您的問題或需求，我們會盡快回覆您：</text>
+        <text class="popup-content-text">{{ t('service.pleaseEnter') }}</text>
         <uni-easyinput v-model="subject" type="textarea" placeholder="主題:" :inputBorder="false" />
         <uni-easyinput v-model="description" type="textarea" placeholder="問題描述:" :inputBorder="false" />
       </view>
@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-// TEMP: 聯繫客服彈窗
+// TEMP: 組件-聯繫客服彈窗
 import { ref, defineExpose } from 'vue'
 import uniPopup from '@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'
 /* TODO:語系須補 */

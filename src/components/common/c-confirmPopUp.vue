@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-// TEMP: 確認彈窗
+// TEMP: 組件-確認彈窗
 import { ref, defineExpose } from 'vue'
 import uniPopup from '@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'
 /* TODO:語系須補 */

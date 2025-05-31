@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-// TEMP: 圖片POP偽裝全螢幕
+// TEMP: 組件-圖片POP偽裝全螢幕
 const props = defineProps({
   imgs: {
     type: Array,

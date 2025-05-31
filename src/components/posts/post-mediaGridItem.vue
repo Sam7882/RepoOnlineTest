@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-// TEMP:九宮格選取圖片
+// TEMP: 組件-九宮格選取影音圖片資源
 import { toPostIndex } from '@/utils/routers'
 const props = defineProps({
 	item: Object,

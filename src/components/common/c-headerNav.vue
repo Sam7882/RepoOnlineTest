@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-// TEMP: 排行榜
+// TEMP: 組件-頂部導航列
 import { router, toHelper } from '@/utils/routers';
 const props = defineProps({
 	title: {

@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-// TEMP: 組件-開關按鈕
+// TEMP: 組件-switch開關按鈕
 const modelValue = defineModel();
 
 const emit = defineEmits(['update:modelValue']);

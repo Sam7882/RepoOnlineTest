@@ -231,8 +231,8 @@ onMounted(() => {
 }
 
 .avatar-canvas {
-	width: 600rpx;
-	height: 600rpx;
+	width: 300px;
+	height: 300px;
 	background: #eee;
 	border-radius: 16rpx;
 	margin-bottom: 60rpx;

@@ -50,7 +50,7 @@
 
 <script setup>
 // TEMP: 組件-底部導航列
-import { toPlayIndex, toFavorites, toPostIndex, toMessage, toPostPreview } from '@/utils/routers';
+import { toPlayIndex, toFavorites, toPostIndex, toMessageBox, toPostPreview } from '@/utils/routers';
 const props = defineProps({
 	// 被景色
 	bgColor: {
@@ -95,7 +95,7 @@ const handleClickToPage = (page) => {
 			toPostPreview()
 			break;
 		case 'message':
-			toMessage()
+			toMessageBox()
 			break;
 	}
 };

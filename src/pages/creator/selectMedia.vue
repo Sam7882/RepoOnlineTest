@@ -44,17 +44,17 @@ const { manageMedia, postData } = storeToRefs(postDataStore)
 const { back } = router
 console.log("🚀 ~ postDataStore:", postDataStore)
 console.log("🚀 ~ postDataStore:", manageMedia)
-const tabs = [t('creator.all'), t('creator.video'), t('creator.photo')]
-const currentTab = ref(t('creator.all'))
+const tabs = [t('common.all'), t('common.video'), t('common.photo')]
+const currentTab = ref(t('common.all'))
 const selectedIds = ref([])
 
 const renderMediaList = ref([])
 
 // 過濾列表
 const filteredList = computed(() => {
-	if (currentTab.value === t('creator.video')) {
+	if (currentTab.value === t('common.video')) {
 		return renderMediaList.value.filter((m) => m.type === 'video')
-	} else if (currentTab.value === t('creator.photo')) {
+	} else if (currentTab.value === t('common.photo')) {
 		return renderMediaList.value.filter((m) => m.type === 'image')
 	} else {
 		return renderMediaList.value

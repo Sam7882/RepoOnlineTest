@@ -12,7 +12,7 @@
 					</view>
 					<text class="previewPopup-text">{{ $t('common.delete') }}</text>
 				</view>
-				<view class="previewPopup-container-item">
+				<view class="previewPopup-container-item" @click="saveDraft">
 					<view class="icon-container">
 						<uni-icons class="icon-save" type="icon-common-file" size="24" custom-prefix="icon"
 							color="var(--text-color-secondary)" />
@@ -87,6 +87,10 @@ const handleNext = () => {
 const messagePopUpRef = ref(null)
 const delMessagePopUp = () => {
 	handleClose()
+
+}
+
+const saveDraft = () => {
 	messagePopUpRef.value.open({
 		content: t('post.saveDraftTip'),
 		confirmBtnText: 'OK',

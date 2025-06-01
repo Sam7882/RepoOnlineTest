@@ -12,7 +12,7 @@
 					</image>
 
 				</view>
-				<view class="icon-container">
+				<view class="icon-container" v-if="isCreator">
 					<uni-icons class="icon" type="icon-common-plus" custom-prefix="icon" size="24"
 						color="var(--text-color-nonary)" @click="onUpload"></uni-icons>
 				</view>
@@ -98,9 +98,11 @@
 				<view
 					class="creator-home-page-data-profile-container-item creator-home-page-data-profile-container-item-hash-tag">
 					<text class="creator-home-page-data-profile-container-item-text"
-						@click="handleTagRank('entertainment')">#娛樂</text>
-					<text class="creator-home-page-data-profile-container-item-text" @click="handleTagRank('game')">#遊戲</text>
-					<text class="creator-home-page-data-profile-container-item-text" @click="handleTagRank('food')">#美食</text>
+						@click.stop="handleTagRank('entertainment')">#娛樂</text>
+					<text class="creator-home-page-data-profile-container-item-text"
+						@click.stop="handleTagRank('game')">#遊戲</text>
+					<text class="creator-home-page-data-profile-container-item-text"
+						@click.stop="handleTagRank('food')">#美食</text>
 				</view>
 
 			</view>
@@ -160,16 +162,17 @@
 					<!-- 編輯資料 -->
 					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button"
 						@click="handleProfileEdit()">{{
-							'編輯資料' }}</button>
+							$t('creator.editData') }}</button>
 					<!-- 分享檔案 -->
-					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
-						'分享檔案' }}</button>
+					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button"
+						@click="handleShare">{{
+							$t('creator.shareFile') }}</button>
 				</view>
 				<!-- 創作者中心 -->
 				<view class="creator-home-page-data-profile-container-item-edit-button-bottom-container"
 					@click="handleSubscription">
 					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
-						'創作者中心' }}</button>
+						$t('creator.creatorCenter') }}</button>
 				</view>
 			</view>
 		</view>
@@ -303,8 +306,8 @@
 						</view>
 						<view class="followPopUp-container-item2">
 							<view class="followPopUp-container-item-content btn-container">
-								<button type="button" class="btn popup-button"
-									@click="confirmfollowPopUp">{{ $t("common.send") }}</button>
+								<button type="button" class="btn popup-button" @click="confirmfollowPopUp">{{ $t("common.send")
+								}}</button>
 							</view>
 						</view>
 					</template>
@@ -317,7 +320,7 @@
 <script setup>
 // TEMP: 創作者主頁
 import { onPageScroll } from '@dcloudio/uni-app'
-import { toPostPreview, toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory, toCreatorEdit, toCreatorSelectMedia, toCreatorClassification } from '@/utils/routers'
+import { toShare, toPostPreview, toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory, toCreatorEdit, toCreatorSelectMedia, toCreatorClassification } from '@/utils/routers'
 import { useInitStore } from '@/stores/useInitDataStore';
 import { usePostData } from '@/stores/usePostData'
 const postDataStore = usePostData()
@@ -463,6 +466,7 @@ const handleRank = () => {
 }
 // 跳到tagRank頁
 const handleTagRank = (tag) => {
+	console.log("🚀 ~ handleTagRank ~ tag:", tag)
 	toTagRank({ tag })
 }
 // 分類
@@ -503,6 +507,10 @@ const openNoticePopUp = () => {
 		title: t('common.systemNotOpen'),
 		content: t('common.storeComingSoon'),
 	})
+}
+// 跳轉到創作者分享頁
+const handleShare = () => {
+	toShare()
 }
 
 // 上傳圖片

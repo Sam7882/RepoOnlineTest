@@ -138,17 +138,18 @@
 // TEMP: 我的錢包
 import { onShow } from '@dcloudio/uni-app';
 import { router, towithdraw } from '@/utils/routers';
-
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 const { back } = router;
 
 const localdata = ref({
 	value: 0,
 	range: [
-		{ value: 0, text: "common.all" },
-		{ value: 3, text: "common.today" },
-		{ value: 4, text: "common.thisWeek" },
-		{ value: 5, text: "common.thisMonth" },
-		{ value: 6, text: "common.thisYear" },
+		{ value: 0, text: t('common.all') },
+		{ value: 3, text: t('common.today') },
+		{ value: 4, text: t('common.thisWeek') },
+		{ value: 5, text: t('common.thisMonth') },
+		{ value: 6, text: t('common.thisYear') },
 	],
 })
 const listTypeData = ref([

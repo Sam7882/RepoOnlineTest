@@ -1,7 +1,8 @@
 <template>
 	<view class="blockade-page">
 		<!-- header 導航-->
-		<c-headerNav class="blockade-page-header" :title="t('auth.blockadeList')" :openSearch="true" @search="showSearch" />
+		<c-headerNav class="blockade-page-header" :title="t('creator.blockadeList')" :openSearch="true"
+			@search="showSearch" />
 
 		<!-- 搜尋容器 -->
 		<view v-if="searchStatus">

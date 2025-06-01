@@ -8,9 +8,9 @@
 				<uni-forms-item class="form-item" name="phone" required>
 					<view class="phone-input-row">
 						<uni-data-select class="country-select" v-model="selectedCountry" :localdata="countryList" :clear="false"
-							:placeholder="$t('creator.countryCode')" />
+							:placeholder="$t('auth.countryCode')" />
 						<uni-easyinput class="inputStyle phone-input" v-model="formData.phone"
-							:placeholder="$t('auth.pleaseEnter', { title: $t('creator.phone') })" :trim="true" :clearable="false"
+							:placeholder="$t('auth.pleaseEnter', { title: $t('auth.phone') })" :trim="true" :clearable="false"
 							type="number" />
 					</view>
 				</uni-forms-item>
@@ -38,8 +38,8 @@
 				</uni-forms-item>
 				<uni-forms-item class="form-item" name="confirmPassword" required>
 					<view class="form-item">
-						<uni-easyinput v-model="formData.confirmPassword" class="inputStyle" type="password" :placeholder="$t("
-							auth.confirmPassword")" :trim="true" :clearable="false" />
+						<uni-easyinput v-model="formData.confirmPassword" class="inputStyle" type="password"
+							:placeholder="$t('auth.confirmPassword')" :trim="true" :clearable="false" />
 					</view>
 					<view class="form-item-tip">
 						<text>{{ $t("auth.rules.password.pattern") }}</text>
@@ -317,7 +317,7 @@ const formSubmit = () => {
 
 .btn-container {
 	padding: 0 40rpx;
-	margin-top: 42rpx;
+	// margin-top: 42rpx;
 
 	.btn {
 		padding: 24rpx;

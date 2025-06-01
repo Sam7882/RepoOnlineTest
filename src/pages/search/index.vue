@@ -188,7 +188,7 @@
 				<view class="theme-list-container">
 					<view class="theme-list-column">
 						<view class="theme-list-item" :style="{ 'background': item.themeColor }" v-for="(item, index) in themeList"
-							:key="index">
+							:key="index" @click="handleMore">
 							<view class="theme-list-item-info">
 								<text class="theme-list-item-info-name">{{ item.title }}</text>
 							</view>
@@ -214,9 +214,9 @@
 						<uni-icons class="recommend-top-text-icon" type="right" size="30"></uni-icons>
 					</view>
 				</view>
-				<view class="recommend-top-more" @click="handleMore">
+				<!-- <view class="recommend-top-more">
 					<uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons>
-				</view>
+				</view> -->
 			</view>
 			<view class="recommend-list">
 				<!-- 橫向可滾動的分類 -->

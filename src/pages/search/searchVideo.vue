@@ -65,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-// TEMP: 搜尋影片頁
+// TEMP: 搜尋主題影片頁
 import { useI18n } from 'vue-i18n';
 import { toSearchTheme } from '@/utils/routers';
 import { router } from '@/utils/routers';

@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-// TEMP: 創作者設定-選單頁面
+// TEMP: 創作者設定-創作者中心設定頁
 import { router, toStatistics, toCreatorApply, toSchedulePost } from '@/utils/routers';
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()

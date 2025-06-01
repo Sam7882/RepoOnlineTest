@@ -46,7 +46,7 @@
 			</view>
 			<view class="btn-container">
 				<button class="btn next-btn" @click="deleteConfirmPopUp">{{ $t("common.delete") }}({{ selectedIds.length
-					}})</button>
+				}})</button>
 			</view>
 		</view>
 
@@ -56,7 +56,7 @@
 </template>
 
 <script setup>
-// TEMP:選取作品
+// TEMP:草稿箱
 import { onLoad } from '@dcloudio/uni-app'
 import { usePostData } from '@/stores/usePostData'
 import { router, toCreatorSelectMedia } from '@/utils/routers'

@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-// TEMP: 關注頁面
+// TEMP: 貼文管理-分類頁面
 import { onShow } from '@dcloudio/uni-app';
 import { router, toCreatorSelectMedia, toCreatorClassificationEdit } from '@/utils/routers';
 import { useI18n } from 'vue-i18n'

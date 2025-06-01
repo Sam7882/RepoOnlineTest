@@ -136,7 +136,7 @@
 </template>
 
 <script setup>
-// TEMP: 創作者設定-編輯頁面
+// TEMP: 創作者設定-帳號設定編輯頁
 import { ref, computed, onMounted } from 'vue'
 import { onLoad } from '@dcloudio/uni-app';
 import countryData from '@/assets/country/country.json'

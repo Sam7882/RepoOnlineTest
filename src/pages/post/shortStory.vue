@@ -88,6 +88,7 @@
 </template>
 
 <script setup>
+// TEMP: 限時動態頁面
 import { router } from '@/utils/routers'
 const { back } = router
 

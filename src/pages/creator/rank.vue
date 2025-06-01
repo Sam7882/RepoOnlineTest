@@ -171,7 +171,7 @@
 </template>
 
 <script setup lang="ts">
-// TEMP: 關注頁面
+// TEMP: 排行榜頁面 - 粉絲與愛心
 import { onShow } from '@dcloudio/uni-app';
 import { router } from '@/utils/routers';
 import { useI18n } from 'vue-i18n';

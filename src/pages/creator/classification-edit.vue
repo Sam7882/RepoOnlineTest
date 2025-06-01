@@ -89,7 +89,7 @@
 						<view class="classNamePopUp-container-item2">
 							<view class="classNamePopUp-container-item-content btn-container">
 								<button type="button" class="btn popup-button" @click="confirmclassNamePopUp">{{ $t("common.confirm")
-									}}</button>
+								}}</button>
 							</view>
 						</view>
 					</template>
@@ -103,7 +103,7 @@
 </template>
 
 <script setup>
-// TEMP:選取作品
+// TEMP: 貼文管理-分類編輯頁
 import { onLoad } from '@dcloudio/uni-app'
 import { usePostData } from '@/stores/usePostData'
 import { toCreatorSelectMedia } from '@/utils/routers'

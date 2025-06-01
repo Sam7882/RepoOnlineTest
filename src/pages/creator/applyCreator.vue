@@ -30,15 +30,15 @@
 </template>
 
 <script setup>
-// TEMP: 創作者設定-選單頁面
+// TEMP: 創作者設定-申請創作者頁
 import { onLoad } from '@dcloudio/uni-app'
 import { router, toStatistics, toCreatorBlockadeEdit } from '@/utils/routers';
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const { back } = router;
 
-const menuTitle = ref(t('auth.becomeCreator'))
-const content = ref(t('auth.welcomeToBecomeCreator'))
+const menuTitle = ref(t('creator.becomeCreator'))
+const content = ref(t('creator.welcomeToBecomeVerifyCreator'))
 const btnStatus = ref('')
 const btnText = computed(() => {
 	if (btnStatus.value === 'waiting') {
@@ -72,13 +72,13 @@ onLoad((options) => {
 
 	switch (type.value) {
 		case 'creator':
-			menuTitle.value = t('auth.becomeCreator')
-			content.value = t('auth.welcomeToBecomeCreator')
+			menuTitle.value = t('creator.becomeCreator')
+			content.value = t('creator.welcomeToBecomeVerifyCreator')
 			btnStatus.value = ''
 			break
 		case 'verifyCreator':
-			menuTitle.value = t('auth.becomeVerifyCreator')
-			content.value = t('auth.welcomeToBecomeVerifyCreator')
+			menuTitle.value = t('creator.becomeVerifyCreator')
+			content.value = t('creator.welcomeToBecomeVerifyCreator')
 			btnStatus.value = 'apply'
 			break
 	}

@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-// TEMP:選取作品
+// TEMP:分類編輯-選取作品
 import { usePostData } from '@/stores/usePostData'
 import { toCreatorClassificationEdit, router } from '@/utils/routers'
 import { onLoad } from '@dcloudio/uni-app'

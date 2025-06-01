@@ -91,7 +91,7 @@
 </template>
 
 <script setup>
-// TEMP: 創作者設定-選單頁面
+// TEMP: 創作者設定-帳號設定頁面
 import { router, toCreatorSetMenuEdit, toCreatorBlockadeEdit } from '@/utils/routers';
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()

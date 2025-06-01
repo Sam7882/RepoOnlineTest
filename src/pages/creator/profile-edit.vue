@@ -86,7 +86,7 @@
 </template>
 
 <script setup>
-// TEMP: 編輯資料
+// TEMP: 編輯個人資料
 import { toSelectSource, toCropAvatar } from '@/utils/routers'
 import { useI18n } from 'vue-i18n'
 

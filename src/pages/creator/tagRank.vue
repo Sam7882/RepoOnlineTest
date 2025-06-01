@@ -71,7 +71,7 @@
 </template>
 
 <script setup>
-// TEMP: 關注頁面
+// TEMP: 標籤排行榜頁面
 import { onLoad } from '@dcloudio/uni-app';
 
 

@@ -61,6 +61,7 @@
 </template>
 
 <script setup>
+// TEMP: 創作者分享頁面
 import { onMounted, ref } from 'vue'
 import UQRCode from '@uqrcode/js';
 import { useI18n } from 'vue-i18n'

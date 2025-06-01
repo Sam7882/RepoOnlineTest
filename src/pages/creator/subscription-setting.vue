@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-// TEMP: 訂閱項目 設定
+// TEMP: 設定訂閱項目頁
 import { onShow } from '@dcloudio/uni-app';
 import { toSubscriptionEdit } from '@/utils/routers';
 import { useI18n } from 'vue-i18n';

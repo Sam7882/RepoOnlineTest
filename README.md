@@ -26,23 +26,23 @@ file path : FanceNew\src\pages.json
 - [入口加載頁] : pages/launch/loading
 ### common
 - [選擇頭像來源頁] : pages/common/select-source
-- [裁剪頭像頁] : pages/common/crop-avatar
+- [大頭照裁切] : pages/common/crop-avatar
 ### helper
-- [幫助頁] : pages/helper/index
+- [幫助中心] : pages/helper/index
 ### auth
-- [登入頁] : pages/auth/login
-- [註冊頁] : pages/auth/register
-- [手機驗證頁] : pages/auth/verify-phone
+- [登入頁面] : pages/auth/login
+- [註冊頁面] : pages/auth/register
+- [手機驗證] : pages/auth/verify-phone
 ### play
-- [影音首頁] : pages/play/index
-- [圖文集頁] : pages/play/article-gallery
+- [影音頁] : pages/play/index
+- [文章圖片列表] : pages/play/article-gallery
 ### post
 - [發佈預覽頁] : pages/post/post-Preview
 - [發佈頁] : pages/post/index
 - [發佈-標記人頁] : pages/post/tagPeople
 - [限時動態頁] : pages/post/shortStory
-- [發佈-排程頁] : pages/post/schedulePost
-- [發佈-草稿箱頁] : pages/post/draftBox
+- [發佈-排定發布] : pages/post/schedulePost
+- [草稿箱] : pages/post/draftBox
 ### searcxh
 - [搜尋首頁] : pages/search/index
 - [搜尋影片頁] : pages/search/searchVideo
@@ -51,36 +51,36 @@ file path : FanceNew\src\pages.json
 - [我的錢包頁] : pages/wallet/index
 - [付款詳情頁] : pages/wallet/pay
 - [提現頁] : pages/wallet/withdraw
-- [充值頁] : pages/wallet/withdrawIn
+- [我的進帳] : pages/wallet/withdrawIn
 - [提現紀錄頁] : pages/wallet/withdrawRecord
 - [訂單詳情頁] : pages/wallet/orderDetail
 - [提現詳情頁] : pages/wallet/withdrawDetail
 - [申請提現頁] : pages/wallet/withdrawApply
 - [信用卡選擇頁] : pages/wallet/creditCardSelect
-- [信用卡設定頁] : pages/wallet/creditCardSetting
-- [信用卡儲存頁] : pages/wallet/creditCardSave
+- [信用卡新增設置頁] : pages/wallet/creditCardSetting
+- [信用卡預設頁] : pages/wallet/creditCardSave
 ### creator
 - [創作者首頁] : pages/creator/home
-- [創作者訊息頁] : pages/creator/message
-- [設定訂閱頁] : pages/creator/subscription-setting
-- [設定訂閱金額頁] : pages/creator/subscription-edit
+- [訊息頁] : pages/creator/message
+- [設定訂閱項目頁] : pages/creator/subscription-setting
+- [訂閱項目編輯] : pages/creator/subscription-edit
 - [個人數據頁] : pages/creator/statistics
 - [我的收藏頁] : pages/creator/favorites
 - [我的關注頁] : pages/creator/following
 - [排行榜頁] : pages/creator/rank
 - [標籤排行榜頁] : pages/creator/tagRank
-- [訂閱會員頁] : pages/creator/subscription
-- [創作者編輯頁] : pages/creator/profile-edit
-- [創作者選擇媒體頁] : pages/creator/selectMedia
-- [創作者分類頁] : pages/creator/classification
-- [創作者分類編輯頁] : pages/creator/classification-edit
+- [訂閱方案頁面] : pages/creator/subscription
+- [編輯個人資料] : pages/creator/profile-edit
+- [分類編輯-選取作品] : pages/creator/selectMedia
+- [貼文管理-分類頁面] : pages/creator/classification
+- [貼文管理-分類編輯頁] : pages/creator/classification-edit
 - [創作者分享頁] : pages/creator/share
-- [創作者設定頁] : pages/creator/setMenu
-- [創作者設定編輯頁] : pages/creator/setMenuEdit
-- [創作者封鎖編輯頁] : pages/creator/blockadeEdit
+- [創作者設定-帳號設定頁面] : pages/creator/setMenu
+- [創作者設定-帳號設定編輯頁] : pages/creator/setMenuEdit
+- [創作者設定-封鎖頁編輯] : pages/creator/blockadeEdit
 - [創作者中心頁] : pages/creator/center
-- [創作者申請頁] : pages/creator/applyCreator
-- [創作者信箱頁] : pages/creator/messageBox
+- [創作者設定-申請創作者頁] : pages/creator/applyCreator
+- [訊息箱] : pages/creator/messageBox
 ---
 ## 元件
 ### common
@@ -95,10 +95,10 @@ file path : FanceNew\src\pages.json
 - [檢舉彈窗] : c-reportPopUp.vue
 - [九宮格照片] : c-gridPhoto.vue
 - [側邊導航] : c-sideNav.vue
-- [標題列] : c-headerNav.vue
+- [頂部導航] : c-headerNav.vue
 - [勾選框] : c-checkBox.vue
 ### creator
-- [創作者頁標題] : creator-header.vue
+- [創作者頁標題導航] : creator-header.vue
 ### posts
 - [發文設定] : post-postSet.vue
 - [媒體格子項目] : post-mediaGridItem.vue

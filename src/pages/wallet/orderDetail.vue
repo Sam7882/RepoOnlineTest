@@ -66,7 +66,7 @@
 			<view class="bottom btn-container">
 				<button type="primary" class="btn primary-btn active" v-if="canWithdraw">{{ $t("wallet.withdraw") }}</button>
 				<button type="primary" class="btn primary-btn" @click="handleWithdrawRecord" v-else>{{ $t("wallet.returnWallet")
-					}}</button>
+				}}</button>
 			</view>
 
 		</view>
@@ -74,7 +74,7 @@
 </template>
 
 <script setup>
-// TEMP: 訂單明細頁
+// TEMP: 訂單詳情頁
 import { toWithdrawRecord } from '@/utils/routers'
 const orderAmount = 16888
 const fee = 250

@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-// TEMP: 發佈 標記人
+// TEMP: 發佈-標記人頁
 import { ref, computed } from 'vue';
 import { usePostData } from '@/stores/usePostData';
 import { toPostIndex } from '@/utils/routers';

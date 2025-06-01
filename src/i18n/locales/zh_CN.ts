@@ -219,6 +219,9 @@ export default {
     postStoryComment: "贴文、限时动态和留言",
     postStoryCommentTip: "关闭后，他人将无法检视您的所有贴文、限时动态和留言。",
     alreadyCollect: "已收藏",
+    editData: "编辑资料",
+    shareFile: "分享档案",
+    creatorCenter: "创作者中心",
   },
   play: {
     sensitiveContent: "敏感内容",

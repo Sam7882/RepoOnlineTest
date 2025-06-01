@@ -228,6 +228,9 @@ export default {
     postStoryCommentTip:
       "เมื่อปิดแล้วคนอื่นจะไม่สามารถดูโพสต์ทั้งหมดของคุณการอัปเดตเวลา จำกัด และความคิดเห็น",
     alreadyCollect: "รวบรวมแล้ว",
+    editData: "แก้ไขข้อมูล",
+    shareFile: "แชร์ไฟล์",
+    creatorCenter: "ศูนย์รวมผู้สร้าง",
   },
   play: {
     sensitiveContent: "เนื้อหาที่ละเอียดอ่อน",

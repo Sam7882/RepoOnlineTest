@@ -232,6 +232,9 @@ export default {
     postStoryCommentTip:
       "閉鎖されると、他の人はすべての投稿、限られた時間の更新、コメントを表示できません。",
     alreadyCollect: "すでに収集されています",
+    editData: "データの編集",
+    shareFile: "ファイルの共有",
+    creatorCenter: "クリエイターセンター",
   },
   play: {
     sensitiveContent: "敏感なコンテンツ",

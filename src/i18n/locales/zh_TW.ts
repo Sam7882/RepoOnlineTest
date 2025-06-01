@@ -220,7 +220,9 @@ export default {
     postStoryComment: "貼文、限時動態和留言",
     postStoryCommentTip: "關閉後，他人將無法檢視您的所有貼文、限時動態和留言。",
     alreadyCollect: "已收藏",
-
+    editData: "編輯資料",
+    shareFile: "分享檔案",
+    creatorCenter: "創作者中心",
   },
   play: {
     sensitiveContent: "敏感內容",

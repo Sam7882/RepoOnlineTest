@@ -227,6 +227,9 @@ export default {
     postStoryCommentTip:
       "일단 문을 닫으면 다른 사람은 모든 게시물, 제한된 시간 업데이트 및 댓글을 볼 수 없습니다.",
     alreadyCollect: "이미 수집되었습니다",
+    editData: "데이터 편집",
+    shareFile: "파일 공유",
+    creatorCenter: "크리에이터 센터",
   },
   play: {
     sensitiveContent: "민감한 내용",

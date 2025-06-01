@@ -234,6 +234,9 @@ export default {
     postStoryCommentTip:
       "Sau khi đóng, những người khác sẽ không thể xem tất cả các bài đăng của bạn, cập nhật thời gian và nhận xét giới hạn.",
     alreadyCollect: "Đã được thu thập",
+    editData: "Chỉnh sửa dữ liệu",
+    shareFile: "Chia sẻ tệp",
+    creatorCenter: "Creator Center",
   },
   play: {
     sensitiveContent: "Nội dung nhạy cảm",

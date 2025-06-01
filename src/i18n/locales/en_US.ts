@@ -230,6 +230,9 @@ export default {
     postStoryCommentTip:
       "Once closed, others will not be able to view all your posts, limited time updates, and comments.",
     alreadyCollect: "Already collected",
+    editData: "Edit Data",
+    shareFile: "Share File",
+    creatorCenter: "Creator Center",
   },
   play: {
     sensitiveContent: "Sensitive content",

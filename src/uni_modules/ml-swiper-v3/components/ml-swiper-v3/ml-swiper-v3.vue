@@ -1094,7 +1094,7 @@ export default {
       this.player.title = currentItem.title; // 資源標題
       this.player.poster = currentItem.poster; // 預覽圖
       this.player.muted = true; // 強制設置為靜音
-      // this.player.autoplay = true; // 強制設置為靜音
+      this.player.autoplay = true; // 強制設置為靜音
       // 初始化聲音狀態 為靜音 true
       this.soundMute = this.player.muted;
       // 才可播放

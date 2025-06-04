@@ -20,7 +20,6 @@
         "backgroundColor": "var(--background-color)"
       }
     },
-
     {
       "path": "pages/auth/login",
       "style": {
@@ -351,6 +350,348 @@
 
     {
       "path": "pages/helper/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+
+    {
+      "path": "pages/pc/launch/loading",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/auth/login",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/auth/register",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/auth/verify-phone",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+
+    {
+      "path": "pages/pc/play/index",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-dark)"
+      }
+    },
+    {
+      "path": "pages/pc/play/article-gallery",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/post/post-Preview",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/post/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/post/tagPeople",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/post/shortStory",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/post/schedulePost",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/post/draftBox",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+
+    {
+      "path": "pages/pc/search/index",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-dark)"
+      }
+    },
+    {
+      "path": "pages/pc/search/searchVideo",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-dark)"
+      }
+    },
+    {
+      "path": "pages/pc/search/searchTheme",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-dark)"
+      }
+    },
+
+    {
+      "path": "pages/pc/wallet/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/pay",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/withdraw",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/withdrawIn",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/withdrawRecord",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/orderDetail",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/withdrawDetail",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/withdrawApply",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/creditCardSelect",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/creditCardSetting",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/creditCardSave",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+
+    {
+      "path": "pages/pc/creator/home",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/message",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/subscription-setting",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-grayLight)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/subscription-edit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-grayLight)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/statistics",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-grayLight)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/favorites",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/creator/following",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/creator/rank",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/creator/tagRank",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/creator/subscription",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/creator/profile-edit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/selectMedia",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/classification",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/classification-edit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/share",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/setMenu",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/setMenuEdit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/blockadeEdit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/center",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/applyCreator",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/messageBox",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/common/select-source",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/common/crop-avatar",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+
+    {
+      "path": "pages/pc/helper/index",
       "style": {
         "navigationStyle": "custom"
       }

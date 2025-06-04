@@ -49,282 +49,268 @@ export function safeSwitchTab(targetUrl: string) {
 	}
 }
 
+// 檢查視窗大小，比對當前頁面是否正確，並跳轉到對應版面
+export function checkViewporReplace(url: string, params = {}) {
+	// 取得螢幕寬度
+	const windowWidth = uni.getSystemInfoSync().windowWidth;
+	const basePath = windowWidth <= 768 ? '/pages/' : '/pages/pc/';
+	// 取得當前頁面路徑
+	const pages = getCurrentPages();
+	const currentPage = pages[pages.length - 1];
+	const currentRoute = '/' + currentPage.route;
+	// 檢查是否已在正確 basePath
+	if (!currentRoute.startsWith(basePath)) {
+		uni.navigateTo({
+			url: `${basePath}${url}` + queryStringify(params)
+		});
+	}
+}
+
+// 檢查視窗大小，跳轉到對應版面
+export function checkViewport(url: string, params = {}) {
+	// 取得螢幕寬度
+	const windowWidth = uni.getSystemInfoSync().windowWidth;
+	// 根據寬度決定跳轉路徑
+	const basePath = windowWidth <= 768 ? '/pages/' : '/pages/pc/';
+	uni.navigateTo({
+		url: `${basePath}${url}` + queryStringify(params)
+	})
+}
+
+// 檢查視窗大小，並自動將當前頁面跳轉到正確版面，並帶入 query 參數
+/* 
+變數名稱	範例值
+windowWidth	375
+basePath	'/pages/'
+currentRoute	'/pages/pc/auth/login'
+options	{ type: 'login', from: 'home' }
+query	'?type=login&from=home'
+expectPath	'/pages/auth/login'
+*/
+export function checkViewportAutoReplace() {
+	// 取得螢幕寬度
+	const windowWidth = uni.getSystemInfoSync().windowWidth;
+	const basePath = windowWidth <= 768 ? '/pages/' : '/pages/pc/';
+	const pages = getCurrentPages();
+	const currentPage = pages[pages.length - 1];
+	const currentRoute = '/' + currentPage.route; // 例如 /pages/auth/login 或 /pages/pc/auth/login
+	// 取得 query 參數（uni-app 3.x 可用 $page?.options）
+	const options = (currentPage as any).$page?.options || {};
+
+	// 組合 query string
+	const query = Object.keys(options).length > 0
+		? '?' + Object.entries(options).map(([k, v]) => `${k}=${encodeURIComponent(v as string)}`).join('&')
+		: '';
+
+	// 計算期望路徑（去除 /pages 或 /pages/pc 前綴，補上正確 basePath）
+	const expectPath = basePath + currentRoute.replace(/^\/pages(\/pc)?\//, '');
+
+	// 若目前路徑不正確，才跳轉
+	if (currentRoute !== expectPath) {
+		uni.redirectTo({ url: expectPath + query });
+	}
+}
+
 // TEMP: 路由工具 - 指定頁面，可帶入query參數
 /* 入口登入註冊 */
 // 跳轉到登入頁
 export const toLogin = (params = {}) => {
 	safeSwitchTab('/pages/auth/login')
-	uni.navigateTo({
-		url: '/pages/auth/login' + queryStringify(params)
-	})
+	checkViewport('/auth/login', params)
 }
 // 跳轉到註冊頁
 export const toRegister = (params = {}) => {
 	safeSwitchTab('/pages/auth/register')
-	uni.navigateTo({
-		url: '/pages/auth/register' + queryStringify(params)
-	})
+	checkViewport('/auth/register', params)
 }
 // 跳轉到手機驗證頁
 export const toPhoneVerify = (params = {}) => {
 	safeSwitchTab('/pages/auth/verify-phone')
-	uni.navigateTo({
-		url: '/pages/auth/verify-phone' + queryStringify(params)
-	})
+	checkViewport('/auth/verify-phone', params)
 }
 
 /* 影音頁 */
 // 跳轉到影音頁
 export const toPlayIndex = (params = {}) => {
 	safeSwitchTab('/pages/play/index')
-	uni.navigateTo({
-		url: '/pages/play/index' + queryStringify(params)
-	})
+	checkViewport('/play/index', params)
 }
 // 跳轉到影音頁
 export const toPlayArticleGallery = (params = {}) => {
 	safeSwitchTab('/pages/play/article-gallery')
-	uni.navigateTo({
-		url: '/pages/play/article-gallery' + queryStringify(params)
-	})
+	checkViewport('/play/article-gallery', params)
 }
 
 // 跳轉到搜尋主頁
 export const toSearchHome = (params = {}) => {
 	safeSwitchTab('/pages/search/index')
-	uni.navigateTo({
-		url: '/pages/search/index' + queryStringify(params)
-	})
+	checkViewport('/search/index', params)
 }
 // 跳轉到搜尋視頻頁
 export const toSearchVideo = (params = {}) => {
 	safeSwitchTab('/pages/search/searchVideo')
-	uni.navigateTo({
-		url: '/pages/search/searchVideo' + queryStringify(params)
-	})
+	checkViewport('/search/searchVideo', params)
 }
 // 跳轉到搜尋主題頁
 export const toSearchTheme = (params = {}) => {
 	safeSwitchTab('/pages/search/searchTheme')
-	uni.navigateTo({
-		url: '/pages/search/searchTheme' + queryStringify(params)
-	})
+	checkViewport('/search/searchTheme', params)
 }
 
 /* 發佈 */
 // 跳轉到發佈頁
 export const toPostIndex = (params = {}) => {
 	safeSwitchTab('/pages/post/index')
-	uni.navigateTo({
-		url: '/pages/post/index' + queryStringify(params)
-	})
+	checkViewport('/post/index', params)
 }
 // 跳轉到發佈頁預覽2
 export const toPostPreview = (params = {}) => {
 	safeSwitchTab('/pages/post/post-Preview')
-	uni.navigateTo({
-		url: '/pages/post/post-Preview' + queryStringify(params)
-	})
+	checkViewport('/post/post-Preview', params)
 }
 // 跳轉到標記頁面
 export const toTagPeople = (params = {}) => {
 	safeSwitchTab('/pages/post/tagPeople')
-	uni.navigateTo({
-		url: '/pages/post/tagPeople' + queryStringify(params)
-	})
+	checkViewport('/post/tagPeople', params)
 }
 // 跳轉到限時動態
 export const toShortStory = (params = {}) => {
 	safeSwitchTab('/pages/post/shortStory')
-	uni.navigateTo({
-		url: '/pages/post/shortStory' + queryStringify(params)
-	})
+	checkViewport('/post/shortStory', params)
 }
 // 跳轉到限時動態
 export const toSchedulePost = (params = {}) => {
 	safeSwitchTab('/pages/post/schedulePost')
-	uni.navigateTo({
-		url: '/pages/post/schedulePost' + queryStringify(params)
-	})
+	checkViewport('/post/schedulePost', params)
 }
 // 跳轉到草稿箱
 export const toDraftBox = (params = {}) => {
 	safeSwitchTab('/pages/post/draftBox')
-	uni.navigateTo({
-		url: '/pages/post/draftBox' + queryStringify(params)
-	})
+	checkViewport('/post/draftBox', params)
 }
 
 /* 創作者 */
 // 跳轉到創作者首頁
 export const toCreatorHome = (params = {}) => {
 	safeSwitchTab('/pages/creator/home')
-	uni.navigateTo({
-		url: '/pages/creator/home' + queryStringify(params)
-	})
+	checkViewport('/creator/home', params)
 }
 // 跳轉到創作者訊息頁
 export const toCreatorMessage = (params = {}) => {
 	safeSwitchTab('/pages/creator/message')
-	uni.navigateTo({
-		url: '/pages/creator/message' + queryStringify(params)
-	})
+	checkViewport('/creator/message', params)
 }
 // 跳轉到訂閱頁設定
 export const toSubscriptionSetting = (params = {}) => {
 	safeSwitchTab('/pages/creator/subscription-setting')
-	uni.navigateTo({
-		url: '/pages/creator/subscription-setting' + queryStringify(params)
-	})
+	checkViewport('/creator/subscription-setting', params)
 }
 // 跳轉到訂閱頁編輯
 export const toSubscriptionEdit = (params = {}) => {
 	safeSwitchTab('/pages/creator/subscription-edit')
-	uni.navigateTo({
-		url: '/pages/creator/subscription-edit' + queryStringify(params)
-	})
+	checkViewport('/creator/subscription-edit', params)
 }
 // 跳轉到個人數據
 export const toStatistics = (params = {}) => {
 	safeSwitchTab('/pages/creator/statistics')
-	uni.navigateTo({
-		url: '/pages/creator/statistics' + queryStringify(params)
-	})
+	checkViewport('/creator/statistics', params)
 }
 // 跳轉到我的收藏
 export const toFavorites = (params = {}) => {
 	safeSwitchTab('/pages/creator/favorites')
-	uni.navigateTo({
-		url: '/pages/creator/favorites' + queryStringify(params)
-	})
+	checkViewport('/creator/favorites', params)
 }
 // 跳轉到我的關注對象
 export const toFollowing = (params = {}) => {
 	safeSwitchTab('/pages/creator/following')
-	uni.navigateTo({
-		url: '/pages/creator/following' + queryStringify(params)
-	})
+	checkViewport('/creator/following', params)
 }
 // 跳轉到排行榜
 export const toRank = (params = {}) => {
 	safeSwitchTab('/pages/creator/rank')
-	uni.navigateTo({
-		url: '/pages/creator/rank' + queryStringify(params)
-	})
+	checkViewport('/creator/rank', params)
 }
 // 跳轉到標籤排行榜
 export const toTagRank = (params = {}) => {
 	safeSwitchTab('/pages/creator/tagRank')
-	uni.navigateTo({
-		url: '/pages/creator/tagRank' + queryStringify(params)
-	})
+	checkViewport('/creator/tagRank', params)
 }
 // 跳轉到訂閱會員頁
 export const toSubscription = (params = {}) => {
 	safeSwitchTab('/pages/creator/subscription')
-	uni.navigateTo({
-		url: '/pages/creator/subscription' + queryStringify(params)
-	})
+	checkViewport('/creator/subscription', params)
 }
 // 跳轉到創作者編輯頁
 export const toCreatorEdit = (params = {}) => {
 	safeSwitchTab('/pages/creator/profile-edit')
-	uni.navigateTo({
-		url: '/pages/creator/profile-edit' + queryStringify(params)
-	})
+	checkViewport('/creator/profile-edit', params)
 }
 // 跳轉到創作者選擇媒體頁作品
 export const toCreatorSelectMedia = (params = {}) => {
 	safeSwitchTab('/pages/creator/selectMedia')
-	uni.navigateTo({
-		url: '/pages/creator/selectMedia' + queryStringify(params)
-	})
+	checkViewport('/creator/selectMedia', params)
 }
 // 跳轉到創作者分類頁
 export const toCreatorClassification = (params = {}) => {
 	safeSwitchTab('/pages/creator/classification')
-	uni.navigateTo({
-		url: '/pages/creator/classification' + queryStringify(params)
-	})
+	checkViewport('/creator/classification', params)
 }
 // 跳轉到創作者分類編輯頁
 export const toCreatorClassificationEdit = (params = {}) => {
 	safeSwitchTab('/pages/creator/classification-edit')
-	uni.navigateTo({
-		url: '/pages/creator/classification-edit' + queryStringify(params)
-	})
+	checkViewport('/creator/classification-edit', params)
 }
 // 跳轉到創作者分享頁
 export const toShare = (params = {}) => {
 	safeSwitchTab('/pages/creator/share')
-	uni.navigateTo({
-		url: '/pages/creator/share' + queryStringify(params)
-	})
+	checkViewport('/creator/share', params)
 }
 // 跳轉到創作者設定頁
 export const toCreatorSetMenu = (params = {}) => {
 	safeSwitchTab('/pages/creator/setMenu')
-	uni.navigateTo({
-		url: '/pages/creator/setMenu' + queryStringify(params)
-	})
+	checkViewport('/creator/setMenu', params)
 }
 // 跳轉到創作者設定頁編輯
 export const toCreatorSetMenuEdit = (params = {}) => {
 	safeSwitchTab('/pages/creator/setMenuEdit')
-	uni.navigateTo({
-		url: '/pages/creator/setMenuEdit' + queryStringify(params)
-	})
+	checkViewport('/creator/setMenuEdit', params)
 }
 // 跳轉到創作者封鎖頁編輯
 export const toCreatorBlockadeEdit = (params = {}) => {
 	safeSwitchTab('/pages/creator/blockadeEdit')
-	uni.navigateTo({
-		url: '/pages/creator/blockadeEdit' + queryStringify(params)
-	})
+	checkViewport('/creator/blockadeEdit', params)
 }
 // 跳轉到創作者中心頁
 export const toCreatorCenter = (params = {}) => {
 	safeSwitchTab('/pages/creator/center')
-	uni.navigateTo({
-		url: '/pages/creator/center' + queryStringify(params)
-	})
+	checkViewport('/creator/center', params)
 }
 // 跳轉到創作者申請頁
 export const toCreatorApply = (params = {}) => {
 	safeSwitchTab('/pages/creator/applyCreator')
-	uni.navigateTo({
-		url: '/pages/creator/applyCreator' + queryStringify(params)
-	})
+	checkViewport('/creator/applyCreator', params)
 }
 // 跳轉到信箱
 export const toMessage = (params = {}) => {
 	safeSwitchTab('/pages/creator/message')
-	uni.navigateTo({
-		url: '/pages/creator/message' + queryStringify(params)
-	})
+	checkViewport('/creator/message', params)
 }
 // 跳轉到信箱
 export const toMessageBox = (params = {}) => {
 	safeSwitchTab('/pages/creator/messageBox')
-	uni.navigateTo({
-		url: '/pages/creator/messageBox' + queryStringify(params)
-	})
+	checkViewport('/creator/messageBox', params)
 }
 
 
 // 跳轉到選擇頭像來源頁
 export const toSelectSource = (params = {}) => {
 	safeSwitchTab('/pages/common/select-source')
-	uni.navigateTo({
-		url: '/pages/common/select-source' + queryStringify(params)
-	})
+	checkViewport('/common/select-source', params)
 }
 // 跳轉到裁剪頭像頁
 export const toCropAvatar = (params = {}) => {
 	safeSwitchTab('/pages/common/crop-avatar')
-	uni.navigateTo({
-		url: '/pages/common/crop-avatar' + queryStringify(params)
-	})
+	checkViewport('/common/crop-avatar', params)
 }
 
 
@@ -332,74 +318,50 @@ export const toCropAvatar = (params = {}) => {
 // 跳轉到錢包
 export const toWallet = (params = {}) => {
 	safeSwitchTab('/pages/wallet/index')
-	uni.navigateTo({
-		url: '/pages/wallet/index' + queryStringify(params)
-	})
+	checkViewport('/wallet/index', params)
 }
 export const toPay = (params = {}) => {
 	safeSwitchTab('/pages/wallet/pay')
-	uni.navigateTo({
-		url: '/pages/wallet/pay' + queryStringify(params)
-	})
+	checkViewport('/wallet/pay', params)
 }
 export const towithdraw = (params = {}) => {
 	safeSwitchTab('/pages/wallet/withdraw')
-	uni.navigateTo({
-		url: '/pages/wallet/withdraw' + queryStringify(params)
-	})
+	checkViewport('/wallet/withdraw', params)
 }
 export const towithdrawIn = (params = {}) => {
 	safeSwitchTab('/pages/wallet/withdrawIn')
-	uni.navigateTo({
-		url: '/pages/wallet/withdrawIn' + queryStringify(params)
-	})
+	checkViewport('/wallet/withdrawIn', params)
 }
 export const toWithdrawRecord = (params = {}) => {
 	safeSwitchTab('/pages/wallet/withdrawRecord')
-	uni.navigateTo({
-		url: '/pages/wallet/withdrawRecord' + queryStringify(params)
-	})
+	checkViewport('/wallet/withdrawRecord', params)
 }
 export const toWithdrawApply = (params = {}) => {
 	safeSwitchTab('/pages/wallet/withdrawApply')
-	uni.navigateTo({
-		url: '/pages/wallet/withdrawApply' + queryStringify(params)
-	})
+	checkViewport('/wallet/withdrawApply', params)
 }
 export const toOrderDetail = (params = {}) => {
 	safeSwitchTab('/pages/wallet/orderDetail')
-	uni.navigateTo({
-		url: '/pages/wallet/orderDetail' + queryStringify(params)
-	})
+	checkViewport('/wallet/orderDetail', params)
 }
 export const toWithdrawDetail = (params = {}) => {
 	safeSwitchTab('/pages/wallet/withdrawDetail')
-	uni.navigateTo({
-		url: '/pages/wallet/withdrawDetail' + queryStringify(params)
-	})
+	checkViewport('/wallet/withdrawDetail', params)
 }
 export const toCreditCardSelect = (params = {}) => {
 	safeSwitchTab('/pages/wallet/creditCardSelect')
-	uni.navigateTo({
-		url: '/pages/wallet/creditCardSelect' + queryStringify(params)
-	})
+	checkViewport('/wallet/creditCardSelect', params)
 }
 export const toCreditCardSetting = (params = {}) => {
 	safeSwitchTab('/pages/wallet/creditCardSetting')
-	uni.navigateTo({
-		url: '/pages/wallet/creditCardSetting' + queryStringify(params)
-	})
+	checkViewport('/wallet/creditCardSetting', params)
 }
 export const toCreditCardSave = (params = {}) => {
 	safeSwitchTab('/pages/wallet/creditCardSave')
-	uni.navigateTo({
-		url: '/pages/wallet/creditCardSave' + queryStringify(params)
-	})
+	checkViewport('/wallet/creditCardSave', params)
 }
 
 export const toHelper = (params = {}) => {
 	safeSwitchTab('/pages/helper/index')
-	uni.navigateTo({
-		url: '/pages/helper/index' + queryStringify(params)
-	})
+	checkViewport('/helper/index', params)
 }

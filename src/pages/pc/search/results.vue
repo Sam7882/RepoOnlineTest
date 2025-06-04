@@ -250,6 +250,10 @@
 					</scroll-view>
 				</view>
 			</view>
+
+
+			<!-- 底部導航列 -->
+			<c-bottomNav :bgColor="'var(--background-color-dark)'" :iconColor="'var(--text-color-secondary)'" />
 		</view>
 	</layout-pcBase>
 </template>
@@ -262,6 +266,7 @@ import { useI18n } from 'vue-i18n';
 import { toSearchVideo, toSearchTheme, checkViewportAutoReplace } from '@/utils/routers';
 const { t } = useI18n();
 /* 滾動分類 */
+const
 const searchTag = ref(0)
 const searchTagList = ref([
 	{

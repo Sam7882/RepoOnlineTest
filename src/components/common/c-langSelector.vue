@@ -1,14 +1,17 @@
 <template>
   <view class="lang-selector" @click="popupRef.open()">
     <!-- 國旗默認顯示 -->
-    <image :src="currentLang.flag" class="flag" />
-    <text class="code">{{ currentLang.label }}</text>
-    <!-- ICON 旋轉所以加入CSS-->
-    <uni-icons class="icon-triangle" custom-prefix="icon" type="icon-video-play" />
+    <view class="lang-selector-container">
+      <image :src="currentLang.flag" class="flag" />
+      <text class="code">{{ currentLang.label }}</text>
+      <!-- ICON 旋轉所以加入CSS-->
+      <uni-icons class="icon-triangle" custom-prefix="icon" type="icon-video-play" />
+    </view>
     <!-- 底部彈窗 -->
-    <uni-popup ref="popupRef" type="bottom">
+    <uni-popup ref="popupRef" :type="type">
       <view class="popup-list">
-        <view v-for="lang in langData" :key="lang.code" class="lang-item" @click="switchLang(lang.code)">
+        <view v-for="lang in langData" :key="lang.code" class="lang-item" :class="{ 'active': lang.code === locale }"
+          @click="switchLang(lang.code)">
           <image :src="lang.flag" class="flag" />
           <text class="label">{{ lang.label }}</text>
         </view>
@@ -22,6 +25,13 @@
 import { useInitStore } from '@/stores/useInitDataStore';
 import langData from '@/i18n/langData'; // 語系資料含有國旗
 import { useI18n } from 'vue-i18n';
+
+const props = defineProps({
+  type: {
+    type: String,
+    default: 'bottom'
+  }
+})
 
 const { locale } = useI18n();
 const store = useInitStore();
@@ -46,12 +56,16 @@ function switchLang(code: string) {
 .lang-selector {
   display: inline-flex;
   align-items: center;
+}
+
+.lang-selector-container {
+  display: inline-flex;
+  align-items: center;
   background-color: #fff;
   padding: 8rpx 16rpx;
   width: auto;
   border-radius: 999rpx;
   border: 1rpx solid #eee;
-  // box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.1);
 }
 
 .icon-triangle {

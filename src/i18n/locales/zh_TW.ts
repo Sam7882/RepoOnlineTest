@@ -11,7 +11,7 @@ export default {
     saved: "已儲存",
     save: "保存",
     save2: "儲存",
-    search: "搜索",
+    search: "搜尋",
     message: "訊息",
     monday: "週一",
     tuesday: "週二",
@@ -104,6 +104,7 @@ export default {
     verifyFailed: "驗證失敗",
     applied: "已套用",
     completed: "已完成",
+    downloadApp: "下載App",
   },
   auth: {
     username: '用戶名稱',
@@ -363,6 +364,7 @@ export default {
     decrease: "減少",
   },
   menu: {
+    viedeoHome: "影音主頁",
     profile: "個人資料",
     statistics: "個人數據",
     wallet: "錢包管理",

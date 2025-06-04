@@ -51,9 +51,10 @@ export function safeSwitchTab(targetUrl: string) {
 
 // 檢查視窗大小，比對當前頁面是否正確，並跳轉到對應版面
 export function checkViewporReplace(url: string, params = {}) {
+	console.log("🚀 ~ 檢查當前頁面 ~ url:", url)
 	// 取得螢幕寬度
 	const windowWidth = uni.getSystemInfoSync().windowWidth;
-	const basePath = windowWidth <= 768 ? '/pages/' : '/pages/pc/';
+	const basePath = windowWidth <= 768 ? '/pages' : '/pages/pc';
 	// 取得當前頁面路徑
 	const pages = getCurrentPages();
 	const currentPage = pages[pages.length - 1];
@@ -68,10 +69,11 @@ export function checkViewporReplace(url: string, params = {}) {
 
 // 檢查視窗大小，跳轉到對應版面
 export function checkViewport(url: string, params = {}) {
+	console.log("🚀 ~ 檢查窗口跳轉頁 ~ url:", url)
 	// 取得螢幕寬度
 	const windowWidth = uni.getSystemInfoSync().windowWidth;
 	// 根據寬度決定跳轉路徑
-	const basePath = windowWidth <= 768 ? '/pages/' : '/pages/pc/';
+	const basePath = windowWidth <= 768 ? '/pages' : '/pages/pc';
 	uni.navigateTo({
 		url: `${basePath}${url}` + queryStringify(params)
 	})
@@ -145,6 +147,11 @@ export const toPlayArticleGallery = (params = {}) => {
 export const toSearchHome = (params = {}) => {
 	safeSwitchTab('/pages/search/index')
 	checkViewport('/search/index', params)
+}
+// 跳轉到搜尋結果
+export const toSearchResults = (params = {}) => {
+	safeSwitchTab('/pages/search/results')
+	checkViewport('/search/results', params)
 }
 // 跳轉到搜尋視頻頁
 export const toSearchVideo = (params = {}) => {

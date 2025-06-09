@@ -42,22 +42,6 @@ page {
 }
 
 .pc-layout {
-	--main-area-padding: 72rpx;
-
-	@media screen and (min-width: 1280px) {
-		--main-area-padding: 120rpx;
-	}
-
-	@media screen and (min-width: 1440px) {
-		--main-area-padding: 150rpx;
-	}
-
-	@media screen and (min-width: 1920px) {
-		--main-area-padding: 200rpx;
-	}
-}
-
-.pc-layout {
 	position: relative;
 	display: flex;
 	height: 100vh;
@@ -75,6 +59,7 @@ page {
 .header-area,
 .content-area {
 	padding: 0 var(--main-area-padding);
+	padding-bottom: 96rpx;
 }
 
 .content-area {

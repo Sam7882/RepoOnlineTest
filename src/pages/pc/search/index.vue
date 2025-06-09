@@ -3,8 +3,8 @@
 		<view class="search-page bg-dark">
 			<!-- 滾動分類 -->
 			<view class="searchTag-container">
-				<scroll-view scroll-x :show-scrollbar="false" class="scroll-container" ref="searchTagScroll"
-					:lower-threshold="1" @scrolltolower="hideShowArrow" :upper-threshold="1" @scrolltoupper="openShowArrow">
+				<scroll-view scroll-x :show-scrollbar="false" class="scroll-container" :lower-threshold="1"
+					@scrolltolower="hideShowArrow" :upper-threshold="1" @scrolltoupper="openShowArrow">
 					<uni-list :border="false">
 						<template v-for="item in searchTagList" :key="item.value">
 							<uni-list-item :border="false" clickable @click="handleTagClick(item.value)"
@@ -25,40 +25,47 @@
 			</view>
 
 			<view class="recommend-container recommend-container-small ">
-				<view class="recommend-list">
+				<view class="swiper-wrapper">
 					<!-- 橫向可滾動的分類 -->
-					<scroll-view scroll-x :show-scrollbar="false" class="scroll-container" ref="searchTagScroll">
-						<uni-list :border="false">
-							<template v-for="(user, key) in newCreatorList" :key="key">
-								<uni-list-item :border="false" clickable @click="handleUserClick(user)" direction="column">
-									<!-- 創作縮圖 -->
-									<template #header>
-										<view class="recommend-content-image-container">
-											<image class="recommend-content-image" src="/static/logo.png" mode="aspectFill" :lazy-load="true">
-											</image>
-											<view class="recommend-content-image-cover">
-												<c-reportPopUp :iconColor="'var(--text-color-secondary)'" />
-											</view>
+					<swiper :display-multiple-items="swiperDisplayNum" next-margin="100rpx" class="swiper-container"
+						:current="swiperCurrentIndex[1]" :style="{ height: swiperHeight }"
+						@change="(e: any) => handleSwiperChange(e, 1)">
+						<template v-for="(user, key) in newCreatorList" :key="key">
+							<swiper-item @click="handleUserClick(user)">
+								<!-- 創作縮圖 -->
+								<view class="swiper-content-container">
+									<view class="recommend-content-image-container">
+										<image class="recommend-content-image" src="/static/logo.png" mode="aspectFill" :lazy-load="true">
+										</image>
+										<view class="recommend-content-image-cover">
+											<c-reportPopUp :iconColor="'var(--text-color-secondary)'" />
 										</view>
-									</template>
+									</view>
 									<!-- 推薦內容訊息 -->
-									<template #body>
-										<view class="recommend-content-container">
-											<!-- 創作者名 -->
-											<view class="recommend-content-name">
-												{{ user.userName }}
-											</view>
-											<!-- 推薦內容文字 -->
-											<view class="recommend-content-text">
-												{{ user.description }}
-											</view>
+									<view class="recommend-content-container">
+										<!-- 創作者名 -->
+										<view class="recommend-content-name">
+											{{ user.userName }}
 										</view>
-									</template>
+										<!-- 推薦內容文字 -->
+										<view class="recommend-content-text">
+											{{ user.description }}
+										</view>
+									</view>
+								</view>
+							</swiper-item>
+						</template>
+					</swiper>
+					<view class="swiper-arrow-container">
+						<view class="icon-container" @click="clickSwiperPrev(1)" :class="{ disabled: swiperCurrentIndex[1] <= 0 }">
+							<uni-icons class="icons" type="left" size="24" color="var(--text-color-primary)" />
+						</view>
+						<view class="icon-container" @click="clickSwiperNext(1)"
+							:class="{ disabled: swiperCurrentIndex[1] >= (newCreatorList.length - Number(swiperDisplayNum)) }">
+							<uni-icons class="icons" type="right" size="24" color="var(--text-color-primary)" />
+						</view>
+					</view>
 
-								</uni-list-item>
-							</template>
-						</uni-list>
-					</scroll-view>
 				</view>
 			</view>
 
@@ -78,88 +85,105 @@
 						<uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons>
 					</view> -->
 				</view>
-				<view class="recommend-list">
+				<view class="swiper-wrapper">
 					<!-- 橫向可滾動的分類 -->
-					<scroll-view scroll-x :show-scrollbar="false" class="scroll-container" ref="searchTagScroll">
-						<uni-list :border="false">
-							<template v-for="(user, key) in recommendList" :key="key">
-								<uni-list-item :border="false" clickable @click="handleUserClick(user)" direction="column">
-									<!-- 創作縮圖 -->
-									<template #header>
-										<view class="recommend-content-image-container">
-											<image class="recommend-content-image" src="/static/logo.png" mode="aspectFill" :lazy-load="true">
-											</image>
-											<view class="recommend-content-image-cover">
-												<c-reportPopUp :iconColor="'var(--text-color-secondary)'" />
-											</view>
+					<swiper :display-multiple-items="swiperDisplayNumLarge" next-margin="100rpx" class="swiper-container"
+						:current="swiperCurrentIndex[2]" :style="{ height: swiperHeightLarge }"
+						@change="(e: any) => handleSwiperChange(e, 2)">
+						<template v-for="(user, key) in recommendList" :key="key">
+							<swiper-item @click="handleUserClick(user)">
+								<!-- 創作縮圖 -->
+								<view class="swiper-content-container">
+									<view class="recommend-content-image-container">
+										<image class="recommend-content-image" src="/static/logo.png" mode="aspectFill" :lazy-load="true">
+										</image>
+										<view class="recommend-content-image-cover">
+											<c-reportPopUp :iconColor="'var(--text-color-secondary)'" />
 										</view>
-									</template>
+									</view>
 									<!-- 推薦內容訊息 -->
-									<template #body>
-										<view class="recommend-content-container">
-											<!-- 創作者名 -->
-											<view class="recommend-content-name">
-												{{ user.userName }}
-											</view>
-											<!-- 推薦內容文字 -->
-											<view class="recommend-content-text">
-												{{ user.description }}
-											</view>
+									<view class="recommend-content-container">
+										<!-- 創作者名 -->
+										<view class="recommend-content-name">
+											{{ user.userName }}
 										</view>
-									</template>
-
-								</uni-list-item>
-							</template>
-						</uni-list>
-					</scroll-view>
+										<!-- 推薦內容文字 -->
+										<view class="recommend-content-text">
+											{{ user.description }}
+										</view>
+									</view>
+								</view>
+							</swiper-item>
+						</template>
+					</swiper>
+					<view class="swiper-arrow-container">
+						<view class="icon-container" @click="clickSwiperPrev(2)" :class="{ disabled: swiperCurrentIndex[2] <= 0 }">
+							<uni-icons class="icons" type="left" size="24" color="var(--text-color-primary)" />
+						</view>
+						<view class="icon-container" @click="clickSwiperNext(2)"
+							:class="{ disabled: swiperCurrentIndex[2] >= (recommendList.length - Number(swiperDisplayNumLarge)) }">
+							<uni-icons class="icons" type="right" size="24" color="var(--text-color-primary)" />
+						</view>
+					</view>
 				</view>
 			</view>
 
 			<!-- 本週熱門 -->
-			<view class="recommend-container recommend-container-small ">
+			<view class="recommend-container">
 				<view class="recommend-top">
 					<view class="recommend-top-text">
-						<view class="recommend-top-text-title-container">
+						<text class="recommend-top-text-tip">{{ $t('search.recommend') }}</text>
+						<!-- <view class="recommend-top-text-title-container">
 							<text class="recommend-top-text-title">
-								{{ $t('search.hotRecommend') }}
+								{{ $t('search.recommendForYou') }}
 							</text>
+							<uni-icons class="recommend-top-text-icon" type="right" size="30"></uni-icons>
+						</view> -->
+					</view>
+					<!-- <view class="recommend-top-more">
+						<uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons>
+					</view> -->
+				</view>
+				<view class="swiper-wrapper">
+					<!-- 橫向可滾動的分類 -->
+					<swiper :display-multiple-items="swiperDisplayNum" next-margin="100rpx" class="swiper-container"
+						:current="swiperCurrentIndex[3]" :style="{ height: swiperHeight }"
+						@change="(e: any) => handleSwiperChange(e, 3)">
+						<template v-for="(user, key) in newCreatorList" :key="key">
+							<swiper-item @click="handleUserClick(user)">
+								<!-- 創作縮圖 -->
+								<view class="swiper-content-container">
+									<view class="recommend-content-image-container">
+										<image class="recommend-content-image" src="/static/logo.png" mode="aspectFill" :lazy-load="true">
+										</image>
+										<view class="recommend-content-image-cover">
+											<c-reportPopUp :iconColor="'var(--text-color-secondary)'" />
+										</view>
+									</view>
+									<!-- 推薦內容訊息 -->
+									<view class="recommend-content-container">
+										<!-- 創作者名 -->
+										<view class="recommend-content-name">
+											{{ user.userName }}
+										</view>
+										<!-- 推薦內容文字 -->
+										<view class="recommend-content-text">
+											{{ user.description }}
+										</view>
+									</view>
+								</view>
+							</swiper-item>
+						</template>
+					</swiper>
+					<view class="swiper-arrow-container">
+						<view class="icon-container" @click="clickSwiperPrev(3)" :class="{ disabled: swiperCurrentIndex[3] <= 0 }">
+							<uni-icons class="icons" type="left" size="24" color="var(--text-color-primary)" />
+						</view>
+						<view class="icon-container" @click="clickSwiperNext(3)"
+							:class="{ disabled: swiperCurrentIndex[3] >= (newCreatorList.length - Number(swiperDisplayNum)) }">
+							<uni-icons class="icons" type="right" size="24" color="var(--text-color-primary)" />
 						</view>
 					</view>
-				</view>
-				<view class="recommend-list">
-					<!-- 橫向可滾動的分類 -->
-					<scroll-view scroll-x :show-scrollbar="false" class="scroll-container" ref="searchTagScroll">
-						<uni-list :border="false">
-							<template v-for="(user, key) in newCreatorList" :key="key">
-								<uni-list-item :border="false" clickable @click="handleUserClick(user)" direction="column">
-									<!-- 創作縮圖 -->
-									<template #header>
-										<view class="recommend-content-image-container">
-											<image class="recommend-content-image" src="/static/logo.png" mode="aspectFill" :lazy-load="true">
-											</image>
-											<view class="recommend-content-image-cover">
-												<c-reportPopUp :iconColor="'var(--text-color-secondary)'" />
-											</view>
-										</view>
-									</template>
-									<!-- 推薦內容訊息 -->
-									<template #body>
-										<view class="recommend-content-container">
-											<!-- 創作者名 -->
-											<view class="recommend-content-name">
-												{{ user.userName }}
-											</view>
-											<!-- 推薦內容文字 -->
-											<view class="recommend-content-text">
-												{{ user.description }}
-											</view>
-										</view>
-									</template>
-
-								</uni-list-item>
-							</template>
-						</uni-list>
-					</scroll-view>
 				</view>
 			</view>
 			<!-- 瀏覽主題 -->
@@ -179,8 +203,8 @@
 						<!-- <uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons> -->
 					</view>
 				</view>
-				<scroll-view scroll-x :show-scrollbar="false" class="scroll-container" ref="searchTagScroll"
-					:lower-threshold="1" @scrolltolower="hideShowArrow" :upper-threshold="1" @scrolltoupper="openShowArrow">
+				<scroll-view scroll-x :show-scrollbar="true" class="scroll-container" :lower-threshold="1"
+					@scrolltolower="hideShowArrow" :upper-threshold="1" @scrolltoupper="openShowArrow">
 					<view class="theme-list-container">
 						<view class="theme-list-column">
 							<view class="theme-list-item" :style="{ 'background': item.themeColor }"
@@ -207,47 +231,53 @@
 							<text class="recommend-top-text-title">
 								{{ $t('search.newCreator') }}
 							</text>
-							<uni-icons class="recommend-top-text-icon" type="right" size="30"></uni-icons>
+							<!-- <uni-icons class="recommend-top-text-icon" type="right" size="30"></uni-icons> -->
 						</view>
 					</view>
 					<!-- <view class="recommend-top-more">
 						<uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons>
 					</view> -->
 				</view>
-				<view class="recommend-list">
+				<view class="swiper-wrapper">
 					<!-- 橫向可滾動的分類 -->
-					<scroll-view scroll-x :show-scrollbar="false" class="scroll-container" ref="searchTagScroll">
-						<uni-list :border="false">
-							<template v-for="(user, key) in newCreatorList" :key="key">
-								<uni-list-item :border="false" clickable @click="handleUserClick(user)" direction="column">
-									<!-- 創作縮圖 -->
-									<template #header>
-										<view class="recommend-content-image-container">
-											<image class="recommend-content-image" src="/static/logo.png" mode="aspectFill" :lazy-load="true">
-											</image>
-											<view class="recommend-content-image-cover">
-												<c-reportPopUp :iconColor="'var(--text-color-secondary)'" />
-											</view>
+					<swiper :display-multiple-items="swiperDisplayNum" next-margin="100rpx" class="swiper-container"
+						:current="swiperCurrentIndex[5]" :style="{ height: swiperHeight }"
+						@change="(e: any) => handleSwiperChange(e, 5)">
+						<template v-for="(user, key) in newCreatorList" :key="key">
+							<swiper-item @click="handleUserClick(user)">
+								<!-- 創作縮圖 -->
+								<view class="swiper-content-container">
+									<view class="recommend-content-image-container">
+										<image class="recommend-content-image" src="/static/logo.png" mode="aspectFill" :lazy-load="true">
+										</image>
+										<view class="recommend-content-image-cover">
+											<c-reportPopUp :iconColor="'var(--text-color-secondary)'" />
 										</view>
-									</template>
+									</view>
 									<!-- 推薦內容訊息 -->
-									<template #body>
-										<view class="recommend-content-container">
-											<!-- 創作者名 -->
-											<view class="recommend-content-name">
-												{{ user.userName }}
-											</view>
-											<!-- 推薦內容文字 -->
-											<view class="recommend-content-text">
-												{{ user.description }}
-											</view>
+									<view class="recommend-content-container">
+										<!-- 創作者名 -->
+										<view class="recommend-content-name">
+											{{ user.userName }}
 										</view>
-									</template>
-
-								</uni-list-item>
-							</template>
-						</uni-list>
-					</scroll-view>
+										<!-- 推薦內容文字 -->
+										<view class="recommend-content-text">
+											{{ user.description }}
+										</view>
+									</view>
+								</view>
+							</swiper-item>
+						</template>
+					</swiper>
+					<view class="swiper-arrow-container">
+						<view class="icon-container" @click="clickSwiperPrev(5)" :class="{ disabled: swiperCurrentIndex[5] <= 0 }">
+							<uni-icons class="icons" type="left" size="24" color="var(--text-color-primary)" />
+						</view>
+						<view class="icon-container" @click="clickSwiperNext(5)"
+							:class="{ disabled: swiperCurrentIndex[5] >= (newCreatorList.length - Number(swiperDisplayNum)) }">
+							<uni-icons class="icons" type="right" size="24" color="var(--text-color-primary)" />
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -257,7 +287,7 @@
 <script setup lang="ts">
 // TEMP: 搜尋主頁
 
-import { onShow } from '@dcloudio/uni-app'
+import { onShow, onResize } from '@dcloudio/uni-app'
 import { useI18n } from 'vue-i18n';
 import { toSearchVideo, toSearchTheme, checkViewportAutoReplace } from '@/utils/routers';
 const { t } = useI18n();
@@ -317,6 +347,26 @@ const userList = ref([
 ])
 /* 關注推薦創作者 */
 const recommendList = ref([
+	{
+		userName: '小明',
+		description: '創作者是介紹創作者介紹創作者是介紹創作者介紹創作者是介紹創作者介紹創作者是介紹創作者介紹',
+		img: 'https://img.yzcdn.cn/vant/ipad.png',
+	},
+	{
+		userName: '創作者名稱',
+		description: '創作者名稱',
+		img: 'https://img.yzcdn.cn/vant/ipad.png',
+	},
+	{
+		userName: '小麗',
+		description: '創作者名稱創作者名稱創作者名稱創作者名稱創作者名稱創作者名稱',
+		img: 'https://img.yzcdn.cn/vant/ipad.png',
+	},
+	{
+		userName: '小春',
+		description: '創作者名稱創作者名稱',
+		img: 'https://img.yzcdn.cn/vant/ipad.png',
+	},
 	{
 		userName: '小明',
 		description: '創作者是介紹創作者介紹創作者是介紹創作者介紹創作者是介紹創作者介紹創作者是介紹創作者介紹',
@@ -424,6 +474,26 @@ const newCreatorList = ref([
 		description: '創作者名稱創作者名稱',
 		img: 'https://img.yzcdn.cn/vant/ipad.png',
 	},
+	{
+		userName: '小明',
+		description: '創作者是介紹創作者介紹創作者是介紹創作者介紹創作者是介紹創作者介紹創作者是介紹創作者介紹',
+		img: 'https://img.yzcdn.cn/vant/ipad.png',
+	},
+	{
+		userName: '創作者名稱',
+		description: '創作者名稱',
+		img: 'https://img.yzcdn.cn/vant/ipad.png',
+	},
+	{
+		userName: '小麗',
+		description: '創作者名稱創作者名稱創作者名稱創作者名稱創作者名稱創作者名稱',
+		img: 'https://img.yzcdn.cn/vant/ipad.png',
+	},
+	{
+		userName: '小春',
+		description: '創作者名稱創作者名稱',
+		img: 'https://img.yzcdn.cn/vant/ipad.png',
+	},
 ])
 // 滾動到左側 顯示箭頭
 const openShowArrow = () => {
@@ -452,6 +522,133 @@ const handleUserClick = (item: any) => {
 	console.log("🚀 ~ 點擊用戶:", item)
 }
 
+// 監聽視窗變化
+// 定義的swiper 顯示數量
+const swiperDisplayNum = ref('6')
+// 定義的swiper 高度
+const swiperHeight = computed(() => {
+	return `calc((100vw - 480rpx - var(--main-area-padding)) / ${swiperDisplayNum.value} * 1.25)`
+})
+const swiperDisplayNumLarge = ref('6')
+const swiperHeightLarge = computed(() => {
+	return `calc((100vw - 480rpx - var(--main-area-padding)) / ${swiperDisplayNumLarge.value} * 1.25)`
+})
+
+// 定義的swiper 間距
+const nextMargin = ref('100rpx')
+// 檢查視窗大小，自動替換swiper 間距, 顯示數量 
+const checkViewportAutoReplace = () => {
+	const viewportWidth = uni.getSystemInfoSync().windowWidth
+	if (viewportWidth < 1440) {
+		swiperDisplayNum.value = '4'
+		swiperDisplayNumLarge.value = '3'
+		nextMargin.value = '100rpx'
+	} else if (viewportWidth < 1920) {
+		swiperDisplayNum.value = '5'
+		swiperDisplayNumLarge.value = '4'
+		nextMargin.value = '125rpx'
+	} else {
+		swiperDisplayNum.value = '7'
+		swiperDisplayNumLarge.value = '6'
+		nextMargin.value = '150rpx'
+	}
+}
+// 視窗大小變化觸發
+onResize(() => {
+	checkViewportAutoReplace()
+})
+
+// 定義的swiper 當前索引
+const swiperCurrentIndex = ref({
+	1: 0,
+	2: 0,
+	3: 0,
+	4: 0,
+	5: 0,
+})
+
+// 點擊滾動到下一個，同時如果後面沒有被隱藏，則不滾動
+const clickSwiperNext = (type: number) => {
+	switch (type) {
+		case 1:
+			if (swiperCurrentIndex.value[1] < (newCreatorList.value.length - Number(swiperDisplayNum.value))) {
+				swiperCurrentIndex.value[1]++
+			}
+			break
+		case 2:
+			if (swiperCurrentIndex.value[2] < (recommendList.value.length - Number(swiperDisplayNumLarge.value))) {
+				swiperCurrentIndex.value[2]++
+			}
+			break
+		case 3:
+			if (swiperCurrentIndex.value[3] < (newCreatorList.value.length - Number(swiperDisplayNum.value))) {
+				swiperCurrentIndex.value[3]++
+			}
+			break
+		case 4:
+			if (swiperCurrentIndex.value[4] < (newCreatorList.value.length - Number(swiperDisplayNum.value))) {
+				swiperCurrentIndex.value[4]++
+			}
+			break
+		case 5:
+			if (swiperCurrentIndex.value[5] < (newCreatorList.value.length - Number(swiperDisplayNum.value))) {
+				swiperCurrentIndex.value[5]++
+			}
+			break
+	}
+}
+// 點擊滾動到上一個
+const clickSwiperPrev = (type: number) => {
+	switch (type) {
+		case 1:
+			if (swiperCurrentIndex.value[1] > 0) {
+				swiperCurrentIndex.value[1]--
+			}
+			break
+		case 2:
+			if (swiperCurrentIndex.value[2] > 0) {
+				swiperCurrentIndex.value[2]--
+			}
+			break
+		case 3:
+			if (swiperCurrentIndex.value[3] > 0) {
+				swiperCurrentIndex.value[3]--
+			}
+			break
+		case 4:
+			if (swiperCurrentIndex.value[4] > 0) {
+				swiperCurrentIndex.value[4]--
+			}
+			break
+		case 5:
+			if (swiperCurrentIndex.value[5] > 0) {
+				swiperCurrentIndex.value[5]--
+			}
+			break
+	}
+}
+
+// 監聽swiper 變化，取當前索引
+const handleSwiperChange = (e: any, type: number) => {
+	switch (type) {
+		case 1:
+			swiperCurrentIndex.value[1] = e.detail.current
+			break
+		case 2:
+			swiperCurrentIndex.value[2] = e.detail.current
+			break
+		case 3:
+			swiperCurrentIndex.value[3] = e.detail.current
+			break
+		case 4:
+			swiperCurrentIndex.value[4] = e.detail.current
+			break
+		case 5:
+			swiperCurrentIndex.value[5] = e.detail.current
+			break
+	}
+}
+
 onShow(() => {
 	checkViewportAutoReplace()
 })
@@ -462,9 +659,55 @@ page {
 	background-color: var(--background-color-dark);
 }
 
+/* swiper  */
+.swiper-wrapper {
+	position: relative;
+
+	.swiper-container {
+		uni-image {
+			width: 100%;
+			height: 100%;
+			aspect-ratio: 1/1;
+			border-radius: 8rpx;
+		}
+	}
+
+	.swiper-content-container {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		padding: 0 32rpx;
+	}
+
+	.swiper-arrow-container {
+		position: absolute;
+		bottom: calc(100% + 50rpx);
+		right: 0;
+		z-index: 10;
+		display: flex;
+		justify-content: space-between;
+		gap: 8rpx;
+
+		.icon-container {
+			.icons {
+				font-size: 40rpx !important;
+				color: var(--text-color-primary) !important;
+			}
+
+			&.disabled {
+				.icons {
+					color: var(--text-color-quaternary) !important;
+				}
+			}
+		}
+	}
+}
+
 .search-page {
 	padding-top: 48rpx;
 }
+
+
 
 .searchInput-container {}
 
@@ -511,7 +754,11 @@ page {
 
 .searchTag-container {
 	position: relative;
-	margin-top: 76rpx;
+	margin-top: 0rpx;
+
+	@media screen and (min-width: 1280px) {
+		margin-top: 24rpx;
+	}
 
 	.right-arrow {
 		position: absolute;
@@ -542,7 +789,7 @@ page {
 		// overflow: scroll;
 
 		&::-webkit-scrollbar {
-			display: none;
+			// display: none;
 		}
 
 		.uni-list-item {
@@ -558,7 +805,7 @@ page {
 
 					.searchTag-item {
 						white-space: nowrap;
-						font-size: 28rpx;
+						font-size: var(--font-size-content-pc);
 						color: var(--text-color-secondary);
 					}
 				}
@@ -588,7 +835,7 @@ page {
 		// overflow: scroll;
 
 		&::-webkit-scrollbar {
-			display: none;
+			// display: none;
 		}
 
 		.uni-list-item {
@@ -625,8 +872,10 @@ page {
 	}
 
 	uni-image {
-		width: 64rpx;
-		height: 64rpx;
+		width: 100%;
+		height: 100%;
+		max-width: 500rpx;
+		aspect-ratio: 1/1;
 		border-radius: 8rpx;
 	}
 
@@ -643,78 +892,16 @@ page {
 	font-size: 32rpx !important;
 }
 
+
 /* 關注推薦 */
 .recommend-container {
 	margin-top: 80rpx;
 
-	&.recommend-container-small {
-		uni-image {
-			width: 300rpx;
-			height: 300rpx;
-			border-radius: 32rpx;
-		}
-
-		.uni-list {
-			.uni-list-item {
-				width: 300rpx;
-			}
-		}
-	}
-
-	// list
-	.uni-list {
-		flex-direction: row;
-		gap: 24rpx;
-		background-color: transparent;
-		align-items: flex-start;
-
-		&::-webkit-scrollbar {
-			display: none;
-		}
-
-		.uni-list-item {
-			width: 360rpx;
-			background-color: transparent !important;
-			overflow: hidden;
-			flex-shrink: 0;
-
-			::v-deep(.uni-list-item__container) {
-				.uni-list-item__container {
-					flex: none;
-					white-space: nowrap;
-					padding: 0;
-					align-items: center;
-					width: 100%;
-
-
-					.searchTag-item {
-						white-space: nowrap;
-						font-size: 28rpx;
-						color: var(--text-color-quaternary);
-					}
-				}
-			}
-
-			&.active {
-				background-color: var(--text-color-secondary) !important;
-
-				.searchTag-item {
-					color: var(--text-color-primary) !important;
-					font-weight: bold;
-				}
-			}
-		}
-	}
-
-	uni-image {
-		width: 360rpx;
-		height: 360rpx;
-		border-radius: 32rpx;
-	}
-
 	.recommend-content-image-container {
 		position: relative;
 		display: inline-flex;
+		border-radius: 20rpx 20rpx 0 0;
+		overflow: hidden;
 	}
 
 	.recommend-content-image-cover {
@@ -728,11 +915,19 @@ page {
 		height: 20%;
 		background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 10%, transparent 100%);
 
-		.recommend-content-image-cover-icon {
-			margin-top: 24rpx;
-			margin-right: 32rpx;
-			font-size: 32rpx !important;
-			color: var(--text-color-secondary) !important;
+		::v-deep(.icon-item-container) {
+			.icon-item {
+				margin-top: 12rpx;
+				margin-right: 24rpx;
+				font-size: 40rpx !important;
+				color: var(--text-color-secondary) !important;
+
+				@media screen and (min-width: 1280px) {
+					margin-top: 16rpx;
+					margin-right: 32rpx;
+					font-size: 48rpx !important;
+				}
+			}
 		}
 	}
 
@@ -752,16 +947,16 @@ page {
 		}
 
 		.recommend-content-name {
-			font-size: 32rpx;
+			font-size: var(--font-size-title-pc);
 			max-height: 1.5em;
-			color: var(--text-color-secondary);
+			color: var(--text-color-primary);
 			-webkit-line-clamp: 1;
 			line-clamp: 1;
 			white-space: nowrap;
 		}
 
 		.recommend-content-text {
-			font-size: 28rpx;
+			font-size: var(--font-size-content-pc);
 			color: var(--text-color-quaternary);
 			max-height: 4.5em;
 			/* 1.5 x 3行 */
@@ -791,10 +986,10 @@ page {
 	.recommend-top-text {
 		display: flex;
 		flex-direction: column;
-		color: var(--text-color-secondary);
+		color: var(--text-color-primary);
 
 		.recommend-top-text-tip {
-			color: var(--text-color-secondary);
+			color: var(--text-color-primary);
 			font-size: 30rpx;
 		}
 
@@ -828,6 +1023,12 @@ page {
 			padding: 10rpx;
 			font-size: 40rpx !important;
 			color: var(--text-color-secondary) !important;
+		}
+
+		.btn {
+			font-size: var(--font-size-title-pc);
+			padding: 16rpx 36rpx;
+			border-radius: 100rpx;
 		}
 	}
 }
@@ -908,13 +1109,14 @@ page {
 	display: flex;
 	flex-direction: row;
 
+
 	.theme-list-column {
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
 		margin-right: 20rpx;
 		width: 100%;
-		max-height: 400rpx;
+		max-height: 300rpx;
 		gap: 20rpx;
 		flex-shrink: 0;
 
@@ -959,7 +1161,7 @@ page {
 
 				.theme-list-item-info-name {
 					color: #fff;
-					font-size: 32rpx;
+					font-size: var(--font-size-title-pc);
 					max-height: 1.5em;
 					color: var(--text-color-primary);
 				}

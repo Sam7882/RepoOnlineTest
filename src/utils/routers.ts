@@ -50,20 +50,49 @@ export function safeSwitchTab(targetUrl: string) {
 }
 
 // 檢查視窗大小，比對當前頁面是否正確，並跳轉到對應版面
-export function checkViewporReplace(url: string, params = {}) {
-	console.log("🚀 ~ 檢查當前頁面 ~ url:", url)
+/* 
+變數名稱	範例值
+windowWidth	375
+basePath	'/pages/'
+currentRoute	'/pages/pc/auth/login'
+actualPath	'/auth/login'
+options	{ type: 'login', from: 'home' }
+query	'?type=login&from=home'
+expectPath	'/pages/auth/login'
+*/
+export function checkViewporReplace() {
 	// 取得螢幕寬度
 	const windowWidth = uni.getSystemInfoSync().windowWidth;
-	const basePath = windowWidth <= 768 ? '/pages' : '/pages/pc';
+	const basePath = windowWidth <= 960 ? '/pages' : '/pages/pc';
+
 	// 取得當前頁面路徑
 	const pages = getCurrentPages();
 	const currentPage = pages[pages.length - 1];
 	const currentRoute = '/' + currentPage.route;
-	// 檢查是否已在正確 basePath
-	if (!currentRoute.startsWith(basePath)) {
-		uni.navigateTo({
-			url: `${basePath}${url}` + queryStringify(params)
-		});
+
+	// 從當前路徑中提取實際頁面路徑（移除 /pages 或 /pages/pc 前綴）
+	const actualPath = currentRoute.replace(/^\/pages(\/pc)?\//, '');
+
+	// 從當前頁面獲取 URL 參數
+	const params = (currentPage as any).$page?.options || {};
+
+	// 檢查當前路徑是否包含 /pc
+	const isCurrentlyPc = currentRoute.includes('/pages/pc/');
+	// 檢查是否應該使用 PC 版
+	const shouldBePc = windowWidth > 960;
+	// 如果當前版本與應該使用的版本不匹配，則進行切換
+	if (isCurrentlyPc !== shouldBePc) {
+		setTimeout(() => {
+			uni.reLaunch({
+				url: `${basePath}/${actualPath}` + queryStringify(params),
+				success: () => {
+					console.log('版面切換成功');
+				},
+				fail: (err) => {
+					console.error('版面切換失敗:', err);
+				}
+			});
+		}, 300)
 	}
 }
 
@@ -73,7 +102,7 @@ export function checkViewport(url: string, params = {}) {
 	// 取得螢幕寬度
 	const windowWidth = uni.getSystemInfoSync().windowWidth;
 	// 根據寬度決定跳轉路徑
-	const basePath = windowWidth <= 768 ? '/pages' : '/pages/pc';
+	const basePath = windowWidth <= 960 ? '/pages' : '/pages/pc';
 	uni.navigateTo({
 		url: `${basePath}${url}` + queryStringify(params)
 	})
@@ -92,13 +121,13 @@ expectPath	'/pages/auth/login'
 export function checkViewportAutoReplace() {
 	// 取得螢幕寬度
 	const windowWidth = uni.getSystemInfoSync().windowWidth;
-	const basePath = windowWidth <= 768 ? '/pages/' : '/pages/pc/';
+	const basePath = windowWidth <= 960 ? '/pages/' : '/pages/pc/';
 	const pages = getCurrentPages();
 	const currentPage = pages[pages.length - 1];
 	const currentRoute = '/' + currentPage.route; // 例如 /pages/auth/login 或 /pages/pc/auth/login
+
 	// 取得 query 參數（uni-app 3.x 可用 $page?.options）
 	const options = (currentPage as any).$page?.options || {};
-
 	// 組合 query string
 	const query = Object.keys(options).length > 0
 		? '?' + Object.entries(options).map(([k, v]) => `${k}=${encodeURIComponent(v as string)}`).join('&')

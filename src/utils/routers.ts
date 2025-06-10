@@ -50,51 +50,55 @@ export function safeSwitchTab(targetUrl: string) {
 }
 
 // 檢查視窗大小，比對當前頁面是否正確，並跳轉到對應版面
-/* 
-變數名稱	範例值
-windowWidth	375
-basePath	'/pages/'
-currentRoute	'/pages/pc/auth/login'
-actualPath	'/auth/login'
-options	{ type: 'login', from: 'home' }
-query	'?type=login&from=home'
-expectPath	'/pages/auth/login'
-*/
+// 全域 flag: 是否正在跳轉中
+let isSwitchingLayout = false;
+
 export function checkViewporReplace() {
-	// 取得螢幕寬度
+	// 若正在跳轉 → 不做
+	if (isSwitchingLayout) {
+		console.log('🚫 正在切版型中，忽略此次呼叫');
+		return;
+	}
+
 	const windowWidth = uni.getSystemInfoSync().windowWidth;
 	const basePath = windowWidth <= 960 ? '/pages' : '/pages/pc';
 
-	// 取得當前頁面路徑
 	const pages = getCurrentPages();
 	const currentPage = pages[pages.length - 1];
 	const currentRoute = '/' + currentPage.route;
 
-	// 從當前路徑中提取實際頁面路徑（移除 /pages 或 /pages/pc 前綴）
 	const actualPath = currentRoute.replace(/^\/pages(\/pc)?\//, '');
-
-	// 從當前頁面獲取 URL 參數
 	const params = (currentPage as any).$page?.options || {};
 
-	// 檢查當前路徑是否包含 /pc
 	const isCurrentlyPc = currentRoute.includes('/pages/pc/');
-	// 檢查是否應該使用 PC 版
-	const shouldBePc = windowWidth > 960;
-	// 如果當前版本與應該使用的版本不匹配，則進行切換
-	if (isCurrentlyPc !== shouldBePc) {
-		setTimeout(() => {
-			uni.reLaunch({
-				url: `${basePath}/${actualPath}` + queryStringify(params),
-				success: () => {
-					console.log('版面切換成功');
-				},
-				fail: (err) => {
-					console.error('版面切換失敗:', err);
-				}
-			});
-		}, 300)
+
+	const currentBasePath = isCurrentlyPc ? '/pages/pc' : '/pages';
+	const targetBasePath = basePath;
+
+	if (currentBasePath !== targetBasePath) {
+		isSwitchingLayout = true; // 設置 flag → 保證不重複跳轉
+		// 用 nextTick 確保 DOM patch 完成後跳轉
+		Promise.resolve().then(() => {
+			setTimeout(() => {
+				uni.redirectTo({
+					url: `${targetBasePath}/${actualPath}` + queryStringify(params),
+					success: () => {
+						console.log('版面切換成功');
+						// 500ms 內不再允許重跳
+						setTimeout(() => {
+							isSwitchingLayout = false;
+						}, 500);
+					},
+					fail: (err) => {
+						console.error('版面切換失敗:', err);
+						isSwitchingLayout = false; // 錯誤時釋放 flag
+					}
+				});
+			}, 50); // 50ms 足夠避開 patch timing 問題
+		});
 	}
 }
+
 
 // 檢查視窗大小，跳轉到對應版面
 export function checkViewport(url: string, params = {}) {
@@ -118,27 +122,52 @@ options	{ type: 'login', from: 'home' }
 query	'?type=login&from=home'
 expectPath	'/pages/auth/login'
 */
+
+
+// 同樣使用全域 flag
+let isAutoSwitchLayout = false;
+
 export function checkViewportAutoReplace() {
-	// 取得螢幕寬度
+	// 若正在跳轉 → 不做
+	if (isAutoSwitchLayout) {
+		console.log('🚫 正在切版型中（onShow），忽略此次呼叫');
+		return;
+	}
+
 	const windowWidth = uni.getSystemInfoSync().windowWidth;
 	const basePath = windowWidth <= 960 ? '/pages/' : '/pages/pc/';
+
 	const pages = getCurrentPages();
 	const currentPage = pages[pages.length - 1];
 	const currentRoute = '/' + currentPage.route; // 例如 /pages/auth/login 或 /pages/pc/auth/login
 
-	// 取得 query 參數（uni-app 3.x 可用 $page?.options）
 	const options = (currentPage as any).$page?.options || {};
-	// 組合 query string
 	const query = Object.keys(options).length > 0
 		? '?' + Object.entries(options).map(([k, v]) => `${k}=${encodeURIComponent(v as string)}`).join('&')
 		: '';
 
-	// 計算期望路徑（去除 /pages 或 /pages/pc 前綴，補上正確 basePath）
 	const expectPath = basePath + currentRoute.replace(/^\/pages(\/pc)?\//, '');
 
-	// 若目前路徑不正確，才跳轉
 	if (currentRoute !== expectPath) {
-		uni.redirectTo({ url: expectPath + query });
+		isAutoSwitchLayout = true;
+
+		Promise.resolve().then(() => {
+			setTimeout(() => {
+				uni.redirectTo({
+					url: expectPath + query,
+					success: () => {
+						console.log('版面切換成功（onShow觸發）');
+						setTimeout(() => {
+							isAutoSwitchLayout = false;
+						}, 500);
+					},
+					fail: (err) => {
+						console.error('版面切換失敗（onShow觸發）:', err);
+						isAutoSwitchLayout = false;
+					}
+				});
+			}, 50);
+		});
 	}
 }
 

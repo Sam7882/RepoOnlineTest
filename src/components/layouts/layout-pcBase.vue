@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-
+// TEMP: PC-基礎版面
 // content 滑動頂部
 const contentScrollTop = () => {
 	const content = document.querySelector('.content-area');

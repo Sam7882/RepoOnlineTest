@@ -18,7 +18,7 @@ export const useViewportStore = defineStore('viewport', {
     updateViewport() {
       const viewportWidth = uni.getSystemInfoSync().windowWidth
       this.viewportWidth = viewportWidth
-      if (viewportWidth > 768) {
+      if (viewportWidth > 960) {
         this.isPc = true
         this.isMobile = false
       } else {

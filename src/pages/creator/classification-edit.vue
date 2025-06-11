@@ -71,7 +71,7 @@
 						<view class="classNamePopUp-container-item" @click="deleteClassification">
 							<view class="classNamePopUp-container-item-content">
 								<view class="icon-container">
-									<uni-icons class="popup-icon" type="icon-common-cancelclassName" custom-prefix="icon" size="24"
+									<uni-icons class="popup-icon" type="icon-common-cancel" custom-prefix="icon" size="24"
 										color="var(--text-color-primary)"></uni-icons>
 								</view>
 								<text>{{ $t("common.deleteClassification") }}</text>

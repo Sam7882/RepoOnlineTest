@@ -1,5 +1,5 @@
 <template>
-	<layout-pcBase v-slot="{ search }">
+	<layout-pcBase>
 		<view class="search-page bg-dark">
 			<view class="type-container">
 				<view class="type-item" :class="{ active: type == 'video' }" @click="switchType('video')">

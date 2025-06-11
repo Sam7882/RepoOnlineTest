@@ -1,5 +1,5 @@
 <template>
-	<layout-pcBase v-slot="{ search }">
+	<layout-pcBase>
 		<view class="search-page bg-dark">
 			<!-- 滾動分類 -->
 			<view class="searchTag-container">

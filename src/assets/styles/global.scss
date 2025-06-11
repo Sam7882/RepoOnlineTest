@@ -89,6 +89,8 @@
     --font-size-title-pc: 32rpx;
     --font-size-title-pc-large: 40rpx;
     --font-size-title-pc-xlarge: 48rpx;
+
+    --content-layout-maxWidth: 80%;
   }
   @media screen and (min-width: 1280px) {
     --font-size-content-pc: 32rpx;
@@ -98,6 +100,11 @@
     --font-size-title-pc-large: 44rpx;
     --font-size-title-pc-xlarge: 48rpx;
   }
+
+  @media screen and (min-width: 1440px) {
+    --content-layout-maxWidth: 50%;
+  }
+
   @media screen and (min-width: 1920px) {
     --font-size-content-pc: 36rpx;
     --font-size-content-pc-small: 32rpx;
@@ -105,6 +112,8 @@
     --font-size-title-pc: 40rpx;
     --font-size-title-pc-large: 48rpx;
     --font-size-title-pc-xlarge: 52rpx;
+
+    --content-layout-maxWidth: 80%;
   }
 
   --main-area-padding: 72rpx;

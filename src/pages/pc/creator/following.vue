@@ -1,73 +1,75 @@
 <template>
-	<view class="wallet-page">
-		<!-- header 導航-->
-		<c-headerNav class="wallet-page-header" :title="'jesiicatestid'" :openSearch="true" @search="showSearch" />
+	<layout-pcBase>
+		<view class="wallet-page pc-content-layout-center-style">
+			<!-- header 導航-->
+			<c-headerNav class="wallet-page-header" :title="'jesiicatestid'" :openSearch="true" @search="showSearch" />
 
-		<!-- 類別 -->
-		<view class="wallet-category-container">
-			<template v-for="(item, index) in categoryList" :key="index">
-				<view class="wallet-category-item" :class="{ active: categoryValue === item.value }"
-					@click="switchCategory(item.value)">
-					<text class="wallet-category-item-text">{{ item.name }} {{ item.num }}</text>
-				</view>
-			</template>
-		</view>
+			<!-- 類別 -->
+			<view class="wallet-category-container">
+				<template v-for="(item, index) in categoryList" :key="index">
+					<view class="wallet-category-item" :class="{ active: categoryValue === item.value }"
+						@click="switchCategory(item.value)">
+						<text class="wallet-category-item-text">{{ item.name }} {{ item.num }}</text>
+					</view>
+				</template>
+			</view>
 
-		<!-- 搜尋容器 -->
-		<view class="wallet-search-container" v-if="searchStatus">
-			<uni-search-bar v-model="searchText" :placeholder="$t('common.search')" @input="handleSearch" />
-		</view>
+			<!-- 搜尋容器 -->
+			<view class="wallet-search-container" v-if="searchStatus">
+				<uni-search-bar v-model="searchText" :placeholder="$t('common.search')" @input="handleSearch" />
+			</view>
 
-		<!--內容容器 -->
-		<view class="wallet-content-container">
-			<!-- 訂閱/購買紀錄 -->
-			<view class="wallet-content-container-bottom-record-container">
-				<!-- 紀錄列表 垂直排序 -->
-				<uni-list :border="false" class="wallet-content-container-bottom-record-list-container">
-					<!-- 紀錄 space-between 左右排列 -->
-					<template v-for="(item, index) in renderFollowingList" :key="index">
-						<uni-list-item :border="false" class="wallet-content-container-bottom-record-list-item">
-							<template #body>
-								<!-- 帳號頭像和錢包總額文字 水平排列 -->
-								<view class="wallet-account-container wallet-account-container-record">
-									<!-- 帳號頭像 垂直排列 -->
-									<view class="wallet-account-info-container">
-										<!-- 頭像 -->
-										<view class="wallet-account-avatar-container">
-											<image class="wallet-account-avatar" :src="item.avatar" mode="widthFix">
-											</image>
-										</view>
-										<!-- 名稱與帳號 -->
-										<view class="wallet-account-info-name-container">
-											<view class="wallet-account-info-name-title-container">
-												<text class="wallet-account-info-title">{{ item.name }}</text>
-												<!-- 認證圖標 -->
-												<view class="wallet-account-info-prove-container">
-													<uni-icons type="icon-community-prove" custom-prefix="icon" size="16"
-														color="var(--text-color-senary)"></uni-icons>
+			<!--內容容器 -->
+			<view class="wallet-content-container">
+				<!-- 訂閱/購買紀錄 -->
+				<view class="wallet-content-container-bottom-record-container">
+					<!-- 紀錄列表 垂直排序 -->
+					<uni-list :border="false" class="wallet-content-container-bottom-record-list-container">
+						<!-- 紀錄 space-between 左右排列 -->
+						<template v-for="(item, index) in renderFollowingList" :key="index">
+							<uni-list-item :border="false" class="wallet-content-container-bottom-record-list-item">
+								<template #body>
+									<!-- 帳號頭像和錢包總額文字 水平排列 -->
+									<view class="wallet-account-container wallet-account-container-record">
+										<!-- 帳號頭像 垂直排列 -->
+										<view class="wallet-account-info-container">
+											<!-- 頭像 -->
+											<view class="wallet-account-avatar-container">
+												<image class="wallet-account-avatar" :src="item.avatar" mode="widthFix">
+												</image>
+											</view>
+											<!-- 名稱與帳號 -->
+											<view class="wallet-account-info-name-container">
+												<view class="wallet-account-info-name-title-container">
+													<text class="wallet-account-info-title">{{ item.name }}</text>
+													<!-- 認證圖標 -->
+													<view class="wallet-account-info-prove-container">
+														<uni-icons type="icon-community-prove" custom-prefix="icon" size="16"
+															color="var(--text-color-senary)"></uni-icons>
+													</view>
+												</view>
+												<view class="wallet-account-info-name-account-container">
+													<text class="wallet-account-info-account">{{ item.account }}</text>
 												</view>
 											</view>
-											<view class="wallet-account-info-name-account-container">
-												<text class="wallet-account-info-account">{{ item.account }}</text>
-											</view>
+										</view>
+										<!-- 靠右按鈕 -->
+										<view class="wallet-content-container-bottom-following-list-item-button-container">
+											<!-- 關注按鈕 -->
+											<button tpye="button" class="wallet-content-container-bottom-following-list-item-button"
+												:class="{ 'unActive': item.following }" @click="switchFollowing(item)">
+												{{ item.following ? $t('creator.following') : $t('creator.unFollowing') }}
+											</button>
 										</view>
 									</view>
-									<!-- 靠右按鈕 -->
-									<view class="wallet-content-container-bottom-following-list-item-button-container">
-										<!-- 關注按鈕 -->
-										<button tpye="button" class="wallet-content-container-bottom-following-list-item-button"
-											:class="{ 'unActive': item.following }" @click="switchFollowing(item)">
-											{{ item.following ? $t('creator.following') : $t('creator.unFollowing') }}
-										</button>
-									</view>
-								</view>
-							</template>
-						</uni-list-item>
-					</template>
-				</uni-list>
+								</template>
+							</uni-list-item>
+						</template>
+					</uni-list>
+				</view>
 			</view>
 		</view>
-	</view>
+	</layout-pcBase>
 </template>
 
 <script setup lang="ts">
@@ -206,7 +208,20 @@ page {
 }
 
 .wallet-page {
-	// padding: 0 100rpx;
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			display: none;
+		}
+	}
 }
 
 .wallet-page-header {
@@ -226,7 +241,7 @@ page {
 	.wallet-category-item {
 		flex: 1;
 		padding: 0 32rpx 20rpx;
-		font-size: 32rpx;
+		font-size: var(--font-size-title-pc-large);
 		color: var(--text-color-primary);
 		text-align: center;
 
@@ -338,7 +353,7 @@ page {
 				justify-content: space-between;
 
 				.wallet-account-info-title {
-					font-size: 34rpx;
+					font-size: var(--font-size-title-pc);
 					color: var(--text-color-primary);
 				}
 
@@ -353,7 +368,7 @@ page {
 				height: fit-content;
 
 				.wallet-account-info-account {
-					font-size: 24rpx;
+					font-size: var(--font-size-content-pc);
 					color: var(--text-color-septenary);
 					line-height: 1;
 				}
@@ -460,11 +475,11 @@ page {
 }
 
 .wallet-content-container-bottom-following-list-item-button {
-	min-width: 160rpx;
+	min-width: 180rpx;
 	border-radius: 10rpx;
 	padding: 20rpx 48rpx;
 	line-height: 1;
-	font-size: 20rpx;
+	font-size: var(--font-size-content-pc-small);
 	background-color: var(--primary-color);
 	color: var(--text-color-secondary);
 

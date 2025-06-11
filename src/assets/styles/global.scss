@@ -102,7 +102,7 @@
   }
 
   @media screen and (min-width: 1440px) {
-    --content-layout-maxWidth: 50%;
+    --content-layout-maxWidth: 70%;
   }
 
   @media screen and (min-width: 1920px) {
@@ -113,7 +113,7 @@
     --font-size-title-pc-large: 48rpx;
     --font-size-title-pc-xlarge: 52rpx;
 
-    --content-layout-maxWidth: 80%;
+    --content-layout-maxWidth: 50%;
   }
 
   --main-area-padding: 72rpx;
@@ -250,4 +250,10 @@ img {
 #u-a-t {
   .uni-toast {
   }
+}
+
+// PC 內容中間視窗大小 與 置中
+.pc-content-layout-center-style {
+  max-width: var(--content-layout-maxWidth);
+  margin: 0 auto;
 }

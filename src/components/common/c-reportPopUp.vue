@@ -37,8 +37,8 @@
 			</uni-popup>
 
 			<!-- 舉報 -->
-			<uni-popup class="reportPopUp" ref="reportPopUp" type="bottom" borderRadius="60rpx 60rpx 0 0"
-				background-color="#f6f6f6">
+			<uni-popup class="reportPopUp" ref="reportPopUp" :type="isPc ? 'center' : 'bottom'"
+				:borderRadius="isPc ? '32rpx' : '60rpx 60rpx 0 0'" background-color="#f6f6f6">
 				<!-- 舉報-1 -->
 				<view class="popup-container" v-if="reportPopUpStep === 1">
 					<!-- 標題與關閉 -->
@@ -46,13 +46,13 @@
 						<text class="popup-title">{{ $t('report.report') }}</text>
 						<uni-icons class="popup-close" type="closeempty" size="24" @click="closeReportPopUp" />
 					</view>
-					<view class="deco-line"></view>
+					<view class="deco-line" v-if="!isPc"></view>
 					<view class="popup-content">
 						<!-- 社群 -->
 						<text class="popup-content-title">{{ $t('report.reportQuestion') }}</text>
 						<text class="popup-content-text">{{ $t('report.reportContentTip') }}</text>
 					</view>
-					<view class="deco-line"></view>
+					<view class="deco-line" v-if="!isPc"></view>
 					<view class="popup-content-list">
 						<view class="popup-content-item" @click="nextReportPopUpStep">
 							<text>{{ $t('report.specificPost') }}</text>
@@ -72,13 +72,13 @@
 						<text class="popup-title">{{ $t('report.report') }}</text>
 						<uni-icons class="popup-close" type="closeempty" size="24" @click="closeReportPopUp" />
 					</view>
-					<view class="deco-line"></view>
+					<view class="deco-line" v-if="!isPc"></view>
 					<view class="popup-content">
 						<!-- 社群 -->
 						<text class="popup-content-title">{{ $t('report.reportQuestion') }}</text>
 						<text class="popup-content-text">{{ $t('report.reportContentTip') }}</text>
 					</view>
-					<view class="deco-line"></view>
+					<view class="deco-line" v-if="!isPc"></view>
 					<view class="popup-content-list">
 						<view class="popup-content-item" @click="nextFeedback">
 							<text>{{ $t('report.reportContent1') }}</text>
@@ -101,8 +101,8 @@
 			</uni-popup>
 
 			<!-- 意見回饋窗 -->
-			<uni-popup class="feedbackPopUp" ref="feedbackPopUp" type="bottom" borderRadius="60rpx 60rpx 0 0"
-				background-color="#f6f6f6">
+			<uni-popup class="feedbackPopUp" ref="feedbackPopUp" :type="isPc ? 'center' : 'bottom'"
+				:borderRadius="isPc ? '32rpx' : '60rpx 60rpx 0 0'" background-color="#f6f6f6">
 				<view class="popup-container">
 					<!-- 標題與關閉 -->
 					<view class="popup-header">
@@ -125,6 +125,10 @@
 
 <script setup>
 // TEMP: 組件-檢舉元件
+import { useViewportStore } from '@/stores/useViewportStore'
+const viewportStore = useViewportStore()
+const { isPc } = storeToRefs(viewportStore)
+
 const props = defineProps({
 	iconColor: {
 		type: String,
@@ -132,6 +136,8 @@ const props = defineProps({
 	}
 })
 const emit = defineEmits(['open', 'close'])
+
+
 
 /* 舉報確認窗F */
 const reportConfirm = ref(null)
@@ -215,6 +221,19 @@ const closeFeedbackPopUp = () => {
 		border-radius: 20rpx;
 		text-align: center;
 		padding: 48rpx 0;
+
+		@media screen and (min-width: 961px) {
+			max-width: 600rpx;
+		}
+
+		@media screen and (min-width: 1920px) {
+			max-width: 800rpx;
+		}
+
+		@media screen and (min-width: 2560px) {
+			max-width: 1000rpx;
+		}
+
 	}
 
 	.uni-popup {
@@ -225,6 +244,18 @@ const closeFeedbackPopUp = () => {
 		font-weight: 500;
 		font-size: 28rpx;
 		color: var(--popTxt-color-title);
+
+		@media screen and (min-width: 961px) {
+			font-size: 32rpx;
+		}
+
+		@media screen and (min-width: 1920px) {
+			font-size: 40rpx;
+		}
+
+		@media screen and (min-width: 2560px) {
+			font-size: 48rpx;
+		}
 	}
 
 	.popup-content {
@@ -233,6 +264,17 @@ const closeFeedbackPopUp = () => {
 		margin-bottom: 48rpx;
 		color: var(--popTxt-color-content);
 
+		@media screen and (min-width: 961px) {
+			font-size: 28rpx;
+		}
+
+		@media screen and (min-width: 1920px) {
+			font-size: 40rpx;
+		}
+
+		@media screen and (min-width: 2560px) {
+			font-size: 48rpx;
+		}
 	}
 
 	.popup-actions {
@@ -257,6 +299,21 @@ const closeFeedbackPopUp = () => {
 		border: unset;
 		background: transparent;
 
+		@media screen and (min-width: 961px) {
+			font-size: 32rpx;
+			padding: 38rpx 40rpx;
+		}
+
+		@media screen and (min-width: 1920px) {
+			font-size: 40rpx;
+			padding: 42rpx 40rpx;
+		}
+
+		@media screen and (min-width: 2560px) {
+			font-size: 48rpx;
+			padding: 56rpx 40rpx;
+		}
+
 		&::after {
 			display: none;
 		}
@@ -265,6 +322,18 @@ const closeFeedbackPopUp = () => {
 	.btn-icon {
 		font-size: 34rpx !important;
 		color: var(--favorite-color-secondary) !important;
+
+		@media screen and (min-width: 961px) {
+			font-size: 32rpx;
+		}
+
+		@media screen and (min-width: 1920px) {
+			font-size: 40rpx !important;
+		}
+
+		@media screen and (min-width: 2560px) {
+			font-size: 48rpx !important;
+		}
 	}
 
 	.btn-icon-next {
@@ -297,6 +366,21 @@ const closeFeedbackPopUp = () => {
 		padding: 32rpx 0;
 		border-radius: 32rpx 32rpx 0 0;
 		background-color: var(--background-color-light);
+		// width: 80vw;
+
+		@media screen and (min-width: 961px) {
+			max-width: 800rpx;
+			border-radius: 32rpx;
+
+		}
+
+		@media screen and (min-width: 1920px) {
+			max-width: 1000rpx;
+		}
+
+		@media screen and (min-width: 2560px) {
+			max-width: 1200rpx;
+		}
 	}
 
 	.popup-header {
@@ -325,19 +409,31 @@ const closeFeedbackPopUp = () => {
 	}
 
 	.popup-title {
-		font-size: 28rpx;
+		font-size: var(--font-size-title-pc);
 		color: var(--text-color-primary);
 	}
 
 	.popup-content {
 		color: var(--text-color-quaternary);
-		font-size: 24rpx;
 		min-height: 200rpx;
 		padding: 36rpx 40rpx;
-
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		font-size: 24rpx;
+
+		@media screen and (min-width: 961px) {
+			font-size: 28rpx;
+		}
+
+		@media screen and (min-width: 1920px) {
+			font-size: 40rpx;
+		}
+
+		@media screen and (min-width: 2560px) {
+			font-size: 48rpx;
+		}
+
 
 		.popup-content-title {
 			font-size: 32rpx;
@@ -353,6 +449,10 @@ const closeFeedbackPopUp = () => {
 
 	.popup-content-list {
 		min-height: 600rpx;
+
+		@media screen and (min-width: 961px) {
+			min-height: unset;
+		}
 	}
 
 	.popup-content-item {
@@ -361,7 +461,7 @@ const closeFeedbackPopUp = () => {
 		padding: 46rpx;
 		line-height: 1;
 		border-bottom: 1px solid var(--text-color-tertiary);
-		font-size: 30rpx;
+		font-size: var(--font-size-content-pc);
 		font-weight: normal;
 
 		&:last-child {
@@ -386,6 +486,11 @@ const closeFeedbackPopUp = () => {
 	.popup-content {
 		padding: 0 88rpx;
 		min-height: 225rpx;
+
+		@media screen and (min-width: 961px) {
+			min-height: unset;
+			padding-bottom: 52rpx;
+		}
 	}
 
 	.btn-container {
@@ -394,7 +499,7 @@ const closeFeedbackPopUp = () => {
 
 	.btn {
 		padding: 24rpx 0;
-		font-size: 30rpx;
+		font-size: var(--font-size-content-pc);
 		font-weight: normal;
 	}
 }

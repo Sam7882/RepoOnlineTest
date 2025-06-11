@@ -1,4 +1,4 @@
-// 發佈資料 store
+// TEMP: 搜尋資料 store
 import { defineStore } from 'pinia';
 
 interface PostState {

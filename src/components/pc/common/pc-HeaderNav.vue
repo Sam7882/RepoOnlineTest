@@ -3,16 +3,21 @@
 		<view class="search-bar searchInput-container">
 			<uni-easyinput v-model="search" class="inputStyle" :placeholder="$t('common.search')" prefixIcon="search"
 				:trim="true" :clearable="false" @blur="handleSearch" @keyup.enter="handleSearch" />
+			<view class="btn-container" v-show="search.length > 0">
+				<button class="btn" type="button" @click="handleSearch">
+					<text>{{ $t('common.search') }}</text>
+				</button>
+			</view>
 		</view>
 		<view class="right-tools">
 			<text class="download-link">{{ $t('common.downloadApp') }}</text>
-			<!-- <text class="menu-icon">≡</text> -->
 			<c-langSelector type="center" class="pc-lang-selector" />
 		</view>
 	</view>
 </template>
 
 <script setup lang="ts">
+// TEMP: PC-頂部搜尋導航列
 import { useSearchData } from '@/stores/useSearchData'
 import { toSearchResults } from '@/utils/routers';
 
@@ -23,6 +28,7 @@ watch(search, val => {
 	setSearch(val)
 })
 
+// 處理搜尋
 const handleSearch = () => {
 	toSearchResults({
 		search: search.value
@@ -42,12 +48,24 @@ const handleSearch = () => {
 }
 
 .search-bar {
-	min-width: 700rpx;
+	display: flex;
+	gap: 24rpx;
+	align-items: center;
+
+	.btn-container {
+
+		.btn {
+			padding: 16rpx 24rpx;
+			font-size: var(--font-size-content-pc);
+		}
+	}
 }
 
 /* 輸入欄位 */
 // INPUT 輸入欄位
 .inputStyle {
+	min-width: 700rpx;
+
 	::v-deep(.uni-easyinput__content) {
 		margin-bottom: 0rpx;
 
@@ -58,7 +76,7 @@ const handleSearch = () => {
 			padding: 4rpx 32rpx;
 
 			&.is-focused {
-				border: 1px solid var(--primary-color) !important;
+				// border: 1px solid var(--primary-color) !important;
 
 				.uniui-eye-filled {
 					color: var(--primary-color) !important;
@@ -76,14 +94,14 @@ const handleSearch = () => {
 		}
 
 		.uni-easyinput__content-input {
-			color: var(--text-color-secondary) !important;
+			color: var(--text-color-primary) !important;
 			font-size: 28rpx;
 		}
 	}
 
 	&.errorStyle ::v-deep(.uni-easyinput__content) {
 		&.is-input-border {
-			border: 1px solid var(--text-color-error) !important;
+			// border: 1px solid var(--text-color-error) !important;
 		}
 	}
 }

@@ -4,7 +4,7 @@
 			<!-- 滾動分類 -->
 			<view class="searchTag-container">
 				<scroll-view scroll-x :show-scrollbar="false" class="scroll-container" :lower-threshold="1"
-					@scrolltolower="hideShowArrow" :upper-threshold="1" @scrolltoupper="openShowArrow">
+					:upper-threshold="1">
 					<uni-list :border="false">
 						<template v-for="item in searchTagList" :key="item.value">
 							<uni-list-item :border="false" clickable @click="handleTagClick(item.value)"
@@ -18,10 +18,6 @@
 						</template>
 					</uni-list>
 				</scroll-view>
-				<!-- 右邊箭頭 -->
-				<!-- <view v-if="showArrow" class="right-arrow">
-					<uni-icons type="right" size="30"></uni-icons>
-				</view> -->
 			</view>
 
 			<view class="recommend-container recommend-container-small ">
@@ -203,24 +199,25 @@
 						<!-- <uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons> -->
 					</view>
 				</view>
-				<scroll-view scroll-x :show-scrollbar="true" class="scroll-container" :lower-threshold="1"
-					@scrolltolower="hideShowArrow" :upper-threshold="1" @scrolltoupper="openShowArrow">
-					<view class="theme-list-container">
-						<view class="theme-list-column">
-							<view class="theme-list-item" :style="{ 'background': item.themeColor }"
-								v-for="(item, index) in themeList" :key="index" @click="handleMore">
-								<view class="theme-list-item-info">
-									<text class="theme-list-item-info-name">{{ item.title }}</text>
-								</view>
-								<view class="icon-container">
-									<uni-icons class="icon-theme" type="icon-common-theme" custom-prefix="icon" size="30"
-										color="var(--text-color-secondary)"></uni-icons>
+				<view class="swiper-wrapper">
+					<swiper :display-multiple-items="swiperDisplayNum" next-margin="100rpx" class="swiper-container">
+						<swiper-item class="theme-list-container" v-for="(items, indexs) in themeColumns" :key="indexs"
+							@click="handleMore">
+							<view class="theme-list-column">
+								<view class="theme-list-item" v-for="(item, index) in items" :key="index"
+									:style="{ 'background': item.themeColor }">
+									<view class="theme-list-item-info">
+										<text class="theme-list-item-info-name">{{ item.title }}</text>
+									</view>
+									<view class="icon-container">
+										<uni-icons class="icon-theme" type="icon-common-theme" custom-prefix="icon" size="30"
+											color="var(--text-color-secondary)"></uni-icons>
+									</view>
 								</view>
 							</view>
-						</view>
-					</view>
-				</scroll-view>
-
+						</swiper-item>
+					</swiper>
+				</view>
 			</view>
 
 			<!-- 新FANCE創作者 -->
@@ -285,12 +282,16 @@
 </template>
 
 <script setup lang="ts">
-// TEMP: 搜尋主頁
+// TEMP: PC搜尋主頁
 
 import { onShow, onResize } from '@dcloudio/uni-app'
 import { useI18n } from 'vue-i18n';
-import { toSearchVideo, toSearchTheme, checkViewportAutoReplace } from '@/utils/routers';
+import { toSearchVideo, toSearchTheme } from '@/utils/routers';
+import { useViewportStore } from '@/stores/useViewportStore'
+
 const { t } = useI18n();
+const viewportStore = useViewportStore()
+const { isPc, viewportWidth } = storeToRefs(viewportStore)
 /* 滾動分類 */
 const searchTag = ref(0)
 const searchTagList = ref([
@@ -323,9 +324,7 @@ const searchTagList = ref([
 		value: 6,
 	},
 ])
-const searchTagScroll = ref(null)
-// 滾動分類箭頭
-const showArrow = ref(true);
+
 /* 滾動用戶 */
 const userList = ref([
 	{
@@ -441,14 +440,13 @@ const themeList = [
 	{ title: '漫畫創作', iconUrl: 'https://picsum.photos/32', themeColor: 'linear-gradient(to bottom, #e2e205, #e2e205)' },
 	{ title: '同人創作', iconUrl: 'https://picsum.photos/32', themeColor: '#ff24fb' },
 ];
-// 每列放 3 個
+
+// 每兩個一組
 const themeColumns = computed(() => {
-	const colCount = Math.ceil(themeList.length / 3);
-	const result = Array.from({ length: colCount }, () => []);
-	themeList.forEach((item, index) => {
-		const colIndex = Math.floor(index / 3);
-		result[colIndex].push(item);
-	});
+	const result = [];
+	for (let i = 0; i < themeList.length; i += 2) {
+		result.push(themeList.slice(i, i + 2));
+	}
 	return result;
 });
 
@@ -495,14 +493,6 @@ const newCreatorList = ref([
 		img: 'https://img.yzcdn.cn/vant/ipad.png',
 	},
 ])
-// 滾動到左側 顯示箭頭
-const openShowArrow = () => {
-	showArrow.value = true
-}
-// 滾動到右側 隱藏箭頭
-const hideShowArrow = () => {
-	showArrow.value = false
-}
 
 const handleToTheme = () => {
 	toSearchTheme()
@@ -538,12 +528,11 @@ const swiperHeightLarge = computed(() => {
 const nextMargin = ref('100rpx')
 // 檢查視窗大小，自動替換swiper 間距, 顯示數量 
 const checkViewportAutoReplace = () => {
-	const viewportWidth = uni.getSystemInfoSync().windowWidth
-	if (viewportWidth < 1440) {
+	if (viewportWidth.value < 1440) {
 		swiperDisplayNum.value = '4'
 		swiperDisplayNumLarge.value = '3'
 		nextMargin.value = '100rpx'
-	} else if (viewportWidth < 1920) {
+	} else if (viewportWidth.value < 1920) {
 		swiperDisplayNum.value = '5'
 		swiperDisplayNumLarge.value = '4'
 		nextMargin.value = '125rpx'
@@ -553,8 +542,8 @@ const checkViewportAutoReplace = () => {
 		nextMargin.value = '150rpx'
 	}
 }
-// 視窗大小變化觸發
-onResize(() => {
+
+watch(viewportWidth, () => {
 	checkViewportAutoReplace()
 })
 
@@ -794,7 +783,7 @@ page {
 
 		.uni-list-item {
 			width: fit-content;
-			background-color: var(--text-color-quinary) !important;
+			background-color: var(--text-color-denary) !important;
 			border-radius: 100rpx;
 
 			::v-deep(.uni-list-item__container) {
@@ -806,7 +795,7 @@ page {
 					.searchTag-item {
 						white-space: nowrap;
 						font-size: var(--font-size-content-pc);
-						color: var(--text-color-secondary);
+						color: var(--text-color-primary);
 					}
 				}
 			}
@@ -819,70 +808,6 @@ page {
 				}
 			}
 		}
-	}
-}
-
-.user-container {
-	position: relative;
-	margin-top: 32rpx;
-
-
-	// list
-	.uni-list {
-		flex-direction: row;
-		gap: 16rpx;
-		background-color: transparent;
-		// overflow: scroll;
-
-		&::-webkit-scrollbar {
-			// display: none;
-		}
-
-		.uni-list-item {
-			width: 360rpx;
-			background-color: var(--text-color-quinary) !important;
-			border-radius: 16rpx;
-			flex-shrink: 0;
-
-			::v-deep(.uni-list-item__container) {
-				.uni-list-item__container {
-					flex: none;
-					white-space: nowrap;
-					padding: 16rpx;
-					align-items: center;
-					width: 100%;
-
-					.searchTag-item {
-						white-space: nowrap;
-						font-size: 28rpx;
-						color: var(--text-color-quaternary);
-					}
-				}
-			}
-
-			&.active {
-				background-color: var(--text-color-secondary) !important;
-
-				.searchTag-item {
-					color: var(--text-color-primary) !important;
-					font-weight: bold;
-				}
-			}
-		}
-	}
-
-	uni-image {
-		width: 100%;
-		height: 100%;
-		max-width: 500rpx;
-		aspect-ratio: 1/1;
-		border-radius: 8rpx;
-	}
-
-	.user-name {
-		color: var(--text-color-secondary);
-		margin-left: 24rpx;
-		font-size: 32rpx;
 	}
 }
 
@@ -900,7 +825,7 @@ page {
 	.recommend-content-image-container {
 		position: relative;
 		display: inline-flex;
-		border-radius: 20rpx 20rpx 0 0;
+		border-radius: 20rpx;
 		overflow: hidden;
 	}
 
@@ -990,7 +915,16 @@ page {
 
 		.recommend-top-text-tip {
 			color: var(--text-color-primary);
-			font-size: 30rpx;
+			font-size: 40rpx;
+
+			@media screen and (min-width: 1280px) {
+				font-size: 44rpx;
+			}
+
+			@media screen and (min-width: 1920px) {
+				font-size: 50rpx;
+			}
+
 		}
 
 		.recommend-top-text-title-container {
@@ -1033,77 +967,6 @@ page {
 	}
 }
 
-/* 本週熱門 */
-.hot-recommend-container {
-	margin-top: 80rpx;
-}
-
-.hot-recommend-list-container {
-	display: flex;
-	flex-direction: row;
-
-	.hot-recommend-list-column {
-		display: flex;
-		flex-direction: column;
-		margin-right: 20rpx;
-		width: 95%;
-		flex-shrink: 0;
-
-		.hot-recommend-list-item {
-			display: flex;
-			align-items: center;
-			margin-bottom: 32rpx;
-			padding-right: 24rpx;
-
-			.hot-recommend-list-item-avatar {
-				width: 100rpx;
-				height: 100rpx;
-				border-radius: 8rpx;
-				margin-right: 12rpx;
-			}
-
-			.hot-recommend-list-item-info {
-				display: flex;
-				flex-direction: column;
-
-				.hot-recommend-list-item-info-name,
-				.hot-recommend-list-item-info-desc {
-					white-space: nowrap;
-					overflow: hidden;
-					display: -webkit-box;
-					-webkit-box-orient: vertical;
-					-webkit-line-clamp: 1;
-					line-clamp: 1;
-				}
-
-				.hot-recommend-list-item-info-name {
-					color: #fff;
-					font-size: 32rpx;
-					max-height: 1.5em;
-					color: var(--text-color-secondary);
-				}
-
-				.hot-recommend-list-item-info-desc {
-					color: #999;
-					font-size: 28rpx;
-					max-height: 1.5em;
-					color: var(--text-color-quaternary);
-				}
-			}
-
-			/* icon */
-			.hot-recommend-list-item-icon {
-				margin-left: auto;
-
-				.hot-recommend-list-item-info-more {
-					font-size: 24rpx !important;
-					color: var(--text-color-secondary) !important;
-				}
-			}
-		}
-	}
-}
-
 /* 瀏覽主題 */
 .theme-list-container {
 	display: flex;
@@ -1119,6 +982,7 @@ page {
 		max-height: 300rpx;
 		gap: 20rpx;
 		flex-shrink: 0;
+		padding: 0 10rpx;
 
 		.theme-list-item {
 			position: relative;

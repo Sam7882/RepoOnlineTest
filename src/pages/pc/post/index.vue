@@ -1,84 +1,118 @@
 <template>
-	<view class="publish-page">
-		<!-- header -->
-		<c-headerNav :title="$t('post.publish')" />
+	<layout-pcBase>
+		<view class="publish-page pc-content-layout-center-style">
+			<!-- header -->
+			<c-headerNav :title="$t('post.publish')">
+				<template #left>
+					<view class="header-nav-left-position header-nav-icon-container" @click="openConfirmPopUp">
+						<uni-icons class="header-nav-icon" type="left" size="20" color="var(--text-color-primary)"></uni-icons>
+					</view>
+				</template>
+			</c-headerNav>
 
-		<!-- 圖片與輸入內容區 -->
-		<view class="publish-media-container">
-			<image class="publish-media-preview" src="/static/images/template/img-template-02.png" mode="aspectFill" />
-			<!-- <uni-easyinput v-model="postContent" type="textarea" class="publish-input" placeholder="請輸入內容" :trim="true"
-				:clearable="false" /> -->
-			<post-postContent ref="postContentRef" v-model="postContent" @update:modelValue="handleText" />
-		</view>
+			<view class="publish-page-container">
+				<!-- 左側預覽圖 -->
+				<view class="publish-page-container-left">
+					<view class="publish-page-container-left-item">
+						<image v-if="mediaList.type === 'image'" class="publish-media-preview" :src="mediaList.url"
+							mode="widthFix" />
+						<video v-else id="storyVideo" class="video" :src="mediaList.url" loop :muted="playStatus === 'pause'"
+							:controls="true" :show-center-play-btn="true" object-fit="contain" :show-loading="false"
+							:enable-progress-gesture="false" :show-play-btn="false" :show-fullscreen-btn="false" :show-progress="true"
+							@click="switchVideoPlay" />
+						<view class="icon-container" v-if="playStatus === 'pause'" @click="switchVideoPlay">
+							<uni-icons class="icons" type="icon-video-play" custom-prefix="icon" size="16" color="#fff" />
+						</view>
+					</view>
+				</view>
 
-		<!-- 標籤與提及 -->
-		<view class="publish-tags-container">
-			<view class="publish-tag" @click="addHashTag">
-				<uni-icons type="tag" size="16" color="#999" />
-				#{{ $t('post.hashTag') }}
+				<!-- 右側文章內容 -->
+				<view class="publish-page-container-right">
+
+					<!-- 圖片與輸入內容區 -->
+					<view class="publish-media-container">
+						<image class="publish-media-preview" src="/static/images/template/img-template-02.png" mode="aspectFill" />
+						<post-postContent ref="postContentRef" v-model="postContent" @update:modelValue="handleText" />
+					</view>
+
+					<!-- 標籤與提及 -->
+					<view class="publish-tags-container">
+						<view class="publish-tag" @click="addHashTag">
+							<uni-icons type="tag" size="16" color="#999" />
+							#{{ $t('post.hashTag') }}
+						</view>
+						<view class="publish-tag" @click="addMention">
+							<uni-icons type="at" size="16" color="#999" />
+							@{{ $t('post.mention') }}
+						</view>
+					</view>
+
+					<!-- 標記人 -->
+					<view class="publish-setting-item" @click="openPostTagPeople">
+						<view class="publish-setting-left">
+							<text>{{ $t('post.tagPeople') }}</text>
+						</view>
+						<uni-icons class="publish-setting-right" type="right" size="16" color="#999" />
+					</view>
+
+					<!-- 發佈設定 -->
+					<view class="publish-setting-item" @click="openPublishSetting">
+						<view class="publish-setting-left">
+							<text>{{ $t('post.publishSetting') }}</text>
+							<text class="desc">{{ $t('post.publishSettingTip') }}</text>
+						</view>
+						<uni-icons class="publish-setting-right" type="right" size="16" color="#999" />
+					</view>
+
+					<!-- 自動發佈 -->
+					<view class="publish-setting-item" @click="openAutoPublish">
+						<view class="publish-setting-left">
+							<text>{{ $t('post.autoPublish') }}</text>
+							<text class="desc">2025/02/25/19:18 {{ $t('post.autoPublishTip') }}</text>
+						</view>
+						<uni-icons class="publish-setting-right" type="right" size="16" color="#999" />
+					</view>
+
+					<!-- 允許評論 -->
+					<view class="publish-setting-item">
+						<view class="publish-setting-left">
+							<text>{{ $t('post.allowComment') }}</text>
+						</view>
+						<c-checkBox class="switch-btn-container" @update:modelValue="handleSwitchChange" />
+
+						<!-- <switch class="publish-setting-right-switch" :checked="true" color="#937CFF" @change="handleSwitchChange" /> -->
+					</view>
+
+					<!-- 底部操作按鈕 -->
+					<view class="publish-actions">
+						<button class="btn-draft" type="button" @click="handleDraft">
+							<uni-icons type="trash" size="18" /> {{ $t('post.draft') }}
+						</button>
+						<button class="btn-publish" type="button" @click="handlePublish">
+							<uni-icons type="upload" size="18" /> {{ $t('post.publish') }}
+						</button>
+					</view>
+				</view>
 			</view>
-			<view class="publish-tag" @click="addMention">
-				<uni-icons type="at" size="16" color="#999" />
-				@{{ $t('post.mention') }}
-			</view>
+
+
+			<post-postSet ref="publishSettingRef" :defaultSelected="publishSetting" @updata:postSet="handlePublishSetting" />
+			<post-dateTimePicker ref="autoPublishRef" @update:autoDate="updateAutoDate"></post-dateTimePicker>
+			<post-postTagPeople ref="postTagPeopleRef" />
+			<c-confirmPopUp ref="confirmPopUp" class="confirm-pop-up" />
 		</view>
-
-		<!-- 標記人 -->
-		<view class="publish-setting-item" @click="toTagPages">
-			<view class="publish-setting-left">
-				<text>{{ $t('post.tagPeople') }}</text>
-			</view>
-			<uni-icons class="publish-setting-right" type="right" size="16" color="#999" />
-		</view>
-
-		<!-- 發佈設定 -->
-		<view class="publish-setting-item" @click="openPublishSetting">
-			<view class="publish-setting-left">
-				<text>{{ $t('post.publishSetting') }}</text>
-				<text class="desc">{{ $t('post.publishSettingTip') }}</text>
-			</view>
-			<uni-icons class="publish-setting-right" type="right" size="16" color="#999" />
-		</view>
-
-		<!-- 自動發佈 -->
-		<view class="publish-setting-item" @click="openAutoPublish">
-			<view class="publish-setting-left">
-				<text>{{ $t('post.autoPublish') }}</text>
-				<text class="desc">2025/02/25/19:18 {{ $t('post.autoPublishTip') }}</text>
-			</view>
-			<uni-icons class="publish-setting-right" type="right" size="16" color="#999" />
-		</view>
-
-		<!-- 允許評論 -->
-		<view class="publish-setting-item">
-			<text>{{ $t('post.allowComment') }}</text>
-			<c-checkBox class="switch-btn-container" @update:modelValue="handleSwitchChange" />
-
-			<!-- <switch class="publish-setting-right-switch" :checked="true" color="#937CFF" @change="handleSwitchChange" /> -->
-		</view>
-
-		<!-- 底部操作按鈕 -->
-		<view class="publish-actions">
-			<button class="btn-draft" type="button" @click="handleDraft">
-				<uni-icons type="trash" size="18" /> {{ $t('post.draft') }}
-			</button>
-			<button class="btn-publish" type="button" @click="handlePublish">
-				<uni-icons type="upload" size="18" /> {{ $t('post.publish') }}
-			</button>
-		</view>
-
-		<post-postSet ref="publishSettingRef" :defaultSelected="publishSetting" @updata:postSet="handlePublishSetting" />
-		<post-dateTimePicker ref="autoPublishRef" @update:autoDate="updateAutoDate"></post-dateTimePicker>
-	</view>
+	</layout-pcBase>
 </template>
 
 <script setup lang="ts">
-// TEMP: 發佈頁
+// TEMP: PC發佈頁
 
 import { onShow } from '@dcloudio/uni-app'
 import { toTagPeople, checkViewportAutoReplace } from '@/utils/routers'
 import { usePostData } from '@/stores/usePostData';
 import { toPlayIndex, toCreatorHome } from '@/utils/routers';
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const postStore = usePostData();
 /*  */
@@ -86,8 +120,46 @@ const postContentRef = ref()
 const postContent = ref('')
 const publishSettingRef = ref()
 const autoPublishRef = ref()
+const { selectedMedia } = storeToRefs(postStore)
+// 選擇第一則媒體
+const mediaList = computed(() => selectedMedia.value[0])
+
+/* 左側預覽 */
+
+const switchVideoPlay = () => {
+	if (playStatus.value === 'play') {
+		pauseVideo()
+	} else {
+		resumeVideo()
+	}
+}
+
+// ICON 暫停播放切換
+const playStatus = ref('play')
+const turnOnPlayStatus = () => {
+	playStatus.value = 'play'
+}
+const turnOnPauseStatus = () => {
+	playStatus.value = 'pause'
+}
+
+// 暫停影片
+const pauseVideo = () => {
+	uni.createVideoContext('storyVideo').pause()
+	turnOnPauseStatus()
+	console.log('暫停影片')
+}
+
+// 播放影片
+const resumeVideo = () => {
+	uni.createVideoContext('storyVideo').play();
+	turnOnPlayStatus()
+	console.log('播放影片')
+}
+
 // 發佈設定
 const publishSetting = ref('subscription')
+
 // TODO: 輸入框 文字變更
 /* 如果輸入框 有 # 或者 @ 則需要反藍色 */
 const handleText = (e: any) => {
@@ -146,6 +218,27 @@ const toTagPages = () => {
 	toTagPeople()
 }
 
+const postTagPeopleRef = ref()
+const openPostTagPeople = () => {
+	postTagPeopleRef.value?.open()
+}
+
+
+const confirmPopUp = ref()
+// TODO: 語系補齊
+const openConfirmPopUp = () => {
+	confirmPopUp.value.open({
+		title: t('post.discardPost'),
+		// content: t('auth.confirmLogout'),
+		confirmBtnText: t('post.discard'),
+		onConfirm: () => {
+			console.log('捨棄')
+
+		}
+	})
+
+}
+
 onShow(() => {
 	checkViewportAutoReplace()
 })
@@ -156,6 +249,111 @@ onShow(() => {
 .publish-page {
 	padding: 32rpx;
 	padding-top: 0;
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position:hover {
+			cursor: pointer;
+		}
+	}
+
+	&.pc-content-layout-center-style {
+		max-width: 100%;
+
+		@media screen and (min-width: 1440px) {
+			max-width: 80%;
+		}
+
+		@media screen and (min-width: 1920px) {
+			max-width: 60%;
+		}
+	}
+}
+
+// 圖標容器
+.header-nav-left-position {
+	position: absolute;
+	left: 48rpx;
+	top: 50%;
+	transform: translateY(-20%);
+	padding-top: 16rpx;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.publish-page-container {
+	display: flex;
+	justify-content: center;
+
+	.publish-page-container-left,
+	.publish-page-container-right {
+		flex: 1;
+	}
+}
+
+.publish-page-container-left {
+	display: flex;
+	justify-content: flex-end;
+	// height: 100%;
+
+	.publish-page-container-left-item {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		background: var(--background-color-dark);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		// TODO: 影片比例設定
+		aspect-ratio: 1/1.625;
+
+
+		.publish-media-preview {
+			width: 100%;
+			height: 100%;
+		}
+
+
+		.icon-container {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+
+			.icons {
+				font-size: 150rpx !important;
+				color: var(--text-color-secondary) !important;
+			}
+		}
+	}
+
+	.video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+
+		::v-deep(.uni-video-container) {
+			.uni-video-cover-play-button {
+				width: 150rpx;
+				height: 150rpx;
+			}
+		}
+	}
+}
+
+.publish-page-container-right {
+	padding-left: 80rpx;
 }
 
 .publish-media-container {
@@ -167,9 +365,17 @@ onShow(() => {
 	margin-bottom: 16rpx;
 
 	.publish-media-preview {
-		width: 140rpx;
-		height: 184rpx;
+		width: 160rpx;
+		height: 100%;
+		aspect-ratio: 1/1.3;
 		border-radius: 8rpx;
+
+		@media screen and (min-width: 1920px) {
+			width: 200rpx;
+
+		}
+
+		@media screen and (min-width: 2560px) {}
 
 	}
 
@@ -190,7 +396,7 @@ onShow(() => {
 		}
 	}
 
-	.publish-input {
+	.editor-wrapper {
 		height: 184rpx;
 
 		::v-deep(.uni-easyinput__content) {
@@ -216,7 +422,7 @@ onShow(() => {
 				}
 
 				.uni-textarea-textarea {
-					font-size: 24rpx;
+					font-size: var(--font-size-content-pc) !important;
 				}
 			}
 		}
@@ -240,8 +446,12 @@ onShow(() => {
 		background: #f2f2f2;
 		padding: 8rpx 16rpx;
 		border-radius: 12rpx;
-		font-size: 24rpx;
+		font-size: var(--font-size-content-pc-small);
 		color: #000;
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 
 	&::after {
@@ -250,7 +460,7 @@ onShow(() => {
 		bottom: -30rpx;
 		left: 50%;
 		transform: translateX(-50%);
-		width: 100vw;
+		width: 100%;
 		height: 1px;
 		background: var(--text-color-octonary);
 	}
@@ -262,21 +472,26 @@ onShow(() => {
 	align-items: center;
 	padding: 24rpx 0;
 	font-size: 28rpx;
+
+	&:hover {
+		cursor: pointer;
+	}
+
 	// border-bottom: 1px solid #eee;
 
 	.publish-setting-left {
 		display: flex;
 		flex-direction: column;
-		font-size: 32rpx;
+		font-size: var(--font-size-title-pc);
 
 		.desc {
-			font-size: 20rpx;
+			font-size: var(--font-size-content-pc-small);
 			color: #999;
 		}
 	}
 
 	.publish-setting-right {
-		font-size: 28rpx !important;
+		font-size: var(--font-size-content-pc) !important;
 		color: var(--text-color-gray3) !important;
 	}
 
@@ -303,21 +518,17 @@ onShow(() => {
 }
 
 .publish-actions {
-	position: absolute;
-	bottom: 32rpx;
-	left: 0;
-	right: 0;
-	padding: 0 32rpx;
+	position: relative;
 	display: flex;
 	justify-content: space-between;
 	margin-top: 64rpx;
-	gap: 24rpx;
+	gap: 80rpx;
 
 	.btn-draft,
 	.btn-publish {
 		flex: 1;
 		border-radius: 16rpx;
-		font-size: 28rpx;
+		font-size: var(--font-size-content-pc);
 		padding: 24rpx 0;
 		line-height: 1;
 	}
@@ -355,6 +566,15 @@ onShow(() => {
 					left: calc(100% - 30rpx - 6rpx) !important;
 				}
 			}
+		}
+	}
+}
+
+.confirm-pop-up {
+	::v-deep(.popup-box) {
+		.confirm-btn {
+			color: var(--favorite-color-secondary);
+			background-color: transparent;
 		}
 	}
 }

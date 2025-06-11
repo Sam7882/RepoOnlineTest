@@ -269,7 +269,8 @@ onShow(() => {
 	position: relative;
 
 	.user-item-right-checkbox {
-		position: relative;
+		position: absolute;
+		inset: 0;
 		z-index: 1;
 		opacity: 0;
 	}
@@ -277,9 +278,7 @@ onShow(() => {
 
 .user-item-right-checkbox-custom-checked {
 	z-index: 0;
-	position: absolute;
-	right: 4rpx;
-	top: 4rpx;
+	position: relative;
 
 	.user-item-right-checkbox-custom-checked-image {
 		width: 50rpx;

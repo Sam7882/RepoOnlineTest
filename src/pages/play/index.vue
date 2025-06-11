@@ -252,7 +252,6 @@ const toSubscription = () => {
 		}
 	}
 	else {
-		/* TODO:語系須補 */
 		confirmModal.value.open({
 			title: t('play.unFollowCreator'),
 			confirmBtnText: t('play.unFollowCreator'),

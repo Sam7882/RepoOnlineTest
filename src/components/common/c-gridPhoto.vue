@@ -120,12 +120,12 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
     }
 
     .content-card-container-item-icon {
-      font-size: 24rpx !important;
+      font-size: var(--font-size-content-pc) !important;
       transform: translateY(2rpx);
     }
 
     .content-card-container-item-icon-text {
-      font-size: 24rpx;
+      font-size: var(--font-size-content-pc);
       color: var(--text-color-secondary);
     }
   }

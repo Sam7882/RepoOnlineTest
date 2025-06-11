@@ -129,6 +129,8 @@ const handleOpenQa = () => {
 	// 標題容器
 	.header-nav-title-container {
 		font-size: 36rpx;
+		font-size: var(--font-size-title-pc-xlarge);
+
 		color: var(--text-color-primary);
 	}
 

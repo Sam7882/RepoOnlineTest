@@ -1,15 +1,34 @@
 <template>
-	<view class="favorites-page">
-		<!-- header 導航-->
-		<c-headerNav :title="$t('creator.myFavorites')" />
-		<!-- 收藏列表 -->
-		<view>
-			<c-gridPhoto :data="gridPhotoData" @clickMedia="handleClickMedia" />
-		</view>
-		<!-- 圖片全螢幕 -->
-		<play-popImgFullScreen ref="videoPopImgFullScreen" :imgs="imageFullScreenImgs"></play-popImgFullScreen>
+	<layout-pcBase>
+		<view class="favorites-page">
+			<!-- header 導航-->
+			<c-headerNav :title="$t('creator.myFavorites')" />
 
-	</view>
+			<!-- 統計數字 -->
+			<view class="statistics-container">
+				<view class="statistics-item" :class="{ active: type === 'all' }" @click="switchType('all')">
+					<text>{{ $t("common.all") }}</text>
+					<text>508</text>
+				</view>
+				<view class="statistics-item" :class="{ active: type === 'video' }" @click="switchType('video')">
+					<text>{{ $t("common.video") }}</text>
+					<text>55</text>
+				</view>
+				<view class="statistics-item" :class="{ active: type === 'photo' }" @click="switchType('photo')">
+					<text>{{ $t("common.photo") }}</text>
+					<text>453</text>
+				</view>
+			</view>
+
+			<!-- 收藏列表 -->
+			<view>
+				<c-gridPhoto :data="gridPhotoData" @clickMedia="handleClickMedia" />
+			</view>
+			<!-- 圖片全螢幕 -->
+			<play-popImgFullScreen ref="videoPopImgFullScreen" :imgs="imageFullScreenImgs"></play-popImgFullScreen>
+
+		</view>
+	</layout-pcBase>
 </template>
 
 <script setup lang="ts">
@@ -37,6 +56,11 @@ const gridPhotoData = ref([
 	{ id: '18', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1018/300/300' },
 	{ id: '19', type: 'image', dataNum: 1, num: "1688", src: 'https://picsum.photos/id/1019/300/300' },
 ]);
+
+const type = ref('all')
+const switchType = (val: string) => {
+	type.value = val
+}
 const imageFullScreenImgs = ref<string[]>([])
 const videoPopImgFullScreen = ref()
 const handleClickMedia = (item: any) => {
@@ -65,5 +89,45 @@ page {
 	background-color: var(--background-color);
 }
 
-.favorites-page {}
+.favorites-page {
+	margin: 0 auto;
+	max-width: var(--content-layout-maxWidth);
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			display: none;
+		}
+	}
+}
+
+.statistics-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 24rpx 0;
+	gap: 80rpx;
+
+	.statistics-item {
+		display: flex;
+		align-items: center;
+		gap: 12rpx;
+		font-size: var(--font-size-title-pc);
+		color: var(--text-color-gray3);
+
+		&.active {
+			color: var(--text-color-primary);
+			font-weight: 500;
+		}
+	}
+
+}
 </style>

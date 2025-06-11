@@ -1,6 +1,6 @@
 <template>
 	<layout-pcBase>
-		<view class="favorites-page">
+		<view class="favorites-page pc-content-layout-center-style">
 			<!-- header 導航-->
 			<c-headerNav :title="$t('creator.myFavorites')" />
 
@@ -90,9 +90,6 @@ page {
 }
 
 .favorites-page {
-	margin: 0 auto;
-	max-width: var(--content-layout-maxWidth);
-
 	::v-deep(.header-nav-space) {
 		.header-nav-space {
 			height: fit-content;

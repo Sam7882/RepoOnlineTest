@@ -107,7 +107,7 @@ defineExpose({ open, close })
 .popup-container {
   padding: 32rpx;
   border-radius: 32rpx 32rpx 0 0;
-  background-color: var(background-color-grayLight2)
+  background-color: var(--background-color-grayLight2)
 }
 
 .popup-header {

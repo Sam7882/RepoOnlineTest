@@ -1,7 +1,9 @@
 <template>
 	<view class="tag-page">
 		<view class="tag-page-header">
-			<uni-icons class="tag-page-header-back" type="closeempty" size="16" @click="goBack" />
+			<slot name="closeIcon">
+				<uni-icons class="tag-page-header-back" type="closeempty" size="16" @click="goBack" />
+			</slot>
 			<text class="tag-page-header-title">{{ $t('post.tagPeople') }}</text>
 		</view>
 
@@ -150,10 +152,14 @@ onShow(() => {
 			left: 16rpx;
 			transform: translateY(-50%);
 			color: var(--text-color-primary);
+
+			&:hover {
+				cursor: pointer;
+			}
 		}
 
 		.tag-page-header-title {
-			font-size: 32rpx;
+			font-size: var(--font-size-title-pc);
 			font-weight: bold;
 		}
 	}
@@ -173,7 +179,7 @@ onShow(() => {
 	}
 
 	.section-title {
-		font-size: 24rpx;
+		font-size: var(--font-size-content-pc);
 		font-weight: bold;
 		color: var(--input-border-color);
 		margin: 16rpx 0;
@@ -200,6 +206,10 @@ onShow(() => {
 		gap: 24rpx;
 		padding: 16rpx 0;
 		flex: 1;
+
+		&:hover {
+			cursor: default;
+		}
 
 		.user-item-left {
 			display: flex;
@@ -239,12 +249,12 @@ onShow(() => {
 			flex: 1;
 
 			.user-item-info-name {
-				font-size: 28rpx;
+				font-size: var(--font-size-title-pc);
 				font-weight: 500;
 			}
 
 			.user-item-info-account {
-				font-size: 22rpx;
+				font-size: var(--font-size-content-pc-small);
 				color: #888;
 			}
 		}
@@ -253,12 +263,12 @@ onShow(() => {
 			flex: 1;
 
 			.user-item-info-name {
-				font-size: 28rpx;
+				font-size: var(--font-size-title-pc);
 				font-weight: 500;
 			}
 
 			.user-item-info-account {
-				font-size: 22rpx;
+				font-size: var(--font-size-content-pc-small);
 				color: #999;
 			}
 		}
@@ -269,7 +279,8 @@ onShow(() => {
 	position: relative;
 
 	.user-item-right-checkbox {
-		position: relative;
+		position: absolute;
+		inset: 0;
 		z-index: 1;
 		opacity: 0;
 	}
@@ -277,9 +288,7 @@ onShow(() => {
 
 .user-item-right-checkbox-custom-checked {
 	z-index: 0;
-	position: absolute;
-	right: 4rpx;
-	top: 4rpx;
+	position: relative;
 
 	.user-item-right-checkbox-custom-checked-image {
 		width: 50rpx;

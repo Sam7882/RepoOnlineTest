@@ -1,5 +1,6 @@
 <template>
-  <uni-popup ref="popupRef" type="bottom" background-color="#f6f6f6">
+  <uni-popup ref="popupRef" :type="isPc ? 'center' : 'bottom'" :borderRadius="isPc ? '32rpx' : '60rpx 60rpx 0 0'"
+    background-color="#f6f6f6">
     <view class="popup-container">
       <!-- 標題與關閉 -->
       <view class="popup-header">
@@ -38,6 +39,10 @@
 
 <script setup lang="ts">
 // TEMP: 組件-自動發佈設定
+import { useViewportStore } from '@/stores/useViewportStore'
+const viewportStore = useViewportStore()
+const { isPc } = storeToRefs(viewportStore)
+
 const emit = defineEmits(['update:autoDate'])
 const popupRef = ref()
 const date = ref('2025-02-25 19:18')
@@ -95,17 +100,35 @@ defineExpose({ open, close })
 
   // 需同時有圓弧，才能有效果
   uni-view[name="content"] {
-    border-radius: 32rpx 32rpx 0 0 !important;
+    // border-radius: 32rpx 32rpx 0 0 !important;
   }
 
   .uni-popup__wrapper {
     background-color: var(--background-color-grayLight) !important;
-    border-radius: 32rpx 32rpx 0 0 !important;
+    // border-radius: 32rpx 32rpx 0 0 !important;
   }
 }
 
 .popup-container {
   padding: 32rpx 24rpx;
+
+
+  width: fit-content;
+
+  @media screen and (min-width: 961px) {
+    width: 80vw;
+    max-width: 800rpx;
+  }
+
+  @media screen and (min-width: 1920px) {
+    width: 80vw;
+    max-width: 1000rpx;
+  }
+
+  @media screen and (min-width: 2560px) {
+    width: 80vw;
+    max-width: 1200rpx;
+  }
 }
 
 .popup-header {
@@ -118,7 +141,7 @@ defineExpose({ open, close })
 
 .popup-title {
   line-height: 1;
-  font-size: 32rpx;
+  font-size: var(--font-size-title-pc-large);
 }
 
 .popup-close {
@@ -135,7 +158,7 @@ defineExpose({ open, close })
 }
 
 .popup-subtitle {
-  font-size: 24rpx;
+  font-size: var(--font-size-content-pc-small);
   font-weight: 500;
   margin-bottom: 80rpx;
   color: #333;
@@ -165,21 +188,21 @@ defineExpose({ open, close })
 }
 
 .date-value {
-  font-size: 24rpx;
+  font-size: var(--font-size-content-pc-small);
   // font-weight: bold;
   display: block;
   text-align: center;
 }
 
 .date-label {
-  font-size: 24rpx;
+  font-size: var(--font-size-content-pc-small);
   color: #999;
   display: block;
   text-align: center;
 }
 
 .result-text {
-  font-size: 24rpx;
+  font-size: var(--font-size-content-pc-small);
   color: #333;
   margin-bottom: 48rpx;
 }
@@ -195,7 +218,7 @@ defineExpose({ open, close })
   color: #fff;
   border-radius: 28rpx;
   padding: 24rpx 96rpx;
-  font-size: 28rpx;
+  font-size: var(--font-size-content-pc);
   line-height: 1;
 }
 

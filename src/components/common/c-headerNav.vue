@@ -17,17 +17,17 @@
 				<slot name="right">
 					<!-- 右邊 搜尋 絕對位置靠右-->
 					<template v-if="openSearch">
-						<uni-icons class="header-search-icon" type="icon-common-search" custom-prefix="icon" size="20"
+						<uni-icons class="icons header-search-icon" type="icon-common-search" custom-prefix="icon" size="20"
 							color="var(--text-color-primary)" @click="switchSearch"></uni-icons>
 					</template>
 					<!-- 右邊 設定按鈕gear 絕對位置靠右-->
 					<template v-if="openSetting">
-						<uni-icons class="header-gear-icon" type="icon-common-gear" custom-prefix="icon" size="20"
+						<uni-icons class="icons header-gear-icon" type="icon-common-gear" custom-prefix="icon" size="20"
 							color="var(--text-color-primary)" @click="handleOpenSetting"></uni-icons>
 					</template>
 					<!-- 右邊 設定按鈕 QA 絕對位置靠右-->
 					<template v-if="openQa">
-						<uni-icons class="header-gear-icon" type="icon-common-qa" custom-prefix="icon" size="20"
+						<uni-icons class="icons header-gear-icon" type="icon-common-qa" custom-prefix="icon" size="20"
 							color="var(--text-color-primary)" @click="handleOpenQa"></uni-icons>
 					</template>
 				</slot>
@@ -124,12 +124,16 @@ const handleOpenQa = () => {
 		top: 50%;
 		transform: translateY(-20%);
 		padding-top: 16rpx;
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 
 	// 標題容器
 	.header-nav-title-container {
 		font-size: 36rpx;
-		font-size: var(--font-size-title-pc-xlarge);
+		font-size: var(--font-size-title-pc);
 		color: var(--text-color-primary);
 	}
 
@@ -146,6 +150,12 @@ const handleOpenQa = () => {
 		display: flex;
 		align-items: center;
 		gap: 24rpx;
+
+		.icons {
+			&:hover {
+				cursor: pointer;
+			}
+		}
 	}
 }
 </style>

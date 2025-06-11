@@ -49,13 +49,25 @@ defineExpose({
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .popup-box {
   width: 80vw;
   background-color: #fff;
   border-radius: 20rpx;
   text-align: center;
   padding: 48rpx 60rpx;
+
+  @media screen and (min-width: 961px) {
+    max-width: 600rpx;
+  }
+
+  @media screen and (min-width: 1920px) {
+    max-width: 800rpx;
+  }
+
+  @media screen and (min-width: 2560px) {
+    max-width: 1000rpx;
+  }
 }
 
 .uni-popup {
@@ -64,13 +76,13 @@ defineExpose({
 
 .popup-title {
   font-weight: 500;
-  font-size: 34rpx;
+  font-size: var(--font-size-title-pc);
   margin-bottom: 20rpx;
   color: var(--popTxt-color-title);
 }
 
 .popup-content {
-  font-size: 28rpx;
+  font-size: var(--font-size-content-pc);
   color: #666;
   margin-bottom: 48rpx;
   color: var(--popTxt-color-content);
@@ -86,7 +98,7 @@ defineExpose({
   padding: 32rpx 40rpx;
   border-radius: 16rpx;
   margin: unset;
-  font-size: 30rpx;
+  font-size: var(--font-size-content-pc);
   line-height: 1;
   width: 100%;
   border: unset;
@@ -97,7 +109,7 @@ defineExpose({
 }
 
 .confirm-btn {
-  color: #fff;
+  color: var(--text-color-secondary);
   background-color: var(--primary-color);
 }
 

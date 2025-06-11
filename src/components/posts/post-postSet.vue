@@ -1,6 +1,6 @@
 <template>
-  <uni-popup ref="popupRef" type="bottom" borderRadius="60rpx 60rpx 0 0" background-color="#f6f6f6"
-    @change="handlePopupChange">
+  <uni-popup ref="popupRef" :type="isPc ? 'center' : 'bottom'" :borderRadius="isPc ? '32rpx' : '60rpx 60rpx 0 0'"
+    background-color="#f6f6f6" @change="handlePopupChange">
     <view class="popup-container">
       <!-- 標題與關閉 -->
       <view class="popup-header">
@@ -47,6 +47,9 @@
 <script setup lang="ts">
 // TEMP: 組件-發布設定
 import { useI18n } from 'vue-i18n'
+import { useViewportStore } from '@/stores/useViewportStore'
+const viewportStore = useViewportStore()
+const { isPc } = storeToRefs(viewportStore)
 const { t } = useI18n()
 // TEMP:發布頁-組件-發布設定底部上滑彈窗
 const props = defineProps({
@@ -122,7 +125,24 @@ defineExpose({ open, close })
 .popup-container {
   padding: 32rpx;
   border-radius: 32rpx 32rpx 0 0;
-  background-color: var(background-color-grayLight2)
+  background-color: var(--background-color-grayLight2);
+
+  width: fit-content;
+
+  @media screen and (min-width: 961px) {
+    width: 80vw;
+    max-width: 800rpx;
+  }
+
+  @media screen and (min-width: 1920px) {
+    width: 80vw;
+    max-width: 1000rpx;
+  }
+
+  @media screen and (min-width: 2560px) {
+    width: 80vw;
+    max-width: 1200rpx;
+  }
 }
 
 .popup-header {
@@ -142,7 +162,7 @@ defineExpose({ open, close })
 }
 
 .popup-title {
-  font-size: 32rpx;
+  font-size: var(--font-size-title-pc-large);
 }
 
 .popup-content {
@@ -152,7 +172,7 @@ defineExpose({ open, close })
 }
 
 .popup-subtitle {
-  font-size: 24rpx;
+  font-size: var(--font-size-content-pc-small);
   margin-bottom: 16rpx;
   color: var(--text-color-primary);
 }
@@ -179,12 +199,12 @@ defineExpose({ open, close })
 
 
 .popup-option-title {
-  font-size: 32rpx;
+  font-size: var(--font-size-title-pc);
   color: var(--text-color-primary);
 }
 
 .popup-option-desc {
-  font-size: 24rpx;
+  font-size: var(--font-size-content-pc-small);
   color: var(--text-color-quaternary);
 }
 
@@ -226,7 +246,7 @@ defineExpose({ open, close })
   color: #fff;
   border-radius: 20rpx;
   padding: 20rpx 96rpx;
-  font-size: 32rpx;
+  font-size: var(--font-size-content-pc);
   line-height: 1;
 }
 </style>

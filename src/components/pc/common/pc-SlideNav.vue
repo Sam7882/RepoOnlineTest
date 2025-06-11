@@ -18,7 +18,7 @@
 		<view class="menu-item">
 			<template v-for="item in menu" :key="item.text">
 				<view class="menu-item-container" :class="{ 'active': item.path === currentPath }"
-					v-if="!item.needLogin || (item.needLogin && isLogin)">
+					@click="item.fn ? item.fn() : null" v-if="!item.needLogin || (item.needLogin && isLogin)">
 					<view class="menu-item-icon">
 						<uni-icons class="icon-menu" :type="item.icon" custom-prefix="icon" size="24"
 							color="var(--text-color-primary)" />
@@ -56,6 +56,9 @@
 				© 2025 FRANCE
 			</text>
 		</view>
+
+		<!-- 聯繫客服 -->
+		<c-servicePopUp ref="servicePopUp" />
 	</view>
 </template>
 
@@ -71,9 +74,17 @@ const isLogin = computed(() => {
 
 // 當前路徑
 const currentPath = computed(() => {
-	console.log("🚀 ~ currentPath ~ getCurrentPages()[0].route:", getCurrentPages()[0].route)
 	return getCurrentPages()[0].route;
 })
+
+
+const servicePopUp = ref(null)
+
+const openService = () => {
+	console.log("🚀 ~ openService ~ openService :")
+	servicePopUp.value.open()
+}
+
 
 // 選單
 const menu = [
@@ -137,7 +148,10 @@ const menu = [
 		path: '/pages/pc/search/index',
 		text: t('menu.service'),
 		icon: 'icon-common-service',
-		needLogin: false
+		needLogin: false,
+		fn: () => {
+			openService()
+		}
 	}
 ]
 </script>
@@ -241,6 +255,10 @@ const menu = [
 		display: flex;
 		align-items: center;
 		gap: 32rpx;
+
+		&:hover {
+			cursor: pointer;
+		}
 
 		@media (min-width: 1280px) {
 			gap: 48rpx;

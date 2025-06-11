@@ -40,7 +40,6 @@
                   <uni-icons class="scroll-view-item-icon" type="icon-common-postStory" custom-prefix="icon"
                     size="24" />
                 </view>
-                <!-- TODO:語系須補-->
                 <text class="scroll-view-item-text">{{ $t('post.addToStory') }}</text>
               </view>
             </view>

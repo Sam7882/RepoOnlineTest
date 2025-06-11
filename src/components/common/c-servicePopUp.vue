@@ -22,7 +22,6 @@ import { ref, defineExpose } from 'vue'
 import uniPopup from '@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
-/* TODO:語系須補 */
 const popup = ref(null)
 const confirmBtnText = ref(t('common.confirm'))
 const cancelBtnText = ref(t('common.cancel'))

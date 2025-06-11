@@ -153,11 +153,10 @@ const openService = () => {
 }
 
 const confirmPopUp = ref(null)
-// TODO: 語系補齊
 const logout = () => {
   confirmPopUp.value.open({
     title: t('auth.logout'),
-    content: '確認要登出?',
+    content: t('auth.confirmLogout'),
     onConfirm: () => {
       toLogin()
     }

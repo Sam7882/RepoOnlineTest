@@ -105,6 +105,7 @@ export default {
     applied: "已套用",
     completed: "已完成",
     downloadApp: "下載App",
+    user: "使用者",
   },
   auth: {
     username: '用戶名稱',
@@ -116,6 +117,7 @@ export default {
     formatFailed: "{title}格式輸入錯誤",
     login: "登入",
     logout: "登出",
+    confirmLogout: "確認要登出?",
     male: "男",
     password: "密碼",
     confirmPassword: "再次輸入密碼",
@@ -269,6 +271,8 @@ export default {
     saveDraft: "儲存草稿",
     saveDraftTip: "草稿已儲存",
     upload: "上傳",
+    discardPost: "捨棄貼文?",
+    discard: "捨棄",
   },
   search: {
     basedOnYourFollowing: "根據你的關注",

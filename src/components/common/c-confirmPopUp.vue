@@ -16,19 +16,18 @@
 import uniPopup from '@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
-/* TODO:語系須補 */
 const popup = ref(null)
-const title = ref('提示')
+const title = ref(t('common.tip'))
 const content = ref('')
-const confirmBtnText = ref('確定')
-const cancelBtnText = ref('取消')
+const confirmBtnText = ref(t('common.confirm'))
+const cancelBtnText = ref(t('common.cancel'))
 let onConfirm = () => { }
 
 function open(options = {}) {
-  title.value = options.title || '提示'
+  title.value = options.title || t('common.tip')
   content.value = options.content || ''
-  confirmBtnText.value = options.confirmBtnText || '確定'
-  cancelBtnText.value = options.cancelBtnText || '取消'
+  confirmBtnText.value = options.confirmBtnText || t('common.confirm')
+  cancelBtnText.value = options.cancelBtnText || t('common.cancel')
   onConfirm = options.onConfirm || (() => { })
   popup.value.open()
 }

@@ -412,6 +412,12 @@
       }
     },
     {
+      "path": "pages/pc/post/uploadPost",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/pc/post/tagPeople",
       "style": {
         "navigationStyle": "custom"

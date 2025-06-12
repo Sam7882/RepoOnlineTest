@@ -101,15 +101,23 @@ export function checkViewporReplace() {
 
 
 // 檢查視窗大小，跳轉到對應版面
-export function checkViewport(url: string, params = {}) {
+export function checkViewport(url: string, params = {}, onlyPc = false) {
 	console.log("🚀 ~ 檢查窗口跳轉頁 ~ url:", url)
 	// 取得螢幕寬度
 	const windowWidth = uni.getSystemInfoSync().windowWidth;
 	// 根據寬度決定跳轉路徑
 	const basePath = windowWidth <= 960 ? '/pages' : '/pages/pc';
-	uni.navigateTo({
-		url: `${basePath}${url}` + queryStringify(params)
-	})
+
+	if (onlyPc) {
+		uni.navigateTo({
+			url: `/pages/pc${url}` + queryStringify(params)
+		})
+	}
+	else {
+		uni.navigateTo({
+			url: `${basePath}${url}` + queryStringify(params)
+		})
+	}
 }
 
 // 檢查視窗大小，並自動將當前頁面跳轉到正確版面，並帶入 query 參數
@@ -227,6 +235,10 @@ export const toSearchTheme = (params = {}) => {
 export const toPostIndex = (params = {}) => {
 	safeSwitchTab('/pages/post/index')
 	checkViewport('/post/index', params)
+}
+export const toPostUpload = (params = {}) => {
+	safeSwitchTab('/pages/post/uploadPost')
+	checkViewport('/post/uploadPost', params, true)
 }
 // 跳轉到發佈頁預覽2
 export const toPostPreview = (params = {}) => {

@@ -31,7 +31,9 @@
 
 					<!-- 圖片與輸入內容區 -->
 					<view class="publish-media-container">
-						<image class="publish-media-preview" src="/static/images/template/img-template-02.png" mode="aspectFill" />
+						<view class="publish-media-preview-container">
+							<image class="publish-media-preview" :src="mediaList.url" mode="widthFix" />
+						</view>
 						<post-postContent ref="postContentRef" v-model="postContent" @update:modelValue="handleText" />
 					</view>
 
@@ -123,6 +125,7 @@ const autoPublishRef = ref()
 const { selectedMedia } = storeToRefs(postStore)
 // 選擇第一則媒體
 const mediaList = computed(() => selectedMedia.value[0])
+console.log("🚀 ~ mediaList:", mediaList)
 
 /* 左側預覽 */
 
@@ -318,6 +321,7 @@ onShow(() => {
 		aspect-ratio: 1/1.625;
 
 
+		// 左側大型
 		.publish-media-preview {
 			width: 100%;
 			height: 100%;
@@ -364,11 +368,17 @@ onShow(() => {
 	align-items: flex-start;
 	margin-bottom: 16rpx;
 
-	.publish-media-preview {
+	.publish-media-preview-container {
+		position: relative;
 		width: 160rpx;
 		height: 100%;
-		aspect-ratio: 1/1.3;
-		border-radius: 8rpx;
+		background: var(--background-color-dark);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		// TODO: 影片比例設定
+		aspect-ratio: 1/1.625;
+
 
 		@media screen and (min-width: 1920px) {
 			width: 200rpx;
@@ -376,8 +386,10 @@ onShow(() => {
 		}
 
 		@media screen and (min-width: 2560px) {}
-
 	}
+
+	// 右側小型
+	.publish-media-preview {}
 
 	::v-deep(.publish-media-preview) {
 

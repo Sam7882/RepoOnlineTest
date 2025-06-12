@@ -1,7 +1,7 @@
 <template>
   <uni-popup ref="popup" type="center">
     <view class="popup-box">
-      <view class="popup-title">{{ '聯繫客服' }}</view>
+      <view class="popup-title">{{ $t('menu.service') }}</view>
       <view class="popup-content">
         <text class="popup-content-text">{{ $t('service.pleaseEnter') }}</text>
         <uni-easyinput v-model="subject" type="textarea" :placeholder="$t('service.theme')" :inputBorder="false" />

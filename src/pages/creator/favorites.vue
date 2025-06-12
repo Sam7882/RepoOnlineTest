@@ -2,10 +2,29 @@
 	<view class="favorites-page">
 		<!-- header 導航-->
 		<c-headerNav :title="$t('creator.myFavorites')" />
+
+		<!-- 統計數字 -->
+		<view class="statistics-container">
+			<view class="statistics-item" :class="{ active: type === 'all' }" @click="switchType('all')">
+				<text>{{ $t("common.all") }}</text>
+				<text>508</text>
+			</view>
+			<view class="statistics-item" :class="{ active: type === 'video' }" @click="switchType('video')">
+				<text>{{ $t("common.video") }}</text>
+				<text>55</text>
+			</view>
+			<view class="statistics-item" :class="{ active: type === 'photo' }" @click="switchType('photo')">
+				<text>{{ $t("common.photo") }}</text>
+				<text>453</text>
+			</view>
+		</view>
+
 		<!-- 收藏列表 -->
 		<view>
 			<c-gridPhoto :data="gridPhotoData" @clickMedia="handleClickMedia" />
 		</view>
+
+
 		<!-- 圖片全螢幕 -->
 		<play-popImgFullScreen ref="videoPopImgFullScreen" :imgs="imageFullScreenImgs"></play-popImgFullScreen>
 
@@ -16,6 +35,12 @@
 // TEMP: 我的收藏
 import { onShow } from '@dcloudio/uni-app';
 import { toPlayIndex, checkViewportAutoReplace } from '@/utils/routers';
+
+const type = ref('all')
+const switchType = (val: string) => {
+	type.value = val
+}
+
 const gridPhotoData = ref([
 	{ id: '1', type: 'image', dataNum: 2, num: "1688", src: 'https://picsum.photos/id/1011/300/300' },
 	{ id: '2', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1012/300/300' },
@@ -66,4 +91,26 @@ page {
 }
 
 .favorites-page {}
+
+.statistics-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 24rpx 0;
+	gap: 80rpx;
+
+	.statistics-item {
+		display: flex;
+		align-items: center;
+		gap: 12rpx;
+		font-size: var(--font-size-title-pc);
+		color: var(--text-color-gray3);
+
+		&.active {
+			color: var(--text-color-primary);
+			font-weight: 500;
+		}
+	}
+
+}
 </style>

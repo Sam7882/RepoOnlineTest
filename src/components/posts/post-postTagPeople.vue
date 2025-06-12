@@ -114,10 +114,9 @@ defineExpose({ open, close })
 .tag-page-header-back {
   position: absolute;
   top: 50%;
-  left: 16rpx;
+  right: 16rpx;
   transform: translateY(-50%);
   color: var(--text-color-primary);
-
   font-size: var(--font-size-title-pc) !important;
 
   &:hover {

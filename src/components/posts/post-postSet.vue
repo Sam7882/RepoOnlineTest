@@ -119,17 +119,19 @@ defineExpose({ open, close })
 ::v-deep(.uni-popup) {
   & {
     z-index: var(--z-index-max) !important;
+    overflow: hidden;
   }
 }
 
 .popup-container {
   padding: 32rpx;
-  border-radius: 32rpx 32rpx 0 0;
+  border-radius: 60rpx 60rpx 0 0;
   background-color: var(--background-color-grayLight2);
-
   width: fit-content;
 
+
   @media screen and (min-width: 961px) {
+    border-radius: 32rpx;
     width: 80vw;
     max-width: 800rpx;
   }
@@ -156,9 +158,10 @@ defineExpose({ open, close })
 
 .popup-close {
   position: absolute;
-  right: 0;
-  top: 25%;
+  top: 50%;
+  right: 16rpx;
   transform: translateY(-50%);
+  font-size: var(--font-size-title-pc) !important;
 }
 
 .popup-title {

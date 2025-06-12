@@ -4,7 +4,7 @@
 			<view class="content-container" id="dropZone" :class="{ 'dragging': isDragging }" @dragover="onDragOver"
 				@dragleave="onDragLeave" @drop="onDrop">
 				<view class="title">
-					<text>建立新貼文</text>
+					<text>{{ $t('post.createNewPost') }}</text>
 				</view>
 				<view class="content">
 					<view class="content-icon">
@@ -13,11 +13,11 @@
 						<uni-icons class="icons" type="icon-common-photo" custom-prefix="icon" size="24"
 							color="var(--text-color-primary)" />
 					</view>
-					<text class="content-text">將相片和影片拖曳到這裡</text>
+					<text class="content-text">{{ $t('post.dragPhotoAndVideo') }}</text>
 					<view class="btn-container">
 						<uni-file-picker ref="filePicker" file-mediatype="all" :limit="MAX_FILE_COUNT" :disable-preview="true"
 							:auto-upload="false" mode="grid" :del-icon="false" @select="onPickerChange">
-							<button class="btn" type="button">選擇檔案</button>
+							<button class="btn" type="button">{{ $t('post.selectFile') }}</button>
 						</uni-file-picker>
 
 						<!-- <button class="btn" type="
@@ -136,7 +136,7 @@ const handleFiles = (files: any) => {
 		// 限制
 		if (!isImage && !isVideo) {
 			uni.showToast({
-				title: `不支援的檔案類型: ${name}`,
+				title: `${t('post.unsupportedFileType')} ${name}`,
 				icon: 'none'
 			})
 			console.warn(`不支援的檔案類型: ${name}`)
@@ -144,12 +144,12 @@ const handleFiles = (files: any) => {
 		}
 
 		if (isImage && size > MAX_IMAGE_SIZE) {
-			console.warn(`圖片超過大小限制: ${name}`)
+			console.warn(`${t('post.imageSizeLimit')} ${name}`)
 			return
 		}
 
 		if (isVideo && size > MAX_VIDEO_SIZE) {
-			console.warn(`影片超過大小限制: ${name}`)
+			console.warn(`${t('post.videoSizeLimit')} ${name}`)
 			return
 		}
 
@@ -166,7 +166,7 @@ const handleFiles = (files: any) => {
 	if (validFiles.length > MAX_FILE_COUNT) {
 		validFiles = validFiles.slice(0, MAX_FILE_COUNT)
 		uni.showToast({
-			title: `最多只能選擇 ${MAX_FILE_COUNT} 個檔案`,
+			title: t('post.maxFileCount', { num: MAX_FILE_COUNT }),
 			icon: 'none'
 		})
 	}

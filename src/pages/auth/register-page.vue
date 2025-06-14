@@ -1,6 +1,6 @@
 <template>
 	<layout-appBase>
-		<view class="login-page">
+		<view class="register-page">
 			<!-- 頂部標題 -->
 			<view class="header">
 				<view class="header-title">
@@ -40,11 +40,8 @@ onShow(() => {
 </script>
 
 <style lang="scss" scoped>
-page {
+.register-page {
 	background-color: var(--background-color);
-}
-
-.login-page {
 	padding: 100rpx;
 }
 

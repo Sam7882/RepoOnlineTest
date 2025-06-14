@@ -59,11 +59,8 @@ onShow(() => {
 </script>
 
 <style lang="scss" scoped>
-page {
-	background-color: var(--background-color);
-}
-
 .login-page {
+	background-color: var(--background-color);
 	padding: 100rpx;
 }
 

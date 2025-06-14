@@ -57,11 +57,8 @@ onShow(() => {
 </script>
 
 <style lang="scss" scoped>
-page {
-	background-color: var(--background-color);
-}
-
 .loading-container {
+	background-color: var(--background-color);
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;

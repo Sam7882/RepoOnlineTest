@@ -115,13 +115,10 @@ uni-page-body {
 	height: 100%;
 }
 
-page {
-	background-color: var(--background-color-dark);
-}
-
 .preview-page {
 	--footer-height: 170rpx;
 
+	background-color: var(--background-color-dark);
 	position: relative;
 	width: 100dvw;
 	height: 100dvh;

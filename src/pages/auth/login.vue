@@ -1,27 +1,29 @@
 <template>
-	<view class="login-page">
-		<!-- 頂部標題 -->
-		<view class="header">
-			<view class="header-title">
-				<text class="title">{{ $t('auth.login') }}</text>
-				<text class="brand">Fance</text>
-				<view class="underline"></view>
+	<layout-appBase>
+		<view class="login-page">
+			<!-- 頂部標題 -->
+			<view class="header">
+				<view class="header-title">
+					<text class="title">{{ $t('auth.login') }}</text>
+					<text class="brand">Fance</text>
+					<view class="underline"></view>
+				</view>
+				<!-- 語言切換器 -->
+				<c-langSelector />
 			</view>
-			<!-- 語言切換器 -->
-			<c-langSelector />
+
+			<auth-loginForm @login="handleLogin" />
+
+			<!-- 第三方登入 -->
+			<auth-social />
+
+			<!-- 註冊連結 -->
+			<view class="register">
+				<text>{{ $t('auth.noAccount') }}</text>
+				<text class="link" @click="toRegister()">{{ $t('auth.register') }}</text>
+			</view>
 		</view>
-
-		<auth-loginForm />
-
-		<!-- 第三方登入 -->
-		<auth-scical />
-
-		<!-- 註冊連結 -->
-		<view class="register">
-			<text>{{ $t('auth.noAccount') }}</text>
-			<text class="link" @click="toRegister()">{{ $t('auth.register') }}</text>
-		</view>
-	</view>
+	</layout-appBase>
 </template>
 
 <script setup>
@@ -33,6 +35,10 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const initStore = useInitStore()
 const { checkInitData } = initStore
+
+const handleLogin = () => {
+	console.log("🚀 handleLogin 登入")
+}
 
 onShow(() => {
 	checkViewportAutoReplace()

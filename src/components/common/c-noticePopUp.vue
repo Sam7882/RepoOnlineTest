@@ -83,11 +83,16 @@ defineExpose({
 
 .close-icon {
   position: absolute;
-  right: 32rpx;
-  top: 64rpx;
+  right: 16rpx;
+  top: 60rpx;
   transform: translateY(-50%);
-  font-size: 40rpx !important;
+  font-size: var(--font-size-title-pc) !important;
   color: var(--text-color-primary) !important;
+
+  @media screen and (min-width: 961px) {
+    right: 32rpx;
+    top: 64rpx;
+  }
 
   &:hover {
     cursor: pointer;
@@ -99,8 +104,7 @@ defineExpose({
 }
 
 .popup-title {
-  font-weight: 500;
-  font-size: var(--font-size-title-pc);
+  font-size: var(--font-size-content-pc);
   color: var(--popTxt-color-title);
 }
 

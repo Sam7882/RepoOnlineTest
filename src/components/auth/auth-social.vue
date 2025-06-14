@@ -1,10 +1,14 @@
 <template>
+	<!-- TODO: icon使用svg -->
 	<!-- 第三方登入 -->
 	<view class="social-login">
-		<image class="social-icon" src="/static/icons/community/icon-community-facebook.png" />
-		<image class="social-icon" src="/static/icons/community/icon-community-line.png" />
-		<image class="social-icon" src="/static/icons/community/icon-community-google.png" />
-		<image class="social-icon" src="/static/icons/community/icon-community-wechat.png" />
+		<view>
+
+		</view>
+		<image class="social-icon" src="/static/icons/community/icon-community-facebook.svg" />
+		<image class="social-icon" src="/static/icons/community/icon-community-line.svg" />
+		<image class="social-icon" src="/static/icons/community/icon-community-google.svg" />
+		<image class="social-icon" src="/static/icons/community/icon-community-wechat.svg" />
 	</view>
 </template>
 <script>
@@ -14,12 +18,12 @@
 	display: flex;
 	justify-content: center;
 	margin-top: 40rpx;
-	gap: 24rpx;
+	gap: 46rpx;
 }
 
 .social-icon {
-	width: 80rpx;
-	height: 80rpx;
+	width: 100rpx;
+	height: 100rpx;
 
 	&:hover {
 		cursor: pointer;

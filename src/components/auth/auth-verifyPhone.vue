@@ -1,6 +1,6 @@
 <template>
 	<uni-popup ref="popupRef" :type="isPc ? 'center' : 'bottom'" :borderRadius="isPc ? '32rpx' : '60rpx 60rpx 0 0'"
-		background-color="#f6f6f6" @change="handleChange">
+		background-color="#f6f6f6">
 		<view class="popup-container">
 			<!-- 標題與關閉 -->
 			<view class="popup-header">
@@ -21,10 +21,7 @@
 
 				<auth-verifyPhoneForm @verify="handleVerify" />
 
-				<!-- 註冊連結 -->
-				<view class="register">
-					<text>{{ $t('auth.verifyCodeTime') }} : {{ formattedTime }}</text>
-				</view>
+
 			</view>
 		</view>
 	</uni-popup>
@@ -41,62 +38,22 @@ const { t } = useI18n()
 const { openNotice } = inject('common');
 
 const phone = ref('+886 988-888-888');
-// 時間倒數
-const COUNTDOWN_SECONDS = 60
-const countdown = ref(COUNTDOWN_SECONDS)
-let timer = null
-// 格式化時間
-const formattedTime = computed(() => {
-	// 除 60 取整數，補0
-	const min = String(Math.floor(countdown.value / 60)).padStart(2, '0')
-	// 取 60 餘數，補0
-	const sec = String(countdown.value % 60).padStart(2, '0')
-	return `${min}:${sec}`
-})
 
 const popupRef = ref(null)
 // 打開
 const open = () => {
 	popupRef.value?.open()
 }
-// 確認是否有按下 保存的判斷依據
-const haveClickConfirm = ref(false)
 const close = () => {
 	popupRef.value?.close()
 }
 
 const handleVerify = () => {
-	// 確認驗證碼倒數時間 是否過期
-	if (countdown.value <= 0) {
-		errors.value.verifyCode = t('auth.verifyCodeTimeError')
-		return
-	}
 	close()
 	openNotice({
 		title: '註冊驗證成功',
 		titleIcon: 'icon-common-confirm'
 	})
-}
-
-const initCountdown = () => {
-	if (timer) clearInterval(timer)
-	timer = null
-	countdown.value = COUNTDOWN_SECONDS
-}
-
-// 監聽開啟時 啟動倒數
-const handleChange = (e) => {
-	console.log("🚀 ~ handleChange ~ e:", e)
-	initCountdown()
-	if (e.show) {
-		timer = setInterval(() => {
-			if (countdown.value > 0) {
-				countdown.value--
-			} else {
-				initCountdown()
-			}
-		}, 1000)
-	}
 }
 
 // // 啟動倒數

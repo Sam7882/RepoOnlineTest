@@ -13,11 +13,17 @@
 		<button type="button" class="verify-btn" @click="handleVerify">
 			{{ $t('auth.verify') }}
 		</button>
+
+		<!-- 倒數秒數 -->
+		<view class="register">
+			<text>{{ $t('auth.verifyCodeTime') }} : {{ formattedTime }}</text>
+		</view>
 	</view>
 </template>
 
 <script setup>
 // TEMP: 組件-PC手機驗證彈窗表單
+import { onShow, onUnload } from '@dcloudio/uni-app';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n()
 
@@ -31,13 +37,55 @@ const verifyCode4 = ref('');
 const errors = ref({});
 
 
+// 時間倒數
+const COUNTDOWN_SECONDS = 60
+const countdown = ref(COUNTDOWN_SECONDS)
+let timer = null
+// 格式化時間
+const formattedTime = computed(() => {
+	// 除 60 取整數，補0
+	const min = String(Math.floor(countdown.value / 60)).padStart(2, '0')
+	// 取 60 餘數，補0
+	const sec = String(countdown.value % 60).padStart(2, '0')
+	return `${min}:${sec}`
+})
+
+
+const initCountdown = () => {
+	if (timer) clearInterval(timer)
+	timer = null
+	countdown.value = COUNTDOWN_SECONDS
+}
 
 const handleVerify = () => {
+	// 確認驗證碼倒數時間 是否過期
+	if (countdown.value <= 0) {
+		errors.value.verifyCode = t('auth.verifyCodeTimeError')
+		return
+	}
+	console.log("🚀 handleVerify ~ handleVerify :")
+
 	// 確認驗證碼是否正確
 	emit('verify')
 };
 
+// 啟動倒數
+onShow(() => {
+	// 倒數計時器
+	initCountdown()
+	timer = setInterval(() => {
+		if (countdown.value > 0) {
+			countdown.value--
+		} else {
+			initCountdown()
+		}
+	}, 1000)
+})
 
+// 清除計時器
+onUnload(() => {
+	initCountdown()
+})
 </script>
 
 <style lang="scss" scoped>

@@ -257,3 +257,9 @@ img {
   max-width: var(--content-layout-maxWidth);
   margin: 0 auto;
 }
+
+.popup-close:hover,
+button:hover,
+.icon-container:hover {
+  cursor: pointer;
+}

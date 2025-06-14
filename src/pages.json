@@ -10,6 +10,7 @@
       "^creator-(.*)": "@/components/creator/creator-$1.vue",
       "^charts-(.*)": "@/components/charts/charts-$1.vue",
       "^post-(.*)": "@/components/posts/post-$1.vue",
+      "^auth-(.*)": "@/components/auth/auth-$1.vue",
       "^play-(.*)": "@/components/plays/play-$1.vue",
       "^layout-(.*)": "@/components/layouts/layout-$1.vue"
     }

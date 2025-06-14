@@ -32,21 +32,19 @@
 
 		<!-- 登入登出按鈕 -->
 		<view class="btn-container">
-			<button type="button" class="btn">
-				<template v-if="isLogin">
-					<view class="icon-container">
-						<uni-icons class="icon-out" type="icon-common-out" custom-prefix="icon" size="24"
-							color="var(--text-color-secondary)" />
-					</view>
-					<text class="btn-text">
-						{{ $t('auth.login') }}
-					</text>
-				</template>
-				<template v-else>
-					<text class="btn-text">
-						{{ $t('auth.logout') }}
-					</text>
-				</template>
+			<button type="button" class="btn" @click="openLogin" v-if="isLogin">
+				<text class="btn-text">
+					{{ $t('auth.login') }}
+				</text>
+			</button>
+			<button type="button" class="btn" @click="logout" v-else>
+				<view class="icon-container">
+					<uni-icons class="icon-out" type="icon-common-out" custom-prefix="icon" size="24"
+						color="var(--text-color-secondary)" />
+				</view>
+				<text class="btn-text">
+					{{ $t('auth.logout') }}
+				</text>
 			</button>
 		</view>
 
@@ -57,8 +55,6 @@
 			</text>
 		</view>
 
-		<!-- 聯繫客服 -->
-		<c-servicePopUp ref="servicePopUp" />
 	</view>
 </template>
 
@@ -66,6 +62,11 @@
 // TEMP: PC-側邊欄位
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
+
+const { openService, openConfirm } = inject('common');
+
+// 取得 auth 方法
+const { openLogin } = inject('auth');
 
 // 登入狀態
 const isLogin = computed(() => {
@@ -78,11 +79,16 @@ const currentPath = computed(() => {
 })
 
 
-const servicePopUp = ref(null)
-
-const openService = () => {
-	console.log("🚀 ~ openService ~ openService :")
-	servicePopUp.value.open()
+const logout = () => {
+	openConfirm({
+		title: t('auth.logout'),
+		content: t('auth.confirmLogout'),
+		confirmBtnText: t('common.confirm'),
+		cancelBtnText: t('common.cancel'),
+		onConfirm: () => {
+			console.log('logout')
+		}
+	})
 }
 
 
@@ -165,6 +171,7 @@ const menu = [
 	display: flex;
 	flex-direction: column;
 	border-right: 4rpx solid var(--text-color-denary);
+	overflow-y: scroll;
 
 	@media (min-width: 1280px) {
 		padding: 70rpx 80rpx;
@@ -301,6 +308,7 @@ const menu = [
 
 .btn-container {
 	margin-top: 80rpx;
+	margin-bottom: 48rpx;
 
 	.btn {
 		display: flex;
@@ -337,11 +345,12 @@ const menu = [
 }
 
 .copyright {
-	position: absolute;
-	bottom: 60rpx;
-	left: 50%;
+	position: relative;
+	// bottom: 60rpx;
+	// left: 50%;
 	// right: 50%;
-	transform: translateX(-50%);
+	// transform: translateX(-50%);
+	margin-top: auto;
 	font-size: 28rpx;
 	color: var(--text-color-primary);
 }

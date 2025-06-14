@@ -21,7 +21,7 @@
 		</uni-forms-item>
 
 		<!-- 性別 -->
-		<view class="gender-container" style="position: relative;">
+		<view class="gender-container" style="position: relative;" id="target">
 			<uni-forms-item name="gender" required>
 				<view class="form-item">
 					<view class="cover-input" @click="openFilter"></view>
@@ -240,11 +240,18 @@ const handleRegister = () => {
 	});
 };
 
-onShow(() => {
-	// 初始計算一次
+// 修改生命週期鉤子
+onMounted(() => {
+	// 在組件掛載後執行
 	updateRect()
-	getElementHeight('#dropDown-menu')
+	getElementHeight()
 })
+
+// onShow(() => {
+// 	// 初始計算一次
+// 	updateRect()
+// 	getElementHeight('#dropDown-menu')
+// })
 
 </script>
 
@@ -412,7 +419,7 @@ onShow(() => {
 .gender-container {
 	position: relative;
 	// 因 uni-form-item 會有層級關係，故頂部的要高於 後續的form-item
-	z-index: calc(var(--z-index-max) + 2) !important;
+	z-index: calc(var(--z-index-max) + 1) !important;
 	overflow: visible;
 }
 

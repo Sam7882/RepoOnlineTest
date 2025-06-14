@@ -186,7 +186,8 @@ watch(loginRemember, (newValue, oldValue) => {
 
 .login-btn {
 	width: 100%;
-	height: 100rpx;
+	padding: 32rpx 0;
+	line-height: 1;
 	background-color: #9e80ff;
 	color: #fff;
 	font-size: var(--font-size-title-pc);

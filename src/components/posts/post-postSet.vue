@@ -51,7 +51,6 @@ import { useViewportStore } from '@/stores/useViewportStore'
 const viewportStore = useViewportStore()
 const { isPc } = storeToRefs(viewportStore)
 const { t } = useI18n()
-// TEMP:發布頁-組件-發布設定底部上滑彈窗
 const props = defineProps({
   // 如果沒有傳入，之前設定的資料，那他就會將預設值傳出去
   defaultSelected: {

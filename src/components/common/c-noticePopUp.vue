@@ -2,9 +2,15 @@
   <uni-popup ref="popup" type="center">
     <view class="popup-box">
       <view class="popup-header">
-        <view class="popup-title" v-if="title">{{ title }}</view>
-        <uni-icons class="close-icon" type="closeempty" size="20" color="var(--popTxt-color-content)" @click="close" />
+        <view class="popup-title" v-if="title">
+          <template v-if="titleIcon">
+            <uni-icons class="icon-info" :type="titleIcon" custom-prefix="icon" size="24"
+              color="var(--primary-color)" />
+          </template>
+          {{ title }}
+        </view>
       </view>
+      <uni-icons class="close-icon" type="closeempty" size="20" color="var(--popTxt-color-content)" @click="close" />
       <view class="popup-content" v-if="content">
         <text>
           {{ content }}
@@ -21,19 +27,22 @@ const { t } = useI18n()
 const popup = ref(null)
 const title = ref(t('common.tip'))
 const content = ref('')
+const titleIcon = ref('')
 
 function setTimeClsoe(time = 2000) {
+  if (!time) {
+    return
+  }
   setTimeout(() => {
     close()
   }, time)
 }
 
 function open(options = {}) {
+  titleIcon.value = options.titleIcon || ''
   title.value = options.title || ''
   content.value = options.content || ''
-  if (options.setTimeOut) {
-    setTimeClsoe(options.setTimeOut)
-  }
+  setTimeClsoe(options.setTimeOut)
   popup.value.open()
 }
 
@@ -51,28 +60,38 @@ defineExpose({
 
 <style scoped>
 .popup-box {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80vw;
+  width: fit-content;
   background-color: #fff;
   border-radius: 30rpx;
   text-align: center;
   padding: 40rpx 0 50rpx;
+
+  @media screen and (min-width: 961px) {
+    max-width: 600rpx;
+  }
 }
 
 .popup-header {
   position: relative;
   width: 100%;
+  padding: 0 48px;
 }
 
 .close-icon {
   position: absolute;
-  right: 38rpx;
-  top: 50%;
+  right: 32rpx;
+  top: 64rpx;
   transform: translateY(-50%);
   font-size: 40rpx !important;
   color: var(--text-color-primary) !important;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .uni-popup {
@@ -81,16 +100,17 @@ defineExpose({
 
 .popup-title {
   font-weight: 500;
-  font-size: 32rpx;
+  font-size: var(--font-size-title-pc);
   color: var(--popTxt-color-title);
 }
 
 .popup-content {
   margin-top: 32rpx;
-  font-size: 24rpx;
+  font-size: var(--font-size-content-pc-small);
   color: #666;
   /* margin-bottom: 48rpx; */
   color: var(--popTxt-color-content);
   /* padding: 32rpx 0 50rpx; */
+  padding: 0 48px;
 }
 </style>

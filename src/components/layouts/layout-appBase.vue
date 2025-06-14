@@ -16,6 +16,7 @@
 
 <script setup>
 // TEMP: PC-基礎版面
+/* TODO: 1. 768 RWD 需調整 */
 /* 
 	layout-pcBase 版面 提供方法給子層使用
 		auth :
@@ -148,10 +149,10 @@ page {
 
 .app-layout {
 	position: relative;
-	display: flex;
-	height: 100vh;
+	// display: flex;
+	// height: 100vh;
 	/* 高度撐滿視窗 */
-	overflow: hidden;
+	// overflow: hidden;
 }
 
 .main-area {

@@ -1,0 +1,213 @@
+<template>
+	<layout-appBase>
+		<view class="login-page">
+			<!-- 頂部標題 -->
+			<view class="header">
+				<view class="header-title">
+					<text class="title">{{ $t('auth.phoneVerify') }}</text>
+					<text class="brand">Fance</text>
+					<view class="underline"></view>
+				</view>
+			</view>
+			<!-- 驗證碼說明 -->
+			<view class="phone-verify-Info">
+				<text class="input-tip">{{ $t('auth.pleaseEnterVerifyCode', { phone: phone }) }}</text>
+			</view>
+
+			<auth-verifyPhoneForm @verify="handleVerify" />
+
+		</view>
+	</layout-appBase>
+</template>
+
+<script setup>
+// TEMP: 手機驗證 : 註冊後轉這裡
+import { onShow, onUnload } from '@dcloudio/uni-app';
+import { useInitStore } from '@/stores/useInitDataStore'
+import { useI18n } from 'vue-i18n';
+import { toLogin, checkViewportAutoReplace } from '@/utils/routers'
+const { t } = useI18n()
+const initStore = useInitStore()
+const { checkInitData } = initStore
+
+
+const { openNotice } = inject('common');
+
+
+const phone = ref('+886 988-888-888');
+
+const handleVerify = () => {
+
+	console.log("🚀 handleVerify ~ handleVerify :")
+	openNotice({
+		title: '註冊驗證成功',
+		titleIcon: 'icon-common-confirm',
+		setTimeOut: false
+	})
+	// 確認驗證碼是否正確
+	// 驗證碼正確
+	// 跳轉登入頁
+	// setTimeout(() => {
+	// 	toLogin()
+	// }, 1500)
+};
+
+// 啟動倒數
+onShow(() => {
+	checkViewportAutoReplace()
+	// 檢查初始化
+	// checkInitData()
+})
+
+
+</script>
+
+<style lang="scss" scoped>
+page {
+	background-color: var(--background-color);
+}
+
+.login-page {
+	padding: 100rpx;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	margin-bottom: 96rpx;
+
+	.header-title {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+
+		.title {
+			font-size: 48rpx;
+			font-weight: bolder;
+		}
+
+		.brand {
+			font-size: 54rpx;
+			font-weight: bolder;
+		}
+
+		.underline {
+			width: 80rpx;
+			height: 10rpx;
+			// background-color: $primary-color;
+			background-color: var(--primary-color);
+		}
+	}
+
+}
+
+
+.lang-selector {
+	position: relative;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 24rpx;
+}
+
+.phone-verify-form-item {
+	display: flex;
+	flex-direction: row;
+	gap: 8rpx;
+}
+
+.uni-easyinput {
+	margin-bottom: 20rpx;
+}
+
+.remember {
+	display: flex;
+	align-items: center;
+	margin: 20rpx 0;
+}
+
+.remember-text {
+	flex: 1;
+	color: #999;
+}
+
+.verify-btn {
+	width: 100%;
+	height: 100rpx;
+	background-color: #9e80ff;
+	color: #fff;
+	font-size: 36rpx;
+	border-radius: 50rpx;
+	margin-top: 80rpx;
+}
+
+.social-login {
+	display: flex;
+	justify-content: center;
+	margin-top: 40rpx;
+	gap: 24rpx;
+}
+
+.social-icon {
+	width: 80rpx;
+	height: 80rpx;
+}
+
+.register {
+	margin-top: 54rpx;
+	text-align: center;
+	font-size: 24rpx;
+	color: var(--text-color-primary);
+}
+
+.link {
+	color: var(--link-color);
+	margin-left: 10rpx;
+}
+
+.phone-verify-Info {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 80rpx;
+}
+
+/* 輸入欄位 */
+// INPUT 輸入欄位
+.inputStyle {
+	::v-deep(.uni-easyinput__content) {
+		margin-bottom: 0rpx;
+
+		&.is-input-border {
+			border: none;
+			background: var(--text-color-tertiary) !important;
+			border-radius: 24rpx;
+			width: 112rpx;
+			aspect-ratio: 1/1;
+			text-align: center;
+			margin: 0 auto;
+
+			.uni-easyinput__content-input {
+				font-size: 48rpx;
+			}
+
+			&.is-focused {
+				border: 1px solid var(--primary-color) !important;
+
+				.uniui-eye-filled {
+					color: var(--primary-color) !important;
+				}
+			}
+		}
+	}
+
+	&.errorStyle ::v-deep(.uni-easyinput__content) {
+		&.is-input-border {
+			border: 1px solid var(--text-color-error) !important;
+		}
+	}
+}
+</style>

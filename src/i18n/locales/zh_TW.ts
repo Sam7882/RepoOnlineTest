@@ -273,6 +273,13 @@ export default {
     upload: "上傳",
     discardPost: "捨棄貼文?",
     discard: "捨棄",
+    createNewPost: "建立新貼文",
+    dragPhotoAndVideo: "將相片和影片拖曳到這裡",
+    selectFile: "選擇檔案",
+    unsupportedFileType: "不支援的檔案類型:",
+    imageSizeLimit: "圖片超過大小限制:",
+    videoSizeLimit: "影片超過大小限制:",
+    maxFileCount: "最多只能選擇 {num} 個檔案",
   },
   search: {
     basedOnYourFollowing: "根據你的關注",

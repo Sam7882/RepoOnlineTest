@@ -4,8 +4,12 @@
       <view class="popup-title">{{ title }}</view>
       <view class="popup-content">{{ content }}</view>
       <view class="popup-actions">
-        <button class="btn confirm-btn" @click="handleConfirm">{{ confirmBtnText }}</button>
-        <button class="btn cancel-btn" @click="close">{{ cancelBtnText }}</button>
+        <view class="btn-container">
+          <button class="btn confirm-btn" @click="handleConfirm">{{ confirmBtnText }}</button>
+        </view>
+        <view class="btn-container">
+          <button class="btn cancel-btn" @click="close">{{ cancelBtnText }}</button>
+        </view>
       </view>
     </view>
   </uni-popup>
@@ -56,6 +60,11 @@ defineExpose({
   text-align: center;
   padding: 48rpx 60rpx;
 
+  @media screen and (min-width: 768px) and (max-width: 960px) {
+    max-width: 500rpx;
+    padding: 32rpx 40rpx;
+  }
+
   @media screen and (min-width: 961px) {
     max-width: 600rpx;
   }
@@ -93,27 +102,7 @@ defineExpose({
   align-items: center;
 }
 
-.btn {
-  padding: 32rpx 40rpx;
-  border-radius: 16rpx;
-  margin: unset;
-  font-size: var(--font-size-content-pc);
-  line-height: 1;
+.btn-container {
   width: 100%;
-  border: unset;
-
-  &::after {
-    display: none;
-  }
-}
-
-.confirm-btn {
-  color: var(--text-color-secondary);
-  background-color: var(--primary-color);
-}
-
-.cancel-btn {
-  background-color: unset;
-  color: var(--text-color-primary);
 }
 </style>

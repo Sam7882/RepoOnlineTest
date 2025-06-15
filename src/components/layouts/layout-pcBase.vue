@@ -179,11 +179,14 @@ page {
 
 .header-area,
 .content-area {
+
 	padding: 0 var(--main-area-padding);
 	padding-bottom: 96rpx;
 }
 
 .content-area {
+	display: flex;
+	justify-content: center;
 	flex: 1;
 	overflow-y: auto;
 	background-color: #fff;

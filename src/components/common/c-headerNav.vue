@@ -102,6 +102,8 @@ const handleOpenQa = () => {
 	--header-nav-space-height: 130rpx;
 	height: var(--header-nav-space-height);
 	padding-top: 32rpx;
+	width: 100%;
+
 }
 
 .header-nav-container {
@@ -113,17 +115,26 @@ const handleOpenQa = () => {
 	// height: var(--header-nav-space-height);
 	display: flex;
 	justify-content: center;
-	padding: 68rpx 40rpx 20rpx;
+	padding: 32rpx 40rpx 32rpx;
 	border-bottom: 1px solid var(--text-color-octonary);
 	line-height: 1;
+
+	@media screen and (min-width: 768px) {
+		padding-top: 24rpx;
+		padding-bottom: 24rpx;
+	}
+
+	@media screen and (min-width: 961px) {
+		padding-top: 32rpx;
+		padding-bottom: 32rpx;
+	}
 
 	// 圖標容器
 	.header-nav-left-position {
 		position: absolute;
 		left: 48rpx;
 		top: 50%;
-		transform: translateY(-20%);
-		padding-top: 16rpx;
+		transform: translateY(-50%);
 
 		&:hover {
 			cursor: pointer;

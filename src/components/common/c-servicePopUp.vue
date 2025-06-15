@@ -55,6 +55,10 @@ defineExpose({
   text-align: center;
   padding: 48rpx 60rpx;
 
+  @media screen and (min-width: 768px) {
+    max-width: 500rpx;
+  }
+
   @media screen and (min-width: 961px) {
     max-width: 700rpx;
   }

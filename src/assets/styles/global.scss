@@ -21,10 +21,11 @@
   src: url('@/assets/font/Yuanti TC Regular.ttf');
 }
 :root {
+  /* 主題顏色 */
   --primary-color: #907bfe;
   --secondary-color: #c1bbf9;
   --tertiary-color: #4e25ff;
-
+  /* 文字顏色 */
   --text-color: #000;
   --text-color-primary: #231815;
   --text-color-secondary: #fff;
@@ -41,10 +42,10 @@
   --text-color-gray2: #a5a6a8;
   --text-color-gray3: #9e9e9f;
   --text-color-error: #ff0000;
-
+  /* 彈窗文字顏色 */
   --popTxt-color-title: #000000;
   --popTxt-color-content: #888888;
-
+  /* 特殊顏色 */
   --input-border-color: #717071;
   --data-color-up: #90c182;
   --data-color-down: #cc4a30;
@@ -70,62 +71,69 @@
   --background-color-blue2: #5db3d9;
   --background-color-dark-opacity85: #040000d9;
   --background-color-dark-opacity70: rgba(77, 74, 74, 0.7);
-
+  /* 設定 z-index */
   --z-index-bottom-nav: 1000;
   --z-index-header-nav: 1000;
   --z-index-max: 10000;
-
+  /* 設定窗口最大寬度 */
+  --setting-page-maxWidth: 960rpx;
+  --content-layout-maxWidth: 100%;
+  @media screen and (min-width: 961px) {
+    --content-layout-maxWidth: 80%;
+  }
+  @media screen and (min-width: 1920px) {
+    --setting-page-maxWidth: 1280rpx;
+  }
+  @media screen and (min-width: 1440px) {
+    --content-layout-maxWidth: 70%;
+  }
+  /* 字體大小 */
   --font-size-content-pc: 24rpx;
   --font-size-content-pc-small: 20rpx;
   --font-size-content-pc-large: 28rpx;
-  --font-size-title-pc: 28rpx;
+  --font-size-title-pc: 32rpx;
   --font-size-title-pc-large: 32rpx;
   --font-size-title-pc-xlarge: 36rpx;
-
+  @media screen and (min-width: 768px) {
+    --font-size-content-pc: 16rpx;
+    --font-size-content-pc-small: 12rpx;
+    --font-size-content-pc-large: 20rpx;
+    --font-size-title-pc: 20rpx;
+    --font-size-title-pc-large: 24rpx;
+    --font-size-title-pc-xlarge: 28rpx;
+  }
   @media screen and (min-width: 961px) {
     --font-size-content-pc: 28rpx;
     --font-size-content-pc-small: 24rpx;
     --font-size-content-pc-large: 32rpx;
     --font-size-title-pc: 32rpx;
-    --font-size-title-pc-large: 40rpx;
-    --font-size-title-pc-xlarge: 48rpx;
-
-    --content-layout-maxWidth: 80%;
+    --font-size-title-pc-large: 36rpx;
+    --font-size-title-pc-xlarge: 40rpx;
   }
   @media screen and (min-width: 1280px) {
     --font-size-content-pc: 32rpx;
     --font-size-content-pc-small: 28rpx;
     --font-size-content-pc-large: 36rpx;
     --font-size-title-pc: 36rpx;
-    --font-size-title-pc-large: 44rpx;
-    --font-size-title-pc-xlarge: 48rpx;
+    --font-size-title-pc-large: 40rpx;
+    --font-size-title-pc-xlarge: 44rpx;
   }
-
-  @media screen and (min-width: 1440px) {
-    --content-layout-maxWidth: 70%;
-  }
-
   @media screen and (min-width: 1920px) {
     --font-size-content-pc: 36rpx;
     --font-size-content-pc-small: 32rpx;
     --font-size-content-pc-large: 40rpx;
     --font-size-title-pc: 40rpx;
-    --font-size-title-pc-large: 48rpx;
-    --font-size-title-pc-xlarge: 52rpx;
-
-    --content-layout-maxWidth: 50%;
+    --font-size-title-pc-large: 44rpx;
+    --font-size-title-pc-xlarge: 48rpx;
   }
-
+  /* 主區域 padding */
   --main-area-padding: 72rpx;
-
   @media screen and (min-width: 1280px) {
     --main-area-padding: 120rpx;
   }
-
   @media screen and (min-width: 1440px) {
     --main-area-padding: 150rpx;
   }
-
   @media screen and (min-width: 1920px) {
     --main-area-padding: 200rpx;
   }
@@ -135,7 +143,7 @@ html,
 body {
   &.dark {
     --background-color: #000000;
-    --background-color-dark: #ff0000;
+    --background-color-dark: #040000;
     --background-color-light: #ffffff;
   }
 
@@ -229,17 +237,43 @@ img {
   margin: 20rpx 0 40rpx;
 }
 
+/* 按鈕 */
 .btn-container {
   .btn {
-    padding: 10rpx 22rpx;
+    padding: 24rpx 22rpx;
     line-height: 1;
-    font-size: 24rpx;
+    font-size: var(--font-size-title-pc);
     background: var(--primary-color);
     color: var(--text-color-secondary);
     border-radius: 20rpx;
+
+    @media screen and (min-width: 768px) and (max-width: 960px) {
+      padding-top: 24rpx;
+      padding-bottom: 24rpx;
+    }
+
+    &.confirm-btn {
+      color: var(--text-color-secondary);
+      background-color: var(--primary-color);
+    }
+
+    &.cancel-btn {
+      background-color: unset;
+      color: var(--text-color-primary);
+    }
+    &.is-disabled,
+    &:disabled {
+      background-color: var(--text-color-gray3) !important;
+      color: var(--text-color-secondary) !important;
+    }
+
+    &::after {
+      display: none;
+    }
   }
 }
 
+/* 圖標 */
 .icon-container {
   display: flex;
   justify-content: center;
@@ -263,3 +297,36 @@ button:hover,
 .icon-container:hover {
   cursor: pointer;
 }
+
+/* INPUT 輸入欄位標準樣式 因uni-ui 需各頁面使用*/
+// .input-style {
+// 	::v-deep(.uni-easyinput__content) {
+// 		margin-bottom: 0rpx;
+
+// 		&.is-input-border {
+// 			border: none !important;
+// 			background: var(--text-color-tertiary) !important;
+// 			border-radius: 10rpx;
+// 			padding: 8rpx 32rpx;
+// 			color: var(--text-color-primary);
+
+// 			@media screen and (min-width: 961px) {
+// 				padding: 4rpx 32rpx;
+// 			}
+
+// 			&.is-focused {
+// 				border: 1px solid var(--primary-color) !important;
+
+// 				.uniui-eye-filled {
+// 					color: var(--primary-color) !important;
+// 				}
+// 			}
+// 		}
+// 	}
+
+// 	&.errorStyle ::v-deep(.uni-easyinput__content) {
+// 		&.is-input-border {
+// 			border: 1px solid var(--text-color-error) !important;
+// 		}
+// 	}
+// }

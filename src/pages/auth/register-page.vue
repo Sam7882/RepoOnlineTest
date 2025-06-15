@@ -10,7 +10,7 @@
 				</view>
 			</view>
 
-			<auth-registerForm @register="handleRegister" />
+			<form-registerForm @register="handleRegister" />
 
 		</view>
 	</layout-appBase>

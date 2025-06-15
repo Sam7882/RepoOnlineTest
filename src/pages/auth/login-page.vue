@@ -12,7 +12,7 @@
 				<c-langSelector />
 			</view>
 
-			<auth-loginForm @login="handleLogin" />
+			<form-loginForm @login="handleLogin" />
 
 			<!-- 第三方登入 -->
 			<auth-social />

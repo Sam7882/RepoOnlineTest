@@ -15,7 +15,7 @@
 				</view>
 			</view>
 			<view class="popup-content">
-				<auth-loginForm @login="handleLogin" />
+				<form-loginForm @login="handleLogin" />
 				<!-- 第三方登入 -->
 				<auth-social />
 				<!-- 註冊連結 -->

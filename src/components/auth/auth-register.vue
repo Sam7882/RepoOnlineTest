@@ -15,7 +15,7 @@
 				</view>
 			</view>
 			<view class="popup-content">
-				<auth-registerForm @register="handleRegister" />
+				<form-registerForm @register="handleRegister" />
 			</view>
 		</view>
 	</uni-popup>

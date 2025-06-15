@@ -19,7 +19,7 @@
 					<text class="input-tip">{{ $t('auth.pleaseEnterVerifyCode', { phone: phone }) }}</text>
 				</view>
 
-				<auth-verifyPhoneForm @verify="handleVerify" />
+				<form-verifyPhoneForm @verify="handleVerify" />
 
 
 			</view>

@@ -1,6 +1,6 @@
 <template>
 	<view class="pay-page">
-		<c-headerNav :title="$t('wallet.creditCard')" />
+		<c-headerNav :title="$t('wallet.creditCard')" :openBack="true" />
 		<view class="pay-page-content">
 			<!-- 卡片詳情 -->
 			<view class="pay-page-title creditCard-template">
@@ -12,6 +12,7 @@
 
 			<form-carditCardSaveForm @submit="handleSubmit" />
 		</view>
+		<c-confirmPopUp ref="confirmModal" />
 	</view>
 </template>
 
@@ -34,11 +35,20 @@ onShow(() => {
 })
 
 </script>
+
 <style lang="scss" scoped>
 .pay-page {
-	padding: 32rpx 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 0 32rpx;
+	padding-top: 24rpx;
 	background-color: var(--background-color-light);
 	color: var(--text-color-primary);
+
+	// 設定窗口最大寬度
+	max-width: var(--setting-page-maxWidth);
 
 	::v-deep(.header-nav-space) {
 		.header-nav-space {
@@ -49,7 +59,12 @@ onShow(() => {
 		.header-nav-container {
 			position: relative;
 		}
+
+		.header-nav-left-position {
+			left: 0;
+		}
 	}
+
 }
 
 uni-image {
@@ -59,7 +74,8 @@ uni-image {
 }
 
 .pay-page-content {
-	padding: 40rpx 32rpx;
+	padding: 40rpx 50rpx;
+	width: 100%;
 }
 
 .creditCard-template {

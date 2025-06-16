@@ -57,8 +57,6 @@
 				</uni-list-item>
 			</uni-list>
 		</view>
-
-		<c-bottomNav />
 	</view>
 </template>
 
@@ -103,19 +101,50 @@ onShow(() => {
 </script>
 
 <style lang="scss" scoped>
+.subscription-setting-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 0 32rpx;
+	padding-top: 24rpx;
+	background-color: var(--background-color-light);
+	color: var(--text-color-primary);
+
+	// 設定窗口最大寬度
+	max-width: var(--setting-page-maxWidth);
+
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			left: 0;
+		}
+	}
+}
+
 uni-image {
 	width: 100%;
 	height: 100%;
 	overflow: visible;
 }
 
-.subscription-setting-page {
-	background-color: var(--background-color);
-	// padding: 0 100rpx;
+.subscription-setting-page-content-container {
+	width: 100%;
+	height: 100%;
+	padding: 0 50rpx;
+	overflow-y: scroll;
 }
 
 .wallet-content-container-bottom-record-list-container {
-
 	::v-deep(.uni-list-item) {
 		.uni-list-item__container {
 			padding: 0;
@@ -131,10 +160,6 @@ uni-image {
 			justify-content: space-between;
 			align-items: center;
 			flex: 1;
-
-			@media screen and (min-width: 768px) and (max-width: 960px) {
-				padding: 24rpx 32rpx 32rpx;
-			}
 
 			.subscription-setting-page-list-item-container-left {
 				display: flex;

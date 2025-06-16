@@ -131,6 +131,11 @@ const handleClickToPage = (page) => {
 		font-size: 54rpx !important;
 		color: var(--text-color-secondary);
 
+		@media screen and (min-width: 768px) and (max-width: 960px) {
+			font-size: 48rpx !important;
+		}
+
+
 		&.iconColor {
 			color: var(--text-color-primary) !important;
 		}
@@ -142,6 +147,11 @@ const handleClickToPage = (page) => {
 	position: relative;
 	width: 100rpx;
 	height: 100rpx;
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		width: 88rpx;
+		height: 88rpx;
+	}
 
 	.main-menu-btn-img {
 		width: 100%;
@@ -172,6 +182,19 @@ const handleClickToPage = (page) => {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+
+		@media screen and (min-width: 768px) and (max-width: 960px) {
+			width: 80rpx;
+			font-size: 48rpx !important;
+		}
+
+		// @media screen and (min-width: 1280px) and (max-width: 1440px) {
+		// 	width: 80rpx;
+		// 	font-size: 40rpx !important;
+		// }
+		// @media screen and (min-width: 1440px) and (max-width: 1920px) {}
+		// @media screen and (min-width: 1920px) and (max-width: 2560px) {}
+		// @media screen and (min-width: 2560px) {}
 	}
 
 }

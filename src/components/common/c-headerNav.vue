@@ -104,6 +104,10 @@ const handleOpenQa = () => {
 	padding-top: 32rpx;
 	width: 100%;
 
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		--header-nav-space-height: 75rpx;
+	}
+
 }
 
 .header-nav-container {

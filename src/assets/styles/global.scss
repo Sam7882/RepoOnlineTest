@@ -92,6 +92,7 @@
   --font-size-content-pc-small: 20rpx;
   --font-size-content-pc-large: 28rpx;
   --font-size-title-pc: 32rpx;
+  --font-size-title-pc-small: 30rpx;
   --font-size-title-pc-large: 32rpx;
   --font-size-title-pc-xlarge: 36rpx;
   @media screen and (min-width: 768px) {
@@ -99,6 +100,7 @@
     --font-size-content-pc-small: 12rpx;
     --font-size-content-pc-large: 20rpx;
     --font-size-title-pc: 20rpx;
+    --font-size-title-pc-small: 18rpx;
     --font-size-title-pc-large: 24rpx;
     --font-size-title-pc-xlarge: 28rpx;
   }
@@ -107,6 +109,7 @@
     --font-size-content-pc-small: 24rpx;
     --font-size-content-pc-large: 32rpx;
     --font-size-title-pc: 32rpx;
+    --font-size-title-pc-small: 30rpx;
     --font-size-title-pc-large: 36rpx;
     --font-size-title-pc-xlarge: 40rpx;
   }
@@ -115,6 +118,7 @@
     --font-size-content-pc-small: 28rpx;
     --font-size-content-pc-large: 36rpx;
     --font-size-title-pc: 36rpx;
+    --font-size-title-pc-small: 34rpx;
     --font-size-title-pc-large: 40rpx;
     --font-size-title-pc-xlarge: 44rpx;
   }
@@ -123,6 +127,7 @@
     --font-size-content-pc-small: 32rpx;
     --font-size-content-pc-large: 40rpx;
     --font-size-title-pc: 40rpx;
+    --font-size-title-pc-small: 38rpx;
     --font-size-title-pc-large: 44rpx;
     --font-size-title-pc-xlarge: 48rpx;
   }
@@ -296,6 +301,24 @@ img {
 button:hover,
 .icon-container:hover {
   cursor: pointer;
+}
+
+// PC 滾動條
+@media screen and (min-width: 961px) {
+  ::-webkit-scrollbar {
+    display: scroll;
+    width: 8rpx;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--text-color-gray3);
+    // width: 1px;
+    border-radius: 10rpx;
+  }
 }
 
 /* INPUT 輸入欄位標準樣式 因uni-ui 需各頁面使用*/

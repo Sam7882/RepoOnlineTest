@@ -1,6 +1,6 @@
 <template>
-  <uni-popup ref="popupRef" type="bottom" borderRadius="60rpx 60rpx 0 0" background-color="#f6f6f6"
-    @change="emitChange">
+  <uni-popup ref="popupRef" :type="isPc ? 'center' : 'bottom'" :borderRadius="isPc ? '32rpx' : '60rpx 60rpx 0 0'"
+    background-color="#f6f6f6" @change="emitChange">
     <view class="popup-container">
       <!-- 標題與關閉 -->
       <view class="popup-header">
@@ -21,9 +21,11 @@
 
 <script setup>
 // TEMP: 組件-底部上滑彈窗
+import { useViewportStore } from '@/stores/useViewportStore'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
-
+const viewportStore = useViewportStore()
+const { isPc } = storeToRefs(viewportStore)
 const title = ref(t('common.tip'))
 const content = ref(t('common.content'))
 
@@ -62,9 +64,18 @@ defineExpose({ open, close })
 
 .popup-container {
   padding: 32rpx;
-  border-radius: 32rpx 32rpx 0 0;
+  border-radius: 60rpx 60rpx 0 0;
   background-color: var(--background-color-light);
+  width: fit-content;
+
+
+  @media screen and (min-width: 961px) {
+    border-radius: 32rpx;
+    width: 80vw;
+    max-width: 800rpx;
+  }
 }
+
 
 .popup-header {
   position: relative;
@@ -80,11 +91,11 @@ defineExpose({ open, close })
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 28rpx !important;
+  font-size: var(--font-size-title-pc-small) !important;
 }
 
 .popup-title {
-  font-size: 28rpx;
+  font-size: var(--font-size-title-pc);
   color: var(--text-color-primary);
 }
 
@@ -97,9 +108,13 @@ defineExpose({ open, close })
 
 .popup-content {
   color: var(--text-color-quaternary);
-  font-size: 24rpx;
+  font-size: var(--font-size-title-pc-small);
   min-height: 240rpx;
   padding: 12rpx 40rpx;
+
+  @media screen and (min-width: 768px) and (max-width: 960px) {
+    min-height: 150rpx;
+  }
 
 }
 </style>

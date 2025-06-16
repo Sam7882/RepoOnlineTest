@@ -93,16 +93,6 @@ defineExpose({ open, close })
 		width: 80vw;
 		max-width: 800rpx;
 	}
-
-	// @media screen and (min-width: 1920px) {
-	// 	width: 80vw;
-	// 	max-width: 800rpx;
-	// }
-
-	// @media screen and (min-width: 2560px) {
-	// 	width: 80vw;
-	// 	max-width: 900rpx;
-	// }
 }
 
 .popup-header {

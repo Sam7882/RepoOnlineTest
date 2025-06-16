@@ -76,5 +76,6 @@ uni-image {
 	padding: 0 50rpx;
 	overflow-x: hidden;
 	overflow-y: auto;
+	padding-top: 48rpx;
 }
 </style>

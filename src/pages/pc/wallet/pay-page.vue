@@ -34,9 +34,33 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .pay-page {
-	padding: 32rpx;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 0 32rpx;
+	padding-top: 24rpx;
 	background-color: var(--background-color-light);
 	color: var(--text-color-primary);
+
+	// 設定窗口最大寬度
+	max-width: var(--setting-page-maxWidth);
+
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			left: 0;
+		}
+	}
 }
 
 
@@ -47,6 +71,10 @@ uni-image {
 }
 
 .pay-page-content {
-	margin-bottom: 40rpx;
+	width: 100%;
+	height: 100%;
+	padding: 0 50rpx;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 </style>

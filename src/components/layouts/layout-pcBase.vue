@@ -26,6 +26,7 @@
 		<c-messagePopUp ref="messagePopUp" />
 		<c-noticePopUp ref="noticePopUp" />
 		<c-confirmPopUp ref="confirmPopUp" />
+		<c-bottomPopUp ref="bottomPopUp" />
 
 	</view>
 </template>
@@ -140,6 +141,17 @@ const openConfirm = (data) => {
 	})
 }
 
+// 底部彈窗
+const bottomPopUp = ref(null)
+const openBottomPopUp = (data) => {
+	const { title, content } = data
+	console.log("🚀 ~ openBottomPopUp ~ openBottomPopUp :")
+	bottomPopUp.value.open({
+		title,
+		content,
+	})
+}
+
 // 使用 provide 提供方法
 provide('auth', {
 	openLogin,
@@ -153,7 +165,8 @@ provide('common', {
 	openService,
 	openMessage,
 	openNotice,
-	openConfirm
+	openConfirm,
+	openBottomPopUp
 })
 </script>
 

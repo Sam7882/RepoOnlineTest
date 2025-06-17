@@ -28,9 +28,9 @@
 </template>
 
 <script setup lang="ts">
-// TEMP: PC發佈頁
+// TEMP: PC上傳檔案頁
 
-import { onShow } from '@dcloudio/uni-app'
+import { onShow, onLoad } from '@dcloudio/uni-app'
 import { toPostIndex, checkViewportAutoReplace } from '@/utils/routers'
 import { usePostData } from '@/stores/usePostData';
 import { useI18n } from 'vue-i18n'
@@ -177,7 +177,11 @@ const handleFiles = (files: any) => {
 	filePicker.value?.clearFiles()
 
 	// 跳轉
-	toPostIndex()
+	if (isSchedulePost.value) {
+		toPostIndex({ isSchedulePost: 'true' })
+	} else {
+		toPostIndex()
+	}
 }
 
 // 建立拖曳監聽相關事件
@@ -197,10 +201,17 @@ onBeforeUnmount(() => {
 })
 
 onShow(() => {
-	checkViewportAutoReplace()
-
+	// checkViewportAutoReplace()
 	// 進入頁面則，清除 uni-file-picker 選擇的檔案
 	filePicker.value?.clearFiles()
+})
+
+const isSchedulePost = ref<boolean | null>(null)
+onLoad((options: any) => {
+	console.log(options)
+	if (options.isSchedulePost) {
+		isSchedulePost.value = options.isSchedulePost === 'true'
+	}
 })
 
 </script>

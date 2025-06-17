@@ -2,237 +2,239 @@
 	<view class="statistics-page">
 		<!-- header 導航-->
 		<c-headerNav :title="$t('creator.myStatistics')" />
-		<!--內容容器 -->
-		<!-- 帳號頭像和錢包總額文字 水平排列 -->
-		<view class="statistics-account-container">
-			<!-- 帳號頭像 垂直排列 -->
-			<view class="statistics-account-info-container">
-				<!-- 頭像 -->
-				<view class="statistics-account-avatar-container">
-					<image class="statistics-account-avatar" src="/static/images/template/img-template-03.png" mode="widthFix">
-					</image>
-				</view>
-				<!-- 名稱與帳號 -->
-				<view class="statistics-account-info-name-container">
-					<view class="statistics-account-info-name-title-container">
-						<text class="statistics-account-info-title">名稱名稱</text>
-						<!-- 認證圖標 -->
-						<view class="statistics-account-info-prove-container">
-							<uni-icons type="icon-community-prove" custom-prefix="icon" size="16"
-								color="var(--text-color-senary)"></uni-icons>
+
+		<view class="content">
+			<!--內容容器 -->
+			<!-- 帳號頭像和錢包總額文字 水平排列 -->
+			<view class="statistics-account-container">
+				<!-- 帳號頭像 垂直排列 -->
+				<view class="statistics-account-info-container">
+					<!-- 頭像 -->
+					<view class="statistics-account-avatar-container">
+						<image class="statistics-account-avatar" src="/static/images/template/img-template-03.png" mode="widthFix">
+						</image>
+					</view>
+					<!-- 名稱與帳號 -->
+					<view class="statistics-account-info-name-container">
+						<view class="statistics-account-info-name-title-container">
+							<text class="statistics-account-info-title">名稱名稱</text>
+							<!-- 認證圖標 -->
+							<view class="statistics-account-info-prove-container">
+								<uni-icons type="icon-community-prove" custom-prefix="icon" size="16"
+									color="var(--text-color-senary)"></uni-icons>
+							</view>
+						</view>
+						<!-- 帳號 -->
+						<view class="statistics-account-info-name-account-container">
+							<text class="statistics-account-info-account">@88888888.88</text>
 						</view>
 					</view>
-					<!-- 帳號 -->
-					<view class="statistics-account-info-name-account-container">
-						<text class="statistics-account-info-account">@88888888.88</text>
+				</view>
+				<view class="statistics-account-container-button-container">
+					<!-- 粉絲數 -->
+					<view class="statistics-account-container-button">
+						<view class="statistics-account-container-button-item">
+							<text class="statistics-account-container-button-item-value">888</text>
+							<template v-if="fanCheck === 'up'">
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
+									custom-prefix="icon" size="16" color="var(--data-color-up)" />
+							</template>
+							<template v-else>
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
+									custom-prefix="icon" size="16" color="var(--data-color-down)" />
+							</template>
+						</view>
+						<text class="statistics-account-container-button-item-text">{{ $t('creator.fansNum') }}</text>
+					</view>
+					<!-- 觀看次數 -->
+					<view class="statistics-account-container-button-divider"></view>
+					<view class="statistics-account-container-button">
+						<view class="statistics-account-container-button-item">
+							<text class="statistics-account-container-button-item-value">100M</text>
+							<template v-if="watchCheck === 'up'">
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
+									custom-prefix="icon" size="16" color="var(--data-color-up)" />
+							</template>
+							<template v-else>
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
+									custom-prefix="icon" size="16" color="var(--data-color-down)" />
+							</template>
+						</view>
+						<text class=" statistics-account-container-button-item-text">{{ $t('creator.watchNum') }}</text>
 					</view>
 				</view>
 			</view>
-			<view class="statistics-account-container-button-container">
-				<!-- 粉絲數 -->
-				<view class="statistics-account-container-button">
-					<view class="statistics-account-container-button-item">
-						<text class="statistics-account-container-button-item-value">888</text>
-						<template v-if="fanCheck === 'up'">
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
-								custom-prefix="icon" size="16" color="var(--data-color-up)" />
-						</template>
-						<template v-else>
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
-								custom-prefix="icon" size="16" color="var(--data-color-down)" />
-						</template>
+
+			<!-- 折線圖 -->
+			<view class="statistics-content-container-bottom">
+				<!-- 靠左標題 -->
+				<view class="statistics-content-container-bottom-title-container">
+					<text>{{ $t('creator.yourFansData') }}</text>
+
+					<view class="type-select-container">
+						<uni-data-select class="type-select" v-model="localdata.value" :localdata="localdata.range" @change="change"
+							placement="bottom" :clear="false"></uni-data-select>
 					</view>
-					<text class="statistics-account-container-button-item-text">{{ $t('creator.fansNum') }}</text>
 				</view>
-				<!-- 觀看次數 -->
-				<view class="statistics-account-container-button-divider"></view>
-				<view class="statistics-account-container-button">
-					<view class="statistics-account-container-button-item">
-						<text class="statistics-account-container-button-item-value">100M</text>
-						<template v-if="watchCheck === 'up'">
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
-								custom-prefix="icon" size="16" color="var(--data-color-up)" />
-						</template>
-						<template v-else>
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
-								custom-prefix="icon" size="16" color="var(--data-color-down)" />
-						</template>
+				<!-- 數據欄位 -->
+				<view class="statistics-content-container-bottom-data">
+					<!-- 粉絲成長紀錄 -->
+					<view class="statistics-content-container-bottom-data-item">
+						<view class="statistics-content-container-bottom-data-item-title">
+							<text>{{ $t('creator.fanGrowth') }}</text>
+						</view>
+						<view class="statistics-content-container-bottom-data-item-value">
+							<uni-icons class="icon-bg fan" type="icon-common-click" custom-prefix="icon" size="16"
+								color="var(--text-color-secondary)" />
+							<text>100M</text>
+							<template v-if="fanCheck === 'up'">
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
+									custom-prefix="icon" size="16" color="var(--data-color-up)" />
+							</template>
+							<template v-else>
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
+									custom-prefix="icon" size="16" color="var(--data-color-down)" />
+							</template>
+						</view>
 					</view>
-					<text class=" statistics-account-container-button-item-text">{{ $t('creator.watchNum') }}</text>
+					<!-- 觀看成長紀錄 -->
+					<view class="statistics-content-container-bottom-data-item">
+						<view class="statistics-content-container-bottom-data-item-title">
+							<text>{{ $t('creator.watchGrowth') }}</text>
+						</view>
+						<view class="statistics-content-container-bottom-data-item-value">
+							<uni-icons class="icon-bg watch" type="icon-input-eye" custom-prefix="icon" size="16"
+								color="var(--text-color-secondary)" />
+							<text>1,234</text>
+							<template v-if="fanCheck === 'up'">
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
+									custom-prefix="icon" size="16" color="var(--data-color-up)" />
+							</template>
+							<template v-else>
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
+									custom-prefix="icon" size="16" color="var(--data-color-down)" />
+							</template>
+						</view>
+					</view>
+				</view>
+				<view class="statistics-content-container-bottom-chart-container">
+					<charts-lineChart :chartData="lineChartData" :opts="lineChartOpts" :dotColor1="dotColor1"
+						:dotColor2="dotColor2" />
+				</view>
+			</view>
+			<!-- 長條圖 -->
+			<view class="statistics-content-container-bottom">
+				<!-- 靠左標題 -->
+				<view class="statistics-content-container-bottom-title-container">
+					<text>{{ $t('creator.yourWatchData') }}</text>
+
+					<view class="type-select-container">
+						<uni-data-select class="type-select" v-model="localdata.value" :localdata="localdata.range" @change="change"
+							placement="bottom" :clear="false"></uni-data-select>
+					</view>
+				</view>
+				<!-- 數據欄位 -->
+				<view class="statistics-content-container-bottom-data">
+					<!-- 粉絲成長紀錄 -->
+					<view class="statistics-content-container-bottom-data-item">
+						<view class="statistics-content-container-bottom-data-item-title">
+							<text>{{ $t('creator.fanGrowth') }}</text>
+						</view>
+						<view class="statistics-content-container-bottom-data-item-value">
+							<uni-icons class="icon-bg fan" type="icon-common-click" custom-prefix="icon" size="16"
+								color="var(--text-color-secondary)" />
+							<text>100M</text>
+							<template v-if="fanCheck === 'up'">
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
+									custom-prefix="icon" size="16" color="var(--data-color-up)" />
+							</template>
+							<template v-else>
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
+									custom-prefix="icon" size="16" color="var(--data-color-down)" />
+							</template>
+						</view>
+					</view>
+					<!-- 觀看成長紀錄 -->
+					<view class="statistics-content-container-bottom-data-item">
+						<view class="statistics-content-container-bottom-data-item-title">
+							<text>{{ $t('creator.watchGrowth') }}</text>
+						</view>
+						<view class="statistics-content-container-bottom-data-item-value">
+							<uni-icons class="icon-bg watch" type="icon-input-eye" custom-prefix="icon" size="16"
+								color="var(--text-color-secondary)" />
+							<text>1,234</text>
+							<template v-if="fanCheck === 'up'">
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
+									custom-prefix="icon" size="16" color="var(--data-color-up)" />
+							</template>
+							<template v-else>
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
+									custom-prefix="icon" size="16" color="var(--data-color-down)" />
+							</template>
+						</view>
+					</view>
+				</view>
+				<view class="statistics-content-container-bottom-chart-container">
+					<charts-barChart :chartData="barChartData" :opts="barChartOpts" />
+				</view>
+			</view>
+			<!-- 圓餅圖 -->
+			<view class="statistics-content-container-bottom">
+				<!-- 靠左標題 -->
+				<view class="statistics-content-container-bottom-title-container">
+					<text>{{ $t('creator.yourFansData') }}</text>
+
+					<view class="type-select-container">
+						<uni-data-select class="type-select" v-model="localdata.value" :localdata="localdata.range" @change="change"
+							placement="bottom" :clear="false"></uni-data-select>
+					</view>
+				</view>
+				<!-- 數據欄位 -->
+				<view class="statistics-content-container-bottom-data">
+					<!-- 粉絲成長紀錄 -->
+					<view class="statistics-content-container-bottom-data-item">
+						<view class="statistics-content-container-bottom-data-item-title">
+							<text>{{ $t('creator.fanGrowth') }}</text>
+						</view>
+						<view class="statistics-content-container-bottom-data-item-value">
+							<uni-icons class="icon-bg fan" type="icon-common-click" custom-prefix="icon" size="16"
+								color="var(--text-color-secondary)" />
+							<text>100M</text>
+							<template v-if="fanCheck === 'up'">
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
+									custom-prefix="icon" size="16" color="var(--data-color-up)" />
+							</template>
+							<template v-else>
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
+									custom-prefix="icon" size="16" color="var(--data-color-down)" />
+							</template>
+						</view>
+					</view>
+					<!-- 觀看成長紀錄 -->
+					<view class="statistics-content-container-bottom-data-item">
+						<view class="statistics-content-container-bottom-data-item-title">
+							<text>{{ $t('creator.watchGrowth') }}</text>
+						</view>
+						<view class="statistics-content-container-bottom-data-item-value">
+							<uni-icons class="icon-bg watch" type="icon-input-eye" custom-prefix="icon" size="16"
+								color="var(--text-color-secondary)" />
+							<text>1,234</text>
+							<template v-if="fanCheck === 'up'">
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
+									custom-prefix="icon" size="16" color="var(--data-color-up)" />
+							</template>
+							<template v-else>
+								<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
+									custom-prefix="icon" size="16" color="var(--data-color-down)" />
+							</template>
+						</view>
+					</view>
+				</view>
+				<view class="statistics-content-container-bottom-chart-container">
+					<charts-pieChart :chartData="pieChartData" :opts="pieChartOpts" />
 				</view>
 			</view>
 		</view>
-
-		<!-- 折線圖 -->
-		<view class="statistics-content-container-bottom">
-			<!-- 靠左標題 -->
-			<view class="statistics-content-container-bottom-title-container">
-				<text>{{ $t('creator.yourFansData') }}</text>
-
-				<view class="type-select-container">
-					<uni-data-select class="type-select" v-model="localdata.value" :localdata="localdata.range" @change="change"
-						placement="bottom" :clear="false"></uni-data-select>
-				</view>
-			</view>
-			<!-- 數據欄位 -->
-			<view class="statistics-content-container-bottom-data">
-				<!-- 粉絲成長紀錄 -->
-				<view class="statistics-content-container-bottom-data-item">
-					<view class="statistics-content-container-bottom-data-item-title">
-						<text>{{ $t('creator.fanGrowth') }}</text>
-					</view>
-					<view class="statistics-content-container-bottom-data-item-value">
-						<uni-icons class="icon-bg fan" type="icon-common-click" custom-prefix="icon" size="16"
-							color="var(--text-color-secondary)" />
-						<text>100M</text>
-						<template v-if="fanCheck === 'up'">
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
-								custom-prefix="icon" size="16" color="var(--data-color-up)" />
-						</template>
-						<template v-else>
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
-								custom-prefix="icon" size="16" color="var(--data-color-down)" />
-						</template>
-					</view>
-				</view>
-				<!-- 觀看成長紀錄 -->
-				<view class="statistics-content-container-bottom-data-item">
-					<view class="statistics-content-container-bottom-data-item-title">
-						<text>{{ $t('creator.watchGrowth') }}</text>
-					</view>
-					<view class="statistics-content-container-bottom-data-item-value">
-						<uni-icons class="icon-bg watch" type="icon-input-eye" custom-prefix="icon" size="16"
-							color="var(--text-color-secondary)" />
-						<text>1,234</text>
-						<template v-if="fanCheck === 'up'">
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
-								custom-prefix="icon" size="16" color="var(--data-color-up)" />
-						</template>
-						<template v-else>
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
-								custom-prefix="icon" size="16" color="var(--data-color-down)" />
-						</template>
-					</view>
-				</view>
-			</view>
-			<view class="statistics-content-container-bottom-chart-container">
-				<charts-lineChart :chartData="lineChartData" :opts="lineChartOpts" :dotColor1="dotColor1"
-					:dotColor2="dotColor2" />
-			</view>
-		</view>
-		<!-- 長條圖 -->
-		<view class="statistics-content-container-bottom">
-			<!-- 靠左標題 -->
-			<view class="statistics-content-container-bottom-title-container">
-				<text>{{ $t('creator.yourWatchData') }}</text>
-
-				<view class="type-select-container">
-					<uni-data-select class="type-select" v-model="localdata.value" :localdata="localdata.range" @change="change"
-						placement="bottom" :clear="false"></uni-data-select>
-				</view>
-			</view>
-			<!-- 數據欄位 -->
-			<view class="statistics-content-container-bottom-data">
-				<!-- 粉絲成長紀錄 -->
-				<view class="statistics-content-container-bottom-data-item">
-					<view class="statistics-content-container-bottom-data-item-title">
-						<text>{{ $t('creator.fanGrowth') }}</text>
-					</view>
-					<view class="statistics-content-container-bottom-data-item-value">
-						<uni-icons class="icon-bg fan" type="icon-common-click" custom-prefix="icon" size="16"
-							color="var(--text-color-secondary)" />
-						<text>100M</text>
-						<template v-if="fanCheck === 'up'">
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
-								custom-prefix="icon" size="16" color="var(--data-color-up)" />
-						</template>
-						<template v-else>
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
-								custom-prefix="icon" size="16" color="var(--data-color-down)" />
-						</template>
-					</view>
-				</view>
-				<!-- 觀看成長紀錄 -->
-				<view class="statistics-content-container-bottom-data-item">
-					<view class="statistics-content-container-bottom-data-item-title">
-						<text>{{ $t('creator.watchGrowth') }}</text>
-					</view>
-					<view class="statistics-content-container-bottom-data-item-value">
-						<uni-icons class="icon-bg watch" type="icon-input-eye" custom-prefix="icon" size="16"
-							color="var(--text-color-secondary)" />
-						<text>1,234</text>
-						<template v-if="fanCheck === 'up'">
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
-								custom-prefix="icon" size="16" color="var(--data-color-up)" />
-						</template>
-						<template v-else>
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
-								custom-prefix="icon" size="16" color="var(--data-color-down)" />
-						</template>
-					</view>
-				</view>
-			</view>
-			<view class="statistics-content-container-bottom-chart-container">
-				<charts-barChart :chartData="barChartData" :opts="barChartOpts" />
-			</view>
-		</view>
-		<!-- 圓餅圖 -->
-		<view class="statistics-content-container-bottom">
-			<!-- 靠左標題 -->
-			<view class="statistics-content-container-bottom-title-container">
-				<text>{{ $t('creator.yourFansData') }}</text>
-
-				<view class="type-select-container">
-					<uni-data-select class="type-select" v-model="localdata.value" :localdata="localdata.range" @change="change"
-						placement="bottom" :clear="false"></uni-data-select>
-				</view>
-			</view>
-			<!-- 數據欄位 -->
-			<view class="statistics-content-container-bottom-data">
-				<!-- 粉絲成長紀錄 -->
-				<view class="statistics-content-container-bottom-data-item">
-					<view class="statistics-content-container-bottom-data-item-title">
-						<text>{{ $t('creator.fanGrowth') }}</text>
-					</view>
-					<view class="statistics-content-container-bottom-data-item-value">
-						<uni-icons class="icon-bg fan" type="icon-common-click" custom-prefix="icon" size="16"
-							color="var(--text-color-secondary)" />
-						<text>100M</text>
-						<template v-if="fanCheck === 'up'">
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
-								custom-prefix="icon" size="16" color="var(--data-color-up)" />
-						</template>
-						<template v-else>
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
-								custom-prefix="icon" size="16" color="var(--data-color-down)" />
-						</template>
-					</view>
-				</view>
-				<!-- 觀看成長紀錄 -->
-				<view class="statistics-content-container-bottom-data-item">
-					<view class="statistics-content-container-bottom-data-item-title">
-						<text>{{ $t('creator.watchGrowth') }}</text>
-					</view>
-					<view class="statistics-content-container-bottom-data-item-value">
-						<uni-icons class="icon-bg watch" type="icon-input-eye" custom-prefix="icon" size="16"
-							color="var(--text-color-secondary)" />
-						<text>1,234</text>
-						<template v-if="fanCheck === 'up'">
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-up"
-								custom-prefix="icon" size="16" color="var(--data-color-up)" />
-						</template>
-						<template v-else>
-							<uni-icons class="statistics-account-container-button-item-icon" type="icon-common-arrowData-down"
-								custom-prefix="icon" size="16" color="var(--data-color-down)" />
-						</template>
-					</view>
-				</view>
-			</view>
-			<view class="statistics-content-container-bottom-chart-container">
-				<charts-pieChart :chartData="pieChartData" :opts="pieChartOpts" />
-			</view>
-		</view>
-
 	</view>
 </template>
 
@@ -415,8 +417,40 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .statistics-page {
-	background-color: var(--background-color-grayLight);
 	// padding: 0 100rpx;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 0 32rpx;
+	padding-top: 24rpx;
+	background-color: var(--background-color-light);
+	color: var(--text-color-primary);
+
+	// 設定窗口最大寬度
+	max-width: var(--setting-page-maxWidth);
+
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			left: 0;
+		}
+	}
+}
+
+.content {
+	width: 100%;
+	height: 100%;
+	padding: 0 50rpx;
 }
 
 .header-nav-container {
@@ -455,10 +489,6 @@ onShow(() => {
 	align-items: center;
 	gap: 12rpx;
 
-	@media screen and (min-width: 768px) and (max-width: 960px) {
-		padding-top: 32rpx;
-	}
-
 	/* 帳號頭像 */
 	.statistics-account-info-container {
 		display: flex;
@@ -474,12 +504,6 @@ onShow(() => {
 			background: var(--primary-color);
 			border-radius: 100%;
 			overflow: hidden;
-
-			@media screen and (min-width: 768px) and (max-width: 960px) {
-				width: 150rpx;
-				height: 150rpx;
-				border: 6rpx solid var(--primary-color);
-			}
 
 			::v-deep(.statistics-account-avatar) {
 				uni-image {
@@ -528,7 +552,7 @@ onShow(() => {
 
 				// 認證圖標
 				.icon-community-prove {
-					font-size: var(--font-size-content-pc-large) !important;
+					font-size: var(--font-size-content-pc) !important;
 				}
 			}
 
@@ -598,10 +622,6 @@ onShow(() => {
 	max-width: 50%;
 	padding: 8rpx 16rpx;
 
-	@media screen and (min-width: 768px) and (max-width: 960px) {
-		min-width: 100rpx;
-	}
-
 	::v-deep(.uni-select) {
 		& {
 			border: unset;
@@ -613,7 +633,6 @@ onShow(() => {
 		.uni-select {
 			height: auto;
 			border: none;
-			font-size: var(--font-size-title-pc-small);
 		}
 
 		.uni-select__input-box {
@@ -666,7 +685,7 @@ onShow(() => {
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
-		font-size: var(--font-size-title-pc-large);
+		font-size: var(--font-size-content-pc-large);
 		color: var(--text-color-primary);
 	}
 
@@ -682,15 +701,13 @@ onShow(() => {
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
+			// align-items: center;
+			// flex: 1;
 			border-radius: 32rpx;
 			background-color: var(--text-color-secondary);
 			color: var(--text-color-primary);
 			font-weight: normal;
 			padding: 16rpx 54rpx;
-
-			@media screen and (min-width: 768px) and (max-width: 960px) {
-				// padding: 16rpx 24rpx;
-			}
 
 
 			.statistics-content-container-bottom-data-item-title {
@@ -711,7 +728,7 @@ onShow(() => {
 					// right: -28rpx;
 					top: 10rpx;
 					// transform: translateY(-50%);
-					font-size: var(--font-size-content-pc-small) !important;
+					font-size: 20rpx !important;
 				}
 			}
 		}
@@ -762,8 +779,6 @@ onShow(() => {
 		flex: 1;
 		margin-bottom: unset;
 		padding: 16rpx 0;
-
-
 	}
 
 	.statistics-content-container-bottom-record-title-container {

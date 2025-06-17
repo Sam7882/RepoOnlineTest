@@ -68,11 +68,3 @@ const pieChartOpts = {
 */
 
 </script>
-
-<style scoped>
-.chart-box {
-	padding: 24rpx;
-	background-color: #fff;
-	border-radius: 20rpx;
-}
-</style>

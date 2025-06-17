@@ -128,18 +128,6 @@ const lineChartOpts = {
 </script>
 
 <style scoped>
-.chart-box {
-	padding: 24rpx;
-	background-color: #fff;
-	border-radius: 20rpx;
-}
-
-.chart-title {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
 .chart-legend {
 	display: flex;
 	gap: 24rpx;

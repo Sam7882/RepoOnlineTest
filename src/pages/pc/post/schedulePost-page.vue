@@ -36,25 +36,6 @@
 			</view>
 
 		</view>
-
-
-		<c-bottomPopUp ref="bottomPopUpRef" class="bottom-pop-up">
-
-			<template #header>
-				<view></view>
-				<!-- <text>草稿</text> -->
-			</template>
-			<template #content>
-				<view class="bottom-content">
-					<view class="btn-container">
-						<button type="button" class="btn btn-delete" @click="deleteDraft">{{ $t('common.delete') }}</button>
-					</view>
-					<view class="btn-container">
-						<button type="button" class="btn btn-cancel" @click="closeCaption">{{ $t('common.cancel') }}</button>
-					</view>
-				</view>
-			</template>
-		</c-bottomPopUp>
 	</view>
 </template>
 <script setup>
@@ -63,6 +44,7 @@ import { onLoad, onShow } from '@dcloudio/uni-app'
 import { toPostPreview, checkViewportAutoReplace } from '@/utils/routers'
 import { usePostData } from '@/stores/usePostData'
 import { useI18n } from 'vue-i18n'
+const { openConfirm } = inject('common')
 const { t } = useI18n()
 const postDataStore = usePostData()
 const { setSelectedMedia } = postDataStore
@@ -109,11 +91,15 @@ const toCropAvatar = ({ src }) => {
 	})
 }
 
-const bottomPopUpRef = ref(null)
+
 const openCaption = () => {
-	bottomPopUpRef.value.open({
-		title: t('common.subscriptionAgreement'),
-		content: t('common.subscriptionAgreementTip2', { title: 'Fance' })
+	openConfirm({
+		title: t('post.deleteDraft'),
+		confirmBtnText: t('common.delete'),
+		cancelBtnText: t('common.cancel'),
+		onConfirm: () => {
+			console.log('deleteDraft')
+		}
 	})
 }
 const closeCaption = () => {
@@ -131,13 +117,45 @@ onShow(() => {
 </script>
 <style lang="scss" scoped>
 .page-container {
-	// padding: 20rpx;
-	background-color: #fff;
-	min-height: 100vh;
+	// // padding: 20rpx;
+	// background-color: #fff;
+	// min-height: 100vh;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 0 32rpx;
+	padding-top: 24rpx;
+	background-color: var(--background-color-light);
+	color: var(--text-color-primary);
+
+	// 設定窗口最大寬度
+	max-width: var(--setting-page-maxWidth);
+
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			left: 0;
+		}
+	}
 }
 
 .content {
-	padding: 40rpx;
+	width: 100%;
+	height: 100%;
+	padding: 0 50rpx;
+	overflow-y: scroll;
+	padding-top: 42rpx;
 }
 
 .btn-container {
@@ -147,10 +165,6 @@ onShow(() => {
 	.btn {
 		padding: 24rpx;
 		font-size: var(--font-size-title-pc);
-
-		@media screen and (min-width: 768px) and (max-width: 960px) {
-			padding: 18rpx;
-		}
 	}
 
 	&.btn-waiting,
@@ -235,10 +249,6 @@ onShow(() => {
 
 		.popup-container {
 			padding: 70rpx 54rpx;
-
-			@media screen and (min-width: 768px) and (max-width: 960px) {
-				padding: 48rpx 32rpx;
-			}
 		}
 
 		.popup-header {
@@ -263,7 +273,6 @@ onShow(() => {
 		.btn {
 			font-size: var(--font-size-title-pc);
 			padding: 24rpx 0;
-
 		}
 
 		.btn-cancel {

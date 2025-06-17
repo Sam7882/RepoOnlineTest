@@ -55,6 +55,23 @@ defineExpose({
   background-color: #fff;
   border-radius: 30rpx;
   text-align: center;
+
+  @media screen and (min-width: 768px) and (max-width: 960px) {
+    max-width: 500rpx;
+    padding: 32rpx 40rpx;
+  }
+
+  @media screen and (min-width: 961px) {
+    max-width: 600rpx;
+  }
+
+  @media screen and (min-width: 1920px) {
+    max-width: 800rpx;
+  }
+
+  @media screen and (min-width: 2560px) {
+    max-width: 1000rpx;
+  }
 }
 
 .uni-popup {
@@ -63,13 +80,13 @@ defineExpose({
 
 .popup-title {
   font-weight: 500;
-  font-size: 34rpx;
+  font-size: var(--font-size-title-pc-large);
   margin-bottom: 20rpx;
   color: var(--popTxt-color-title);
 }
 
 .popup-content {
-  font-size: 24rpx;
+  font-size: var(--font-size-content-pc);
   color: #666;
   /* margin-bottom: 48rpx; */
   color: var(--popTxt-color-content);
@@ -90,7 +107,7 @@ defineExpose({
   padding: 50rpx 0;
   border-radius: 16rpx;
   margin: unset;
-  font-size: 30rpx;
+  font-size: var(--font-size-title-pc);
   line-height: 1;
   width: 100%;
   border: unset;

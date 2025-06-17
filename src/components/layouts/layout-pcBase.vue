@@ -2,6 +2,7 @@
 	<view class="pc-layout">
 		<!-- 左側多欄位導覽區 -->
 		<pc-SlideNav />
+		<slot name="slideSecondNav" />
 
 		<!-- 右側主畫面 -->
 		<view class="main-area">

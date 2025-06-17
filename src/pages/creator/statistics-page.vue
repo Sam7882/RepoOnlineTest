@@ -688,11 +688,6 @@ onShow(() => {
 			font-weight: normal;
 			padding: 16rpx 54rpx;
 
-			@media screen and (min-width: 768px) and (max-width: 960px) {
-				// padding: 16rpx 24rpx;
-			}
-
-
 			.statistics-content-container-bottom-data-item-title {
 				font-size: var(--font-size-content-pc);
 			}

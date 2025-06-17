@@ -8,5 +8,5 @@
 
 <script setup>
 // TEMP: 創作者設定-創作者中心設定頁中介頁
-import CenterPage from './center-page.vue'
+import CenterPage from '@/pages/pc/creator/center-page.vue'
 </script>

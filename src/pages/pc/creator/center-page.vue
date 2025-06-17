@@ -26,7 +26,8 @@
 					<view class="icon-container">
 					</view>
 				</view>
-				<view class="menu-item" :class="{ 'active': currentPage === 'schedule' }" @click="handleEdit('schedule')">
+				<view class="menu-item" :class="{ 'active': currentPage === 'schedulePost' }"
+					@click="handleEdit('schedulePost')">
 					<text>{{ $t('post.schedulePost') }}</text>
 					<view class="icon-container">
 					</view>
@@ -71,7 +72,7 @@ const handleEdit = (index) => {
 		case 'data':
 			toStatistics()
 			break
-		case 'schedule':
+		case 'schedulePost':
 			toSchedulePost()
 			break
 	}

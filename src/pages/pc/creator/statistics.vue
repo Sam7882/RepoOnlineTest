@@ -11,6 +11,6 @@
 
 <script setup>
 // TEMP: 個人數據中介頁
-import CenterPage from './center-page.vue'
-import StatisticsPage from './statistics-page.vue'
+import CenterPage from '@/pages/pc/creator/center-page.vue'
+import StatisticsPage from '@/pages/pc/creator/statistics-page.vue'
 </script>

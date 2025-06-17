@@ -41,7 +41,7 @@
 <script setup>
 // TEMP: 發布頁-排定發布
 import { onLoad, onShow } from '@dcloudio/uni-app'
-import { toPostPreview, checkViewportAutoReplace } from '@/utils/routers'
+import { toPostUpload, checkViewportAutoReplace } from '@/utils/routers'
 import { usePostData } from '@/stores/usePostData'
 import { useI18n } from 'vue-i18n'
 const { openConfirm } = inject('common')
@@ -65,23 +65,91 @@ const goBack = () => {
 	uni.navigateBack()
 }
 
+// 最大檔案數量
+const MAX_FILE_COUNT = 10
+// 圖片大小限制
+const MAX_IMAGE_SIZE = 10 * 1024 * 1024 // 10MB
+// 影片大小限制
+const MAX_VIDEO_SIZE = 100 * 1024 * 1024 // 100MB
+
+// 圖片類型
+const VALID_IMAGE_TYPES = [
+	'image/jpeg',
+	'image/png',
+	'image/gif',
+	'image/webp'
+]
+// 影片類型
+const VALID_VIDEO_TYPES = [
+	'video/mp4',
+	'video/quicktime',
+	'video/x-msvideo',
+	'video/webm',
+	'video/x-matroska'
+]
+
 const onUpload = () => {
-	uni.chooseImage({
-		count: 15,
-		sourceType: ['album'],
-		success: (res) => {
-			const fileList = res.tempFilePaths.map((src, index) => ({
-				id: `${Date.now()}-${index}`,
-				type: 'image',
-				src
-			}))
-			setSelectedMedia(fileList)
-			toPostPreview()
-		},
-		fail: (err) => {
-			uni.showToast({ title: t('common.selectFailed'), icon: 'none' })
-		}
-	})
+	// 因設計稿是前往上傳頁，故原上功能註解
+	toPostUpload({ isSchedulePost: 'true' })
+	// NOTE: 以下是跳到預覽頁面
+	// uni.chooseImage({
+	// 	count: MAX_FILE_COUNT,
+	// 	sourceType: ['album'],
+	// 	success: (res) => {
+	// 		const fileList = res.tempFiles.map((file) => {
+	// 			const { type, size, name } = file
+	// 			const isImage = VALID_IMAGE_TYPES.includes(type)
+	// 			const isVideo = VALID_VIDEO_TYPES.includes(type)
+
+	// 			// 限制檢查
+	// 			if (!isImage && !isVideo) {
+	// 				uni.showToast({
+	// 					title: `${t('post.unsupportedFileType')} ${name}`,
+	// 					icon: 'none'
+	// 				})
+	// 				return null
+	// 			}
+
+	// 			if (isImage && size > MAX_IMAGE_SIZE) {
+	// 				uni.showToast({
+	// 					title: `${t('post.imageSizeLimit')} ${name}`,
+	// 					icon: 'none'
+	// 				})
+	// 				return null
+	// 			}
+
+	// 			if (isVideo && size > MAX_VIDEO_SIZE) {
+	// 				uni.showToast({
+	// 					title: `${t('post.videoSizeLimit')} ${name}`,
+	// 					icon: 'none'
+	// 				})
+	// 				return null
+	// 			}
+
+	// 			return {
+	// 				id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+	// 				type: isImage ? 'image' : 'video',
+	// 				url: URL.createObjectURL(file),
+	// 				rawFile: file // 保留原始檔案，發 API 時會用到
+	// 			}
+	// 		}).filter(Boolean) // 過濾掉不符合條件的檔案
+
+	// 		// 數量限制
+	// 		if (fileList.length > MAX_FILE_COUNT) {
+	// 			fileList.splice(MAX_FILE_COUNT)
+	// 			uni.showToast({
+	// 				title: t('post.maxFileCount', { num: MAX_FILE_COUNT }),
+	// 				icon: 'none'
+	// 			})
+	// 		}
+
+	// 		setSelectedMedia(fileList)
+	// 		toPostPreview()
+	// 	},
+	// 	fail: (err) => {
+	// 		uni.showToast({ title: t('common.selectFailed'), icon: 'none' })
+	// 	}
+	// })
 }
 
 // 模擬轉跳裁切頁面

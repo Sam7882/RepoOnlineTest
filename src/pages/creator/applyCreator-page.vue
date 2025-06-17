@@ -23,9 +23,6 @@
 				<button class="btn" @click="openMessagePopUp()">{{ btnText }}</button>
 			</view>
 		</view>
-
-		<c-messagePopUp ref="messagePopUpRef" />
-
 	</view>
 </template>
 
@@ -37,6 +34,7 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const { back } = router;
 
+const { openMessage } = inject('common')
 const menuTitle = ref(t('creator.becomeCreator'))
 const content = ref(t('creator.welcomeToBecomeVerifyCreator'))
 const btnStatus = ref('')
@@ -54,9 +52,8 @@ const btnText = computed(() => {
 const type = ref('creator')
 
 
-const messagePopUpRef = ref(null)
 const openMessagePopUp = () => {
-	messagePopUpRef.value.open({
+	openMessage({
 		content: t('auth.sorryNoPasss'),
 		confirmBtnText: 'OK',
 		onConfirm: () => {

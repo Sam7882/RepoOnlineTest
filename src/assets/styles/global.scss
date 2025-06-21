@@ -308,6 +308,7 @@ button:hover,
   ::-webkit-scrollbar {
     display: scroll;
     width: 8rpx;
+    display: none;
   }
 
   ::-webkit-scrollbar-track {
@@ -319,6 +320,20 @@ button:hover,
     // width: 1px;
     border-radius: 10rpx;
   }
+}
+
+// 分析圖表
+.chart-box {
+  padding: 24rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+}
+
+.chart-title {
+  font-size: var(--font-size-title-pc);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* INPUT 輸入欄位標準樣式 因uni-ui 需各頁面使用*/

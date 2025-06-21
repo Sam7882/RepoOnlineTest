@@ -22,6 +22,10 @@ const toggle = () => {
 .switch-wrapper {
 	width: fit-content;
 	height: fit-content;
+
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 .switch {

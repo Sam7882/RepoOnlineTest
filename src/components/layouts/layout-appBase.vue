@@ -114,13 +114,15 @@ const openNotice = (data) => {
 // 確認
 const confirmPopUp = ref(null)
 const openConfirm = (data) => {
-	const { title, content, confirmBtnText, cancelBtnText, onConfirm } = data
+	const { title, content, confirmBtnText, cancelBtnText, onConfirm, confirmBtnStyle, cancelBtnStyle } = data
 	console.log("🚀 ~ openConfirm ~ openConfirm :")
 	confirmPopUp.value.open({
 		title,
 		content,
 		confirmBtnText,
+		confirmBtnStyle,
 		cancelBtnText,
+		cancelBtnStyle,
 		onConfirm
 	})
 }

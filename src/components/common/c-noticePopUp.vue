@@ -29,7 +29,7 @@ const title = ref(t('common.tip'))
 const content = ref('')
 const titleIcon = ref('')
 
-function setTimeClsoe(time = 2000) {
+function setTimeClsoe(time = 1500) {
   if (!time) {
     return
   }

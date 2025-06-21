@@ -1,14 +1,14 @@
 <template>
-  <uni-popup ref="popup" type="center">
+  <uni-popup ref="popup" type="center" class="popUp-confirm">
     <view class="popup-box">
       <view class="popup-title">{{ title }}</view>
       <view class="popup-content">{{ content }}</view>
       <view class="popup-actions">
-        <view class="btn-container">
-          <button class="btn confirm-btn" @click="handleConfirm">{{ confirmBtnText }}</button>
+        <view class="btn-container btn-confirm">
+          <button class="btn confirm-btn" @click="handleConfirm" :style="confirmBtnStyle">{{ confirmBtnText }}</button>
         </view>
-        <view class="btn-container">
-          <button class="btn cancel-btn" @click="close">{{ cancelBtnText }}</button>
+        <view class="btn-container btn-cancel">
+          <button class="btn cancel-btn" @click="close" :style="cancelBtnStyle">{{ cancelBtnText }}</button>
         </view>
       </view>
     </view>
@@ -25,6 +25,8 @@ const title = ref(t('common.tip'))
 const content = ref('')
 const confirmBtnText = ref(t('common.confirm'))
 const cancelBtnText = ref(t('common.cancel'))
+const confirmBtnStyle = ref({})
+const cancelBtnStyle = ref({})
 let onConfirm = () => { }
 
 function open(options = {}) {
@@ -33,6 +35,9 @@ function open(options = {}) {
   confirmBtnText.value = options.confirmBtnText || t('common.confirm')
   cancelBtnText.value = options.cancelBtnText || t('common.cancel')
   onConfirm = options.onConfirm || (() => { })
+  confirmBtnStyle.value = options.confirmBtnStyle || {}
+  console.log("🚀 ~ open ~ confirmBtnStyle:", confirmBtnStyle.value)
+  cancelBtnStyle.value = options.cancelBtnStyle || {}
   popup.value.open()
 }
 

@@ -343,6 +343,7 @@ export const toShare = (params = {}) => {
 	checkViewport('/creator/share', params)
 }
 // 跳轉到創作者設定頁
+// 僅PC版 params: { tab: 'account' | 'privacy' | 'message' }
 export const toCreatorSetMenu = (params = {}) => {
 	safeSwitchTab('/pages/creator/setMenu')
 	checkViewport('/creator/setMenu', params)

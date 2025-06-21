@@ -3,127 +3,22 @@
 		<c-headerNav :title="typeTitle" />
 		<view class="content">
 			<!-- 手機號碼 -->
-			<uni-forms class="form form-phone" v-if="type === 'phone'" :model="formData" :rules="formRules.phone"
-				ref="formRef">
-				<uni-forms-item class="form-item" name="phone" required>
-					<view class="phone-input-row">
-						<uni-data-select class="country-select" v-model="selectedCountry" :localdata="countryList" :clear="false"
-							:placeholder="$t('auth.countryCode')" />
-						<uni-easyinput class="inputStyle phone-input" v-model="formData.phone"
-							:placeholder="$t('auth.pleaseEnter', { title: $t('auth.phone') })" :trim="true" :clearable="false"
-							type="number" />
-					</view>
-				</uni-forms-item>
-				<uni-forms-item class="verifyCode-container" name="verifyCode" required>
-					<view class="form-item">
-						<uni-easyinput v-model="formData.verifyCode" class="inputStyle" type="text"
-							:placeholder="$t('auth.pleaseEnter', { title: $t('auth.verifyCode') })" :trim="true" :clearable="false" />
-					</view>
-					<view class="btn-container">
-						<button type="button" class="btn" @click="verifyCodeSend">{{ verifyStatus ?
-							`${verifyTime}${$t("common.second")} ${$t("common.resendCode")}` : $t('common.sendCode')
-						}}</button>
-					</view>
-				</uni-forms-item>
-			</uni-forms>
+			<form-setMenu-phoneBindForm v-if="type === 'phoneBind'" @submit="submitForm" class="bottom-btn" />
 
-			<!-- 登入密碼 -->
-			<uni-forms class="form form-password" v-else-if="type === 'password'" :model="formData"
-				:rules="formRules.password" ref="formRef">
-				<uni-forms-item class="form-item" name="password" required>
-					<view class="form-item">
-						<uni-easyinput v-model="formData.password" class="inputStyle" type="password"
-							:placeholder="$t('auth.pleaseEnter', { title: $t('auth.password') })" :trim="true" :clearable="false" />
-					</view>
-				</uni-forms-item>
-				<uni-forms-item class="form-item" name="confirmPassword" required>
-					<view class="form-item">
-						<uni-easyinput v-model="formData.confirmPassword" class="inputStyle" type="password"
-							:placeholder="$t('auth.confirmPassword')" :trim="true" :clearable="false" />
-					</view>
-					<view class="form-item-tip">
-						<text>{{ $t("auth.rules.password.pattern") }}</text>
-					</view>
-				</uni-forms-item>
-			</uni-forms>
+			<form-setMenu-passwordForm v-else-if="type === 'password'" @submit="submitForm" class="bottom-btn" />
 
-
-			<!-- 電子信箱 -->
-			<uni-forms class="form" v-else-if="type === 'email'" :model="formData" :rules="formRules.email" ref="formRef">
-				<uni-forms-item class="form-item" name="email" required>
-					<view class="form-item">
-						<uni-easyinput v-model="formData.email" class="inputStyle" type="text"
-							:placeholder="$t('auth.pleaseEnter', { title: $t('creator.email') })" :trim="true" :clearable="false" />
-					</view>
-				</uni-forms-item>
-				<uni-forms-item class="verifyCode-container" name="verifyCode" required>
-					<view class="form-item">
-						<uni-easyinput v-model="formData.verifyCode" class="inputStyle" type="text"
-							:placeholder="$t('auth.pleaseEnter', { title: $t('auth.verifyCode') })" :trim="true" :clearable="false" />
-					</view>
-					<view class="btn-container">
-						<button type="button" class="btn" @click="verifyCodeSend">{{ verifyStatus ?
-							`${verifyTime}${$t("common.second")} ${$t("common.resendCode")}` : $t('common.sendCode')
-						}}</button>
-					</view>
-				</uni-forms-item>
-			</uni-forms>
+			<form-setMenu-emailForm v-else-if="type === 'email'" @submit="submitForm" class="bottom-btn" />
 
 			<!-- 其他設定（已封鎖、我的收藏、消息設定...） -->
 			<!-- 電子信箱 -->
-			<!-- 收藏隱私設定 type === 'favorite' -->
-			<view v-if="type === 'favorite'" class="switch-list">
-				<view class="switch-item">
-					<view class="switch-item-content">
-						<view class="switch-title">{{ $t("creator.publicMyFavorites") }}</view>
-						<c-checkBox class="switch-btn-container" v-model="formData.publicFavorite" />
-					</view>
-					<view class="switch-desc">{{ $t("creator.publicMyFavoritesTip") }}</view>
-				</view>
-				<view class="switch-item">
-					<view class="switch-item-content">
-						<view class="switch-title">{{ $t("creator.publicMyHeart") }}</view>
-						<c-checkBox class="switch-btn-container" v-model="formData.publicLike" />
-					</view>
-					<view class="switch-desc">{{ $t("creator.publicMyHeartTip") }}</view>
-				</view>
-				<view class="switch-item">
-					<view class="switch-item-content">
-						<view class="switch-title">{{ $t("creator.publicMyCategory") }}</view>
-						<c-checkBox class="switch-btn-container" v-model="formData.publicCategory" />
-					</view>
-					<view class="switch-desc">{{ $t("creator.publicMyCategoryTip") }}</view>
-				</view>
-			</view>
+			<form-setMenu-favoritePrivacyForm v-else-if="type === 'favorite'" @submit="submitForm" class="bottom-btn" />
 
 			<!-- 消息設定 type === 'message' -->
-			<view v-if="type === 'message'" class="switch-list">
-				<view class="switch-item">
-					<view class="switch-item-content">
-						<view class="switch-title">{{ $t("creator.postStoryComment") }}</view>
-						<c-checkBox class="switch-btn-container" v-model="formData.postNotice" />
-					</view>
-					<view class="switch-desc"></view>
-				</view>
-				<view class="switch-item">
-					<view class="switch-item-content">
-						<view class="switch-title">{{ $t("common.message") }}</view>
-						<c-checkBox class="switch-btn-container" v-model="formData.message" />
-					</view>
-					<view class="switch-desc"></view>
-				</view>
-				<view class="switch-item">
-					<view class="switch-item-content">
-						<view class="switch-title">{{ $t("common.allPause") }}</view>
-						<c-checkBox class="switch-btn-container" v-model="formData.allPause" />
-					</view>
-					<view class="switch-desc"></view>
-				</view>
-			</view>
+			<form-setMenu-messageForm v-else-if="type === 'message'" @submit="submitForm" class="bottom-btn" />
 		</view>
 
 		<!-- 發送按鈕 -->
-		<view class="footer" v-if="type === 'favorite' || type === 'message'">
+		<!-- <view class="footer" v-if="type === 'favorite' || type === 'message'">
 			<view class="btn-container">
 				<button type="button" class="btn" @click="submitForm('switch')">{{ $t("common.save2") }}</button>
 			</view>
@@ -131,12 +26,17 @@
 
 		<view class="btn-container" v-else>
 			<button type="button" class="btn" @click="submitForm('switch')">{{ $t("common.confirm") }}</button>
-		</view>
+		</view> -->
 	</view>
 </template>
 
 <script setup>
 // TEMP: 創作者設定-帳號設定編輯頁
+import formSetMenuPhoneBindForm from '@/components/form/form-setMenu-phoneBindForm.vue'
+import formSetMenuPasswordForm from '@/components/form/form-setMenu-passwordForm.vue'
+import formSetMenuEmailForm from '@/components/form/form-setMenu-emailForm.vue'
+import formSetMenuFavoritePrivacyForm from '@/components/form/form-setMenu-favoritePrivacyForm.vue'
+import formSetMenuMessageForm from '@/components/form/form-setMenu-messageForm.vue'
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import { checkViewportAutoReplace } from '@/utils/routers';
 import countryData from '@/assets/country/country.json'
@@ -145,7 +45,7 @@ const { t } = useI18n()
 const type = ref('')
 const typeTitle = computed(() => {
 	switch (type.value) {
-		case 'phone': return t('creator.phoneBind')
+		case 'phoneBind': return t('creator.phoneBind')
 		case 'password': return t('creator.loginPassword')
 		case 'email': return t('creator.emailBind')
 		case 'favorite': return t('creator.favoritePrivacySetting')
@@ -246,57 +146,47 @@ const selectedCountryCode = computed(() => {
 })
 
 // 根據 type 組合送出資料，並加上 validate 驗證
-const submitForm = (submitType) => {
-	if (submitType === 'switch') {
-		switchSubmit()
-	}
-	else {
-		formSubmit()
-	}
-}
-const switchSubmit = () => {
-	let payload = {}
-	if (type.value === 'favorite') {
-		payload = {
-			publicFavorite: formData.value.publicFavorite,
-			publicLike: formData.value.publicLike,
-			publicCategory: formData.value.publicCategory
-		}
-		console.log('送出資料:', payload)
-	}
-	else if (type.value === 'message') {
-		payload = {
-			postNotice: formData.value.postNotice,
-			message: formData.value.message,
-			allPause: formData.value.allPause,
-		}
-	}
-}
-const formSubmit = () => {
-	let payload = {}
-	formRef.value.validate()
-		.then(() => {
-			if (type.value === 'phone') {
-				payload = {
-					phone: selectedCountryCode.value + formData.value.phone,
-					verifyCode: formData.value.verifyCode
-				}
-			} else if (type.value === 'password') {
-				payload = {
-					password: formData.value.password,
-					confirmPassword: formData.value.confirmPassword
-				}
-			} else if (type.value === 'email') {
-				payload = {
-					email: formData.value.email,
-					verifyCode: formData.value.verifyCode
-				}
-			}
-			console.log('送出資料:', payload)
-			// 這裡可串接API
-		}).catch(err => {
-			console.log('驗證失敗:', err)
+// const submitForm = (submitType) => {
+// 	if (submitType === 'switch') {
+// 		switchSubmit()
+// 	}
+// 	else {
+// 		formSubmit()
+// 	}
+// }
+// const switchSubmit = () => {
+// 	let payload = {}
+// 	if (type.value === 'favorite') {
+// 		payload = {
+// 			publicFavorite: formData.value.publicFavorite,
+// 			publicLike: formData.value.publicLike,
+// 			publicCategory: formData.value.publicCategory
+// 		}
+// 		console.log('送出資料:', payload)
+// 	}
+// 	else if (type.value === 'message') {
+// 		payload = {
+// 			postNotice: formData.value.postNotice,
+// 			message: formData.value.message,
+// 			allPause: formData.value.allPause,
+// 		}
+// 	}
+// }
+const submitForm = (status, err) => {
+	// 成功
+	if (status) {
+		openNotice({
+			title: t('common.success'),
+			titleIcon: 'icon-common-confirm',
 		})
+	}
+	// 錯誤
+	else {
+		openNotice({
+			title: t('common.error'),
+			content: err,
+		})
+	}
 }
 </script>
 
@@ -305,280 +195,12 @@ const formSubmit = () => {
 	--footer-height: 180rpx;
 }
 
-// 圖標容器
-.header-nav-left-position {
-	position: absolute;
-	left: 48rpx;
-	top: 50%;
-	transform: translateY(-20%);
-	padding-top: 16rpx;
-}
-
 .content {
 	padding-top: 50rpx;
 	padding-bottom: var(--footer-height);
-}
 
-.btn-container {
-	padding: 0 40rpx;
-	// margin-top: 42rpx;
-
-	.btn {
-		padding: 24rpx;
-		font-size: 30rpx;
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		padding-top: 24rpx;
 	}
-}
-
-.form {
-	display: flex;
-	flex-direction: column;
-	gap: 24rpx;
-	padding: 0 48rpx;
-
-	::v-deep(.uni-forms) {
-		.uni-forms-item__label {
-			display: none;
-		}
-	}
-
-
-
-	.form-item {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		gap: 0;
-
-		&:last-child {
-			margin-bottom: 0;
-		}
-
-		.form-input-icon {
-			position: absolute;
-			left: 16rpx;
-			top: 50%;
-			z-index: 10;
-			transform: translateY(-50%);
-			margin-left: 32rpx;
-			font-size: 36rpx !important;
-
-			&.email {
-				font-size: 28rpx !important;
-			}
-		}
-	}
-
-	.form-item-label {
-		position: absolute;
-		z-index: 1;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-	}
-
-	/* 手機號碼 */
-	.phone-input-row {
-		display: flex;
-		flex-direction: row;
-
-		.country-select {
-			width: fit-content;
-			flex: unset;
-
-			::v-deep(.uni-stat-box) {
-				.uni-stat-box {
-					height: 100%;
-				}
-
-				.uni-select {
-					border: none;
-					background: var(--text-color-tertiary);
-					border-radius: 20rpx 0 0 20rpx;
-					height: 100%;
-					width: fit-content;
-					padding-left: 40rpx;
-
-					.uni-select__input-box {
-						padding: 20rpx 12rpx 20rpx;
-						height: fit-content;
-						width: fit-content;
-						gap: 30rpx;
-
-					}
-
-					.uni-select__input-text {
-						font-size: 30rpx;
-						line-height: 1;
-					}
-				}
-			}
-		}
-
-		.phone-input {
-			flex: 1;
-
-			::v-deep(.is-input-border) {
-				.is-input-border {
-					border-radius: 0 20rpx 20rpx 0;
-					padding: 20rpx 0;
-				}
-
-				.uni-easyinput__content-input {
-					height: fit-content;
-					line-height: 1;
-					font-size: 30rpx;
-				}
-			}
-		}
-	}
-
-	/* 驗證碼 */
-	.verifyCode-container {
-		position: relative;
-
-		.btn-container {
-			position: absolute;
-			top: 50%;
-			right: 24rpx;
-			transform: translateY(-50%);
-			padding: 0;
-
-			.btn {
-				border-radius: 10rpx;
-				padding: 12rpx 30rpx;
-				font-size: 24rpx;
-			}
-		}
-	}
-
-	.form-item-tip {
-		margin: 22rpx 0 22rpx 8rpx;
-		font-size: 24rpx;
-		color: var(--text-color-gray3);
-	}
-}
-
-.form-password {
-	::v-deep(uni-form) {
-		.uni-forms-item:last-child {
-			margin-bottom: 0;
-		}
-	}
-}
-
-/* 開關 c-checkBox*/
-.switch-list {
-	display: flex;
-	flex-direction: column;
-	gap: 56rpx;
-	padding: 0 48rpx;
-
-	.switch-item {
-		display: flex;
-		flex-direction: column;
-
-		.switch-item-content {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			justify-content: space-between;
-			gap: 12rpx;
-		}
-
-		.switch-title {
-			font-size: 30rpx;
-			line-height: 1;
-		}
-
-		.switch-desc {
-			font-size: 24rpx;
-			color: var(--text-color-gray3);
-			line-height: 1;
-		}
-
-
-
-	}
-
-	.switch-btn-container {
-		width: fit-content;
-		height: fit-content;
-
-		::v-deep(.switch) {
-			.switch {
-				width: fit-content;
-				height: fit-content;
-				padding: 20rpx 36rpx;
-
-				.switch-dot {
-					width: 30rpx;
-					height: 30rpx;
-					top: 50%;
-					translate: 0 -50%;
-				}
-
-				&.switch-checked {
-					.switch-dot {
-						left: calc(100% - 30rpx - 6rpx) !important;
-					}
-				}
-			}
-		}
-	}
-}
-
-/* 輸入欄位 */
-// INPUT 輸入欄位
-.inputStyle {
-	::v-deep(.uni-easyinput__content) {
-		margin-bottom: 0rpx;
-
-		&.is-input-border {
-			border: none;
-			background: var(--text-color-tertiary) !important;
-			border-radius: 20rpx;
-			padding: 8rpx 32rpx;
-			padding-left: 40rpx;
-
-			&.is-focused {
-				// border: 1px solid var(--primary-color) !important;
-
-				.uniui-eye-filled {
-					color: var(--primary-color) !important;
-				}
-			}
-
-			.uni-easyinput__content-input {
-				padding: 0 !important;
-			}
-
-			.uni-input-input {
-				font-size: 28rpx;
-			}
-		}
-	}
-
-	&.errorStyle ::v-deep(.uni-easyinput__content) {
-		&.is-input-border {
-			border: 1px solid var(--text-color-error) !important;
-		}
-	}
-}
-
-.footer {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	padding-top: 20rpx;
-	padding-bottom: 60rpx;
-	background: var(--background-color);
-
-	.btn-container {
-		margin-top: 0;
-	}
-
-	// padding: 0 48rpx;
 }
 </style>

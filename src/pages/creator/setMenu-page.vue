@@ -33,7 +33,7 @@
 			</view>
 			<!-- 第二層選單 - 帳號管理 -->
 			<view class="menu-list " v-if="menuIndex === '1-1'">
-				<view class="menu-item" @click="handleEdit('phone')">
+				<view class="menu-item" @click="handleEdit('phoneBind')">
 					<text>{{ $t("creator.phoneNumber") }}</text>
 					<view class="icon-container">
 						<text>+886*******115</text>
@@ -72,7 +72,7 @@
 
 		<!-- 底部按鈕 -->
 		<view class="footer-container">
-			<view class="delete-account" v-if="menuIndex === '1-1'">
+			<view class="delete-account" v-if="menuIndex === '1-1'" @click="handleDeleteAccount">
 				<text>{{ $t("creator.deleteAccount") }}</text>
 			</view>
 			<view class="btn-container">
@@ -98,6 +98,7 @@ import { router, toCreatorSetMenuEdit, toCreatorBlockadeEdit, checkViewportAutoR
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const { back } = router;
+const { openConfirm } = inject('common')
 const menuTitle = ref(t('common.setting'))
 const menuIndex = ref('1')
 const nextMenu = (index) => {
@@ -122,9 +123,9 @@ const prevMenu = () => {
 const handleEdit = (index) => {
 	console.log("🚀 ~ handleEdit ~ index:", index)
 	switch (index) {
-		case 'phone':
+		case 'phoneBind':
 			toCreatorSetMenuEdit({
-				type: 'phone'
+				type: 'phoneBind'
 			})
 			break
 		case 'password':
@@ -153,6 +154,22 @@ const handleEdit = (index) => {
 	}
 }
 
+
+const handleDeleteAccount = () => {
+	openConfirm({
+		title: t('creator.deleteAccount'),
+		content: t('creator.deleteAccountTip'),
+		confirmBtnText: t('common.confirmDelete'),
+		cancelBtnText: t('common.notYet'),
+		confirmBtnStyle: {
+			background: 'var(--favorite-color-secondary)'
+		},
+		confirm: () => {
+			console.log('刪除帳號')
+		}
+	})
+}
+
 onShow(() => {
 	checkViewportAutoReplace()
 })
@@ -160,7 +177,11 @@ onShow(() => {
 
 <style scoped lang="scss">
 .set-menu {
-	--footer-height: 300rpx;
+	--footer-height: 400rpx;
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		--footer-height: 260rpx;
+	}
 }
 
 // 圖標容器
@@ -168,8 +189,7 @@ onShow(() => {
 	position: absolute;
 	left: 48rpx;
 	top: 50%;
-	transform: translateY(-20%);
-	padding-top: 16rpx;
+	transform: translateY(-50%);
 }
 
 .content {
@@ -181,7 +201,11 @@ onShow(() => {
 	justify-content: space-between;
 	padding: 30rpx 46rpx;
 	border-bottom: 1rpx solid var(--text-color-denary);
-	font-size: 30rpx;
+	font-size: var(--font-size-title-pc-small);
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		padding: 24rpx 32rpx;
+	}
 
 	.icon-container {
 		.icon-right {
@@ -203,14 +227,23 @@ onShow(() => {
 	gap: 30rpx;
 	background: var(--background-color-light);
 
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		padding-bottom: 32rpx;
+	}
+
 	.delete-account {
-		font-size: 28rpx;
+		font-size: var(--font-size-content-pc-large);
 		color: var(--tertiary-color);
 	}
 
 	.btn {
 		padding: 24rpx 0;
-		font-size: 30rpx;
+		font-size: var(--font-size-title-pc);
+
+		@media screen and (min-width: 768px) and (max-width: 960px) {
+			padding: 16rpx 0;
+
+		}
 	}
 }
 </style>

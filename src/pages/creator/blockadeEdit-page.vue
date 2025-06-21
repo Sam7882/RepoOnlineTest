@@ -186,12 +186,9 @@ onShow(() => {
 </script>
 
 <style lang="scss" scoped>
-page {}
-
 .blockade-page {
 	background-color: var(--background-color);
 	--footer-height: 180rpx;
-	// padding: 0 100rpx;
 }
 
 .blockade-page-header {
@@ -211,7 +208,7 @@ page {}
 	.category-item {
 		flex: 1;
 		padding: 0 32rpx 20rpx;
-		font-size: 32rpx;
+		font-size: var(--font-size-title-pc);
 		color: var(--text-color-primary);
 		text-align: center;
 
@@ -223,11 +220,15 @@ page {}
 
 .content-container {
 	padding: 0 44rpx;
-	padding-bottom: var(--footer-height);
+	// padding-bottom: var(--footer-height);
 
 	::v-deep(.uni-list-item__container) {
 		.uni-list-item__container {
 			padding: 28rpx 0;
+
+			@media screen and (min-width: 768px) and (max-width: 960px) {
+				padding: 16rpx 0;
+			}
 		}
 	}
 }
@@ -257,7 +258,7 @@ page {}
 		}
 
 		.amount-item {
-			font-size: 48rpx;
+			font-size: var(--font-size-title-pc-xlarge);
 			color: var(--text-color-primary);
 		}
 	}
@@ -286,6 +287,11 @@ page {}
 			background: var(--primary-color);
 			border-radius: 100%;
 			overflow: hidden;
+
+			@media screen and (min-width: 768px) and (max-width: 960px) {
+				width: 80rpx;
+				height: 80rpx;
+			}
 
 			::v-deep(.account-avatar) {
 				uni-image {
@@ -324,13 +330,13 @@ page {}
 				justify-content: space-between;
 
 				.account-info-title {
-					font-size: 34rpx;
+					font-size: var(--font-size-title-pc);
 					color: var(--text-color-primary);
 				}
 
 				// 認證圖標
 				.icon-community-prove {
-					font-size: 28rpx !important;
+					font-size: var(--font-size-content-pc-large) !important;
 				}
 			}
 
@@ -339,7 +345,7 @@ page {}
 				height: fit-content;
 
 				.account-info-account {
-					font-size: 24rpx;
+					font-size: var(--font-size-content-pc);
 					color: var(--text-color-septenary);
 					line-height: 1;
 				}
@@ -349,7 +355,7 @@ page {}
 
 	.account-total-amount-container {
 		margin-right: 32rpx;
-		font-size: 24rpx;
+		font-size: var(--font-size-content-pc-small);
 		color: var(--text-color-primary);
 		transform: translateY(-10rpx);
 	}
@@ -390,11 +396,11 @@ page {}
 			}
 
 			.content-container-bottom-data-item-title {
-				font-size: 16rpx;
+				font-size: var(--font-size-content-pc-small);
 			}
 
 			.content-container-bottom-data-item-value {
-				font-size: 40rpx;
+				font-size: var(--font-size-title-pc-xlarge);
 				font-weight: 300;
 			}
 		}
@@ -405,7 +411,7 @@ page {}
 		width: 50%;
 
 		.content-container-bottom-button {
-			font-size: 24rpx;
+			font-size: var(--font-size-content-pc);
 			line-height: 1;
 			padding: 24rpx 64rpx;
 			border-radius: 16rpx;
@@ -418,6 +424,10 @@ page {}
 
 /* 訂閱/購買紀錄 */
 .content-container-bottom-record-container {
+	height: calc(100dvh - var(--footer-height));
+	padding-bottom: var(--footer-height);
+	overflow-y: auto;
+
 	.account-container-record {
 		flex-direction: row;
 		justify-content: space-between;
@@ -429,7 +439,7 @@ page {}
 
 	.content-container-bottom-record-title-container {
 		display: flex;
-		font-size: 24rpx;
+		font-size: var(--font-size-content-pc);
 		color: var(--text-color-primary);
 	}
 
@@ -439,20 +449,25 @@ page {}
 		gap: 48rpx;
 
 		.content-container-bottom-record-list-item-amount-icon {
-			font-size: 24rpx !important;
+			font-size: var(--font-size-content-pc) !important;
 			// padding-bottom: 4rpx;
 		}
 	}
 }
 
 .content-container-bottom-blockade-list-item-button {
-	min-width: 160rpx;
+	min-width: 120rpx;
 	border-radius: 10rpx;
-	padding: 20rpx 48rpx;
+	padding: 20rpx 32rpx;
 	line-height: 1;
-	font-size: 20rpx;
+	font-size: var(--font-size-content-pc);
 	background-color: var(--primary-color);
 	color: var(--text-color-secondary);
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		min-width: 100rpx;
+		padding: 16rpx 16rpx;
+	}
 
 	&::after {
 		display: none;
@@ -474,13 +489,17 @@ page {}
 	padding-bottom: 60rpx;
 	background: var(--background-color);
 
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		padding-bottom: 32rpx;
+	}
+
 	.btn-container {
 		padding: 0 40rpx;
 		margin-top: 0;
 
 		.btn {
 			padding: 24rpx;
-			font-size: 30rpx;
+			font-size: var(--font-size-title-pc);
 		}
 
 	}

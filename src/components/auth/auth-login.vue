@@ -67,7 +67,6 @@ const handleRegister = () => {
 }
 
 onShow(() => {
-	checkViewportAutoReplace()
 })
 
 defineExpose({ open, close })

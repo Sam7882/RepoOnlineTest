@@ -368,3 +368,33 @@ button:hover,
 // 		}
 // 	}
 // }
+
+// 懸浮置頂按鈕
+.floating-button {
+  position: fixed;
+  bottom: 5%;
+  right: 50px;
+  z-index: 10;
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background-color: var(--text-color-septenary);
+
+  @media screen and (min-width: 1280px) {
+    width: 90rpx;
+    height: 90rpx;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  & > .icons {
+    color: var(--text-color-secondary) !important;
+    font-size: 40rpx !important;
+
+    @media screen and (min-width: 1280px) {
+      font-size: 48rpx;
+    }
+  }
+}

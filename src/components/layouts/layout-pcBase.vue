@@ -13,11 +13,8 @@
 				<slot />
 			</view>
 		</view>
+		<!-- TODO: 移動到搜尋頁面中 -->
 
-		<!-- 懸浮按鈕 -->
-		<view class="icon-container floating-button" @click="contentScrollTop">
-			<uni-icons class="icons" type="up" size="24" color="var(--text-color-primary)" />
-		</view>
 
 		<!-- 聯繫客服 -->
 		<c-servicePopUp ref="servicePopUp" />
@@ -45,16 +42,7 @@
 			2. openMessage : 訊息
 			3. openNotice : 通知
 */
-// content 滑動頂部
-const contentScrollTop = () => {
-	const content = document.querySelector('.content-area');
-	if (content) {
-		content.scrollTo({
-			top: 0,
-			behavior: 'smooth'
-		});
-	}
-}
+
 
 
 // 聯繫客服
@@ -207,35 +195,5 @@ page {
 	overflow-y: auto;
 	background-color: #fff;
 
-}
-
-.floating-button {
-	position: fixed;
-	bottom: 5%;
-	right: 50px;
-	z-index: 10;
-	width: 72rpx;
-	height: 72rpx;
-	border-radius: 50%;
-	background-color: var(--text-color-septenary);
-
-	@media screen and (min-width: 1280px) {
-		width: 90rpx;
-		height: 90rpx;
-	}
-
-
-	&:hover {
-		cursor: pointer;
-	}
-
-	&>.icons {
-		color: var(--text-color-secondary) !important;
-		font-size: 40rpx !important;
-
-		@media screen and (min-width: 1280px) {
-			font-size: 48rpx;
-		}
-	}
 }
 </style>

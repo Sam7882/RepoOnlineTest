@@ -45,6 +45,12 @@ const handleSearch = () => {
 	border-bottom: 4rpx solid var(--text-color-denary);
 	padding-top: 64rpx !important;
 	padding-bottom: 48rpx !important;
+
+	@media screen and (min-width: 961px) and (max-width: 1280px) {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 24rpx;
+	}
 }
 
 .search-bar {
@@ -110,6 +116,11 @@ const handleSearch = () => {
 	display: flex;
 	align-items: center;
 	gap: 80rpx;
+
+	@media screen and (min-width: 961px) and (max-width: 1280px) {
+		flex: 1;
+		justify-content: space-between;
+	}
 }
 
 .download-link {

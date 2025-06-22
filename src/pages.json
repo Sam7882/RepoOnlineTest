@@ -224,6 +224,13 @@
       }
     },
     {
+      "path": "pages/creator/subscription-manage",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-grayLight)"
+      }
+    },
+    {
       "path": "pages/creator/statistics",
       "style": {
         "navigationStyle": "custom",

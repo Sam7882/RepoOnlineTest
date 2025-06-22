@@ -1,7 +1,7 @@
 <template>
 	<view class="statistics-page">
 		<!-- header 導航-->
-		<c-headerNav :title="$t('creator.myStatistics')" />
+		<c-headerNav :title="$t('creator.myStatistics')" :openBack="false" />
 
 		<view class="content">
 			<!--內容容器 -->

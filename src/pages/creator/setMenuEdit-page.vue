@@ -2,31 +2,17 @@
 	<view class="set-menu">
 		<c-headerNav :title="typeTitle" />
 		<view class="content">
-			<!-- 手機號碼 -->
+			<!-- 帳號綁定 -->
 			<form-setMenu-phoneBindForm v-if="type === 'phoneBind'" @submit="submitForm" class="bottom-btn" />
-
+			<!-- 密碼 -->
 			<form-setMenu-passwordForm v-else-if="type === 'password'" @submit="submitForm" class="bottom-btn" />
-
-			<form-setMenu-emailForm v-else-if="type === 'email'" @submit="submitForm" class="bottom-btn" />
-
-			<!-- 其他設定（已封鎖、我的收藏、消息設定...） -->
 			<!-- 電子信箱 -->
+			<form-setMenu-emailForm v-else-if="type === 'email'" @submit="submitForm" class="bottom-btn" />
+			<!-- 收藏隱私設定 -->
 			<form-setMenu-favoritePrivacyForm v-else-if="type === 'favorite'" @submit="submitForm" class="bottom-btn" />
-
-			<!-- 消息設定 type === 'message' -->
+			<!-- 消息設定 -->
 			<form-setMenu-messageForm v-else-if="type === 'message'" @submit="submitForm" class="bottom-btn" />
 		</view>
-
-		<!-- 發送按鈕 -->
-		<!-- <view class="footer" v-if="type === 'favorite' || type === 'message'">
-			<view class="btn-container">
-				<button type="button" class="btn" @click="submitForm('switch')">{{ $t("common.save2") }}</button>
-			</view>
-		</view>
-
-		<view class="btn-container" v-else>
-			<button type="button" class="btn" @click="submitForm('switch')">{{ $t("common.confirm") }}</button>
-		</view> -->
 	</view>
 </template>
 

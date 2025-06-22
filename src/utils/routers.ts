@@ -287,6 +287,11 @@ export const toSubscriptionEdit = (params = {}) => {
 	safeSwitchTab('/pages/creator/subscription-edit')
 	checkViewport('/creator/subscription-edit', params)
 }
+// 跳轉到訂閱頁管理
+export const toSubscriptionManage = (params = {}) => {
+	safeSwitchTab('/pages/creator/subscription-manage')
+	checkViewport('/creator/subscription-manage', params)
+}
 // 跳轉到個人數據
 export const toStatistics = (params = {}) => {
 	safeSwitchTab('/pages/creator/statistics')

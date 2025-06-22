@@ -1,7 +1,7 @@
 <template>
 	<view class="page-container">
 		<!-- 導覽欄 -->
-		<c-headerNav :title="'排定發布'">
+		<c-headerNav :title="'排定發布'" :openBack="false">
 		</c-headerNav>
 
 		<view class="content">

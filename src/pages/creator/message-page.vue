@@ -290,7 +290,7 @@ onMounted(() => {
 	border-bottom: 1px solid var(--background-color-grayLight2);
 
 	.header-container-title {
-		font-size: 32rpx;
+		font-size: var(--font-size-title-pc);
 		font-weight: 500;
 	}
 
@@ -302,11 +302,11 @@ onMounted(() => {
 	}
 
 	.header-nav-icon {
-		font-size: 32rpx !important;
+		font-size: var(--font-size-title-pc) !important;
 	}
 
 	.header-container-title-text {
-		font-size: 32rpx;
+		font-size: var(--font-size-title-pc);
 		font-weight: 500;
 	}
 
@@ -328,7 +328,7 @@ onMounted(() => {
 			gap: 32rpx;
 
 			.item-container-item-icon {
-				font-size: 36rpx !important;
+				font-size: var(--font-size-title-pc-large) !important;
 				color: var(--text-color-primary) !important;
 			}
 		}
@@ -347,6 +347,7 @@ onMounted(() => {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-shrink: 0;
 
 
 	// transform: translate(-50%, -50%);
@@ -391,18 +392,24 @@ onMounted(() => {
 				width: 100%;
 				display: flex;
 				justify-content: center;
-				font-size: 28rpx;
+				font-size: var(--font-size-title-pc-small);
 				color: var(--text-color-gray3);
 			}
 
 			.message-list-item-content {
+				width: fit-content;
 				padding: 16rpx;
 				background: var(--primary-color);
 				border-radius: 40rpx;
-				line-height: 1;
+				line-height: 1.5;
 				color: var(--text-color-secondary);
-				font-size: 32rpx;
+				font-size: var(--font-size-title-pc);
 				font-weight: normal;
+
+				@media screen and (min-width: 768px) and (max-width: 960px) {
+					padding: 10rpx 20rpx;
+					margin: 10px 0;
+				}
 			}
 
 			&.other {
@@ -419,9 +426,13 @@ onMounted(() => {
 		::v-deep(.uni-list-item) {
 			.uni-list-item__container {
 				display: flex;
-				align-items: center;
+				align-items: flex-start;
 				gap: 14rpx;
 				padding: 20rpx 40rpx;
+
+				@media screen and (min-width: 768px) and (max-width: 960px) {
+					padding: 10rpx 40rpx;
+				}
 			}
 
 			&.me {
@@ -468,7 +479,7 @@ onMounted(() => {
 			aspect-ratio: 1/1;
 
 			.message-input-send-button-icon {
-				font-size: 28rpx !important;
+				font-size: var(--font-size-title-pc-small) !important;
 				color: var(--text-color-gray2) !important;
 			}
 		}
@@ -498,12 +509,12 @@ onMounted(() => {
 
 		.uni-input-placeholder {
 			color: var(--popTxt-color-content) !important;
-			font-size: 28rpx;
+			font-size: var(--font-size-title-pc);
 		}
 
 		.uni-easyinput__content-input {
 			color: var(--popTxt-color-content) !important;
-			font-size: 28rpx;
+			font-size: var(--font-size-title-pc);
 		}
 	}
 
@@ -569,7 +580,7 @@ onMounted(() => {
 		// gap: 4rpx;
 
 		.noMessage-data-profile-container-item {
-			font-size: 24rpx;
+			font-size: var(--font-size-content-pc);
 			color: var(--text-color-primary);
 
 			// 名稱與帳號
@@ -584,7 +595,7 @@ onMounted(() => {
 				}
 
 				.noMessage-data-profile-container-item-text-name {
-					font-size: 38rpx;
+					font-size: var(--font-size-title-pc-large);
 					font-weight: bold;
 
 				}
@@ -595,11 +606,11 @@ onMounted(() => {
 					right: -100%;
 					transform: translate(-50%, -50%);
 					color: var(--text-color-senary) !important;
-					font-size: 32rpx !important;
+					font-size: var(--font-size-title-pc) !important;
 				}
 
 				.noMessage-data-profile-container-item-text-account {
-					font-size: 26rpx;
+					font-size: var(--font-size-content-pc-large);
 					color: var(--popTxt-color-content);
 					margin-top: -4rpx;
 				}
@@ -648,7 +659,7 @@ onMounted(() => {
 		.btn {
 			padding: 24rpx;
 			min-width: 300rpx;
-			font-size: 32rpx;
+			font-size: var(--font-size-title-pc);
 		}
 	}
 }

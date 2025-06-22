@@ -1,8 +1,11 @@
 <template>
 	<view class="messsageBox-page">
 		<!-- header 導航-->
-		<c-headerNav class="page-header" :title="$t('common.message')" />
-
+		<view class="header">
+			<view class="header-title">
+				<text>{{ $t('common.message') }}</text>
+			</view>
+		</view>
 		<!--內容容器 -->
 		<view class="content-container">
 			<view class="content-container-bottom-record-container">
@@ -134,11 +137,11 @@ const followingList = ref([
 	},
 ])
 
+const emit = defineEmits(['handleMessage'])
+
 const handleMessage = (item: any) => {
 	console.log("🚀 ~ handleMessage ~ item:", item)
-	toMessage({
-		id: item.id
-	})
+	emit('handleMessage', item.id)
 }
 
 onShow(() => {
@@ -151,8 +154,33 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .messsageBox-page {
-	background-color: var(--background-color);
-	// padding: 0 100rpx;
+	--footer-height: 300rpx;
+	position: relative;
+	background: var(--background-color);
+	padding: 70rpx 36rpx;
+	box-shadow: 2rpx 0 8rpx rgba(0, 0, 0, 0.08);
+	display: flex;
+	flex-direction: column;
+	border-right: 4rpx solid var(--text-color-denary);
+	overflow-y: scroll;
+	padding-top: 88rpx;
+
+	@media screen and (min-width: 961px) and (max-width: 1280px) {
+		padding-top: 80rpx;
+		max-width: 600rpx;
+	}
+}
+
+.header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 24rpx;
+}
+
+.header-title {
+	color: var(--text-color-primary);
+	font-size: var(--font-size-title-pc);
 }
 
 .content-container {
@@ -251,7 +279,7 @@ onShow(() => {
 				height: fit-content;
 
 				.message {
-					font-size: var(--font-size-content-pc);
+					font-size: var(--font-size-content-pc-small);
 					color: var(--text-color-gray3);
 					line-height: 1;
 				}
@@ -275,7 +303,7 @@ onShow(() => {
 
 .date {
 	line-height: 1;
-	font-size: var(--font-size-content-pc);
+	font-size: var(--font-size-content-pc-small);
 	color: var(--text-color-gray3);
 }
 </style>

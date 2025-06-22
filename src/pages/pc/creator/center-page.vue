@@ -1,11 +1,11 @@
 <template>
 	<view class="set-menu">
-		<!-- 內容 -->
 		<view class="header">
 			<view class="header-title">
 				<text>{{ $t('creator.creatorCenter') }}</text>
 			</view>
 		</view>
+		<!-- 內容 -->
 		<view class="content">
 			<view class="menu-list ">
 				<view class="menu-item" @click="handleEdit('beCreator')">
@@ -21,7 +21,7 @@
 					<view class="icon-container">
 					</view>
 				</view>
-				<view class="menu-item" :class="{ 'active': currentPage === 'statistics' }" @click="handleEdit('data')">
+				<view class="menu-item" :class="{ 'active': currentPage === 'statistics' }" @click="handleEdit('statistics')">
 					<text>{{ $t('menu.statistics') }}</text>
 					<view class="icon-container">
 					</view>
@@ -29,6 +29,12 @@
 				<view class="menu-item" :class="{ 'active': currentPage === 'schedulePost' }"
 					@click="handleEdit('schedulePost')">
 					<text>{{ $t('post.schedulePost') }}</text>
+					<view class="icon-container">
+					</view>
+				</view>
+				<view class="menu-item" :class="{ 'active': currentPage === 'subscriptionManage' }"
+					@click="handleEdit('subscriptionManage')">
+					<text>{{ $t('common.subscriptionSetting') }}</text>
 					<view class="icon-container">
 					</view>
 				</view>
@@ -42,16 +48,17 @@
 <script setup>
 // TEMP: PC創作者設定-創作者中心設定頁(成為創作者&認證創作者)
 import { onShow } from '@dcloudio/uni-app';
-import { toStatistics, toSchedulePost, checkViewportAutoReplace } from '@/utils/routers';
+import { checkViewportAutoReplace } from '@/utils/routers';
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
-
 const props = defineProps({
 	page: {
 		type: String,
 		default: 'center'
 	}
 })
+const emit = defineEmits(['switchTab'])
+
 const currentPage = computed(() => props.page)
 const applyCreatorRef = ref()
 const applyType = ref('creator')
@@ -69,17 +76,16 @@ const handleEdit = (index) => {
 		case 'verifyCreator':
 			openApplyCreator('verifyCreator')
 			break
-		case 'data':
-			toStatistics()
+		case 'statistics':
+			emit('switchTab', 'statistics')
 			break
 		case 'schedulePost':
-			toSchedulePost()
+			emit('switchTab', 'schedulePost')
+			break
+		case 'subscriptionManage':
+			emit('switchTab', 'subscriptionManage')
 			break
 	}
-}
-
-const handleCreator = () => {
-
 }
 
 onShow(() => {
@@ -92,11 +98,11 @@ onShow(() => {
 	--footer-height: 300rpx;
 	position: relative;
 	background: var(--background-color);
-	padding: 2.1875rem 2.34375rem;
-	box-shadow: 0.0625rem 0 0.25rem rgba(0, 0, 0, 0.08);
+	padding: 70rpx 75rpx;
+	box-shadow: 2rpx 0 8rpx rgba(0, 0, 0, 0.08);
 	display: flex;
 	flex-direction: column;
-	border-right: 0.125rem solid var(--text-color-denary);
+	border-right: 4rpx solid var(--text-color-denary);
 	overflow-y: scroll;
 	padding-left: 96rpx;
 	padding-right: 64rpx;
@@ -104,7 +110,7 @@ onShow(() => {
 
 	@media screen and (min-width: 961px) and (max-width: 1280px) {
 		padding-left: 72rpx;
-		padding-right: 36rpx;
+		padding-right: 64rpx;
 		padding-top: 80rpx;
 	}
 }

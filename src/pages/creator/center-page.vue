@@ -33,6 +33,12 @@
 						<uni-icons class="icon-right" type="right" size="16" color="#999" />
 					</view>
 				</view>
+				<view class="menu-item" @click="handleEdit('subscriptionManage')">
+					<text>{{ $t('common.subscriptionSetting') }}</text>
+					<view class="icon-container">
+						<uni-icons class="icon-right" type="right" size="16" color="#999" />
+					</view>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -41,7 +47,7 @@
 <script setup>
 // TEMP: 創作者設定-創作者中心設定頁
 import { onShow } from '@dcloudio/uni-app';
-import { router, toStatistics, toCreatorApply, toSchedulePost, checkViewportAutoReplace } from '@/utils/routers';
+import { router, toStatistics, toCreatorApply, toSchedulePost, toSubscriptionManage, checkViewportAutoReplace } from '@/utils/routers';
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const { back } = router;
@@ -66,6 +72,9 @@ const handleEdit = (index) => {
 			break
 		case 'schedule':
 			toSchedulePost()
+			break
+		case 'subscriptionManage':
+			toSubscriptionManage()
 			break
 	}
 }

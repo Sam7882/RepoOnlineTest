@@ -26,10 +26,12 @@
 							color="var(--text-color-primary)" @click="handleOpenSetting"></uni-icons>
 					</template>
 					<!-- 右邊 設定按鈕 QA 絕對位置靠右-->
-					<template v-if="openQa">
-						<uni-icons class="icons header-gear-icon" type="icon-common-qa" custom-prefix="icon" size="20"
-							color="var(--text-color-primary)" @click="handleOpenQa"></uni-icons>
-					</template>
+					<slot name="Qa">
+						<template v-if="openQa">
+							<uni-icons class="icons header-gear-icon" type="icon-common-qa" custom-prefix="icon" size="20"
+								color="var(--text-color-primary)" @click="handleOpenQa"></uni-icons>
+						</template>
+					</slot>
 				</slot>
 			</view>
 		</view>
@@ -157,8 +159,8 @@ const handleOpenQa = () => {
 		position: absolute;
 		right: 48rpx;
 		top: 50%;
-		transform: translateY(-20%);
-		padding-top: 16rpx;
+		transform: translateY(-50%);
+		// padding-top: 16rpx;
 	}
 
 	.header-search-icon-container {

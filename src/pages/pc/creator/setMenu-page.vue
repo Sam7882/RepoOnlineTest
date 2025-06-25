@@ -25,6 +25,17 @@
 					<view class="icon-container">
 					</view>
 				</view>
+				<view class="menu-item" :class="{ 'active': currentPage === 'walletManage' }"
+					@click="handlePage('walletManage')">
+					<text>{{ $t("menu.wallet") }}</text>
+					<view class="icon-container">
+					</view>
+				</view>
+				<view class="menu-item" :class="{ 'active': currentPage === 'helper' }" @click="handlePage('helper')">
+					<text>{{ $t("menu.helper") }}</text>
+					<view class="icon-container">
+					</view>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -57,6 +68,12 @@ const handlePage = (index) => {
 			break
 		case 'message':
 			emit('switchTab', 'message')
+			break
+		case 'walletManage':
+			emit('switchTab', 'walletManage')
+			break
+		case 'helper':
+			emit('switchTab', 'helper')
 			break
 	}
 }

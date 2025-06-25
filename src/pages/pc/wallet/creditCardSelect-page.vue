@@ -67,13 +67,16 @@ import { toCreditCardSetting, toCreditCardSave, checkViewportAutoReplace } from 
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 
+const emit = defineEmits(['switchTab'])
+
 const handleOpenSetting = () => {
 	console.log('handleOpenSetting')
 	toCreditCardSetting()
 }
 
 const handleOpenSave = () => {
-	toCreditCardSave()
+	emit('switchTab', 'creditCardSave')
+	// toCreditCardSave()
 }
 
 const openStatus = ref(false)

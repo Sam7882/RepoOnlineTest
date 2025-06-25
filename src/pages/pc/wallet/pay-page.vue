@@ -1,6 +1,12 @@
 <template>
 	<view class="pay-page">
-		<c-headerNav :title="$t('wallet.paymentDetails')" />
+		<c-headerNav :title="$t('wallet.paymentDetails')">
+			<template #left>
+				<view class="header-nav-left-position header-nav-icon-container" @click="handleBack">
+					<uni-icons class="header-nav-icon" type="left" size="20" color="var(--text-color-primary)"></uni-icons>
+				</view>
+			</template>
+		</c-headerNav>
 		<view class="pay-page-content">
 			<form-payForm @submit="handleSubmit" />
 		</view>
@@ -17,9 +23,16 @@ const initStore = useInitStore()
 const { checkInitData } = initStore
 const { t } = useI18n()
 
+const emit = defineEmits(['switchTab'])
+
 const { openNotice } = inject('common')
 /* 確認付款 */
 // 確認付款按鈕 送出資料
+
+const handleBack = () => {
+	emit('switchTab', 'orderDetail')
+}
+
 const handleSubmit = () => {
 	openNotice({
 		title: t('common.verifySuccess')
@@ -60,6 +73,18 @@ onShow(() => {
 		.header-nav-left-position {
 			left: 0;
 		}
+	}
+}
+
+// 圖標容器
+.header-nav-left-position {
+	position: absolute;
+	left: 48rpx;
+	top: 50%;
+	transform: translateY(-50%);
+
+	&:hover {
+		cursor: pointer;
 	}
 }
 

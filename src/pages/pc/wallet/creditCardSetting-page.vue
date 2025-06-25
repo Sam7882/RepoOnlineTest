@@ -17,10 +17,13 @@ const initStore = useInitStore()
 const { checkInitData } = initStore
 const { t } = useI18n()
 
+const emit = defineEmits(['switchTab'])
+
 /* 確認付款 */
 // 確認付款按鈕 送出資料
 const handleSubmit = () => {
-	toCreditCardSelect()
+	emit('switchTab', 'creditCardSelect')
+	// toCreditCardSelect()
 }
 
 

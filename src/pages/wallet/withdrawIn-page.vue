@@ -111,7 +111,7 @@ uni-image {
 }
 
 .withdrawIn-page-content {
-	padding: 68rpx 40rpx 0;
+	padding: 32rpx 40rpx 0;
 }
 
 .withdrawIn-page-content-header {
@@ -125,7 +125,7 @@ uni-image {
 		text-align: center;
 		line-height: 1;
 		padding: 20rpx 0;
-		font-size: 28rpx;
+		font-size: var(--font-size-title-pc-small);
 		color: var(--primary-color);
 		border-bottom: 1px solid var(--primary-color);
 
@@ -150,6 +150,10 @@ uni-image {
 	flex-direction: column;
 	align-items: center;
 
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		margin-top: 32rpx;
+	}
+
 	.withdrawIn-page-content-body-amount {
 		font-size: 64rpx;
 		font-weight: 500;
@@ -157,7 +161,7 @@ uni-image {
 	}
 
 	.withdrawIn-page-content-body-text {
-		font-size: 28rpx;
+		font-size: var(--font-size-content-pc-large);
 		color: var(--popTxt-color-content);
 		margin-bottom: 58rpx;
 	}
@@ -194,6 +198,7 @@ uni-image {
 		text-align: center;
 		background: var(--text-color-tertiary);
 		color: var(--popTxt-color-content);
+		font-size: var(--font-size-content-pc-large);
 	}
 }
 
@@ -214,6 +219,8 @@ uni-image {
 .withdrawIn-page-content-body-list {
 	display: flex;
 	flex-direction: column;
+	overflow-y: auto;
+	height: 80dvh;
 
 	.withdrawIn-page-content-body-list-item {
 		display: flex;
@@ -248,16 +255,16 @@ uni-image {
 
 			.withdrawIn-page-content-body-list-item-left-text {
 				.withdrawIn-page-content-body-list-item-left-text-title {
-					font-size: 28rpx;
+					font-size: var(--font-size-content-pc-large);
 				}
 
 				.withdrawIn-page-content-body-list-item-left-text-date {
-					font-size: 24rpx;
+					font-size: var(--font-size-content-pc);
 					color: var(--popTxt-color-conten);
 				}
 
 				.withdrawIn-page-content-body-list-item-left-text-status {
-					font-size: 16rpx;
+					font-size: var(--font-size-content-pc-small);
 					color: var(--popTxt-color-content);
 				}
 			}
@@ -270,7 +277,7 @@ uni-image {
 			gap: 24rpx;
 
 			.withdrawIn-page-content-body-list-item-right-amount {
-				font-size: 30rpx;
+				font-size: var(--font-size-content-pc-large);
 
 			}
 

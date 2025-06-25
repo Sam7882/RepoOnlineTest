@@ -141,7 +141,7 @@ uni-image {
 }
 
 .withdrawIn-page-content {
-	padding: 68rpx 40rpx 0;
+	padding: 32rpx 40rpx 0;
 }
 
 .withdrawIn-page-content-header {
@@ -155,7 +155,7 @@ uni-image {
 		text-align: center;
 		line-height: 1;
 		padding: 20rpx 0;
-		font-size: 28rpx;
+		font-size: var(--font-size-content-pc-small);
 		color: var(--primary-color);
 		border-bottom: 1px solid var(--primary-color);
 
@@ -184,10 +184,14 @@ uni-image {
 		font-size: 64rpx;
 		font-weight: 500;
 		margin-bottom: 36rpx;
+
+		@media screen and (min-width: 768px) and (max-width: 960px) {
+			font-size: 48rpx;
+		}
 	}
 
 	.withdrawIn-page-content-body-text {
-		font-size: 28rpx;
+		font-size: var(--font-size-content-pc-small);
 		color: var(--popTxt-color-content);
 		margin-bottom: 58rpx;
 	}
@@ -253,6 +257,10 @@ uni-image {
 		padding-right: 34rpx;
 		border-bottom: 1px solid var(--text-color-octonary);
 
+		@media screen and (min-width: 768px) and (max-width: 960px) {
+			padding: 24rpx 0;
+		}
+
 		.withdrawIn-page-content-body-list-item-left {
 			display: flex;
 			align-items: center;
@@ -263,7 +271,7 @@ uni-image {
 				padding: 18rpx 26rpx;
 
 				.withdrawIn-icon {
-					font-size: 34rpx !important;
+					font-size: var(--font-size-title-pc-large) !important;
 					color: var(--text-color-secondary) !important;
 				}
 
@@ -282,16 +290,16 @@ uni-image {
 
 			.withdrawIn-page-content-body-list-item-left-text {
 				.withdrawIn-page-content-body-list-item-left-text-title {
-					font-size: 28rpx;
+					font-size: var(--font-size-content-pc-large);
 				}
 
 				.withdrawIn-page-content-body-list-item-left-text-date {
-					font-size: 24rpx;
+					font-size: var(--font-size-content-pc);
 					color: var(--popTxt-color-conten);
 				}
 
 				.withdrawIn-page-content-body-list-item-left-text-status {
-					font-size: 16rpx;
+					font-size: var(--font-size-content-pc-small);
 					color: var(--popTxt-color-content);
 				}
 			}
@@ -304,7 +312,7 @@ uni-image {
 			gap: 24rpx;
 
 			.withdrawIn-page-content-body-list-item-right-amount {
-				font-size: 30rpx;
+				font-size: var(--font-size-title-pc-small);
 
 				&.plus {
 					color: var(--play-sponsor-color-quaternary);
@@ -332,6 +340,10 @@ uni-image {
 	max-width: 50%;
 	padding: 20rpx 16rpx;
 
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		padding: 16rpx 12rpx;
+	}
+
 	::v-deep(.uni-select) {
 		& {
 			border: unset;
@@ -356,6 +368,7 @@ uni-image {
 		.uni-select__input-text {
 			width: fit-content;
 			color: var(--text-color-secondary);
+			font-size: var(--font-size-title-pc);
 		}
 
 		.uni-icons {
@@ -375,6 +388,7 @@ uni-image {
 
 			.uni-select__selector-item {
 				padding: 0 46rpx;
+				font-size: var(--font-size-content-pc);
 
 				uni-text {
 					white-space: nowrap;

@@ -112,7 +112,8 @@ uni-image {
 }
 
 .withdraw-page-content {
-	padding: 70rpx 40rpx 0;
+	padding: 32rpx 40rpx 0;
+
 }
 
 .withdraw-amount-container {
@@ -125,7 +126,7 @@ uni-image {
 		gap: 26rpx;
 
 		.withdraw-amount-container-top-title {
-			font-size: 36rpx;
+			font-size: var(--font-size-title-pc-xlarge);
 		}
 
 		.withdraw-amount-container-top-record {
@@ -133,12 +134,12 @@ uni-image {
 			align-items: center;
 
 			.withdraw-amount-container-top-record-text {
-				font-size: 28rpx;
+				font-size: var(--font-size-title-pc-small);
 				color: var(--popTxt-color-content);
 			}
 
 			.withdraw-icon {
-				font-size: 24rpx !important;
+				font-size: var(--font-size-content-pc) !important;
 				color: var(--popTxt-color-content) !important;
 			}
 		}
@@ -147,25 +148,33 @@ uni-image {
 	.withdraw-amount {
 		font-size: 64rpx;
 		font-weight: 500;
+
+		@media screen and (min-width: 768px) and (max-width: 960px) {
+			font-size: 48rpx;
+		}
 	}
 }
 
 .withdraw-btn-container {
-	position: absolute;
-	bottom: 80rpx;
+	position: fixed;
+	bottom: 40rpx;
 	left: 50%;
 	transform: translateX(-50%);
 
 	.btn {
 		min-width: 350rpx;
 		padding: 20rpx 40rpx;
-		font-size: 32rpx;
+		font-size: var(--font-size-title-pc);
 		line-height: initial;
 	}
 }
 
 .deco-line {
 	margin: 32rpx 0;
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		margin: 24rpx 0;
+	}
 }
 
 .withdraw-item-container {
@@ -180,7 +189,7 @@ uni-image {
 		.withdraw-item-container-item-left {
 			display: flex;
 			gap: 14rpx;
-			font-size: 36rpx;
+			font-size: var(--font-size-title-pc-xlarge);
 
 			.withdraw-item-icon {
 				font-size: 34rpx !important;

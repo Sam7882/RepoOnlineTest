@@ -7,7 +7,7 @@
           :clearable="false" />
 
       </view>
-      <view>
+      <view class="helper-collapse-container">
         <uni-collapse>
           <template v-for="(item, index) in helpList" :key="index">
             <uni-collapse-item class="helper-collapse-item" :title="item.title" :show-animation="true"
@@ -58,7 +58,8 @@ onShow(() => {
 
 <style scoped lang="scss">
 .helper-container {
-  padding: 50rpx 40rpx 0;
+  padding: 32rpx 40rpx 0;
+
 }
 
 .helper-search {
@@ -88,12 +89,12 @@ onShow(() => {
 
     .uni-input-placeholder {
       color: var(--text-color-quaternary) !important;
-      font-size: 28rpx;
+      font-size: var(--font-size-content-pc-large);
     }
 
     .uni-easyinput__content-input {
       color: var(--text-color-secondary) !important;
-      font-size: 28rpx;
+      font-size: var(--font-size-content-pc-large);
     }
   }
 
@@ -104,20 +105,46 @@ onShow(() => {
   }
 }
 
+.helper-collapse-container {
+  margin-top: 32rpx;
+
+  @media screen and (min-width: 768px) and (max-width: 960px) {
+    margin-top: 16rpx;
+  }
+}
+
 .helper-collapse-item {
   border-bottom: 1px solid var(--text-color-octonary);
-  padding: 12px 0;
+  padding: 32rpx 0 16rpx;
+
+
+  @media screen and (min-width: 768px) and (max-width: 960px) {
+    padding: 24rpx 0 8rpx;
+  }
 
   .content {
+    line-height: 1.5;
     margin-bottom: 14rpx;
 
+    @media screen and (min-width: 768px) and (max-width: 960px) {
+      margin-bottom: 8rpx;
+    }
+
     .text {
-      font-size: 24rpx;
+      font-size: var(--font-size-content-pc);
       color: var(--text-color-quaternary);
     }
   }
 
   ::v-deep(.uni-collapse-item__title) {
+    .uni-collapse-item__title {
+      margin-bottom: 16rpx;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
     .uni-collapse-item__title-box {
       padding: unset;
       height: fit-content;
@@ -125,6 +152,7 @@ onShow(() => {
 
     .uni-collapse-item__title-text {
       line-height: 1;
+      font-size: var(--font-size-title-pc);
     }
 
     .uni-collapse-item__title-wrap {

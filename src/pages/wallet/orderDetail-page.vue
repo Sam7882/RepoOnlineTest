@@ -111,10 +111,11 @@ onShow(() => {
 	background-color: #fe7b8266;
 	display: flex;
 	justify-content: center;
-	padding: 0 120rpx;
-	padding-top: 28rpx;
+	padding: 16rpx;
+	// padding-top: 28rpx;
 	text-align: center;
-	font-size: 24rpx;
+	font-size: var(--font-size-content-pc);
+	width: 100%;
 
 }
 
@@ -129,6 +130,11 @@ onShow(() => {
 	font-weight: 500;
 	padding: 40rpx 0;
 	color: var(--favorite-color-secondary);
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		font-size: 48rpx;
+		padding: 32rpx 0;
+	}
 }
 
 .deco-line {
@@ -137,6 +143,10 @@ onShow(() => {
 
 .section {
 	padding: 46rpx 0;
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		padding: 32rpx 0;
+	}
 }
 
 .row {
@@ -144,7 +154,7 @@ onShow(() => {
 	justify-content: space-between;
 	margin-bottom: 20rpx;
 	color: var(--text-color-primary);
-	font-size: 28rpx;
+	font-size: var(--font-size-content-pc-large);
 }
 
 .row:last-child {
@@ -204,7 +214,7 @@ onShow(() => {
 
 	.id {
 		color: var(--popTxt-color-content);
-		font-size: 24rpx;
+		font-size: var(--font-size-content-pc-small);
 	}
 }
 
@@ -212,7 +222,11 @@ onShow(() => {
 	display: flex;
 	justify-content: space-between;
 	padding-bottom: 46rpx;
-	font-size: 28rpx;
+	font-size: var(--font-size-content-pc-large);
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		padding-bottom: 32rpx;
+	}
 }
 
 .name-row {
@@ -221,7 +235,7 @@ onShow(() => {
 	gap: 10rpx;
 
 	.name {
-		font-size: 34rpx;
+		font-size: var(--font-size-title-pc-large);
 	}
 }
 
@@ -240,7 +254,7 @@ onShow(() => {
 	padding: 20rpx 0;
 	line-height: 1;
 	border-radius: 16rpx;
-	font-size: 32rpx;
+	font-size: var(--font-size-title-pc);
 	background: unset;
 	color: var(--primary-color);
 	border: 1px solid var(--primary-color);

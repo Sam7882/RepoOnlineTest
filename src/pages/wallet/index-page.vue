@@ -83,7 +83,7 @@
 				<!-- 紀錄列表 垂直排序 -->
 				<uni-list :border="false" class="wallet-content-container-bottom-record-list-container">
 					<!-- 紀錄 space-between 左右排列 -->
-					<template v-for="(item, index) in 5" :key="index">
+					<template v-for="(item, index) in 20" :key="index">
 						<uni-list-item :border="true" class="wallet-content-container-bottom-record-list-item">
 							<template #body>
 								<!-- 帳號頭像和錢包總額文字 水平排列 -->
@@ -201,7 +201,7 @@ onShow(() => {
 
 	// 標題容器
 	.header-nav-title-container {
-		font-size: 32rpx;
+		font-size: var(--font-size-title-pc);
 		color: var(--text-color-primary);
 	}
 }
@@ -215,6 +215,10 @@ onShow(() => {
 	padding: 0 64rpx;
 	margin-bottom: 118rpx;
 
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		margin-bottom: 64rpx;
+	}
+
 	// 錢包金額
 	.wallet-amount-container {
 		position: relative;
@@ -222,6 +226,10 @@ onShow(() => {
 		justify-content: center;
 		align-items: center;
 		padding-bottom: 46rpx;
+
+		@media screen and (min-width: 768px) and (max-width: 960px) {
+			padding-bottom: 32rpx;
+		}
 
 		// padding: 0 64rpx;
 		&::after {
@@ -238,6 +246,10 @@ onShow(() => {
 			font-size: 64rpx;
 			font-weight: 500;
 			color: var(--text-color-primary);
+
+			@media screen and (min-width: 768px) and (max-width: 960px) {
+				font-size: 48rpx;
+			}
 		}
 	}
 }
@@ -252,6 +264,10 @@ onShow(() => {
 	justify-content: space-between;
 	align-items: center;
 
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		padding-top: 32rpx;
+	}
+
 	/* 帳號頭像 */
 	.wallet-account-info-container {
 		display: flex;
@@ -265,6 +281,12 @@ onShow(() => {
 			background: var(--primary-color);
 			border-radius: 100%;
 			overflow: hidden;
+
+			@media screen and (min-width: 768px) and (max-width: 960px) {
+				width: 80rpx;
+				height: 80rpx;
+				border: 4rpx solid var(--primary-color);
+			}
 
 			::v-deep(.wallet-account-avatar) {
 				uni-image {
@@ -303,7 +325,7 @@ onShow(() => {
 				justify-content: space-between;
 
 				.wallet-account-info-title {
-					font-size: 34rpx;
+					font-size: var(--font-size-title-pc-large);
 					color: var(--text-color-primary);
 				}
 
@@ -318,7 +340,7 @@ onShow(() => {
 				height: fit-content;
 
 				.wallet-account-info-account {
-					font-size: 24rpx;
+					font-size: var(--font-size-content-pc);
 					color: var(--text-color-septenary);
 					line-height: 1;
 				}
@@ -328,7 +350,7 @@ onShow(() => {
 
 	.wallet-account-total-amount-container {
 		margin-right: 32rpx;
-		font-size: 30rpx;
+		font-size: var(--font-size-title-pc-small);
 		color: var(--text-color-primary);
 		transform: translateY(-10rpx);
 	}
@@ -363,17 +385,21 @@ onShow(() => {
 			font-weight: normal;
 			padding: 28rpx 64rpx;
 
+			@media screen and (min-width: 768px) and (max-width: 960px) {
+				padding: 16rpx 32rpx;
+			}
+
 			&:last-child {
 				background-color: var(--background-color-blue);
 
 			}
 
 			.wallet-content-container-bottom-data-item-title {
-				font-size: 24rpx;
+				font-size: var(--font-size-title-pc);
 			}
 
 			.wallet-content-container-bottom-data-item-value {
-				font-size: 44rpx;
+				font-size: var(--font-size-title-pc-xlarge);
 				font-weight: 500;
 			}
 		}
@@ -384,12 +410,13 @@ onShow(() => {
 		width: 50%;
 
 		.wallet-content-container-bottom-button {
-			font-size: 24rpx;
+			font-size: var(--font-size-title-pc);
 			line-height: 1;
 			padding: 24rpx 64rpx;
 			border-radius: 16rpx;
 			background-color: var(--primary-color);
 			color: var(--text-color-secondary);
+
 		}
 
 	}
@@ -404,13 +431,17 @@ onShow(() => {
 		flex: 1;
 		margin-bottom: unset;
 		padding: 16rpx 0;
+
+		@media screen and (min-width: 768px) and (max-width: 960px) {
+			padding: 0;
+		}
 	}
 
 	.wallet-content-container-bottom-record-title-container {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		font-size: 24rpx;
+		font-size: var(--font-size-content-pc);
 		color: var(--text-color-primary);
 	}
 
@@ -425,7 +456,7 @@ onShow(() => {
 		}
 
 		.wallet-content-container-bottom-record-list-item-amount-value {
-			font-size: 32rpx;
+			font-size: var(--font-size-title-pc);
 		}
 	}
 }
@@ -439,7 +470,7 @@ onShow(() => {
 		padding: 4rpx 0;
 
 		.listType-text {
-			font-size: 28rpx;
+			font-size: var(--font-size-title-pc);
 			color: var(--text-color-quaternary);
 		}
 
@@ -480,6 +511,7 @@ onShow(() => {
 
 		.uni-select__input-text {
 			color: var(--text-color-secondary);
+			font-size: var(--font-size-title-pc);
 		}
 
 		.uni-icons {
@@ -499,6 +531,7 @@ onShow(() => {
 
 			.uni-select__selector-item {
 				padding: 0 46rpx;
+				font-size: var(--font-size-content-pc);
 
 				uni-text {
 					white-space: nowrap;
@@ -508,10 +541,19 @@ onShow(() => {
 	}
 }
 
+.wallet-content-container-bottom-record-list-container {
+	height: 80dvh;
+	overflow-y: auto;
+}
+
 .wallet-content-container-bottom-record-list-item {
 	::v-deep(.uni-list-item__container) {
 		.uni-list-item__container {
 			padding: 34rpx 0;
+
+			@media screen and (min-width: 768px) and (max-width: 960px) {
+				padding: 24rpx 0;
+			}
 		}
 	}
 }

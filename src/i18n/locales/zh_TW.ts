@@ -368,6 +368,9 @@ export default {
     alreadyWithdraw: "已提領",
     withdrawAmount2: "撥款金額",
     canWithdraw: "可提領",
+    withdrawApplySuccess: "提款申請已送出",
+    withdrawDetail: "提款明細",
+    orderDetail: "訂單明細",
   },
   charts: {
     analysisReport: "分析報告",
@@ -390,6 +393,7 @@ export default {
     following: "我的關注",
     service: "聯繫客服",
     logout: "登出",
+    helper: "幫助中心",
   },
   service: {
     pleaseEnter: "請輸入您的問題或需求，我們會盡快回覆您：",

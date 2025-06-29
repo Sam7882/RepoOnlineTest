@@ -5,7 +5,8 @@
 
 		<!-- 圖片裁切畫布區 -->
 		<canvas canvas-id="avatarCanvas" class="avatar-canvas" id="avatarCanvas" @touchstart="handleTouchStart"
-			@touchmove="handleTouchMove" @touchend="handleTouchEnd"></canvas>
+			@touchmove="handleTouchMove" @touchend="handleTouchEnd" @mousedown="handleMouseDown" @mousemove="handleMouseMove"
+			@mouseup="handleMouseUp" @mouseleave="handleMouseUp"></canvas>
 
 		<!-- 操作按鈕 -->
 		<view class="action-buttons">
@@ -84,8 +85,8 @@ const drawCanvas = () => {
 
 	ctx.draw() // 開始繪製
 }
-
 let isDragging = false
+
 // 開始拖曳
 const handleTouchStart = (e) => {
 	const touch = e.touches[0] // 取得觸摸點
@@ -95,9 +96,19 @@ const handleTouchStart = (e) => {
 	document.body.classList.add('no-scroll')
 }
 
+
+const handleMouseDown = (e) => {
+	const touch = e.touches[0] // 取得觸摸點
+	startX = touch.clientX // 設定起點 X
+	startY = touch.clientY // 設定起點 Y
+	isDragging = true
+	document.body.classList.add('no-scroll')
+}
+
+
 // 拖曳移動邏輯
 const handleTouchMove = (e) => {
-	if (!isDragging) { return }
+	if (!isDragging) return
 	const touch = e.touches[0] // 取得觸摸點
 	// 計算目前觸控位置和起始點的差值（偏移量）
 	const dx = touch.x - startX // 計算 X 軸移動距離
@@ -123,7 +134,41 @@ const handleTouchMove = (e) => {
 	drawCanvas() // 重繪畫布
 }
 
+// 拖曳移動邏輯
+const handleMouseMove = (e) => {
+	if (!isDragging) { return }
+	const mouse = e.touches[0] // 取得觸摸點
+	// 計算目前觸控位置和起始點的差值（偏移量）
+	const dx = mouse.clientX - startX // 計算 X 軸移動距離
+	const dy = mouse.clientY - startY // 計算 Y 軸移動距離
+
+	// 下一個圖片的位置
+	// 目前圖片位置 + 手指移動量 = 新圖片位置
+	const nextX = imgPos.x + dx // 計算圖片 X 軸位置
+	const nextY = imgPos.y + dy // 計算圖片 Y 軸位置
+	const imgW = imgPos.imgWidth * imgPos.scale // 計算圖片寬度
+	const imgH = imgPos.imgHeight * imgPos.scale // 計算圖片高度
+
+	// 限制移動範圍不可超出裁切圓形區域
+	if (nextX <= 0 && nextX + imgW >= canvasSize) {
+		imgPos.x = nextX // 設定圖片 X 軸位置
+	}
+	if (nextY <= 0 && nextY + imgH >= canvasSize) {
+		imgPos.y = nextY // 設定圖片 Y 軸位置
+	}
+
+	startX = mouse.clientX // 設定起點 X
+	startY = mouse.clientY // 設定起點 Y
+	drawCanvas() // 重繪畫布
+}
+
+
 const handleTouchEnd = () => {
+	isDragging = false
+	document.body.classList.remove('no-scroll')
+}
+
+const handleMouseUp = () => {
 	isDragging = false
 	document.body.classList.remove('no-scroll')
 }
@@ -224,15 +269,33 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .crop-avatar {
-	background: #fff;
-	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding-top: 40rpx;
-	overflow: hidden;
-	touch-action: none;
-	position: relative;
+	width: 100%;
+	padding: 0 32rpx;
+	padding-top: 24rpx;
+	background-color: var(--background-color-light);
+	color: var(--text-color-primary);
+
+	// 設定窗口最大寬度
+	max-width: var(--setting-page-maxWidth);
+
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			left: 0;
+		}
+	}
 }
 
 .header {
@@ -242,11 +305,17 @@ onMounted(() => {
 }
 
 .avatar-canvas {
+	margin-top: 80rpx;
 	width: 300px;
 	height: 300px;
 	background: #eee;
 	border-radius: 16rpx;
 	margin-bottom: 60rpx;
+
+
+	&:hover {
+		cursor: grab;
+	}
 }
 
 .action-buttons {
@@ -256,11 +325,11 @@ onMounted(() => {
 	align-items: center;
 	gap: 30rpx;
 	padding: 0 20rpx;
-	margin-top: auto;
-	margin-bottom: 80rpx;
+	// margin-top: 80rpx;
+	// margin-bottom: 80rpx;
 
 	.btn-container {
-		width: 100%;
+		width: 50%;
 
 		&:last-child {
 			.btn {

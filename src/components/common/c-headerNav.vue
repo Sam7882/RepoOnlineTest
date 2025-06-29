@@ -100,6 +100,7 @@ const handleOpenQa = () => {
 
 <style lang="scss" scoped>
 .header-nav-space {
+	background-color: var(--background-color-light);
 	position: relative;
 	--header-nav-space-height: 130rpx;
 	height: var(--header-nav-space-height);

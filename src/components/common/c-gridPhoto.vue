@@ -57,6 +57,7 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
 <style lang="scss" scoped>
 /* 卡片區 */
 .content-card-container {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   // gap: 16rpx;
@@ -67,6 +68,10 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
     width: 100%;
     height: 100%;
     aspect-ratio: 1/1.2;
+
+    &:hover {
+      cursor: pointer;
+    }
 
     ::v-deep(.content-card-container-item-img) {
       uni-image {

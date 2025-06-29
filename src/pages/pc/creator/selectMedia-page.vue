@@ -103,12 +103,36 @@ onShow(() => {
 
 <style scoped lang="scss">
 .select-media-page {
-	--header-height: 250rpx;
+	--header-height: 32rpx;
 	--footer-height: 200rpx;
 
-	@media screen and (min-width: 768px) and (max-width: 960px) {
-		--header-height: 160rpx;
-		--footer-height: 120rpx;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 0 32rpx;
+	padding-top: 24rpx;
+	background-color: var(--background-color-light);
+	color: var(--text-color-primary);
+
+	// 設定窗口最大寬度
+	max-width: var(--setting-page-maxWidth);
+
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			left: 0;
+		}
 	}
 }
 
@@ -118,11 +142,8 @@ onShow(() => {
 }
 
 .header {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	z-index: 100;
+	width: 100%;
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -136,11 +157,7 @@ onShow(() => {
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	padding: 48rpx 32rpx;
-
-	@media screen and (min-width: 768px) and (max-width: 960px) {
-		padding: 24rpx 16rpx;
-	}
+	padding: 24rpx 16rpx;
 
 	.icon-container {
 		position: absolute;
@@ -180,6 +197,7 @@ onShow(() => {
 }
 
 .grid {
+	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 12rpx;
@@ -193,15 +211,17 @@ onShow(() => {
 .footer {
 	position: fixed;
 	bottom: 0;
-	left: 0;
-	right: 0%;
-	z-index: 1;
+	width: 100%;
+	z-index: 100;
 	padding: 20rpx;
 	height: var(--footer-height);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background: var(--background-color-light);
+	box-shadow: 0 -4rpx 16rpx 0 rgba(0, 0, 0, 0.1);
+	border-radius: 20rpx 20rpx 0 0;
+	max-width: var(--setting-page-maxWidth);
 
 	.btn-container {
 		width: 100%;

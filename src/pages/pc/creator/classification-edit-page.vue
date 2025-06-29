@@ -28,10 +28,12 @@
 		</view> -->
 
 		<!-- 資料網格 -->
-		<view class="grid">
-			<post-mediaGridItem v-for="item in renderMediaList" :key="item.id" :item="item"
-				:is-selected="selectedIds.includes(item.id)" :select-index="selectedIds.indexOf(item.id)"
-				@toggle-select="toggleSelect" :can-tagging="canTagging" />
+		<view class="grid-container">
+			<view class="grid">
+				<post-mediaGridItem v-for="item in renderMediaList" :key="item.id" :item="item"
+					:is-selected="selectedIds.includes(item.id)" :select-index="selectedIds.indexOf(item.id)"
+					@toggle-select="toggleSelect" :can-tagging="canTagging" />
+			</view>
 		</view>
 
 
@@ -72,7 +74,7 @@
 						<view class="classNamePopUp-container-item" @click="deleteClassification">
 							<view class="classNamePopUp-container-item-content">
 								<view class="icon-container">
-									<uni-icons class="popup-icon" type="icon-common-cancel" custom-prefix="icon" size="24"
+									<uni-icons class="popup-icon" type="icon-common-cancelclassName" custom-prefix="icon" size="24"
 										color="var(--text-color-primary)"></uni-icons>
 								</view>
 								<text>{{ $t("common.deleteClassification") }}</text>
@@ -98,8 +100,6 @@
 			</template>
 		</c-bottomPopUp>
 
-		<c-confirmPopUp ref="confirmPopUpRef" class="confirmPopUp"></c-confirmPopUp>
-		<c-messagePopUp ref="alertDialog" />
 	</view>
 </template>
 
@@ -113,11 +113,12 @@ const { t } = useI18n()
 const postDataStore = usePostData()
 const { manageMedia, selectedMedia } = storeToRefs(postDataStore)
 
+const { openConfirm, openMessage } = inject('common')
+
 const renderMediaList = ref(manageMedia.value)
 const classTitle = ref('一號分類')
 const popupTitle = ref(t('common.edit'))
 const selectedIds = ref([])
-const alertDialog = ref(null)
 // 選取作品
 const toggleSelect = (id) => {
 	const index = selectedIds.value.indexOf(id)
@@ -146,7 +147,7 @@ const handleManage = () => {
 
 const deleteSelected = () => {
 	console.log("🚀 ~ 移除所選:")
-	alertDialog.value.open({
+	openMessage({
 		content: '已移除',
 		confirmBtnText: 'OK',
 		onConfirm: () => {
@@ -189,10 +190,9 @@ const confirmclassNamePopUp = () => {
 }
 
 
-const confirmPopUpRef = ref(null)
 const deleteClassification = () => {
 	cancelclassNamePopUp()
-	confirmPopUpRef.value.open({
+	openConfirm({
 		title: '刪除分類',
 		content: '確認要刪除分類?',
 		onConfirm: () => {
@@ -219,16 +219,38 @@ onShow(() => {
 
 <style scoped lang="scss">
 .select-media-page {
-	--header-height: 32rpx;
+	--header-height: 64rpx;
 	--footer-height: 250rpx;
-	--c-header-height: 90rpx;
-	--tab-height: 90rpx;
+	--c-header-height: 124rpx;
+	--tab-height: 120rpx;
 
-	@media screen and (min-width: 768px) and (max-width: 960px) {
-		--header-height: 16rpx;
-		--footer-height: 200rpx;
-		--c-header-height: 48rpx;
-		--tab-height: 60rpx;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 0 32rpx;
+	padding-top: 24rpx;
+	background-color: var(--background-color-light);
+	color: var(--text-color-primary);
+
+	// 設定窗口最大寬度
+	max-width: var(--setting-page-maxWidth);
+
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			left: 0;
+		}
 	}
 }
 
@@ -247,27 +269,28 @@ onShow(() => {
 }
 
 .header {
-	padding-top: var(--tab-height);
+	padding-top: var(----tab-height);
+	display: flex;
+	width: 100%;
 }
 
 .tab {
-	position: fixed;
-	top: var(--c-header-height);
+	position: relative;
 	background: var(--background-color-light);
-	left: 0;
-	right: 0;
-	z-index: 100;
 	display: flex;
 	align-items: center;
 	gap: 4rpx;
-	width: 100%;
-	flex: 1;
+	// width: 100%;
+	// flex: 1;
 	text-align: center;
-	font-size: var(--font-size-content-pc-large);
-	padding: 18rpx;
+	font-size: var(--font-size-title-pc-small);
 	line-height: 1;
 	color: var(--text-color-primary);
-	padding: 40rpx 44rpx;
+	padding: 24rpx 80rpx;
+
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 .tab.active {
@@ -276,13 +299,19 @@ onShow(() => {
 	border-bottom: 4rpx solid #000;
 }
 
+.grid-container {
+	width: 100%;
+	overflow-y: scroll;
+	margin-top: 24rpx;
+}
+
 .grid {
 	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 4rpx;
 	flex: 1;
-	padding-top: var(--header-height);
+	// padding-top: var(--header-height);
 	padding-bottom: var(--footer-height);
 }
 
@@ -291,15 +320,17 @@ onShow(() => {
 .footer {
 	position: fixed;
 	bottom: 0;
-	left: 0;
-	right: 0%;
-	z-index: 1;
+	width: 100%;
+	z-index: 100;
 	padding: 20rpx;
 	height: var(--footer-height);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background: var(--background-color-light);
+	box-shadow: 0 -4rpx 16rpx 0 rgba(0, 0, 0, 0.1);
+	border-radius: 20rpx 20rpx 0 0;
+	max-width: var(--setting-page-maxWidth);
 
 	.icon-container {
 		position: absolute;
@@ -333,7 +364,7 @@ onShow(() => {
 	right: 0;
 	top: 50%;
 	transform: translateY(-50%);
-	font-size: var(--font-size-title-pc) !important;
+	font-size: var(--font-size-title-pc-small) !important;
 }
 
 .classNamePopUp {
@@ -369,7 +400,6 @@ onShow(() => {
 
 	.deco-line {
 		width: 100%;
-		scale: 1.2;
 		margin: 0;
 	}
 }

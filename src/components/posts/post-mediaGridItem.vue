@@ -1,9 +1,9 @@
 <template>
 	<view class="media-item" @click="handleToPost">
 		<image v-if="item.type === 'image'" :src="item.src" mode="aspectFill" class="media-thumbnail" />
-		<view v-else class="media-thumbnail video-wrapper">
-			<image :src="item.cover || fallbackVideoCover" mode="aspectFill" />
-		</view>
+		<template v-else>
+			<image :src="item.cover || fallbackVideoCover" mode="aspectFill" class="media-thumbnail" />
+		</template>
 		<view class="info-container">
 			<uni-icons class="info-icon" custom-prefix="icon" size="30" color="var(--text-color-secondary)"
 				:type="item.type === 'image' ? 'icon-common-copy' : item.type === 'video' ? 'icon-stander-play2' : ''" />
@@ -39,13 +39,14 @@ const props = defineProps({
 const emit = defineEmits(['toggle-select'])
 
 const handleToPost = () => {
-	if (props.onDelete) {
+	if (props.canTagging) {
 		toggle()
 		return
+	} else {
+		toPostIndex({
+			id: props.item.id
+		})
 	}
-	toPostIndex({
-		id: props.item.id
-	})
 }
 
 const toggle = () => {
@@ -65,16 +66,18 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
 	aspect-ratio: 1 / 1;
 	// border-radius: 8rpx;
 	overflow: hidden;
+
+	&:hover {
+		cursor: pointer;
+	}
 }
+
+::v-deep(.uni-image) {}
 
 .media-thumbnail {
 	width: 100%;
 	height: 100%;
 	display: block;
-	// border-radius: 8rpx;
-}
-
-.video-wrapper {
 	position: relative;
 	background: #000;
 }
@@ -88,7 +91,7 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
 	position: absolute;
 	bottom: 8rpx;
 	right: 8rpx;
-	font-size: 26rpx;
+	font-size: var(--font-size-content-pc);
 	color: white;
 	background: rgba(0, 0, 0, 0.5);
 	padding: 4rpx 8rpx;
@@ -99,16 +102,31 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
 	position: absolute;
 	top: 8rpx;
 	right: 8rpx;
-	width: 30rpx;
-	height: 30rpx;
+	width: 48rpx;
+	height: auto;
+	aspect-ratio: 1 / 1;
 	border-radius: 50%;
 	background: transparent;
 	border: 2rpx solid white;
-	font-size: 16rpx;
+	font-size: var(--font-size-title-pc-small);
+	line-height: 1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	color: var(--text-color-secondary);
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		width: 32rpx;
+	}
+
+	@media screen and (min-width: 961px) {
+		width: 54rpx;
+	}
+
+	@media screen and (min-width: 1280px) {
+		width: 64rpx;
+	}
+
 
 	&.isSelected {
 		background: var(--primary-color);
@@ -129,12 +147,12 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
 }
 
 .info-icon {
-	font-size: 24rpx !important;
+	font-size: var(--font-size-title-pc) !important;
 	transform: translateY(2rpx);
 }
 
 .info-icon-text {
-	font-size: 24rpx;
+	font-size: var(--font-size-content-pc);
 	color: var(--text-color-secondary);
 }
 </style>

@@ -130,12 +130,35 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .classification-page {
-	background-color: var(--background-color);
-	// padding: 0 100rpx;
 	--footer-btn-height: 220rpx;
 
-	@media screen and (min-width: 768px) and (max-width: 960px) {
-		--footer-btn-height: 120rpx;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 0 32rpx;
+	padding-top: 24rpx;
+	background-color: var(--background-color-light);
+	color: var(--text-color-primary);
+
+	// 設定窗口最大寬度
+	max-width: var(--setting-page-maxWidth);
+
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			left: 0;
+		}
 	}
 }
 
@@ -148,7 +171,12 @@ onShow(() => {
 }
 
 .classification-content-container {
-	padding: 0;
+	// padding: 0;
+	width: 100%;
+	height: 100%;
+	padding: 0 50rpx;
+	padding-top: 70rpx;
+	overflow-y: scroll;
 
 	::v-deep(.uni-list-item__container) {
 		.uni-list-item__container {
@@ -190,14 +218,11 @@ onShow(() => {
 .footer-btn-container {
 	position: fixed;
 	bottom: 0;
-	left: 0;
-	right: 0;
+	width: 100%;
 	padding: 40rpx 44rpx 80rpx;
 	background-color: var(--background-color);
 
-	@media screen and (min-width: 768px) and (max-width: 960px) {
-		padding: 20rpx 24rpx 40rpx;
-	}
+	max-width: var(--setting-page-maxWidth);
 
 	.btn {
 		font-size: var(--font-size-title-pc);

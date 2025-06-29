@@ -1,6 +1,6 @@
 <template>
 	<view class="profile-edit">
-		<c-headerNav :title="'編輯資料'" />
+		<c-headerNav :title="'編輯資料'" backUrl="/pages/creator/home" />
 
 		<view class="profile-avatar">
 			<view class="avatar-container" @click="openAvatarOptions">
@@ -12,7 +12,7 @@
 		</view>
 		<view class="form-container">
 			<view class="deco-line"></view>
-			<uni-forms :model="form" :rules="formRules" ref="formRef" label-position="top">
+			<uni-forms :model="form" :rules="formRules" ref="formRef" label-position="top" label-width="fit-content">
 				<uni-forms-item :label="$t('auth.name')" name="name">
 					<uni-easyinput class="inputStyle" v-model="form.name"
 						:placeholder="$t('auth.pleaseEnter', { title: $t('auth.name') })" :clearable="false" />
@@ -57,6 +57,21 @@
 						</view>
 					</view>
 				</view>
+
+				<!-- 社群連結 -->
+				<uni-forms-item :label="'instagram'" name="instagram">
+					<uni-easyinput class="inputStyle" v-model="form.instagram" disabled :clearable="false" />
+				</uni-forms-item>
+				<uni-forms-item :label="'youtube'" name="youtube">
+					<uni-easyinput class="inputStyle" v-model="form.youtube" disabled :clearable="false" />
+				</uni-forms-item>
+				<uni-forms-item :label="'x'" name="x">
+					<uni-easyinput class="inputStyle" v-model="form.x" disabled :clearable="false" />
+				</uni-forms-item>
+				<uni-forms-item :label="'facebook'" name="facebook">
+					<uni-easyinput class="inputStyle" v-model="form.facebook" disabled :clearable="false" />
+				</uni-forms-item>
+
 				<view class="btn-container">
 					<button class="btn save-btn" type="primary" @click="handleSubmit">{{ $t("common.save2") }}</button>
 				</view>
@@ -99,7 +114,11 @@ const form = reactive({
 	username: 'adkdjwee00',
 	gender: '女',
 	birthday: '2025-11-05',
-	bio: '我是一個女生我是一個女生'
+	bio: '我是一個女生我是一個女生',
+	instagram: 'https://www.instagram.com/adkdjwee00',
+	youtube: 'https://www.youtube.com/adkdjwee00',
+	x: 'https://x.com/adkdjwee00',
+	facebook: 'https://www.facebook.com/adkdjwee00'
 })
 
 const formRef = ref(null)
@@ -202,6 +221,10 @@ onShow(() => {
 	margin-top: 44rpx;
 	// margin: 44rpx 0;
 	position: relative;
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		margin-top: 24rpx;
+	}
 }
 
 .avatar-container {
@@ -215,6 +238,11 @@ onShow(() => {
 	background: var(--primary-color);
 	border-radius: 100%;
 	overflow: hidden;
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		width: 160rpx;
+		height: 160rpx;
+	}
 
 	// transform: translate(-50%, -50%);
 	::v-deep(.avatar-img) {
@@ -259,18 +287,29 @@ onShow(() => {
 .form-container {
 	padding: 32rpx;
 
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		padding: 24rpx 32rpx;
+	}
+
+
 	.deco-line {
 		margin: 36rpx 0;
+
+		@media screen and (min-width: 768px) and (max-width: 960px) {
+			margin: 24rpx 0;
+		}
 	}
 
 	/* FORM */
 	::v-deep(.uni-forms-item) {
+		.uni-forms-item {
+			margin-bottom: 12rpx;
+		}
 
 		// 標籤
 		.uni-forms-item__label {
-			font-size: 28rpx;
+			font-size: var(--font-size-content-pc-large);
 			color: var(--popTxt-color-content);
-			padding-bottom: 24rpx !important;
 		}
 
 
@@ -300,13 +339,13 @@ onShow(() => {
 
 		.uni-input-placeholder {
 			color: var(--text-color-quaternary) !important;
-			font-size: 28rpx;
+			font-size: var(--font-size-content-pc-large);
 		}
 
 		.uni-easyinput__content-input {
 			padding: 0 !important;
 			color: var(--text-color-primary) !important;
-			font-size: 28rpx;
+			font-size: var(--font-size-content-pc-large);
 		}
 
 		// textarea
@@ -331,7 +370,7 @@ onShow(() => {
 		right: 0;
 		padding: 0 16rpx;
 		color: var(--popTxt-color-content);
-		font-size: 20rpx;
+		font-size: var(--font-size-content-pc);
 	}
 
 	.form-tip-container {
@@ -339,24 +378,28 @@ onShow(() => {
 		left: 0;
 		top: 100%;
 		margin-top: 4rpx;
-
 	}
 }
 
 .form-tip {
-	font-size: 24rpx;
+	display: block;
+	font-size: var(--font-size-content-pc);
 	color: var(--popTxt-color-content);
-	margin-top: 4rpx;
-	margin-left: 32rpx;
+	margin-bottom: 16rpx;
 }
 
 
 .tag-section {
 	margin-top: 80rpx;
+	margin-bottom: 40rpx;
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		margin-top: 40rpx;
+	}
 
 	.tag-label {
 		// font-weight: bold;
-		font-size: 28rpx;
+		font-size: var(--font-size-content-pc-large);
 		margin-bottom: 16rpx;
 		display: block;
 		color: var(--popTxt-color-content);
@@ -372,7 +415,7 @@ onShow(() => {
 		padding: 10rpx 20rpx;
 		border-radius: 20rpx;
 		// border: 1rpx solid #ccc;
-		font-size: 24rpx;
+		font-size: var(--font-size-content-pc);
 		background: #f5f5f5;
 		color: #333;
 		position: relative;
@@ -394,7 +437,7 @@ onShow(() => {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		font-size: 20rpx;
+		font-size: var(--font-size-content-pc-small);
 		width: 32rpx;
 		height: 32rpx;
 		text-align: center;
@@ -425,8 +468,11 @@ onShow(() => {
 
 .save-btn {
 	margin-top: 120rpx;
-	padding: 26rpx 0;
-	font-size: 30rpx;
+	font-size: var(--font-size-title-pc);
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		margin-top: 80rpx;
+	}
 }
 
 
@@ -469,7 +515,37 @@ onShow(() => {
 
 	.btn {
 		padding: 24rpx 0;
-		font-size: 32rpx;
+		font-size: var(--font-size-title-pc);
 	}
 }
-</style>
+
+
+/* uni-forms label 全域樣式設定 */
+/* 讓 label 寬度自適應內容且不換行 */
+// ::v-deep(.uni-forms-item) {
+// 	.uni-forms-item__label {
+// 		/* 寬度自適應內容 */
+// 		width: fit-content !important;
+// 		min-width: fit-content !important;
+// 		max-width: none !important;
+
+// 		/* 防止換行 */
+// 		white-space: nowrap !important;
+// 		word-wrap: normal !important;
+// 		word-break: keep-all !important;
+
+// 		/* 確保文字不會被截斷 */
+// 		overflow: visible !important;
+// 		text-overflow: unset !important;
+
+// 		/* 保持原有的樣式 */
+// 		display: inline-block !important;
+// 		flex-shrink: 0 !important;
+// 	}
+
+// 	/* 確保表單項目容器能正確顯示 */
+// 	.uni-forms-item__content {
+// 		flex: 1;
+// 		min-width: 0;
+// 	}
+// }</style>

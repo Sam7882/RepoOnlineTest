@@ -56,7 +56,6 @@
 		</view>
 
 		<c-noticePopUp ref="noticePopUpRef"></c-noticePopUp>
-		<c-sharePopUp ref="sharePopUp"></c-sharePopUp>
 	</view>
 </template>
 
@@ -66,6 +65,8 @@ import { onShow } from '@dcloudio/uni-app'
 import { checkViewportAutoReplace } from '@/utils/routers'
 import UQRCode from '@uqrcode/js';
 import { useI18n } from 'vue-i18n'
+const { openNotice, openSharePopUp } = inject('common')
+
 const { t } = useI18n()
 const name = ref('我是名字我是名字')
 const username = ref('adkdjwee00')
@@ -75,13 +76,12 @@ const link = ref('https://example.com/u/adkdjwee00')
 const goBack = () => uni.navigateBack()
 
 
-const noticePopUpRef = ref(null)
 const copyLink = () => {
 	uni.setClipboardData({
 		data: link.value,
 		showToast: false,
 		success: () => {
-			noticePopUpRef.value.open({
+			openNotice({
 				title: t('common.copySuccessTip'),
 				// setTimeOut: 1500
 			})
@@ -90,10 +90,9 @@ const copyLink = () => {
 }
 
 // 分享
-const sharePopUp = ref(null)
 const toShare = () => {
 	console.log("🚀 == 分享 == ")
-	sharePopUp.value?.open()
+	openSharePopUp()
 	/* NOTE:暫代 去往該圖文的總攬 */
 	// toPlayArticleGallery()
 }
@@ -140,17 +139,17 @@ onMounted(() => {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-top: 38rpx;
+	margin-top: 32rpx;
 	text-align: center;
 }
 
 .name {
-	font-size: 38rpx;
+	font-size: var(--font-size-title-pc-xlarge);
 	font-weight: 500;
 }
 
 .username {
-	font-size: 32rpx;
+	font-size: var(--font-size-title-pc);
 	// color: #444;
 	color: var(--text-color-primary);
 }
@@ -182,7 +181,7 @@ onMounted(() => {
 		align-items: center;
 		gap: 32rpx;
 		padding: 48rpx 0;
-		font-size: 32rpx;
+		font-size: var(--font-size-title-pc);
 
 		.btn-icon {
 			font-size: 50rpx !important;
@@ -227,7 +226,7 @@ onMounted(() => {
 
 		.brand {
 			display: block;
-			font-size: 32rpx;
+			font-size: var(--font-size-title-pc);
 			font-weight: bolder;
 			color: #222;
 			letter-spacing: 2rpx;
@@ -259,7 +258,7 @@ onMounted(() => {
 	}
 
 	.desc {
-		font-size: 16rpx;
+		font-size: var(--font-size-content-pc-small);
 	}
 
 }

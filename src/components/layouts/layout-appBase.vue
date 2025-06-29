@@ -11,6 +11,7 @@
 		<c-noticePopUp ref="noticePopUp" />
 		<c-confirmPopUp ref="confirmPopUp" />
 		<c-bottomPopUp ref="bottomPopUp" />
+		<c-sharePopUp ref="sharePopUp" />
 	</view>
 </template>
 
@@ -138,6 +139,14 @@ const openBottomPopUp = (data) => {
 	})
 }
 
+// 分享
+
+const sharePopUp = ref(null)
+const openSharePopUp = () => {
+	console.log("🚀 ~ openSharePopUp ~ openSharePopUp :")
+	sharePopUp.value.open()
+}
+
 // 使用 provide 提供方法
 provide('auth', {
 	openLogin,
@@ -152,7 +161,8 @@ provide('common', {
 	openMessage,
 	openNotice,
 	openConfirm,
-	openBottomPopUp
+	openBottomPopUp,
+	openSharePopUp
 })
 </script>
 

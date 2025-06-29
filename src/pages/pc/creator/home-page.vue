@@ -264,10 +264,6 @@
 
 		<!-- 圖文區 卡片 水平排序，自動換行，一行三格 grid排版-->
 		<c-gridPhoto :data="gridPhotoData" />
-		<!-- 底部導航列 -->
-		<c-bottomNav :bgColor="'var(--background-color-light)'" :iconColor="'var(--text-color-primary)'"
-			:primaryMenu="'primary'" />
-		<c-noticePopUp ref="noticePopUpRef" />
 
 		<!-- 關注 -->
 		<c-bottomPopUp ref="followPopUpRef" class="followPopUp" @close="initfollowPopUp">
@@ -314,6 +310,8 @@
 				</view>
 			</template>
 		</c-bottomPopUp>
+
+		<pc-sharePopUp ref="sharePopUpRef" @close="initSharePopUp" />
 	</view>
 </template>
 
@@ -324,6 +322,8 @@ import { onPageScroll, onShow } from '@dcloudio/uni-app'
 import { toShare, toPostPreview, toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory, toCreatorEdit, toCreatorSelectMedia, toCreatorClassification, checkViewportAutoReplace } from '@/utils/routers'
 import { useInitStore } from '@/stores/useInitDataStore';
 import { usePostData } from '@/stores/usePostData'
+
+const { openNotice } = inject('common')
 const postDataStore = usePostData()
 const { setSelectedMedia } = postDataStore
 const type = ref('all');
@@ -502,16 +502,20 @@ const handleShortStory = () => {
 const handleProfileEdit = () => {
 	toCreatorEdit()
 }
-const noticePopUpRef = ref(null)
 const openNoticePopUp = () => {
-	noticePopUpRef.value.open({
+	openNotice({
 		title: t('common.systemNotOpen'),
 		content: t('common.storeComingSoon'),
 	})
 }
+
+const sharePopUpRef = ref(null)
+const initSharePopUp = () => {
+	sharePopUpRef.value.close()
+}
 // 跳轉到創作者分享頁
 const handleShare = () => {
-	toShare()
+	sharePopUpRef.value.open()
 }
 
 // 上傳圖片
@@ -553,7 +557,34 @@ onPageScroll(() => {
 
 <style lang="scss" scoped>
 .creator-home-page {
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	// padding: 0 32rpx;
+	padding-top: 24rpx;
 	background-color: var(--background-color-light);
+	color: var(--text-color-primary);
+
+	// 設定窗口最大寬度
+	max-width: var(--setting-page-maxWidth);
+
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			left: 0;
+		}
+	}
 }
 
 // 封面圖
@@ -616,7 +647,7 @@ onPageScroll(() => {
 	}
 
 	.creator-home-page-data-header-container-title {
-		font-size: 32rpx;
+		font-size: var(--font-size-title-pc);
 		font-weight: 500;
 	}
 }
@@ -637,7 +668,7 @@ onPageScroll(() => {
 		gap: 32rpx;
 
 		.creator-home-page-data-item-container-item-icon {
-			font-size: 36rpx !important;
+			font-size: var(--font-size-title-pc-xlarge) !important;
 			color: var(--text-color-primary) !important;
 		}
 	}
@@ -682,12 +713,6 @@ onPageScroll(() => {
 			border-radius: 100%;
 			overflow: hidden;
 
-			@media screen and (min-width: 768px) and (max-width: 960px) {
-				width: 120rpx;
-				height: 120rpx;
-				border: 6rpx solid var(--primary-color);
-			}
-
 
 			// transform: translate(-50%, -50%);
 			::v-deep(.creator-home-page-avatar) {
@@ -728,12 +753,16 @@ onPageScroll(() => {
 		border-radius: 20rpx;
 		background: var(--favorite-color-secondary);
 
+		&:hover {
+			cursor: pointer;
+		}
+
 		&.fans {
 			background: var(--favorite-color);
 		}
 
 		.creator-home-page-data-item-container-item-icon {
-			font-size: var(--font-size-content-pc) !important;
+			font-size: 24rpx !important;
 		}
 	}
 
@@ -761,6 +790,10 @@ onPageScroll(() => {
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
+
+			&:hover {
+				cursor: pointer;
+			}
 		}
 
 		.creator-home-page-data-item-container-item-text {
@@ -769,7 +802,7 @@ onPageScroll(() => {
 
 			&.creator-home-page-data-item-container-item-text-number {
 				font-weight: 500;
-				font-size: var(--font-size-title-pc-xlarge);
+				font-size: 36rpx;
 				color: var(--text-color-primary);
 			}
 
@@ -794,10 +827,6 @@ onPageScroll(() => {
 		align-items: center;
 		gap: 16rpx;
 		margin-bottom: 40rpx;
-
-		@media screen and (min-width: 768px) and (max-width: 960px) {
-			margin-bottom: 24rpx;
-		}
 
 		// gap: 4rpx;
 
@@ -851,6 +880,10 @@ onPageScroll(() => {
 				gap: 32rpx;
 				color: var(--text-color-senary);
 				margin-bottom: 4rpx;
+
+				&:hover {
+					cursor: pointer;
+				}
 			}
 
 			// 地標
@@ -883,10 +916,16 @@ onPageScroll(() => {
 		padding-left: 8rpx;
 		margin-bottom: 24rpx;
 
+		&:hover {
+			cursor: pointer;
+		}
+
 		::v-deep(.creator-home-page-data-profile-container-item-social-icon-item) {
 			uni-image {
-				width: 48rpx;
-				height: 48rpx;
+				width: 80rpx;
+				// height: 48rpx;
+				height: auto;
+				aspect-ratio: 1/1;
 			}
 		}
 	}
@@ -944,10 +983,6 @@ onPageScroll(() => {
 			color: var(--text-color-primary);
 			text-align: center;
 
-			@media screen and (min-width: 768px) and (max-width: 960px) {
-				padding: 16rpx 16rpx;
-			}
-
 			&::after {
 				display: none;
 			}
@@ -964,11 +999,8 @@ onPageScroll(() => {
 }
 
 .type-container {
+	width: 100%;
 	margin: 26rpx 0 16rpx;
-
-	@media screen and (min-width: 768px) and (max-width: 960px) {
-		margin: 16rpx 0 16rpx;
-	}
 
 	::v-deep(.uni-scroll-view) {
 		&::-webkit-scrollbar {
@@ -995,13 +1027,8 @@ onPageScroll(() => {
 		// height: fit-content;
 		aspect-ratio: 1/1;
 
-		@media screen and (min-width: 768px) and (max-width: 960px) {
-			width: 48rpx;
-			height: 48rpx;
-		}
-
 		.icon-gear {
-			font-size: var(--font-size-title-pc-xlarge) !important;
+			font-size: 42rpx !important;
 		}
 	}
 
@@ -1014,8 +1041,8 @@ onPageScroll(() => {
 		background: var(--text-color-denary);
 		border-radius: 10rpx;
 
-		@media screen and (min-width: 768px) and (max-width: 960px) {
-			padding: 12rpx 24rpx;
+		&:hover {
+			cursor: pointer;
 		}
 
 		&:first-child {
@@ -1023,7 +1050,7 @@ onPageScroll(() => {
 		}
 
 		&>.icon {
-			font-size: var(--font-size-content-pc-large) !important;
+			font-size: 28rpx !important;
 			color: var(--text-color-quaternary) !important;
 		}
 
@@ -1076,6 +1103,7 @@ onPageScroll(() => {
 	justify-content: center;
 	margin-top: 16rpx;
 	padding: 0 24rpx;
+	width: 100%;
 
 	.creator-home-page-content-type-container-item {
 		flex: 1;
@@ -1086,8 +1114,12 @@ onPageScroll(() => {
 		align-items: center;
 		justify-content: center;
 
+		&:hover {
+			cursor: pointer;
+		}
+
 		.icon {
-			font-size: var(--font-size-title-pc-xlarge) !important;
+			font-size: var(--font-size-title-pc) !important;
 		}
 
 
@@ -1193,7 +1225,7 @@ onPageScroll(() => {
 
 		.filter-select-item-icon {
 			visibility: hidden;
-			font-size: var(--font-size-content-pc) !important;
+			font-size: 24rpx !important;
 		}
 
 		// 控制勾選
@@ -1268,7 +1300,7 @@ onPageScroll(() => {
 
 
 		.popup-icon {
-			font-size: var(--font-size-content-pc-large) !important;
+			font-size: 28rpx !important;
 			color: var(--text-color-primary) !important;
 		}
 	}
@@ -1278,11 +1310,11 @@ onPageScroll(() => {
 		justify-content: center;
 		align-items: center;
 		gap: 38rpx;
-		font-size: var(--font-size-content-pc-small);
+		font-size: var(--font-size-content-pc);
 		color: var(--text-color-primary);
 
 		.popup-icon {
-			font-size: var(--font-size-content-pc-large) !important;
+			font-size: 28rpx !important;
 			color: var(--text-color-primary) !important;
 		}
 	}
@@ -1328,12 +1360,12 @@ onPageScroll(() => {
 
 		.uni-input-placeholder {
 			color: var(--text-color-quaternary) !important;
-			font-size: var(--font-size-content-pc-large);
+			font-size: var(--font-size-content-pc);
 		}
 
 		.uni-easyinput__content-input {
 			color: var(--text-color-primary) !important;
-			font-size: var(--font-size-content-pc-large);
+			font-size: var(--font-size-content-pc);
 		}
 	}
 

@@ -107,12 +107,14 @@ const handleCreatorSetMenu = () => {
 <style lang="scss" scoped>
 // HEADER
 .header-container {
+	width: 100%;
 	position: relative;
 	display: flex;
 	justify-content: flex-end;
 	// padding: 24rpx 0;
-	margin: 68rpx 40rpx 32rpx;
+	padding: 0rpx 40rpx;
 	gap: 40rpx;
+
 
 	.header-container-back-button {
 		position: absolute;
@@ -129,7 +131,7 @@ const handleCreatorSetMenu = () => {
 	}
 
 	.header-container-title {
-		font-size: 32rpx;
+		font-size: var(--font-size-title-pc);
 		font-weight: 500;
 	}
 }
@@ -149,8 +151,12 @@ const handleCreatorSetMenu = () => {
 		align-items: center;
 		gap: 32rpx;
 
+		&:hover {
+			cursor: pointer;
+		}
+
 		.item-container-item-icon {
-			font-size: 36rpx !important;
+			font-size: var(--font-size-title-pc-xlarge) !important;
 			color: var(--text-color-primary) !important;
 		}
 	}

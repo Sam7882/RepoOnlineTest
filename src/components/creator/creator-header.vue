@@ -2,7 +2,7 @@
 	<!-- 創作者HeaderNav -->
 	<view class="header-container">
 		<view class="header-container-title">
-			<view class="header-container-back-button" v-if="!isCreator" @click="handleBack">
+			<view class="header-container-back-button" v-if="!isCreator && openBack" @click="handleBack">
 				<uni-icons class="header-nav-icon" type="left" size="20" color="var(--text-color-primary)"></uni-icons>
 			</view>
 			<text class="header-container-title-text" @click="switchIsCreator" v-if="!isCreator">{{
@@ -53,6 +53,10 @@ const props = defineProps({
 	isCreator: {
 		type: Boolean,
 		default: false
+	},
+	openBack: {
+		type: Boolean,
+		default: true
 	}
 })
 const isCreator = ref(props.isCreator || false)
@@ -111,14 +115,16 @@ const handleCreatorSetMenu = () => {
 	position: relative;
 	display: flex;
 	justify-content: flex-end;
-	// padding: 24rpx 0;
-	padding: 0rpx 40rpx;
+	padding: 24rpx 32rpx;
 	gap: 40rpx;
 
+	@media screen and (min-width: 961px) {
+		padding: 0rpx 40rpx;
+	}
 
 	.header-container-back-button {
 		position: absolute;
-		left: 0;
+		left: 32rpx;
 		top: 50%;
 		transform: translateY(-50%);
 	}
@@ -144,6 +150,10 @@ const handleCreatorSetMenu = () => {
 	// padding: 24rpx 0;
 	// padding: 68rpx 40rpx 32rpx;
 	gap: 28rpx;
+
+	@media screen and (min-width: 961px) {
+		gap: 64rpx;
+	}
 
 	.item-container-item-top-menu {
 		display: flex;

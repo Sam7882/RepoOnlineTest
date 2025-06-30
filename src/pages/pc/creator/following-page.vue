@@ -1,5 +1,5 @@
 <template>
-	<view class="wallet-page">
+	<view class="wallet-page pc-content-layout-center-style">
 		<!-- header 導航-->
 		<c-headerNav class="wallet-page-header" :title="'jesiicatestid'" :openSearch="true" @search="showSearch" />
 
@@ -203,7 +203,34 @@ onShow(() => {
 <style lang="scss" scoped>
 .wallet-page {
 	background-color: var(--background-color);
-	// padding: 0 100rpx;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 0 32rpx;
+	padding-top: 24rpx;
+	background-color: var(--background-color-light);
+	color: var(--text-color-primary);
+
+	// 設定窗口最大寬度
+	max-width: var(--setting-page-maxWidth);
+
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			left: 0;
+		}
+	}
 }
 
 .wallet-page-header {
@@ -223,7 +250,7 @@ onShow(() => {
 	.wallet-category-item {
 		flex: 1;
 		padding: 0 32rpx 20rpx;
-		font-size: var(--font-size-title-pc);
+		font-size: var(--font-size-title-pc-large);
 		color: var(--text-color-primary);
 		text-align: center;
 
@@ -239,10 +266,6 @@ onShow(() => {
 	::v-deep(.uni-list-item__container) {
 		.uni-list-item__container {
 			padding: 28rpx 0;
-
-			@media screen and (min-width: 768px) and (max-width: 960px) {
-				padding: 16rpx 0;
-			}
 		}
 	}
 }
@@ -272,7 +295,7 @@ onShow(() => {
 		}
 
 		.wallet-amount-item {
-			font-size: var(--font-size-title-pc-xlarge);
+			font-size: 48rpx;
 			color: var(--text-color-primary);
 		}
 	}
@@ -301,12 +324,6 @@ onShow(() => {
 			background: var(--primary-color);
 			border-radius: 100%;
 			overflow: hidden;
-
-			@media screen and (min-width: 768px) and (max-width: 960px) {
-				width: 80rpx;
-				height: 80rpx;
-				border: 4rpx solid var(--primary-color);
-			}
 
 			::v-deep(.wallet-account-avatar) {
 				uni-image {
@@ -345,7 +362,7 @@ onShow(() => {
 				justify-content: space-between;
 
 				.wallet-account-info-title {
-					font-size: var(--font-size-title-pc-large);
+					font-size: var(--font-size-title-pc);
 					color: var(--text-color-primary);
 				}
 
@@ -370,7 +387,7 @@ onShow(() => {
 
 	.wallet-account-total-amount-container {
 		margin-right: 32rpx;
-		font-size: var(--font-size-content-pc);
+		font-size: 24rpx;
 		color: var(--text-color-primary);
 		transform: translateY(-10rpx);
 	}
@@ -411,11 +428,11 @@ onShow(() => {
 			}
 
 			.wallet-content-container-bottom-data-item-title {
-				font-size: var(--font-size-content-pc-small);
+				font-size: 16rpx;
 			}
 
 			.wallet-content-container-bottom-data-item-value {
-				font-size: var(--font-size-title-pc-xlarge);
+				font-size: 40rpx;
 				font-weight: 300;
 			}
 		}
@@ -426,7 +443,7 @@ onShow(() => {
 		width: 50%;
 
 		.wallet-content-container-bottom-button {
-			font-size: var(--font-size-content-pc);
+			font-size: 24rpx;
 			line-height: 1;
 			padding: 24rpx 64rpx;
 			border-radius: 16rpx;
@@ -450,7 +467,7 @@ onShow(() => {
 
 	.wallet-content-container-bottom-record-title-container {
 		display: flex;
-		font-size: var(--font-size-content-pc);
+		font-size: 24rpx;
 		color: var(--text-color-primary);
 	}
 
@@ -460,26 +477,20 @@ onShow(() => {
 		gap: 48rpx;
 
 		.wallet-content-container-bottom-record-list-item-amount-icon {
-			font-size: var(--font-size-content-pc) !important;
+			font-size: 24rpx !important;
 			// padding-bottom: 4rpx;
 		}
 	}
 }
 
 .wallet-content-container-bottom-following-list-item-button {
-	min-width: 160rpx;
+	min-width: 180rpx;
 	border-radius: 10rpx;
 	padding: 20rpx 48rpx;
 	line-height: 1;
-	font-size: var(--font-size-content-pc);
+	font-size: var(--font-size-content-pc-small);
 	background-color: var(--primary-color);
 	color: var(--text-color-secondary);
-
-	@media screen and (min-width: 768px) and (max-width: 960px) {
-		min-width: 120rpx;
-		padding: 16rpx 32rpx;
-		font-size: var(--font-size-content-pc-small);
-	}
 
 	&::after {
 		display: none;

@@ -1,81 +1,118 @@
 <template>
-	<view class="wallet-page">
-		<!-- header 導航-->
-		<c-headerNav class="wallet-page-header" :title="'jesiicatestid'" :openSearch="true" @search="showSearch" />
-
-		<!-- 類別 -->
-		<view class="wallet-category-container">
-			<template v-for="(item, index) in categoryList" :key="index">
-				<view class="wallet-category-item" :class="{ active: categoryValue === item.value }"
-					@click="switchCategory(item.value)">
-					<text class="wallet-category-item-text">{{ item.name }} {{ item.num }}</text>
+	<uni-popup ref="popupRef" :type="isPc ? 'center' : 'bottom'" :borderRadius="isPc ? '32rpx' : '60rpx 60rpx 0 0'"
+		background-color="#f6f6f6">
+		<view class="popup-container">
+			<!-- 標題與關閉 -->
+			<view class="popup-header">
+				<view class="header-title">
+					<text class="title">{{ 'jesiicatestid' }}</text>
+					<view class="deco-line"></view>
 				</view>
-			</template>
-		</view>
+				<!--內容容器 -->
+				<!-- <view class="content-container">
 
-		<!-- 搜尋容器 -->
-		<view class="wallet-search-container" v-if="searchStatus">
-			<uni-search-bar v-model="searchText" :placeholder="$t('common.search')" @input="handleSearch" />
-		</view>
+		</view> -->
+				<view class="icon-container popup-close-container">
+					<uni-icons class="icons" type="closeempty" size="24" @click="close" />
+				</view>
+			</view>
+			<view class="popup-content">
+				<!-- 類別 -->
+				<view class="wallet-category-container">
+					<template v-for="(item, index) in categoryList" :key="index">
+						<view class="wallet-category-item" :class="{ active: categoryValue === item.value }"
+							@click="switchCategory(item.value)">
+							<text class="wallet-category-item-text">{{ item.name }} {{ item.num }}</text>
+						</view>
+					</template>
+				</view>
+				<!-- 搜尋容器 -->
+				<view class="wallet-search-container">
+					<uni-search-bar v-model="searchText" :placeholder="$t('common.search')" @input="handleSearch" />
+				</view>
 
-		<!--內容容器 -->
-		<view class="wallet-content-container">
-			<!-- 訂閱/購買紀錄 -->
-			<view class="wallet-content-container-bottom-record-container">
-				<!-- 紀錄列表 垂直排序 -->
-				<uni-list :border="false" class="wallet-content-container-bottom-record-list-container">
-					<!-- 紀錄 space-between 左右排列 -->
-					<template v-for="(item, index) in renderFollowingList" :key="index">
-						<uni-list-item :border="false" class="wallet-content-container-bottom-record-list-item">
-							<template #body>
-								<!-- 帳號頭像和錢包總額文字 水平排列 -->
-								<view class="wallet-account-container wallet-account-container-record">
-									<!-- 帳號頭像 垂直排列 -->
-									<view class="wallet-account-info-container">
-										<!-- 頭像 -->
-										<view class="wallet-account-avatar-container">
-											<image class="wallet-account-avatar" :src="item.avatar" mode="widthFix">
-											</image>
-										</view>
-										<!-- 名稱與帳號 -->
-										<view class="wallet-account-info-name-container">
-											<view class="wallet-account-info-name-title-container">
-												<text class="wallet-account-info-title">{{ item.name }}</text>
-												<!-- 認證圖標 -->
-												<view class="wallet-account-info-prove-container">
-													<uni-icons type="icon-community-prove" custom-prefix="icon" size="16"
-														color="var(--text-color-senary)"></uni-icons>
+				<!--內容容器 -->
+				<view class="wallet-content-container">
+					<!-- 訂閱/購買紀錄 -->
+					<view class="wallet-content-container-bottom-record-container">
+						<!-- 紀錄列表 垂直排序 -->
+						<uni-list :border="false" class="wallet-content-container-bottom-record-list-container">
+							<!-- 紀錄 space-between 左右排列 -->
+							<template v-for="(item, index) in renderFollowingList" :key="index">
+								<uni-list-item :border="false" class="wallet-content-container-bottom-record-list-item">
+									<template #body>
+										<!-- 帳號頭像和錢包總額文字 水平排列 -->
+										<view class="wallet-account-container wallet-account-container-record">
+											<!-- 帳號頭像 垂直排列 -->
+											<view class="wallet-account-info-container">
+												<!-- 頭像 -->
+												<view class="wallet-account-avatar-container">
+													<image class="wallet-account-avatar" :src="item.avatar" mode="widthFix">
+													</image>
+												</view>
+												<!-- 名稱與帳號 -->
+												<view class="wallet-account-info-name-container">
+													<view class="wallet-account-info-name-title-container">
+														<text class="wallet-account-info-title">{{ item.name }}</text>
+														<!-- 認證圖標 -->
+														<view class="wallet-account-info-prove-container">
+															<uni-icons type="icon-community-prove" custom-prefix="icon" size="16"
+																color="var(--text-color-senary)"></uni-icons>
+														</view>
+													</view>
+													<view class="wallet-account-info-name-account-container">
+														<text class="wallet-account-info-account">{{ item.account }}</text>
+													</view>
 												</view>
 											</view>
-											<view class="wallet-account-info-name-account-container">
-												<text class="wallet-account-info-account">{{ item.account }}</text>
+											<!-- 靠右按鈕 -->
+											<view class="wallet-content-container-bottom-following-list-item-button-container btn-container">
+												<!-- 關注按鈕 -->
+												<button tpye="button" class="wallet-content-container-bottom-following-list-item-button btn"
+													:class="{ 'unActive': item.following }" @click="switchFollowing(item)">
+													{{ item.following ? $t('creator.following') : $t('creator.unFollowing') }}
+												</button>
 											</view>
 										</view>
-									</view>
-									<!-- 靠右按鈕 -->
-									<view class="wallet-content-container-bottom-following-list-item-button-container">
-										<!-- 關注按鈕 -->
-										<button tpye="button" class="wallet-content-container-bottom-following-list-item-button"
-											:class="{ 'unActive': item.following }" @click="switchFollowing(item)">
-											{{ item.following ? $t('creator.following') : $t('creator.unFollowing') }}
-										</button>
-									</view>
-								</view>
+									</template>
+								</uni-list-item>
 							</template>
-						</uni-list-item>
-					</template>
-				</uni-list>
+						</uni-list>
+					</view>
+				</view>
+
 			</view>
 		</view>
-	</view>
+	</uni-popup>
+
+	<c-confirmPopUp ref="confirmPopUp" />
 </template>
 
 <script setup lang="ts">
-// TEMP: 關注頁面
+// TEMP: 創作者設定-封鎖頁編輯
 import { onShow } from '@dcloudio/uni-app';
+import { useViewportStore } from '@/stores/useViewportStore'
 import { checkViewportAutoReplace } from '@/utils/routers';
 import { useI18n } from 'vue-i18n'
+const viewportStore = useViewportStore()
+const { isPc } = storeToRefs(viewportStore)
+const emit = defineEmits(['close'])
+const popupRef = ref()
+// 打開
+const open = () => {
+	popupRef.value?.open()
+}
+// 確認是否有按下 保存的判斷依據
+const haveClickConfirm = ref(false)
+const close = () => {
+	popupRef.value?.close()
+	emit('close')
+}
+
+defineExpose({ open, close })
+
 const { t } = useI18n()
+
 const followingList = ref([
 	{
 		following: true,
@@ -134,8 +171,6 @@ const followingList = ref([
 ])
 // 搜尋文字
 const searchText = ref('')
-// 搜尋欄顯示狀態
-const searchStatus = ref(false)
 
 // 渲染列表
 const renderFollowingList = computed(() => {
@@ -178,14 +213,6 @@ const switchFollowing = (item: any) => {
 	item.following = !item.following
 }
 
-// 顯示搜尋欄
-const showSearch = (status: boolean) => {
-	searchStatus.value = status
-	if (!status) {
-		searchText.value = ''
-	}
-}
-
 // 搜尋文字替換處理
 const handleSearch = (text: string) => {
 	searchText.value = text.trim()
@@ -193,17 +220,206 @@ const handleSearch = (text: string) => {
 
 
 onShow(() => {
-	checkViewportAutoReplace()
 	// 檢查初始化
 	// checkInitData()
 })
 
 </script>
 
+<style scoped lang="scss">
+::v-deep(.uni-popup) {
+	& {
+		z-index: var(--z-index-max) !important;
+		overflow: hidden;
+	}
+}
+
+.popup-container {
+	padding: 32rpx 0;
+	border-radius: 60rpx 60rpx 0 0;
+	background-color: var(--background-color-light);
+	width: fit-content;
+	overflow: visible;
+
+
+	@media screen and (min-width: 961px) {
+		border-radius: 32rpx;
+		width: 80vw;
+		max-width: 800rpx;
+	}
+
+	@media screen and (min-width: 1920px) {
+		max-width: 1000rpx;
+	}
+
+	@media screen and (min-width: 2560px) {
+		max-width: 1200rpx;
+	}
+}
+
+.popup-header {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	overflow: visible;
+}
+
+.header-title {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	.title {
+		font-size: var(--font-size-title-pc-xlarge);
+	}
+
+	.deco-line {
+		width: 100%;
+		margin: 0;
+		margin-top: 16rpx;
+		height: 4px;
+	}
+}
+
+.popup-close-container {
+	position: absolute;
+	top: 50%;
+	right: 64rpx;
+	z-index: 10;
+	transform: translateY(-70%);
+
+	.popup-close {
+		font-size: var(--font-size-title-pc-xlarge) !important;
+	}
+}
+
+
+.popup-title {
+	font-size: var(--font-size-title-pc-large);
+}
+
+.popup-content {
+	background-color: var(--background-color-light);
+	padding: 40rpx 0;
+	border-radius: 40rpx;
+	overflow: visible;
+}
+
+.popup-subtitle {
+	font-size: var(--font-size-content-pc-small);
+	margin-bottom: 16rpx;
+	color: var(--text-color-primary);
+}
+
+.popup-options {
+	display: flex;
+	flex-direction: column;
+	gap: 32rpx;
+	margin-bottom: 64rpx;
+}
+
+.popup-option {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.popup-option-main {
+	display: flex;
+	flex-direction: column;
+	gap: 4rpx;
+}
+
+
+.popup-option-title {
+	font-size: var(--font-size-title-pc);
+	color: var(--text-color-primary);
+}
+
+.popup-option-desc {
+	font-size: var(--font-size-content-pc-small);
+	color: var(--text-color-quaternary);
+}
+
+.popup-option-radio-container {
+	position: relative;
+
+	.popup-option-radio {
+		opacity: 0;
+	}
+}
+
+.popup-option-custom-checked {
+	z-index: 10;
+	position: absolute;
+	right: 4px;
+	top: 2px;
+
+	.popup-option-custom-checked-image {
+		width: 34rpx;
+		height: 34rpx !important;
+	}
+
+	::v-deep(.popup-option-custom-checked-image) {
+
+		// width: 24rpx;
+		// height: 24rpx;
+	}
+}
+
+.popup-confirm-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.popup-confirm {
+	display: inline-block;
+	background-color: var(--primary-color);
+	color: #fff;
+	border-radius: 20rpx;
+	padding: 20rpx 96rpx;
+	font-size: var(--font-size-content-pc);
+	line-height: 1;
+}
+</style>
+
 <style lang="scss" scoped>
 .wallet-page {
 	background-color: var(--background-color);
-	// padding: 0 100rpx;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 0 32rpx;
+	padding-top: 24rpx;
+	background-color: var(--background-color-light);
+	color: var(--text-color-primary);
+
+	// 設定窗口最大寬度
+	max-width: var(--setting-page-maxWidth);
+
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			left: 0;
+		}
+	}
 }
 
 .wallet-page-header {
@@ -223,9 +439,13 @@ onShow(() => {
 	.wallet-category-item {
 		flex: 1;
 		padding: 0 32rpx 20rpx;
-		font-size: var(--font-size-title-pc);
+		font-size: var(--font-size-title-pc-large);
 		color: var(--text-color-primary);
 		text-align: center;
+
+		&:hover {
+			cursor: pointer;
+		}
 
 		&.active {
 			border-bottom: 2px solid var(--text-color-primary);
@@ -233,16 +453,22 @@ onShow(() => {
 	}
 }
 
+.wallet-search-container {
+	padding: 0 32rpx;
+}
+
 .wallet-content-container {
-	padding: 0 44rpx;
+	// padding: 0 44rpx;
+
+	width: 100%;
+	height: 50dvh;
+	padding: 0 50rpx;
+	overflow-y: scroll;
 
 	::v-deep(.uni-list-item__container) {
 		.uni-list-item__container {
 			padding: 28rpx 0;
-
-			@media screen and (min-width: 768px) and (max-width: 960px) {
-				padding: 16rpx 0;
-			}
+			cursor: default;
 		}
 	}
 }
@@ -302,12 +528,6 @@ onShow(() => {
 			border-radius: 100%;
 			overflow: hidden;
 
-			@media screen and (min-width: 768px) and (max-width: 960px) {
-				width: 80rpx;
-				height: 80rpx;
-				border: 4rpx solid var(--primary-color);
-			}
-
 			::v-deep(.wallet-account-avatar) {
 				uni-image {
 					top: 50%;
@@ -345,7 +565,7 @@ onShow(() => {
 				justify-content: space-between;
 
 				.wallet-account-info-title {
-					font-size: var(--font-size-title-pc-large);
+					font-size: var(--font-size-title-pc);
 					color: var(--text-color-primary);
 				}
 
@@ -467,19 +687,13 @@ onShow(() => {
 }
 
 .wallet-content-container-bottom-following-list-item-button {
-	min-width: 160rpx;
-	border-radius: 10rpx;
+	min-width: 180rpx;
+	border-radius: 20rpx;
 	padding: 20rpx 48rpx;
 	line-height: 1;
-	font-size: var(--font-size-content-pc);
+	font-size: var(--font-size-content-pc-small);
 	background-color: var(--primary-color);
 	color: var(--text-color-secondary);
-
-	@media screen and (min-width: 768px) and (max-width: 960px) {
-		min-width: 120rpx;
-		padding: 16rpx 32rpx;
-		font-size: var(--font-size-content-pc-small);
-	}
 
 	&::after {
 		display: none;

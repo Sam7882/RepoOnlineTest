@@ -205,6 +205,10 @@ const closeFeedbackPopUp = () => {
 	align-items: center;
 	gap: 32rpx;
 
+	&:hover {
+		cursor: pointer;
+	}
+
 	.icon-item {
 		font-size: 36rpx !important;
 	}

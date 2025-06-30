@@ -29,7 +29,9 @@ export const useInitStore = defineStore('init', {
   state: (): InitState => ({
     siteInfo: {
     },
+    // 當前創作者ID
     creatorId: '',
+    // 登入資訊
     userInfo: {
       id: '',
       name: '',

@@ -267,7 +267,6 @@
 		<!-- 底部導航列 -->
 		<c-bottomNav :bgColor="'var(--background-color-light)'" :iconColor="'var(--text-color-primary)'"
 			:primaryMenu="'primary'" />
-		<c-noticePopUp ref="noticePopUpRef" />
 
 		<!-- 關注 -->
 		<c-bottomPopUp ref="followPopUpRef" class="followPopUp" @close="initfollowPopUp">
@@ -324,13 +323,18 @@ import { onPageScroll, onShow } from '@dcloudio/uni-app'
 import { toShare, toPostPreview, toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory, toCreatorEdit, toCreatorSelectMedia, toCreatorClassification, checkViewportAutoReplace } from '@/utils/routers'
 import { useInitStore } from '@/stores/useInitDataStore';
 import { usePostData } from '@/stores/usePostData'
+import { useI18n } from 'vue-i18n'
+
+const { openNotice } = inject('common')
+const { t } = useI18n()
 const postDataStore = usePostData()
 const { setSelectedMedia } = postDataStore
 const type = ref('all');
 const showSelect = ref(false);
 
 const initStore = useInitStore();
-const isCreator = computed(() => initStore.isCreator);
+// const isCreator = computed(() => initStore.isCreator);
+const isCreator = computed(() => false);
 console.log("🚀 ~ isCreator:", isCreator.value)
 
 // 用於計算 filterSelect 該顯示的位置
@@ -502,9 +506,8 @@ const handleShortStory = () => {
 const handleProfileEdit = () => {
 	toCreatorEdit()
 }
-const noticePopUpRef = ref(null)
 const openNoticePopUp = () => {
-	noticePopUpRef.value.open({
+	openNotice({
 		title: t('common.systemNotOpen'),
 		content: t('common.storeComingSoon'),
 	})
@@ -1260,6 +1263,10 @@ onPageScroll(() => {
 	align-items: center;
 	padding: 48rpx 0;
 
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		padding: 32rpx 0;
+	}
+
 	&>.icon-container {
 		position: absolute;
 		top: 50%;
@@ -1278,8 +1285,12 @@ onPageScroll(() => {
 		justify-content: center;
 		align-items: center;
 		gap: 38rpx;
-		font-size: var(--font-size-content-pc-small);
+		font-size: var(--font-size-title-pc);
 		color: var(--text-color-primary);
+
+		@media screen and (min-width: 768px) and (max-width: 960px) {
+			gap: 24rpx;
+		}
 
 		.popup-icon {
 			font-size: var(--font-size-content-pc-large) !important;
@@ -1299,6 +1310,11 @@ onPageScroll(() => {
 
 .followPopUp-container-item2 {
 	width: 100%;
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		margin-bottom: 32rpx;
+	}
+
 
 	&:first-child {
 		margin-bottom: 26rpx;

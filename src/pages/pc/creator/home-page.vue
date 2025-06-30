@@ -1,7 +1,7 @@
 <template>
 	<view class="creator-home-page">
 
-		<creator-header :isCreator="isCreator" />
+		<creator-header :isCreator="isCreator" :openBack="false" />
 
 
 		<view class="creator-home-page-data-container">
@@ -312,6 +312,7 @@
 		</c-bottomPopUp>
 
 		<pc-sharePopUp ref="sharePopUpRef" @close="initSharePopUp" />
+		<pc-followingPopUp ref="followingPopUpRef" @close="initFollowingPopUp" />
 	</view>
 </template>
 
@@ -322,7 +323,8 @@ import { onPageScroll, onShow } from '@dcloudio/uni-app'
 import { toShare, toPostPreview, toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory, toCreatorEdit, toCreatorSelectMedia, toCreatorClassification, checkViewportAutoReplace } from '@/utils/routers'
 import { useInitStore } from '@/stores/useInitDataStore';
 import { usePostData } from '@/stores/usePostData'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const { openNotice } = inject('common')
 const postDataStore = usePostData()
 const { setSelectedMedia } = postDataStore
@@ -330,7 +332,8 @@ const type = ref('all');
 const showSelect = ref(false);
 
 const initStore = useInitStore();
-const isCreator = computed(() => initStore.isCreator);
+// const isCreator = computed(() => initStore.isCreator);
+const isCreator = computed(() => false);
 console.log("🚀 ~ isCreator:", isCreator.value)
 
 // 用於計算 filterSelect 該顯示的位置
@@ -432,10 +435,7 @@ const getElementHeight = (selector = '#target') => {
 const handleSubscription = () => {
 	toSubscription()
 }
-// 跳到following頁
-const handleFollowing = () => {
-	toFollowing()
-}
+
 const followPopUpRef = ref(null)
 const isFollowing = ref(false)
 const setFallowing = () => {
@@ -516,6 +516,16 @@ const initSharePopUp = () => {
 // 跳轉到創作者分享頁
 const handleShare = () => {
 	sharePopUpRef.value.open()
+}
+
+// 關注彈窗
+const followingPopUpRef = ref(null)
+const initFollowingPopUp = () => {
+	// followingPopUpRef.value.close()
+	console.log("🚀 ~ initFollowingPopUp ~ close:")
+}
+const handleFollowing = () => {
+	followingPopUpRef.value.open()
 }
 
 // 上傳圖片
@@ -1198,7 +1208,7 @@ onPageScroll(() => {
 		}
 
 		.uni-scroll-view {
-			max-height: 150rpx;
+			max-height: 300rpx;
 			min-width: 200rpx;
 		}
 	}
@@ -1279,7 +1289,6 @@ onPageScroll(() => {
 
 	.deco-line {
 		width: 100%;
-		scale: 1.2;
 		margin: 0;
 	}
 }

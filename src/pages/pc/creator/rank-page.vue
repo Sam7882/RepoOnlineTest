@@ -23,50 +23,51 @@
 			</template>
 		</view>
 
-		<view class="firstRank-container">
-			<view class="firstRank-item" v-for="(item, index) in rankList.slice(0, 3)" :key="index">
-				<!-- 絕對位置 頭像 -->
-				<view class="firstRank-avatar-container">
-					<image class="firstRank-avatar" :src="item.avatar" mode="widthFix">
-					</image>
-				</view>
 
-				<view class="firstRank-medal-container">
-					<image v-if="item.rank === 1" class="firstRank-medal" src="/static/icons/rank/icon-rank-medal-1.png"
-						mode="widthFix">
-					</image>
-					<image v-if="item.rank === 2" class="firstRank-medal" src="/static/icons/rank/icon-rank-medal-2.png"
-						mode="widthFix">
-					</image>
-					<image v-if="item.rank === 3" class="firstRank-medal" src="/static/icons/rank/icon-rank-medal-3.png"
-						mode="widthFix">
-					</image>
-				</view>
-
-				<!-- 名稱與帳號 垂直排序 -->
-				<view class="firstRank-data-profile-container">
-					<!-- 創作者名稱與帳號 -->
-					<view class="firstRank-data-profile-container-item firstRank-data-profile-container-item-self-account">
-						<view class="firstRank-data-profile-container-item-text-container">
-							<text
-								class="firstRank-data-profile-container-item-text firstRank-data-profile-container-item-text-name">{{
-									item.name }}
-							</text>
-							<uni-icons class="firstRank-data-profile-container-item-text-name-icon" type="icon-community-prove"
-								custom-prefix="icon" size="24" color="var(--text-color-primary)"></uni-icons>
-						</view>
-						<text
-							class="firstRank-data-profile-container-item-text firstRank-data-profile-container-item-text-account">{{
-								item.account }}</text>
-						<text class="firstRank-data-profile-container-item-text firstRank-data-profile-container-item-text-num">{{
-							item.fansNum }}</text>
-					</view>
-				</view>
-			</view>
-		</view>
 
 		<!--內容容器 -->
 		<view class="rank-content-container">
+			<view class="firstRank-container">
+				<view class="firstRank-item" v-for="(item, index) in rankList.slice(0, 3)" :key="index">
+					<!-- 絕對位置 頭像 -->
+					<view class="firstRank-avatar-container">
+						<image class="firstRank-avatar" :src="item.avatar" mode="widthFix">
+						</image>
+					</view>
+
+					<view class="firstRank-medal-container">
+						<image v-if="item.rank === 1" class="firstRank-medal" src="/static/icons/rank/icon-rank-medal-1.png"
+							mode="widthFix">
+						</image>
+						<image v-if="item.rank === 2" class="firstRank-medal" src="/static/icons/rank/icon-rank-medal-2.png"
+							mode="widthFix">
+						</image>
+						<image v-if="item.rank === 3" class="firstRank-medal" src="/static/icons/rank/icon-rank-medal-3.png"
+							mode="widthFix">
+						</image>
+					</view>
+
+					<!-- 名稱與帳號 垂直排序 -->
+					<view class="firstRank-data-profile-container">
+						<!-- 創作者名稱與帳號 -->
+						<view class="firstRank-data-profile-container-item firstRank-data-profile-container-item-self-account">
+							<view class="firstRank-data-profile-container-item-text-container">
+								<text
+									class="firstRank-data-profile-container-item-text firstRank-data-profile-container-item-text-name">{{
+										item.name }}
+								</text>
+								<uni-icons class="firstRank-data-profile-container-item-text-name-icon" type="icon-community-prove"
+									custom-prefix="icon" size="24" color="var(--text-color-primary)"></uni-icons>
+							</view>
+							<text
+								class="firstRank-data-profile-container-item-text firstRank-data-profile-container-item-text-account">{{
+									item.account }}</text>
+							<text class="firstRank-data-profile-container-item-text firstRank-data-profile-container-item-text-num">{{
+								item.fansNum }}</text>
+						</view>
+					</view>
+				</view>
+			</view>
 			<!-- 訂閱/購買紀錄 -->
 			<view class="rank-content-container-bottom-record-container">
 				<!-- 紀錄列表 垂直排序 -->
@@ -329,8 +330,34 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .rank-page {
-	background-color: var(--background-color);
-	// padding: 0 100rpx;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 0 32rpx;
+	padding-top: 24rpx;
+	background-color: var(--background-color-light);
+	color: var(--text-color-primary);
+
+	// 設定窗口最大寬度
+	max-width: var(--setting-page-maxWidth);
+
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			left: 0;
+		}
+	}
 }
 
 .rank-page-header {
@@ -344,6 +371,7 @@ onShow(() => {
 
 
 .rank-category-container {
+	width: 90%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -351,7 +379,7 @@ onShow(() => {
 
 	.rank-category-item {
 		// flex: 1;
-		padding: 16rpx 88rpx 4rpx;
+		padding: 32rpx 88rpx 4rpx;
 		font-size: var(--font-size-title-pc);
 		color: var(--text-color-primary);
 		text-align: center;
@@ -363,6 +391,7 @@ onShow(() => {
 }
 
 .rankDate-category-container {
+	width: 90%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -390,10 +419,11 @@ onShow(() => {
 }
 
 .firstRank-container {
+	width: 100%;
 	display: flex;
 	justify-content: space-around;
 	align-items: flex-start;
-	padding: 36rpx 44rpx 0;
+	padding: 36rpx 0;
 
 	.firstRank-item:first-child {
 		order: 1;
@@ -420,11 +450,6 @@ onShow(() => {
 		width: 60rpx;
 		height: 60rpx;
 		aspect-ratio: 1/1;
-
-		@media screen and (min-width: 768px) and (max-width: 960px) {
-			width: 48rpx;
-			height: 48rpx;
-		}
 	}
 }
 
@@ -444,11 +469,6 @@ onShow(() => {
 		background: var(--primary-color);
 		border-radius: 100%;
 		overflow: hidden;
-
-		@media screen and (min-width: 768px) and (max-width: 960px) {
-			width: 120rpx;
-			height: 120rpx;
-		}
 
 
 		// transform: translate(-50%, -50%);
@@ -483,7 +503,7 @@ onShow(() => {
 		flex-direction: column;
 		align-items: center;
 		gap: 16rpx;
-		margin-bottom: 24rpx;
+		margin-bottom: 40rpx;
 
 		// gap: 4rpx;
 
@@ -503,7 +523,7 @@ onShow(() => {
 				}
 
 				.firstRank-data-profile-container-item-text-name {
-					font-size: var(--font-size-title-pc-small);
+					font-size: var(--font-size-content-pc-large);
 					font-weight: 500;
 					padding: 0 8rpx;
 				}
@@ -572,21 +592,20 @@ onShow(() => {
 		.btn {
 			padding: 24rpx;
 			min-width: 300rpx;
-			font-size: 32rpx;
+			font-size: var(--font-size-title-pc);
 		}
 	}
 }
 
 .rank-content-container {
-	padding: 0 44rpx 280rpx;
+	width: 80%;
+	height: 100%;
+	overflow-y: scroll;
+	padding: 0 24rpx 280rpx;
 
 	::v-deep(.uni-list-item__container) {
 		.uni-list-item__container {
 			padding: 28rpx 0;
-
-			@media screen and (min-width: 768px) and (max-width: 960px) {
-				padding: 12rpx 0;
-			}
 		}
 	}
 }
@@ -667,7 +686,7 @@ onShow(() => {
 
 				// 認證圖標
 				.icon-community-prove {
-					font-size: var(--font-size-title-pc-small) !important;
+					font-size: 28rpx !important;
 				}
 			}
 
@@ -676,8 +695,8 @@ onShow(() => {
 				height: fit-content;
 
 				.rank-account-info-account {
-					font-size: var(--font-size-content-pc);
-					color: var(--text-color-septenary);
+					font-size: var(--font-size-content-pc-small);
+					color: var(--text-color-gray3);
 					line-height: 1;
 				}
 			}
@@ -722,11 +741,11 @@ onShow(() => {
 .rank-bottom-myRank-container {
 	position: fixed;
 	bottom: 0;
-	left: 0;
-	right: 0;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	background: var(--primary-color);
+	max-width: var(--setting-page-maxWidth);
 
 	.rank-bottom-myRank-item {
 		position: relative;
@@ -735,10 +754,6 @@ onShow(() => {
 		align-items: center;
 		padding: 40rpx 44rpx;
 		background: var(--text-color-denary);
-
-		@media screen and (min-width: 768px) and (max-width: 960px) {
-			padding: 16rpx 44rpx;
-		}
 
 		.rank-account-container {
 			padding-top: 0;
@@ -788,7 +803,7 @@ onShow(() => {
 
 	.distance-container,
 	.distance-num-container {
-		font-size: var(--font-size-content-pc);
+		font-size: var(--font-size-content-pc-small);
 	}
 
 	.distance-num-container {

@@ -1,5 +1,12 @@
 <template>
 	<view class="story-container">
+		<view class="mask">
+			<!-- 關閉按鈕 -->
+			<view class="icon-container" @click="closeShortStory">
+				<uni-icons class="icon-item icon-close" type="closeempty" size="24" color="var(--text-color-secondary)" />
+			</view>
+		</view>
+
 		<!-- 多段影片進度條 -->
 		<view class="header-container">
 			<view class="progress-bar-group">
@@ -64,10 +71,7 @@
 					</view>
 					<!-- 舉報按鈕 -->
 					<c-reportPopUp iconColor="var(--text-color-secondary)" @open="resumeVideo" @close="pauseVideo" />
-					<!-- 關閉按鈕 -->
-					<view class="icon-container" @click="closeShortStory">
-						<uni-icons class="icon-item icon-close" type="closeempty" size="24" color="var(--text-color-secondary)" />
-					</view>
+
 				</view>
 			</view>
 		</view>
@@ -79,10 +83,13 @@
 			:enable-progress-gesture="false" :show-play-btn="false" :show-fullscreen-btn="false" :show-progress="false" />
 
 		<!-- 控制上下操控 -->
-		<view class="control-container" @touchstart.stop="pauseVideo" @touchend.stop="resumeVideo">
+		<view class="control-container" @touchstart.stop="pauseVideo" @touchend.stop="resumeVideo"
+			@mousedown.stop="pauseVideo" @mouseup.stop="resumeVideo">
 			<!-- 左右兩側往內延伸 25% -->
-			<view class="control-item" @touchstart="startTouch('prev')" @touchend="endTouch('prev')"></view>
-			<view class="control-item" @touchstart="startTouch('next')" @touchend="endTouch('next')"></view>
+			<view class="control-item" @touchstart="startTouch('prev')" @touchend="endTouch('prev')"
+				@mousedown="startTouch('prev')" @mouseup="endTouch('prev')"></view>
+			<view class="control-item" @touchstart="startTouch('next')" @touchend="endTouch('next')"
+				@mousedown="startTouch('next')" @mouseup="endTouch('next')"></view>
 		</view>
 	</view>
 </template>
@@ -214,26 +221,55 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .story-container {
-	position: relative;
-
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	aspect-ratio: 1 / 1.625;
+	width: 100%;
+	max-width: var(--video-maxWidth);
+	height: auto;
 	background-color: black;
 }
 
-.video {
+.mask {
 	position: fixed;
-	inset: 0;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	width: 100dvw;
 	height: 100dvh;
+	background-color: rgba(0, 0, 0, 1);
+	z-index: -1;
+
+	.icon-container {
+
+		position: absolute;
+		top: 48rpx;
+		right: 48rpx;
+		z-index: 1000;
+
+		.icon-item {
+			font-size: var(--font-size-title-pc-xlarge) !important;
+			color: var(--text-color-secondary) !important;
+		}
+	}
+}
+
+.video {
+	position: relative;
+	width: 100%;
+	height: 100%;
 	object-fit: cover;
 }
 
 .header-container {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	display: flex;
 	gap: 4px;
-	padding: 10px;
+	padding: 32rpx 20rpx;
 	width: 100%;
 	z-index: 10;
 	display: flex;
@@ -264,20 +300,26 @@ onShow(() => {
 
 /* 資訊 */
 .info-container {
+	margin-top: 16rpx;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.info-container-left,
+.info-container-left {
+	display: flex;
+	align-items: center;
+	gap: 32rpx;
+}
+
 .info-container-right {
 	display: flex;
 	align-items: center;
-	gap: 20rpx;
+	gap: 48rpx;
 }
 
 .icon-left {
-	font-size: 32rpx !important;
+	font-size: var(--font-size-title-pc) !important;
 	color: var(--text-color-secondary) !important;
 }
 
@@ -324,38 +366,38 @@ onShow(() => {
 	display: flex;
 	align-items: center;
 	color: var(--text-color-secondary);
-	font-size: 28rpx;
+	font-size: var(--font-size-content-pc-small);
 	gap: 6rpx;
 }
 
 .icon-prove {
-	font-size: 24rpx !important;
+	font-size: var(--font-size-content-pc) !important;
 	color: var(--text-color-secondary) !important;
 	translate: 0 4rpx;
 }
 
 .time {
-	font-size: 24rpx;
+	font-size: var(--font-size-content-pc);
 	color: var(--text-color-secondary);
 }
 
 .info-container-right {
 	.icon-container {
 		.icon-item {
-			font-size: 32rpx !important;
+			font-size: var(--font-size-title-pc) !important;
 			color: var(--text-color-secondary) !important;
 		}
-
 	}
 }
 
 /* 控制上下操控 */
 .control-container {
-	position: fixed;
+	position: absolute;
 	bottom: 0;
 	left: 0;
 	width: 100%;
 	height: 90%;
+	z-index: 100;
 
 	display: flex;
 	justify-content: space-between;

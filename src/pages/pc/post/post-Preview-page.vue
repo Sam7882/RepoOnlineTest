@@ -223,7 +223,7 @@ uni-page-body {
 	width: 100%;
 	height: auto;
 	// TODO: 上傳圖片比例
-	aspect-ratio: 9 / 16;
+	aspect-ratio: 1/1.625;
 
 	::v-deep(.preview-container-image-item) {
 		uni-image {

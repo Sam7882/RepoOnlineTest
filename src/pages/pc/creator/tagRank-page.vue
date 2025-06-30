@@ -236,6 +236,33 @@ onShow(() => {
 .rank-page {
 	background-color: var(--background-color);
 	// padding: 0 100rpx;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 0 32rpx;
+	padding-top: 24rpx;
+	background-color: var(--background-color-light);
+	color: var(--text-color-primary);
+
+	// 設定窗口最大寬度
+	max-width: var(--setting-page-maxWidth);
+
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			left: 0;
+		}
+	}
 }
 
 .rank-page-header {
@@ -324,8 +351,8 @@ onShow(() => {
 	margin-right: 24rpx;
 
 	.firstRank-medal {
-		width: 60rpx;
-		height: 60rpx;
+		width: 80rpx;
+		height: 80rpx;
 		aspect-ratio: 1/1;
 	}
 }
@@ -475,6 +502,7 @@ onShow(() => {
 }
 
 .rank-page-header-container {
+	width: 90%;
 	padding: 22rpx 44rpx 0;
 
 	display: flex;
@@ -486,15 +514,14 @@ onShow(() => {
 }
 
 .rank-content-container {
+	width: 90%;
+	height: 100%;
+	overflow-y: scroll;
 	padding: 0 44rpx 0 30rpx;
 
 	::v-deep(.uni-list-item__container) {
 		.uni-list-item__container {
 			padding: 20rpx 0;
-
-			@media screen and (min-width: 768px) and (max-width: 960px) {
-				padding: 16rpx 0;
-			}
 		}
 	}
 }
@@ -532,12 +559,6 @@ onShow(() => {
 			background: var(--primary-color);
 			border-radius: 100%;
 			overflow: hidden;
-
-			@media screen and (min-width: 768px) and (max-width: 960px) {
-				width: 80rpx;
-				height: 80rpx;
-				border: 4rpx solid var(--primary-color);
-			}
 
 			::v-deep(.rank-account-avatar) {
 				uni-image {

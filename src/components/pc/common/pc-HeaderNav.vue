@@ -47,13 +47,15 @@ const handleSearch = () => {
 	padding-bottom: 48rpx !important;
 
 	@media screen and (min-width: 961px) and (max-width: 1280px) {
-		flex-direction: column;
 		align-items: stretch;
 		gap: 24rpx;
+		padding-top: 32rpx !important;
+		padding-bottom: 32rpx !important;
 	}
 }
 
 .search-bar {
+	flex: 1;
 	display: flex;
 	gap: 24rpx;
 	align-items: center;
@@ -118,7 +120,6 @@ const handleSearch = () => {
 	gap: 80rpx;
 
 	@media screen and (min-width: 961px) and (max-width: 1280px) {
-		flex: 1;
 		justify-content: space-between;
 	}
 }

@@ -194,7 +194,7 @@ page {
 .content-area {
 
 	padding: 0 var(--main-area-padding);
-	padding-bottom: 96rpx;
+	// padding-bottom: 80rpx;
 }
 
 .content-area {

@@ -1,34 +1,34 @@
 <template>
   <!-- #ifdef APP-NVUE -->
-  <view :style="full" v-if="datas.length > 0">
+  <view :style="isPc ? { 'width': '100%', 'height': '100%' } : full" v-if="datas.length > 0">
     <!-- #endif -->
     <!-- #ifndef APP-NVUE -->
-    <view :style="full">
+    <view :style="isPc ? { 'width': '100%', 'height': '100%' } : full">
       <!-- #endif -->
       <!-- #ifdef APP-VUE -->
-      <view :style="full" class="appTipView">
+      <view :style="isPc ? { 'width': '100%', 'height': '100%' } : full" class="appTipView">
         <text class="appTipText">
           在 VUE 页面中 无法使用 ml-swiper-v3 组件，请改用 NVUE 页面
         </text>
       </view>
       <!-- #endif -->
       <!-- #ifndef APP-VUE -->
-      <swiper :style="full" class="ml-swiper-v3" :current="current" :circular="useSwiper" vertical
-        :disable-touch="touchable" :duration="config.duration" touchable @change="change" @transition="transition"
-        :current-item-id="`s${current}`" @touchstart="start" @touchmove="move" @touchend="end"
-        @animationfinish="animationfinish">
-        <swiper-item ref="ani" :style="full" class="" data-dom="swiperItem" v-for="(item, index) in datas" :key="index"
-          :item-id="`s${index}`">
-          <view class="ml-swiper-v3-item" :style="full" @longpress="longpress(item)">
+      <swiper class="ml-swiper-v3" :current="current" :circular="useSwiper" vertical :disable-touch="touchable"
+        :duration="config.duration" touchable @change="change" @transition="transition" :current-item-id="`s${current}`"
+        @touchstart="start" @touchmove="move" @touchend="end" @animationfinish="animationfinish">
+        <swiper-item ref="ani" :style="isPc ? { 'width': '100%', 'height': '100%' } : full" class=""
+          data-dom="swiperItem" v-for="(item, index) in datas" :key="index" :item-id="`s${index}`">
+          <view class="ml-swiper-v3-item" :style="isPc ? 'width: 100%; height: 100%;' : full"
+            @longpress="longpress(item)">
             <template v-if="item.imgList && Array.isArray(item.imgList) && item.imgList.length > 0">
-              <view :style="full" @tap="onclick(item)">
-                <ml-swiper-image :imgList="item.imgList" :width="config.width" :height="config.height"
-                  @imgChange="imgChange" />
+              <view :style="isPc ? { 'width': '100%', 'height': '100%' } : full" @tap="onclick(item)">
+                <ml-swiper-image class="full image-full" :imgList="item.imgList" :width="config.width"
+                  :height="config.height" @imgChange="imgChange" />
               </view>
             </template>
             <template v-else>
               <!-- #ifdef H5 | WEB -->
-              <view class="swiper-video" :style="videoFull" v-if="config.useVideo">
+              <view class="swiper-video" :style="{ width: '100%', height: '100%' }" v-if="config.useVideo">
                 <!-- 替換為用陣列渲染的方式 -->
                 <template v-if="item">
                   <video :id="`video_${index}`" :src="`${item.url || item.src || ''}`" :poster="`${item.poster}`"
@@ -37,7 +37,7 @@
                     enable-progress-gesture="false" webkit-playsinline="true" playsinline="true"
                     x-webkit-airplay="allow" x5-video-player-type="h5-page" :object-fit="config.objectFit"
                     controlsList="nodownload" :codec="config.codec" play-btn-position="center"
-                    :style="`${videoFull}z-index:0;;pointer-events:auto !important;object-position: center;`"
+                    :style="`${videoFull}z-index:0;;pointer-events:auto !important;object-position: center;width: 100%; height: 100%;`"
                     :key="`${videoKey}`" :controls="pagedatas.fullScreen" :autoplay="false" show-center-play-btn
                     :show-loading="config.loading" :duration="item.duration || 0" :initial-time="item.initialTime || 0"
                     @play="onplay" :play-strategy="config.playStrategy" @pause="onpause" @ended="onended"
@@ -193,6 +193,10 @@ import mlSwiperImage from "./ml-swiper-image.vue";
 // #ifdef APP-NVUE
 import useAnimation from "./useAnimation.js";
 // #endif
+
+import { useViewportStore } from '@/stores/useViewportStore'
+
+
 export default {
   name: "mlSwiperV3",
   components: { mlSwiperImage },
@@ -274,6 +278,7 @@ export default {
           useVideo: true,
           /** swiper 滑动动画时长 */
           duration: 300,
+          // TODO: 確認影片是否要整個影片展出，還是要經過COVER 裁切
           /** contain：包含，fill：填充，cover：覆盖 */
           objectFit: "contain",
           /** hardware：硬解码，software：ffmpeg软解码 */
@@ -366,6 +371,7 @@ export default {
         playStrategy: 1
       },
       soundMute: true, // 預設為靜音
+      isPc: false, // PC 端判斷
     };
   },
   computed: {
@@ -433,6 +439,10 @@ export default {
     }
   },
   created() {
+    // 初始化 isPc 屬性
+    const viewportStore = useViewportStore();
+    this.isPc = viewportStore.isPc;
+
     this.datas = [];
     const length = this.list.length;
     if (length < 3) {
@@ -1226,12 +1236,35 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.full {
+  @media screen and (min-width: 961px) {
+    width: 100%;
+    height: 100%;
+  }
+
+  // 針對組件圖片設定
+  ::v-deep(.image-full) {
+    uni-swiper {
+      width: 100%;
+      height: 100%;
+
+      uni-image {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+
 .ml-swiper-v3 {
   position: relative;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
+  height: 100%;
   /* #ifndef APP-NVUE */
   max-width: 100%;
   max-height: 100%;
@@ -1293,6 +1326,10 @@ export default {
   flex-direction: column;
   justify-content: center;
   z-index: 99;
+
+  @media screen and (min-width: 961px) {
+    height: 100%;
+  }
 }
 
 .ml-swiper-v3-bottom {

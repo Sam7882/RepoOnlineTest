@@ -182,15 +182,11 @@
 				</template> -->
 			</ml-swiper-v3>
 		</view>
-		<!-- 底部導航 -->
-		<c-bottomNav :bgColor="'var(--background-color-dark)'" :iconColor="'var(--text-color-secondary)'"
-			:primaryMenu="'primary'" />
-		<c-confirmPopUp ref="confirmModal" />
+
 		<play-popMessage ref="videoPopMessage"></play-popMessage>
 		<play-popSponsor ref="videoPopSponsor"></play-popSponsor>
 		<play-popSubscription ref="videoPopSubscription"></play-popSubscription>
 		<play-popImgFullScreen ref="videoPopImgFullScreen" :imgs="imageFullScreenImgs"></play-popImgFullScreen>
-		<c-sharePopUp ref="sharePopUp"></c-sharePopUp>
 	</view>
 </template>
 
@@ -200,9 +196,12 @@ import { onShow, onHide } from '@dcloudio/uni-app'
 import { toSearchHome, toCreatorHome, toPlayArticleGallery, checkViewportAutoReplace } from '@/utils/routers'
 import { useInitStore } from '@/stores/useInitDataStore';
 import { useI18n } from 'vue-i18n';
+const { openConfirm, openSharePopUp } = inject('common')
+
 const { t } = useI18n();
 const initStore = useInitStore();
 const { setCreatorId } = initStore;
+
 /* NOTE:非播放組件  */
 // 右側工具欄位
 const isFavorite = ref(false); // 是否喜歡
@@ -213,8 +212,6 @@ const videoPopSubscription = ref(null) // 訂閱彈跳窗口
 const videoPopImgFullScreen = ref(null) // 圖片全螢幕彈跳窗口
 const playing = ref(true); // 是否播放
 const imageFullScreenImgs = ref([]) // 圖片全螢幕圖片列表
-// POPUP確認窗口
-const confirmModal = ref(null)
 
 // 頂部header fn
 const toFocus = () => {
@@ -252,7 +249,7 @@ const toSubscription = () => {
 		}
 	}
 	else {
-		confirmModal.value.open({
+		openConfirm({
 			title: t('play.unFollowCreator'),
 			confirmBtnText: t('play.unFollowCreator'),
 			onConfirm: () => {
@@ -281,10 +278,9 @@ const openPopMessage = () => {
 	videoPopMessage.value?.open()
 }
 // 分享
-const sharePopUp = ref(null)
 const toShare = () => {
 	console.log("🚀 == 分享 == ")
-	sharePopUp.value?.open()
+	openSharePopUp()
 	/* NOTE:暫代 去往該圖文的總攬 */
 	// toPlayArticleGallery()
 }
@@ -316,7 +312,7 @@ const closeFilter = (item) => {
 }
 const setFilter = () => {
 	console.log("🚀 == 過濾器 == ")
-	confirmModal.value.open({
+	openConfirm({
 		title: t('play.disableFilter'),
 		content: t('play.disableFilterTip'),
 		onConfirm: () => {
@@ -361,8 +357,9 @@ const touch = reactive({
 /** 组件配置  */
 // NOTE: 影音頁 播放器高度無法自動偵測組件的高度，需要直接寫死數值才能正確渲染
 const options = reactive({
-	// width: uni.getSystemInfoSync().windowWidth, // 组件宽度
-	height: uni.getSystemInfoSync().windowHeight - uni.getSystemInfoSync().statusBarHeight - uni.getSystemInfoSync().safeAreaInsets.bottom - 68, // 组件高度(适配安全距离)
+	width: '100%', // 组件宽度
+	// height: uni.getSystemInfoSync().windowHeight - uni.getSystemInfoSync().statusBarHeight - uni.getSystemInfoSync().safeAreaInsets.bottom - 68, // 组件高度(适配安全距离)
+	height: '100%', // 组件高度(适配安全距离)
 	loadingText: t('common.loading'), // 初始化时的提示内容
 	criticalVal: 2, // 临界值
 	showProgress: true, // 是否显示进度条
@@ -510,7 +507,7 @@ function changed(event) {
 
 /** 进度变更事件 */
 function timeupdate(event) {
-	console.log(" == timeupdate == ", event);
+	// console.log(" == timeupdate == ", event);
 }
 
 /** 缓冲事件 */
@@ -575,22 +572,6 @@ function getList() {
 			id: 'test002'
 		},
 		{
-			title: "2、w_girl、御-3",
-			poster: 'http://gips3.baidu.com/it/u=3886271102,3123389489&fm=3028',
-			url: "https://txmov2.a.yximgs.com/upic/2020/10/02/09/BMjAyMDEwMDIwOTAwMDlfMTIyMjc0NTk0Ml8zNjk3Mjg0NjcxOF8xXzM=_b_B28a4518e86e2cf6155a6c1fc9cf79c6d.mp4",
-			ageChecked: false,
-			locked: false,
-			id: 'test003'
-		},
-		{
-			title: "0、小狗、JKwu",
-			poster: 'http://gips2.baidu.com/it/u=195724436,3554684702&fm=3028',
-			url: "https://txmov2.a.yximgs.com/upic/2020/11/08/19/BMjAyMDExMDgxOTQxNTlfNTIzNDczMzQ0XzM4OTQ1MDk5MTI4XzFfMw==_b_Bc770a92f0cf153407d60a2eddffeae2a.mp4",
-			ageChecked: false,
-			locked: false,
-			id: 'test004'
-		},
-		{
 			title: "1、图片列表",
 			poster: 'http://gips2.baidu.com/it/u=195724436,3554684702&fm=3028',
 			imgList: [
@@ -605,6 +586,24 @@ function getList() {
 			locked: false,
 			id: 'test005'
 		},
+		// {
+		// 	title: "2、w_girl、御-3",
+		// 	poster: 'http://gips3.baidu.com/it/u=3886271102,3123389489&fm=3028',
+		// 	url: "https://txmov2.a.yximgs.com/upic/2020/10/02/09/BMjAyMDEwMDIwOTAwMDlfMTIyMjc0NTk0Ml8zNjk3Mjg0NjcxOF8xXzM=_b_B28a4518e86e2cf6155a6c1fc9cf79c6d.mp4",
+		// 	ageChecked: false,
+		// 	locked: false,
+		// 	id: 'test003'
+		// },
+
+		{
+			title: "0、小狗、JKwu",
+			poster: 'http://gips2.baidu.com/it/u=195724436,3554684702&fm=3028',
+			url: "https://txmov2.a.yximgs.com/upic/2020/11/08/19/BMjAyMDExMDgxOTQxNTlfNTIzNDczMzQ0XzM4OTQ1MDk5MTI4XzFfMw==_b_Bc770a92f0cf153407d60a2eddffeae2a.mp4",
+			ageChecked: false,
+			locked: false,
+			id: 'test004'
+		},
+
 		{
 			title: "4、猫耳朵、多",
 			poster: 'http://gips0.baidu.com/it/u=3602773692,1512483864&fm=3028',
@@ -738,10 +737,6 @@ function getList() {
 </script>
 
 <style scoped lang="scss">
-pages {
-	background: var(--background-color-dark);
-}
-
 .play-container {
 	/* #ifndef APP-NVUE */
 	width: 100vw;
@@ -750,6 +745,16 @@ pages {
 	/* #endif */
 	background: #141c27;
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	color: var(--text-color-primary);
+	background: var(--background-color-dark);
+	// 設定影片最大寬度
+	max-width: var(--video-maxWidth);
+	// TODO: 影片比例設定
+	aspect-ratio: 1 / 1.625;
 }
 
 // header
@@ -1060,8 +1065,9 @@ pages {
 	--bottomNav-margin-height: 32rpx; // 與底部導航的間距
 	--progress-bar-margin-height: 54rpx; // 影音進度條與底部導航的間距
 	--info-margin-height: 48rpx; // 影音資訊區塊與底部導航的間距
+	width: 100%;
+	height: 100%;
 
-	.ml-swiper-v3-custom {}
 
 	::v-deep(.uni-swiper-slides) {
 		uni-swiper-item {
@@ -1130,6 +1136,14 @@ pages {
 		// 圖文多張進度條
 		.ml-scroll-img-dot {
 			bottom: calc(var(--bottomNav-margin-height) + var(--progress-bar-margin-height)) !important;
+
+
+			.img-dot {
+				@media screen and (min-width: 961px) {
+					flex: 1;
+					width: auto !important;
+				}
+			}
 		}
 
 		// 影音進度條

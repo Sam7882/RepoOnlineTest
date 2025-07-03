@@ -118,13 +118,13 @@
 								<button type="button" class="mask-container-item-button-item" @click="closeFilter(item)">
 									<uni-icons class="mask-container-item-button-item-icon" type="icon-input-eye" custom-prefix="icon"
 										size="16" />
-									<text>{{ $t('play.watch') }}</text>
+									<text class="mask-container-item-button-item-text">{{ $t('play.watch') }}</text>
 								</button>
 								<!-- 停用過濾器 -->
 								<button type="button" class="mask-container-item-button-item" @click="setFilter">
 									<uni-icons class="mask-container-item-button-item-icon" type="icon-common-gear" custom-prefix="icon"
 										size="16" />
-									<text>{{ $t('play.disableFilter') }}</text>
+									<text class="mask-container-item-button-item-text">{{ $t('play.disableFilter') }}</text>
 								</button>
 							</view>
 						</view>
@@ -769,11 +769,11 @@ function getList() {
 	width: 100%;
 	padding: 32rpx 32rpx 0;
 	color: var(--text-color-secondary);
-	font-size: 32rpx;
+	font-size: var(--font-size-title-pc);
 
 	.icon {
 		transform: translateY(2rpx);
-		font-size: 38rpx !important;
+		font-size: var(--font-size-title-pc-xlarge) !important;
 	}
 
 	.header-left {
@@ -785,13 +785,15 @@ function getList() {
 			gap: 12rpx;
 			align-items: center;
 
-			.header-left-item-text {}
+			.header-left-item-text {
+				font-size: var(--font-size-title-pc);
+			}
 		}
 	}
 
 	.header-right {
 		.icon {
-			font-size: 48rpx !important;
+			font-size: var(--font-size-title-pc-xlarge) !important;
 		}
 	}
 }
@@ -940,7 +942,7 @@ function getList() {
 
 	.icon-val {
 		color: #fff;
-		font-size: 13px;
+		font-size: var(--font-size-content-pc-small);
 		text-align: center;
 	}
 }
@@ -982,14 +984,14 @@ function getList() {
 		}
 
 		.mask-container-item-text-title {
-			font-size: 30rpx;
+			font-size: var(--font-size-title-pc);
 		}
 
 		.mask-container-item-text-content {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			font-size: 20rpx;
+			font-size: var(--font-size-content-pc);
 			color: var(--text-color-octonary) !important;
 		}
 
@@ -1001,10 +1003,15 @@ function getList() {
 			.mask-container-item-button-item {
 				display: flex;
 				align-items: center;
-				gap: 8rpx;
+				gap: 16rpx;
 				line-height: 1;
-				padding: 6rpx 12rpx 8rpx;
-				font-size: 20rpx;
+				padding: 12rpx 16rpx;
+				font-size: var(--font-size-content-pc);
+
+				.mask-container-item-button-item-text {
+					font-size: var(--font-size-content-pc);
+
+				}
 
 				&:first-child {
 					background: var(--primary-color);
@@ -1021,7 +1028,7 @@ function getList() {
 				}
 
 				.mask-container-item-button-item-icon {
-					font-size: 20rpx !important;
+					font-size: var(--font-size-content-pc-small) !important;
 					transform: translateY(3rpx);
 				}
 			}
@@ -1055,7 +1062,7 @@ function getList() {
 
 		.locked-container-item-text {
 			font-weight: 300;
-			font-size: 24rpx;
+			font-size: var(--font-size-content-pc);
 		}
 	}
 }
@@ -1114,7 +1121,7 @@ function getList() {
 				gap: 16rpx;
 
 				.bottom-tool-container-wrapper-name {
-					font-size: 32rpx;
+					font-size: var(--font-size-title-pc);
 					font-weight: 500;
 				}
 
@@ -1124,12 +1131,12 @@ function getList() {
 				}
 
 				.bottom-tool-container-wrapper-account {
-					font-size: 24rpx;
+					font-size: var(--font-size-content-pc);
 				}
 			}
 
 			.bottom-tool-container-title {
-				font-size: 32rpx;
+				font-size: var(--font-size-content-pc-large);
 			}
 		}
 
@@ -1181,7 +1188,7 @@ function getList() {
 			padding: 0 40rpx;
 
 			.fullscreen-button {
-				font-size: 38rpx !important;
+				font-size: var(--font-size-title-pc-xlarge) !important;
 			}
 		}
 
@@ -1197,7 +1204,7 @@ function getList() {
 
 .title {
 	color: #fff;
-	font-size: 14px;
+	font-size: var(--font-size-content-pc-large);
 	font-weight: 400;
 }
 
@@ -1213,7 +1220,7 @@ function getList() {
 	.text {
 		color: #fff;
 		font-weight: 200;
-		font-size: 12px;
+		font-size: var(--font-size-content-pc);
 		padding: 0 5px;
 		text-align: center;
 	}
@@ -1264,13 +1271,13 @@ function getList() {
 	border-radius: 20rpx;
 
 	.tooltip-text {
-		font-size: 24rpx;
+		font-size: var(--font-size-content-pc);
 		color: var(--text-color-secondary);
 		white-space: nowrap;
 	}
 
 	.tooltip-icon {
-		font-size: 16rpx !important;
+		font-size: var(--font-size-title-pc) !important;
 		color: var(--text-color-secondary) !important;
 	}
 }

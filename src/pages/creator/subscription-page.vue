@@ -88,8 +88,6 @@
         </view>
       </view>
     </view>
-
-    <c-bottomPopUp ref="bottomPopUpRef" />
   </view>
 </template>
 
@@ -102,6 +100,8 @@ import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 
+
+const { openBottomPopUp } = inject('common')
 
 const selectSubscription = (id) => {
   console.log('selectSubscription', id)
@@ -118,7 +118,7 @@ const submitForm = () => {
 
 const bottomPopUpRef = ref(null)
 const openCaption = () => {
-  bottomPopUpRef.value.open({
+  openBottomPopUp({
     title: t('common.subscriptionAgreement'),
     content: t('common.subscriptionAgreementTip2', { title: 'Fance' })
   })
@@ -162,7 +162,7 @@ onShow(() => {
 
   .title {
     line-height: 1;
-    font-size: 20rpx;
+    font-size: var(--font-size-title-pc);
     color: var(--text-color-secondary);
   }
 
@@ -187,7 +187,7 @@ onShow(() => {
     display: flex;
     align-items: center;
     gap: 12rpx;
-    font-size: 20rpx;
+    font-size: var(--font-size-content-pc);
 
     .content-text {
       color: var(--text-color-secondary);
@@ -223,7 +223,7 @@ onShow(() => {
 
           .uni-easyinput__content-input,
           .uni-easyinput__placeholder-class {
-            font-size: 20rpx !important;
+            font-size: var(--font-size-content-pc) !important;
           }
 
           .uni-easyinput__content-input {
@@ -253,7 +253,7 @@ onShow(() => {
 
         .uni-easyinput__content-input,
         .uni-easyinput__placeholder-class {
-          font-size: 20rpx !important;
+          font-size: var(--font-size-content-pc) !important;
         }
 
         .uni-easyinput__content-input {
@@ -271,7 +271,7 @@ onShow(() => {
         .uni-easyinput__content-textarea {
           height: 80rpx;
           min-height: 80rpx;
-          font-size: 20rpx !important;
+          font-size: var(--font-size-content-pc) !important;
         }
       }
     }
@@ -317,6 +317,7 @@ onShow(() => {
 
 .subscription-page-data-profile-container-item-text {
   color: var(--text-color-primary);
+  font-size: var(--font-size-content-pc-large);
 }
 
 .subscription-page-data-container {
@@ -371,7 +372,7 @@ onShow(() => {
     font-weight: normal;
 
     .subscription-page-data-profile-container-item {
-      font-size: 24rpx;
+      font-size: var(--font-size-content-pc);
 
       // 名稱與帳號
       &.subscription-page-data-profile-container-item-self-account {
@@ -385,7 +386,7 @@ onShow(() => {
         }
 
         .subscription-page-data-profile-container-item-text-name-container {
-          font-size: 32rpx;
+          font-size: var(--font-size-title-pc);
 
           .icon {
             position: absolute;
@@ -397,7 +398,7 @@ onShow(() => {
         }
 
         .subscription-page-data-profile-container-item-text-account {
-          font-size: 26rpx;
+          font-size: var(--font-size-title-pc-small);
           color: var(--text-color-quaternary);
           margin-top: -4rpx;
         }
@@ -407,7 +408,7 @@ onShow(() => {
       &.subscription-page-data-profile-container-item-title {
         line-height: 1.1;
         text-align: center;
-        font-size: 24rpx;
+        font-size: var(--font-size-content-pc);
         margin-bottom: 12rpx;
       }
 
@@ -421,7 +422,7 @@ onShow(() => {
   flex-direction: column;
   flex-wrap: wrap;
   gap: 12rpx;
-  font-size: 24rpx;
+  font-size: var(--font-size-content-pc);
   margin-bottom: 20rpx;
 
 }
@@ -442,11 +443,11 @@ onShow(() => {
     flex-direction: column;
     gap: 24rpx;
     line-height: 1;
-    font-size: 18rpx;
+    font-size: var(--font-size-content-pc);
     margin-bottom: 20rpx;
 
     .comment-container-item-text {
-      font-size: 24rpx;
+      font-size: var(--font-size-title-pc);
 
       &:first-child {
         color: var(--text-color-primary);
@@ -470,7 +471,7 @@ onShow(() => {
     color: var(--text-color-primary);
     border-radius: 32rpx;
     padding: 16rpx 44rpx;
-    font-size: 30rpx;
+    font-size: var(--font-size-title-pc);
     line-height: 1;
     margin: unset;
     display: flex;
@@ -496,6 +497,7 @@ onShow(() => {
 }
 
 .row-title {
+  font-size: var(--font-size-title-pc-xlarge);
   margin-bottom: 0;
 }
 
@@ -505,7 +507,7 @@ onShow(() => {
   align-items: center;
   background: var(--text-color-tertiary);
   color: var(--text-color-quaternary);
-  font-size: 28rpx;
+  font-size: var(--font-size-content-pc-large);
   padding: 40rpx 32rpx;
   border-radius: 20rpx;
   white-space: pre-wrap;
@@ -516,9 +518,14 @@ onShow(() => {
   margin-top: 80rpx;
   margin-bottom: 50rpx;
 
+  @media screen and (min-width: 768px) and (max-width: 960px) {
+    margin-top: 40rpx;
+    margin-bottom: 20rpx;
+  }
+
   .submit-btn {
     border-radius: 20rpx;
-    font-size: 30rpx;
+    font-size: var(--font-size-title-pc);
     padding: 24rpx 0;
     line-height: 1;
     background-color: var(--primary-color);
@@ -536,7 +543,7 @@ onShow(() => {
 .caption-container {
   margin-top: 20rpx;
   color: var(--popTxt-color-content);
-  font-size: 24rpx;
+  font-size: var(--font-size-content-pc);
   line-height: 1;
 
   .caption {

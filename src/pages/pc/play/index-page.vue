@@ -323,7 +323,7 @@ const setFilter = () => {
 // 底部按鈕
 const openImageFullScreen = () => {
 	console.log("🚀 == 圖片全螢幕 == ")
-	imageFullScreenImgs.value = list.value[0].imgList
+	imageFullScreenImgs.value = list.value[current.value.index]?.imgList || []
 	videoPopImgFullScreen.value?.open()
 }
 

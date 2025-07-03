@@ -3,7 +3,7 @@
     <view class="fullscreen-popup">
       <!-- 圖片 -->
       <swiper class="fullscreen-swiper" :current="currentIndex" circular @change="onChange" @transition="hideSlipIcon">
-        <swiper-item v-for="(img, i) in imgs" :key="i">
+        <swiper-item v-for="(img, i) in images" :key="i">
           <image :src="img" mode="aspectFit" class="fullscreen-img" />
         </swiper-item>
       </swiper>
@@ -31,7 +31,7 @@ const props = defineProps({
 // 彈窗
 const popupRef = ref(null);
 // 圖片
-const images = ref([]);
+const images = computed(() => props.imgs);
 // 當前圖片索引
 const currentIndex = ref(0);
 // 是否顯示滑動圖片ICON提示
@@ -39,7 +39,6 @@ const isSlipIcon = ref(true);
 
 // 開啟
 const open = (imgs, index = 0) => {
-  images.value = imgs;
   currentIndex.value = index;
   isSlipIcon.value = true;
   popupRef.value?.open();
@@ -122,5 +121,7 @@ defineExpose({ open });
   color: #fff;
   font-size: 36rpx;
   z-index: 999;
+
+  cursor: pointer;
 }
 </style>

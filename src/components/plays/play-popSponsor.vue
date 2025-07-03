@@ -1,5 +1,6 @@
 <template>
-  <uni-popup ref="popupRef" type="center" background-color="#f6f6f6">
+  <uni-popup ref="popupRef" :type="isPc ? 'center' : 'bottom'" :borderRadius="isPc ? '32rpx' : '60rpx 60rpx 0 0'"
+    background-color="#f6f6f6">
     <view class="popup-container popup-container-sponsor-input" v-if="payProcess == 'bill'">
       <!-- 標題與關閉 -->
       <view class="popup-header">
@@ -11,7 +12,7 @@
       <view class="popup-content">
         <view class="popup-content-item">
           <!-- 打賞金額 -->
-          <text class="popup-content-title">{{ $t('sponsor.sponsorAmount') }}</text>
+          <text class="popup-content-title">{{ $t('sponsor.sponsorTip') }}</text>
           <!-- 頭像 -->
           <view class="avatar-image-container">
             <image class="avatar-image popup-content-image" src="/static/images/template/img-template-01.png"
@@ -139,10 +140,13 @@
 
 <script setup lang="ts">
 // TEMP: 組件-打賞付款選擇彈窗
+import { useViewportStore } from '@/stores/useViewportStore'
 import { toPay } from '@/utils/routers'
 import { toCreditCardSelect } from '@/utils/routers'
 const emit = defineEmits(['update:Data'])
 const popupRef = ref()
+const viewportStore = useViewportStore()
+const { isPc } = storeToRefs(viewportStore)
 
 const creditCardList = ref([
   {
@@ -198,26 +202,36 @@ const confirmPay = () => {
 defineExpose({ open, close })
 </script>
 
+
+
 <style scoped lang="scss">
 ::v-deep(.uni-popup) {
-
-  // 需同時有圓弧，才能有效果
-  uni-view[name="content"] {
-    border-radius: 32rpx 32rpx 0 0 !important;
-    // bottom: 136rpx !important; // 底部導航高
-    // max-height: calc(100% - 68px - 25%);
-  }
-
-  .uni-popup__wrapper {
-    background-color: var(--background-color-dark) !important;
-    border-radius: 32rpx !important;
-    // height: 100%;
-    width: 65%;
+  & {
+    z-index: var(--z-index-max) !important;
   }
 }
 
 .popup-container {
   padding: 32rpx;
+  border-radius: 60rpx 60rpx 0 0;
+  background-color: var(--background-color-dark);
+  width: fit-content;
+  overflow: visible;
+
+
+  @media screen and (min-width: 961px) {
+    border-radius: 32rpx;
+    width: 80vw;
+    max-width: 800rpx;
+  }
+
+  @media screen and (min-width: 1920px) {
+    max-width: 1000rpx;
+  }
+
+  @media screen and (min-width: 2560px) {
+    max-width: 1200rpx;
+  }
 }
 
 // header
@@ -230,7 +244,7 @@ defineExpose({ open, close })
 
   .popup-title {
     line-height: 1;
-    font-size: 20rpx;
+    font-size: var(--font-size-title-pc);
     color: var(--text-color-secondary);
   }
 
@@ -255,7 +269,7 @@ defineExpose({ open, close })
     display: flex;
     align-items: center;
     gap: 12rpx;
-    font-size: 20rpx;
+    font-size: var(--font-size-content-pc);
 
     .popup-content-text {
       color: var(--text-color-secondary);
@@ -396,13 +410,13 @@ defineExpose({ open, close })
     // display: flex;
     display: none;
     color: var(--play-sponsor-color);
-    font-size: 20rpx;
+    font-size: var(--font-size-content-pc);
     line-height: 1;
 
     .popup-comment-container-item-icon {
       // padding-top: 4rpx;
       transform: translateY(4rpx);
-      font-size: 20rpx !important;
+      font-size: var(--font-size-content-pc) !important;
       color: var(--play-sponsor-color) !important;
     }
 
@@ -413,7 +427,7 @@ defineExpose({ open, close })
     color: #fff;
     border-radius: 8rpx;
     padding: 8rpx 16rpx;
-    font-size: 20rpx;
+    font-size: var(--font-size-content-pc);
     line-height: 1;
     margin: unset;
   }
@@ -456,7 +470,7 @@ defineExpose({ open, close })
     }
 
     .popup-comment-container-item-title {
-      font-size: 18rpx;
+      font-size: var(--font-size-content-pc-small);
       line-height: 1;
       transform: translateY(-12rpx);
       color: var(--text-color-senary);
@@ -495,7 +509,7 @@ defineExpose({ open, close })
           display: flex;
           align-items: center;
           gap: 16rpx;
-          font-size: 20rpx;
+          font-size: var(--font-size-content-pc);
         }
       }
     }

@@ -402,6 +402,7 @@ export default {
   },
   sponsor: {
     sponsor: "打賞贊助",
+    sponsorTip: "您想贊助多少給",
     sponsorAmount: "打賞金額",
   },
   payment: {

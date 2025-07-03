@@ -16,6 +16,7 @@
 		<!-- TODO: 移動到搜尋頁面中 -->
 
 
+		<play-popSubscription ref="videoPopSubscription" />
 		<!-- 聯繫客服 -->
 		<c-servicePopUp ref="servicePopUp" />
 		<auth-login ref="loginPopUp" />
@@ -151,6 +152,12 @@ const openSharePopUp = () => {
 	sharePopUp.value.open()
 }
 
+// 訂閱
+const videoPopSubscription = ref(null)
+const openPopSubscription = () => {
+	videoPopSubscription.value?.open()
+}
+
 // 使用 provide 提供方法
 provide('auth', {
 	openLogin,
@@ -167,6 +174,10 @@ provide('common', {
 	openConfirm,
 	openBottomPopUp,
 	openSharePopUp
+})
+
+provide('play', {
+	openPopSubscription
 })
 </script>
 

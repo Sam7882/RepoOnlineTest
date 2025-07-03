@@ -150,7 +150,7 @@
 				</view>
 				<!-- 成為會員 -->
 				<view class="creator-home-page-data-profile-container-item-edit-button-bottom-container"
-					@click="handleSubscription">
+					@click="handleToSubscription">
 					<button type="button" class="creator-home-page-data-profile-container-item-edit-button-item-button">{{
 						$t('creator.beMember') }}</button>
 				</view>
@@ -319,21 +319,22 @@
 <script setup>
 // TEMP: 創作者主頁
 
-import { onPageScroll, onShow } from '@dcloudio/uni-app'
+import { onPageScroll, onShow, onLoad } from '@dcloudio/uni-app'
 import { toShare, toPostPreview, toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory, toCreatorEdit, toCreatorSelectMedia, toCreatorClassification, checkViewportAutoReplace } from '@/utils/routers'
 import { useInitStore } from '@/stores/useInitDataStore';
 import { usePostData } from '@/stores/usePostData'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const { openNotice } = inject('common')
+const { openPopSubscription } = inject('play')
 const postDataStore = usePostData()
 const { setSelectedMedia } = postDataStore
 const type = ref('all');
 const showSelect = ref(false);
 
 const initStore = useInitStore();
-// const isCreator = computed(() => initStore.isCreator);
-const isCreator = computed(() => false);
+const pageId = ref('')
+const isCreator = computed(() => pageId.value === initStore.userInfo.id);
 console.log("🚀 ~ isCreator:", isCreator.value)
 
 // 用於計算 filterSelect 該顯示的位置
@@ -430,6 +431,10 @@ const getElementHeight = (selector = '#target') => {
 			filterSelectHeight.value = rect.height
 		}
 	}).exec()
+}
+
+const handleToSubscription = () => {
+	openPopSubscription()
 }
 
 const handleSubscription = () => {
@@ -561,6 +566,15 @@ onShow(() => {
 // 跨平台：App + H5 通用滾動監聽
 onPageScroll(() => {
 	updateRect()
+})
+
+onLoad((options) => {
+	console.log("🚀 ~ onLoad ~ options:", options)
+	if (options.id) {
+		pageId.value = options.id
+	} else {
+		pageId.value = initStore.userInfo.id
+	}
 })
 
 </script>

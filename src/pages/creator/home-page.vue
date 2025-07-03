@@ -319,7 +319,7 @@
 <script setup>
 // TEMP: 創作者主頁
 
-import { onPageScroll, onShow } from '@dcloudio/uni-app'
+import { onPageScroll, onShow, onLoad } from '@dcloudio/uni-app'
 import { toShare, toPostPreview, toSubscription, toCreatorMessage, toFollowing, toRank, toTagRank, toShortStory, toCreatorEdit, toCreatorSelectMedia, toCreatorClassification, checkViewportAutoReplace } from '@/utils/routers'
 import { useInitStore } from '@/stores/useInitDataStore';
 import { usePostData } from '@/stores/usePostData'
@@ -333,9 +333,10 @@ const type = ref('all');
 const showSelect = ref(false);
 
 const initStore = useInitStore();
-// const isCreator = computed(() => initStore.isCreator);
-const isCreator = computed(() => false);
+const pageId = ref('')
+const isCreator = computed(() => pageId.value === initStore.userInfo.id);
 console.log("🚀 ~ isCreator:", isCreator.value)
+
 
 // 用於計算 filterSelect 該顯示的位置
 const filterSelectShowTop = ref({})
@@ -550,6 +551,15 @@ onShow(() => {
 // 跨平台：App + H5 通用滾動監聽
 onPageScroll(() => {
 	updateRect()
+})
+
+onLoad((options) => {
+	console.log("🚀 ~ onLoad ~ options:", options)
+	if (options.id) {
+		pageId.value = options.id
+	} else {
+		pageId.value = initStore.userInfo.id
+	}
 })
 
 </script>

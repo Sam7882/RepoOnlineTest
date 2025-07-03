@@ -5,8 +5,7 @@
 			<view class="header-container-back-button" v-if="!isCreator && openBack" @click="handleBack">
 				<uni-icons class="header-nav-icon" type="left" size="20" color="var(--text-color-primary)"></uni-icons>
 			</view>
-			<text class="header-container-title-text" @click="switchIsCreator" v-if="!isCreator">{{
-				'Jesiicatestid' }}</text>
+			<text class="header-container-title-text" v-if="!isCreator">{{ 'Jesiicatestid' }}</text>
 			<!-- 頭像側邊按鈕 -->
 			<view class="item-top-menu-container">
 				<template v-if="!isCreator">
@@ -59,10 +58,7 @@ const props = defineProps({
 		default: true
 	}
 })
-const isCreator = ref(props.isCreator || false)
-const switchIsCreator = () => {
-	isCreator.value = !isCreator.value
-}
+const isCreator = computed(() => props.isCreator || false)
 
 // 訂閱
 const confirmPopUpRef = ref(null)
@@ -107,6 +103,7 @@ const toShare = () => {
 const handleCreatorSetMenu = () => {
 	toCreatorSetMenu()
 }
+
 </script>
 <style lang="scss" scoped>
 // HEADER

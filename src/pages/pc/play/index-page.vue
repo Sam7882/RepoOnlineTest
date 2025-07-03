@@ -185,7 +185,6 @@
 
 		<play-popMessage ref="videoPopMessage"></play-popMessage>
 		<play-popSponsor ref="videoPopSponsor"></play-popSponsor>
-		<play-popSubscription ref="videoPopSubscription"></play-popSubscription>
 		<play-popImgFullScreen ref="videoPopImgFullScreen" :imgs="imageFullScreenImgs"></play-popImgFullScreen>
 	</view>
 </template>
@@ -208,7 +207,6 @@ const isFavorite = ref(false); // 是否喜歡
 const isCollect = ref(false); // 是否收藏
 const videoPopMessage = ref(null) // 留言彈跳窗口
 const videoPopSponsor = ref(null) // 打賞彈跳窗口
-const videoPopSubscription = ref(null) // 訂閱彈跳窗口
 const videoPopImgFullScreen = ref(null) // 圖片全螢幕彈跳窗口
 const playing = ref(true); // 是否播放
 const imageFullScreenImgs = ref([]) // 圖片全螢幕圖片列表
@@ -262,7 +260,7 @@ const toSubscription = () => {
 		})
 	}
 }
-// videoPopSubscription.value?.open()
+
 // 喜歡
 const likeThis = () => {
 	isFavorite.value = !isFavorite.value;

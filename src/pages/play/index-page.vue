@@ -185,12 +185,9 @@
 		<!-- 底部導航 -->
 		<c-bottomNav :bgColor="'var(--background-color-dark)'" :iconColor="'var(--text-color-secondary)'"
 			:primaryMenu="'primary'" />
-		<c-confirmPopUp ref="confirmModal" />
 		<play-popMessage ref="videoPopMessage"></play-popMessage>
 		<play-popSponsor ref="videoPopSponsor"></play-popSponsor>
-		<play-popSubscription ref="videoPopSubscription"></play-popSubscription>
 		<play-popImgFullScreen ref="videoPopImgFullScreen" :imgs="imageFullScreenImgs"></play-popImgFullScreen>
-		<c-sharePopUp ref="sharePopUp"></c-sharePopUp>
 	</view>
 </template>
 
@@ -201,6 +198,7 @@ import { toSearchHome, toCreatorHome, toPlayArticleGallery, checkViewportAutoRep
 import { useInitStore } from '@/stores/useInitDataStore';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
+const { openSharePopUp, openConfirm } = inject('common')
 const initStore = useInitStore();
 const { setCreatorId } = initStore;
 /* NOTE:非播放組件  */
@@ -209,12 +207,10 @@ const isFavorite = ref(false); // 是否喜歡
 const isCollect = ref(false); // 是否收藏
 const videoPopMessage = ref(null) // 留言彈跳窗口
 const videoPopSponsor = ref(null) // 打賞彈跳窗口
-const videoPopSubscription = ref(null) // 訂閱彈跳窗口
 const videoPopImgFullScreen = ref(null) // 圖片全螢幕彈跳窗口
 const playing = ref(true); // 是否播放
 const imageFullScreenImgs = ref([]) // 圖片全螢幕圖片列表
 // POPUP確認窗口
-const confirmModal = ref(null)
 
 // 頂部header fn
 const toFocus = () => {
@@ -252,7 +248,7 @@ const toSubscription = () => {
 		}
 	}
 	else {
-		confirmModal.value.open({
+		openConfirm({
 			title: t('play.unFollowCreator'),
 			confirmBtnText: t('play.unFollowCreator'),
 			onConfirm: () => {
@@ -265,7 +261,6 @@ const toSubscription = () => {
 		})
 	}
 }
-// videoPopSubscription.value?.open()
 // 喜歡
 const likeThis = () => {
 	isFavorite.value = !isFavorite.value;
@@ -281,10 +276,9 @@ const openPopMessage = () => {
 	videoPopMessage.value?.open()
 }
 // 分享
-const sharePopUp = ref(null)
 const toShare = () => {
 	console.log("🚀 == 分享 == ")
-	sharePopUp.value?.open()
+	openSharePopUp()
 	/* NOTE:暫代 去往該圖文的總攬 */
 	// toPlayArticleGallery()
 }
@@ -316,7 +310,7 @@ const closeFilter = (item) => {
 }
 const setFilter = () => {
 	console.log("🚀 == 過濾器 == ")
-	confirmModal.value.open({
+	openConfirm({
 		title: t('play.disableFilter'),
 		content: t('play.disableFilterTip'),
 		onConfirm: () => {

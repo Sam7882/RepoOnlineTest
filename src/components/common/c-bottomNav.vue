@@ -1,5 +1,5 @@
 <template>
-	<view class="bottom-nav-spacer">
+	<view class="bottom-nav-spacer" :style="{ 'height': navHeight }">
 		<view class="bottom-nav-container" :style="{ 'background': props.bgColor }">
 			<!-- 首頁 影音頁-->
 			<view class="bottom-nav-item" @click="handleClickToPage('home')">
@@ -50,6 +50,7 @@
 
 <script setup>
 // TEMP: 組件-底部導航列
+import { getElementInfo } from '@/utils/tools';
 import { toPlayIndex, toFavorites, toPostIndex, toMessageBox, toPostPreview } from '@/utils/routers';
 const props = defineProps({
 	// 被景色
@@ -68,6 +69,51 @@ const props = defineProps({
 		default: 'var(--text-color-primary)',
 	},
 });
+
+// 底部導航容器高度
+const containerHeight = ref(136) // 預設高度 136rpx
+
+// 計算底部導航間距高度
+const navHeight = computed(() => {
+	return `${containerHeight.value}px`
+})
+
+// 獲取底部導航容器高度
+const updateContainerHeight = () => {
+	getElementInfo('.bottom-nav-container', (info) => {
+		if (info && info.height) {
+			containerHeight.value = info.height
+			// 將高度寫入到 CSS 變數
+			updateCSSVariable(info.height)
+		}
+	})
+}
+
+// 更新 CSS 變數
+const updateCSSVariable = (height) => {
+	// 獲取 .bottom-nav-spacer 元素
+	const spacerElement = document.querySelector('.bottom-nav-spacer')
+	if (spacerElement) {
+		spacerElement.style.setProperty('--bottom-nav-spacer-height', `${height}px`)
+	}
+}
+
+// 組件掛載後獲取高度
+onMounted(() => {
+	// 延遲執行確保 DOM 已渲染
+	nextTick(() => {
+		updateContainerHeight()
+	})
+
+	// 監聽視窗大小變化
+	uni.onWindowResize(updateContainerHeight)
+})
+
+// 組件卸載時移除監聽
+onUnmounted(() => {
+	uni.offWindowResize(updateContainerHeight)
+})
+
 // 主選單 啟動懸浮的圖示
 const activeMenu = ref(false);
 const handleClickMainMenu = () => {
@@ -106,9 +152,15 @@ const handleClickToPage = (page) => {
 <style lang="scss" scoped>
 /* 底部導航列 */
 .bottom-nav-spacer {
-	--bottom-nav-spacer-height: 136rpx;
-	height: var(--bottom-nav-spacer-height);
-	padding-top: 32rpx;
+	display: flex;
+	// --bottom-nav-spacer-height: 136rpx;
+	// height: calc(var(--bottom-nav-spacer-height) + var(--iphone-homeBar-height));
+	// padding-top: 32rpx;
+
+	// @media screen and (min-width: 768px) and (max-width: 960px) {
+	// --bottom-nav-spacer-height: 100rpx;
+	// }
+	padding-bottom: var(--iphone-homeBar-height);
 }
 
 .bottom-nav-container {
@@ -117,13 +169,14 @@ const handleClickToPage = (page) => {
 	left: 0;
 	z-index: var(--z-index-bottom-nav);
 	width: 100%;
-	height: var(--bottom-nav-spacer-height);
+	height: fit-content;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 	padding: 18rpx 32rpx;
 	background: var(--background-color);
+	padding-bottom: var(--iphone-homeBar-height);
 }
 
 .bottom-nav-item {
@@ -132,7 +185,7 @@ const handleClickToPage = (page) => {
 		color: var(--text-color-secondary);
 
 		@media screen and (min-width: 768px) and (max-width: 960px) {
-			font-size: 48rpx !important;
+			font-size: 40rpx !important;
 		}
 
 
@@ -149,8 +202,8 @@ const handleClickToPage = (page) => {
 	height: 100rpx;
 
 	@media screen and (min-width: 768px) and (max-width: 960px) {
-		width: 88rpx;
-		height: 88rpx;
+		width: 72rpx;
+		height: 72rpx;
 	}
 
 	.main-menu-btn-img {
@@ -184,17 +237,9 @@ const handleClickToPage = (page) => {
 		align-items: center;
 
 		@media screen and (min-width: 768px) and (max-width: 960px) {
-			width: 80rpx;
-			font-size: 48rpx !important;
+			width: 72rpx;
+			font-size: 36rpx !important;
 		}
-
-		// @media screen and (min-width: 1280px) and (max-width: 1440px) {
-		// 	width: 80rpx;
-		// 	font-size: 40rpx !important;
-		// }
-		// @media screen and (min-width: 1440px) and (max-width: 1920px) {}
-		// @media screen and (min-width: 1920px) and (max-width: 2560px) {}
-		// @media screen and (min-width: 2560px) {}
 	}
 
 }

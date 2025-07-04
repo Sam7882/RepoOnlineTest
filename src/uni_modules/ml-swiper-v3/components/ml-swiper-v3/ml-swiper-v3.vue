@@ -1,12 +1,12 @@
 <template>
   <!-- #ifdef APP-NVUE -->
-  <view :style="isPc ? { 'width': '100%', 'height': '100%' } : full" v-if="datas.length > 0">
+  <view :style="{ 'width': '100%', 'height': '100%' }" v-if="datas.length > 0">
     <!-- #endif -->
     <!-- #ifndef APP-NVUE -->
-    <view :style="isPc ? { 'width': '100%', 'height': '100%' } : full">
+    <view :style="{ 'width': '100%', 'height': '100%' }">
       <!-- #endif -->
       <!-- #ifdef APP-VUE -->
-      <view :style="isPc ? { 'width': '100%', 'height': '100%' } : full" class="appTipView">
+      <view :style="{ 'width': '100%', 'height': '100%' }" class="appTipView">
         <text class="appTipText">
           在 VUE 页面中 无法使用 ml-swiper-v3 组件，请改用 NVUE 页面
         </text>
@@ -16,12 +16,11 @@
       <swiper class="ml-swiper-v3" :current="current" :circular="useSwiper" vertical :disable-touch="touchable"
         :duration="config.duration" touchable @change="change" @transition="transition" :current-item-id="`s${current}`"
         @touchstart="start" @touchmove="move" @touchend="end" @animationfinish="animationfinish">
-        <swiper-item ref="ani" :style="isPc ? { 'width': '100%', 'height': '100%' } : full" class=""
-          data-dom="swiperItem" v-for="(item, index) in datas" :key="index" :item-id="`s${index}`">
-          <view class="ml-swiper-v3-item" :style="isPc ? 'width: 100%; height: 100%;' : full"
-            @longpress="longpress(item)">
+        <swiper-item ref="ani" :style="{ 'width': '100%', 'height': '100%' }" class="" data-dom="swiperItem"
+          v-for="(item, index) in datas" :key="index" :item-id="`s${index}`">
+          <view class="ml-swiper-v3-item" :style="{ 'width': '100%', 'height': '100%' }" @longpress="longpress(item)">
             <template v-if="item.imgList && Array.isArray(item.imgList) && item.imgList.length > 0">
-              <view :style="isPc ? { 'width': '100%', 'height': '100%' } : full" @tap="onclick(item)">
+              <view :style="{ 'width': '100%', 'height': '100%' }" @tap="onclick(item)">
                 <ml-swiper-image class="full image-full" :imgList="item.imgList" :width="config.width"
                   :height="config.height" @imgChange="imgChange" />
               </view>

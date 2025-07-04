@@ -78,7 +78,7 @@ export default {
     notJoin: "未加入",
     sorryNoPasss: "很抱歉，未審核通過。",
     remove: "移除",
-    checkForRemove: "確定要移除 {name} 嗎?",
+    checkForRemove: "確定要移除{name}嗎?",
     setting: "設定",
     selected: "已選取",
     changeName: "變更名稱",
@@ -97,7 +97,8 @@ export default {
     forMember: "給會員的話",
     subscriptionAgreementTip: "訂閱方案即表示你同意",
     subscriptionAgreement: "訂閱條款",
-    subscriptionAgreementTip2: "您可前往管理付款資訊頁面新增付款方式。 如欲了解詳情，請參考如何新增或更新付款方式。 若您想更改 {title} 付款方式，我們提供多種付款選項。",
+    subscriptionAgreementTip2:
+      "您可前往管理付款資訊頁面新增付款方式。 如欲了解詳情，請參考如何新增或更新付款方式。 若您想更改{title}付款方式，我們提供多種付款選項。",
     cancelSelect: "取消選取",
     select: "選取",
     selectFailed: "選擇失敗",
@@ -115,7 +116,7 @@ export default {
     alreadyRemoved: "已移除",
   },
   auth: {
-    username: '用戶名稱',
+    username: "用戶名稱",
     birthday: "生日",
     bio: "簡介",
     email: "信箱",
@@ -158,9 +159,8 @@ export default {
       email: {
         pattern: "請輸入正確的信箱格式",
       },
-      confirmPassword: {
-      }
-    }
+      confirmPassword: {},
+    },
   },
   creator: {
     myFavorites: "我的收藏",
@@ -261,7 +261,7 @@ export default {
     autoPublishSettingTip: "設定您需要自動上傳作品的時間",
     autoPublishTip: "自動上傳",
     allowComment: "允許發表評論",
-    autoPublishOnDate: "您的作品於 {date} 自動上傳",
+    autoPublishOnDate: "您的作品於{date}自動上傳",
     hashTag: "主題標籤",
     mention: "提及",
     tagPeople: "標記人",
@@ -292,7 +292,7 @@ export default {
     unsupportedFileType: "不支援的檔案類型:",
     imageSizeLimit: "圖片超過大小限制:",
     videoSizeLimit: "影片超過大小限制:",
-    maxFileCount: "最多只能選擇 {num} 個檔案",
+    maxFileCount: "最多只能選擇{num}個檔案",
   },
   search: {
     basedOnYourFollowing: "根據你的關注",
@@ -355,13 +355,15 @@ export default {
     finalOrderAmount: "最終訂單進帳",
     withdraw: "提領",
     returnWallet: "返回我的錢包",
-    autoRenewalTip: "此筆為 自動續訂，今天是{ today}，系統將於 {endDate}自動扣款完成續訂。",
-    autoRenewalTip2: "若您不希望自動續訂，可前往「個人帳號 > 訂閱管理」頁面手動取消，避免下期繼續收費。",
+    autoRenewalTip:
+      "此筆為 自動續訂，今天是{today}，系統將於{endDate}自動扣款完成續訂。",
+    autoRenewalTip2:
+      "若您不希望自動續訂，可前往「個人帳號 > 訂閱管理」頁面手動取消，避免下期繼續收費。",
     withdrawableAmount: "可提領金額",
     transactionRecord: "交易紀錄",
     myIncome: "我的進帳",
     noBalanceToWithdraw: "您沒有餘額可以提領",
-    withdrawTip: "此次提領將於 {startDate} 到 {endDate}期間，匯入您的帳戶。",
+    withdrawTip: "此次提領將於{startDate}到{endDate}期間，匯入您的帳戶。",
     withdrawTo: "撥款至",
     transferAmount: "轉帳金額",
     withdrawNumber: "提款編號",
@@ -405,7 +407,6 @@ export default {
   service: {
     pleaseEnter: "請輸入您的問題或需求，我們會盡快回覆您：",
     theme: "主題",
-
     problemDescription: "問題描述",
   },
   sponsor: {
@@ -448,6 +449,7 @@ export default {
     reportContent3: "裸露或性行為",
     reportContent4: "侵犯智慧財產權",
     thankYouSuggest: "謝謝您的意見回饋",
-    reportReply: "我們已收到您的檢舉，系統會盡快進行審核。若確認違規，將依據相關規範進行處理。 感謝您協助我們維護社群安全與秩序。",
-  }
+    reportReply:
+      "我們已收到您的檢舉，系統會盡快進行審核。若確認違規，將依據相關規範進行處理。 感謝您協助我們維護社群安全與秩序。",
+  },
 };

@@ -33,6 +33,7 @@ export default {
     thisYear: "This year",
     recommend: "Recommend",
     subscription: "Subscription",
+    subscriptionSetting: "Subscribe Settings",
     followingNum: "Number of followers",
     country: "Nation",
     postalCode: "Postal code",
@@ -55,6 +56,7 @@ export default {
     resendCode: "Resend",
     close: "Closure",
     postContent: "Please enter content",
+    inputMessage: "Please enter a message",
     done: "Finish",
     notYet: "Don't do it for now",
     notInterest: "Not interested",
@@ -105,6 +107,13 @@ export default {
     verifyFailed: "Verification failed",
     applied: "Applied",
     completed: "Completed",
+    downloadApp: "Download the App",
+    user: "User",
+    success: "Success",
+    error: "Fail",
+    confirmDelete: "Confirm to delete",
+    pleaseEnterContent: "Please enter content",
+    alreadyRemoved: "Removed",
   },
   auth: {
     username: "Username",
@@ -116,6 +125,7 @@ export default {
     formatFailed: "{title}format input error",
     login: "Log in",
     logout: "Sign out",
+    confirmLogout: "Confirm to log out?",
     male: "Male",
     password: "Password",
     confirmPassword: "Enter your password again",
@@ -139,6 +149,8 @@ export default {
     verifyCodeTimeError:
       "The validity time of the verification code has expired",
     checkAright: "Please check whether the input is correct",
+    registerVerifySuccess: "Registration verification was successful",
+    loginSuccess: "Login successfully",
     rules: {
       phone: {
         pattern: "Please enter the correct mobile phone number",
@@ -206,6 +218,7 @@ export default {
     monthRank: "Monthly List",
     accountManagement: "Account Management",
     privacySetting: "Privacy Settings",
+    favoriteSetting: "Save privacy settings",
     messageSetting: "Message settings",
     loginPassword: "Login password",
     phoneNumber: "Phone number",
@@ -216,6 +229,8 @@ export default {
     email: "Email",
     blocked: "Blocked",
     deleteAccount: "Delete an account",
+    deleteAccountTip:
+      "Are you sure you want to delete your account? This operation cannot be restored.",
     switchAccount: "Switch account",
     publicMyFavorites: "Publicly my collection",
     publicMyFavoritesTip:
@@ -230,9 +245,10 @@ export default {
     postStoryCommentTip:
       "Once closed, others will not be able to view all your posts, limited time updates, and comments.",
     alreadyCollect: "Already collected",
-    editData: "Edit Data",
-    shareFile: "Share File",
+    editData: "Edit information",
+    shareFile: "Share the file",
     creatorCenter: "Creator Center",
+    accountBind: "Account binding",
   },
   play: {
     sensitiveContent: "Sensitive content",
@@ -251,6 +267,7 @@ export default {
   },
   post: {
     publish: "Release",
+    confirmPublish: "Confirm the release",
     publishSetting: "Release settings",
     publishSettingTip: "Subscribe to users",
     autoPublish: "Automatic release",
@@ -282,6 +299,15 @@ export default {
     saveDraft: "Save drafts",
     saveDraftTip: "Drafts have been stored",
     upload: "Upload",
+    discardPost: "Give up posts?",
+    discard: "Give up",
+    createNewPost: "Create a new post",
+    dragPhotoAndVideo: "Drag photos and videos here",
+    selectFile: "Select a file",
+    unsupportedFileType: "File types that are not supported:",
+    imageSizeLimit: "Image exceeds the size limit:",
+    videoSizeLimit: "Video exceeds the size limit:",
+    maxFileCount: "At most, you can choose{num}files",
   },
   search: {
     basedOnYourFollowing: "According to your attention",
@@ -323,11 +349,12 @@ export default {
     totalAmount: "Total amount paid today",
     confirmPayment: "Confirm payment",
     amount: "Amount",
+    paymentAmount: "Payment amount",
     timeError: "Time error",
     cardDetails: "Card details",
     creditCardBank: "Credit card bank",
     setAsDefaultCreditCard: "Set as a preset credit card",
-    removeCreditCard: "Remove credit card",
+    removeCreditCard: "Remove the credit card",
     deleteCreditCard: "Delete a credit card",
     deleteCreditCardTip: "Are you sure you want to delete this credit card?",
     creditCard: "Credit card",
@@ -364,8 +391,11 @@ export default {
     completeTime: "Finished time",
     soonWithdraw: "Funding is about to be allocated",
     alreadyWithdraw: "Received",
-    withdrawAmount2: "Amount of grant",
+    withdrawAmount2: "Amount of funding",
     canWithdraw: "Can be picked up",
+    withdrawApplySuccess: "The withdrawal application has been sent",
+    withdrawDetail: "Withdrawal details",
+    orderDetail: "Order details",
   },
   charts: {
     analysisReport: "Analysis Report",
@@ -380,6 +410,7 @@ export default {
     decrease: "Reduce",
   },
   menu: {
+    viedeoHome: "Video Home Page",
     profile: "Personal Profile",
     statistics: "Personal Data",
     wallet: "Wallet Management",
@@ -387,6 +418,7 @@ export default {
     following: "My attention",
     service: "Contact customer service",
     logout: "Sign out",
+    helper: "Help Center",
   },
   service: {
     pleaseEnter:
@@ -396,6 +428,7 @@ export default {
   },
   sponsor: {
     sponsor: "Rewards and Sponsorships",
+    sponsorTip: "How much do you want to sponsor",
     sponsorAmount: "Reward amount",
   },
   payment: {
@@ -411,7 +444,15 @@ export default {
     subscriptionTip: "Benefits of subscription",
     subscriptionTip1: "Full access to all subscriptions for this creator",
     subscriptionTip2: "Priority to creators' activities",
+    subscriptionTip3: "The benefits of subscriptions for creators",
+    subscriptionTip4: "Increase loyal fans",
+    subscriptionTip5: "Build closer connections with subscribers",
+    subscriptionTip6: "Stabilized income growth",
+    subscriptionTip7: "Set the unlocked amount movie",
+    subscriptionTip8: "Please set the following plan amount",
     subscriptionPlanChoose: "Please select the following scheme to unlock",
+    toMemberMessage: "For members",
+    subscriptionCase: "Subscription Programs",
   },
   report: {
     report: "Report",

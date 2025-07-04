@@ -33,6 +33,7 @@ export default {
     thisYear: "今年",
     recommend: "推薦する",
     subscription: "サブスクリプション",
+    subscriptionSetting: "設定を購読します",
     followingNum: "フォロワーの数",
     country: "国家",
     postalCode: "郵便番号",
@@ -55,6 +56,7 @@ export default {
     resendCode: "再送信",
     close: "閉鎖",
     postContent: "コンテンツを入力してください",
+    inputMessage: "メッセージを入力してください",
     done: "仕上げる",
     notYet: "今のところはしないでください",
     notInterest: "興味がありません",
@@ -106,6 +108,13 @@ export default {
     verifyFailed: "検証に失敗しました",
     applied: "適用済み",
     completed: "完了しました",
+    downloadApp: "アプリをダウンロードします",
+    user: "ユーザー",
+    success: "成功",
+    error: "失敗",
+    confirmDelete: "削除することを確認します",
+    pleaseEnterContent: "コンテンツを入力してください",
+    alreadyRemoved: "削除",
   },
   auth: {
     username: "ユーザー名",
@@ -117,6 +126,7 @@ export default {
     formatFailed: "{title}FORMAT入力エラー",
     login: "ログイン",
     logout: "サインアウト",
+    confirmLogout: "ログアウトを確認しますか？",
     male: "男",
     password: "パスワード",
     confirmPassword: "もう一度パスワードを入力してください",
@@ -139,6 +149,8 @@ export default {
     verifyCodeTime: "検証コードの有効期間",
     verifyCodeTimeError: "検証コードの有効期間が期限切れになりました",
     checkAright: "入力が正しいかどうかを確認してください",
+    registerVerifySuccess: "登録検証は成功しました",
+    loginSuccess: "正常にログインします",
     rules: {
       phone: {
         pattern: "正しい携帯電話番号を入力してください",
@@ -208,6 +220,7 @@ export default {
     monthRank: "毎月のリスト",
     accountManagement: "アカウント管理",
     privacySetting: "プライバシー設定",
+    favoriteSetting: "プライバシー設定を保存します",
     messageSetting: "メッセージ設定",
     loginPassword: "パスワードをログインします",
     phoneNumber: "電話番号",
@@ -218,6 +231,8 @@ export default {
     email: "メール",
     blocked: "ブロックされています",
     deleteAccount: "アカウントを削除します",
+    deleteAccountTip:
+      "アカウントを削除したいですか？この操作は復元できません。",
     switchAccount: "スイッチアカウント",
     publicMyFavorites: "公に私のコレクション",
     publicMyFavoritesTip:
@@ -232,9 +247,10 @@ export default {
     postStoryCommentTip:
       "閉鎖されると、他の人はすべての投稿、限られた時間の更新、コメントを表示できません。",
     alreadyCollect: "すでに収集されています",
-    editData: "データの編集",
-    shareFile: "ファイルの共有",
-    creatorCenter: "クリエイターセンター",
+    editData: "情報を編集します",
+    shareFile: "ファイルを共有します",
+    creatorCenter: "クリエーターセンター",
+    accountBind: "アカウントバインディング",
   },
   play: {
     sensitiveContent: "敏感なコンテンツ",
@@ -253,6 +269,7 @@ export default {
   },
   post: {
     publish: "リリース",
+    confirmPublish: "リリースを確認してください",
     publishSetting: "設定をリリースします",
     publishSettingTip: "ユーザーを購読します",
     autoPublish: "自動リリース",
@@ -284,6 +301,15 @@ export default {
     saveDraft: "ドラフトを保存します",
     saveDraftTip: "ドラフトが保存されています",
     upload: "アップロード",
+    discardPost: "投稿をあきらめますか？",
+    discard: "あきらめる",
+    createNewPost: "新しい投稿を作成します",
+    dragPhotoAndVideo: "ここで写真やビデオをドラッグします",
+    selectFile: "ファイルを選択します",
+    unsupportedFileType: "サポートされていないファイルタイプ：",
+    imageSizeLimit: "画像はサイズ制限を超えています。",
+    videoSizeLimit: "ビデオはサイズ制限を超えています。",
+    maxFileCount: "せいぜい、{num}ファイルを選択できます",
   },
   search: {
     basedOnYourFollowing: "あなたの注意によると",
@@ -325,6 +351,7 @@ export default {
     totalAmount: "今日支払われた総額",
     confirmPayment: "支払いを確認します",
     amount: "額",
+    paymentAmount: "支払い額",
     timeError: "時間エラー",
     cardDetails: "カードの詳細",
     creditCardBank: "クレジットカード銀行",
@@ -348,7 +375,7 @@ export default {
     autoRenewalTip:
       "このペンは自動的に更新されます。今日は{today}であり、システムは{endDate}の更新を自動的に差し引きます。",
     autoRenewalTip2:
-      "自動的に更新したくない場合は、「個人アカウント>サブスクリプション管理」ページにアクセスして、次の号で継続的な料金を避けるために手動でキャンセルできます。",
+      "自動的に更新したくない場合は、「個人アカウント>サブスクリプション管理」ページにアクセスして手動でキャンセルして、次の号で継続的な料金を避けることができます。",
     withdrawableAmount: "金額を引き出すことができます",
     transactionRecord: "トランザクションレコード",
     myIncome: "私のアカウント",
@@ -366,8 +393,11 @@ export default {
     completeTime: "完成時間",
     soonWithdraw: "資金が割り当てられようとしています",
     alreadyWithdraw: "受け取った",
-    withdrawAmount2: "助成金の量",
+    withdrawAmount2: "資金額",
     canWithdraw: "拾うことができます",
+    withdrawApplySuccess: "撤退申請が送信されました",
+    withdrawDetail: "引き出しの詳細",
+    orderDetail: "詳細を注文します",
   },
   charts: {
     analysisReport: "分析レポート",
@@ -382,13 +412,15 @@ export default {
     decrease: "減らす",
   },
   menu: {
+    viedeoHome: "ビデオホームページ",
     profile: "個人的なプロフィール",
     statistics: "個人データ",
     wallet: "ウォレット管理",
     favorites: "私のコレクション",
     following: "私の注意",
-    service: "カスタマーサービスに連絡してください",
+    service: "カスタマーサービスにお問い合わせください",
     logout: "サインアウト",
+    helper: "ヘルプセンター",
   },
   service: {
     pleaseEnter:
@@ -398,6 +430,7 @@ export default {
   },
   sponsor: {
     sponsor: "報酬とスポンサーシップ",
+    sponsorTip: "どのくらいスポンサーしたいですか",
     sponsorAmount: "報酬額",
   },
   payment: {
@@ -415,8 +448,16 @@ export default {
     subscriptionTip1:
       "この作成者のすべてのサブスクリプションへの完全なアクセス",
     subscriptionTip2: "クリエイターの活動の優先事項",
+    subscriptionTip3: "クリエイターのサブスクリプションの利点",
+    subscriptionTip4: "忠実なファンを増やします",
+    subscriptionTip5: "加入者との密接な接続を構築します",
+    subscriptionTip6: "安定した所得の成長",
+    subscriptionTip7: "ロックされていない量の映画を設定します",
+    subscriptionTip8: "次の計画額を設定してください",
     subscriptionPlanChoose:
       "ロックを解除するには、次のスキームを選択してください",
+    toMemberMessage: "メンバー向け",
+    subscriptionCase: "サブスクリプションプログラム",
   },
   report: {
     report: "報告",

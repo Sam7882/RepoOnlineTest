@@ -33,6 +33,7 @@ export default {
     thisYear: "Năm nay",
     recommend: "Gợi ý",
     subscription: "Đăng ký",
+    subscriptionSetting: "Đăng ký cài đặt",
     followingNum: "Số lượng người theo dõi",
     country: "Quốc gia",
     postalCode: "Mã bưu điện",
@@ -55,6 +56,7 @@ export default {
     resendCode: "Chia rẽ",
     close: "Đóng cửa",
     postContent: "Vui lòng nhập nội dung",
+    inputMessage: "Vui lòng nhập một tin nhắn",
     done: "Hoàn thành",
     notYet: "Đừng làm điều đó ngay bây giờ",
     notInterest: "Không quan tâm",
@@ -105,6 +107,13 @@ export default {
     verifyFailed: "Xác minh thất bại",
     applied: "Áp dụng",
     completed: "Hoàn thành",
+    downloadApp: "Tải xuống ứng dụng",
+    user: "Người dùng",
+    success: "Thành công",
+    error: "Thất bại",
+    confirmDelete: "Xác nhận để xóa",
+    pleaseEnterContent: "Vui lòng nhập nội dung",
+    alreadyRemoved: "LOẠI BỎ",
   },
   auth: {
     username: "Tên người dùng",
@@ -116,6 +125,7 @@ export default {
     formatFailed: "{title}format Lỗi đầu vào",
     login: "Đăng nhập",
     logout: "Đăng xuất",
+    confirmLogout: "Xác nhận để đăng xuất?",
     male: "Nam giới",
     password: "Mật khẩu",
     confirmPassword: "Nhập lại mật khẩu của bạn",
@@ -138,6 +148,8 @@ export default {
     verifyCodeTime: "Tính hợp lệ của mã xác minh",
     verifyCodeTimeError: "Thời gian hợp lệ của mã xác minh đã hết hạn",
     checkAright: "Vui lòng kiểm tra xem đầu vào có đúng không",
+    registerVerifySuccess: "Xác minh đăng ký đã thành công",
+    loginSuccess: "Đăng nhập thành công",
     rules: {
       phone: {
         pattern: "Vui lòng nhập đúng số điện thoại di động",
@@ -210,6 +222,7 @@ export default {
     monthRank: "Danh sách hàng tháng",
     accountManagement: "Quản lý tài khoản",
     privacySetting: "Cài đặt quyền riêng tư",
+    favoriteSetting: "Lưu cài đặt quyền riêng tư",
     messageSetting: "Cài đặt tin nhắn",
     loginPassword: "Đăng nhập mật khẩu",
     phoneNumber: "Số điện thoại",
@@ -220,6 +233,8 @@ export default {
     email: "E-mail",
     blocked: "Bị chặn",
     deleteAccount: "Xóa một tài khoản",
+    deleteAccountTip:
+      "Bạn có chắc bạn muốn xóa tài khoản của mình không? Hoạt động này không thể được khôi phục.",
     switchAccount: "Chuyển đổi tài khoản",
     publicMyFavorites: "Công khai bộ sưu tập của tôi",
     publicMyFavoritesTip:
@@ -234,9 +249,10 @@ export default {
     postStoryCommentTip:
       "Sau khi đóng, những người khác sẽ không thể xem tất cả các bài đăng của bạn, cập nhật thời gian và nhận xét giới hạn.",
     alreadyCollect: "Đã được thu thập",
-    editData: "Chỉnh sửa dữ liệu",
-    shareFile: "Chia sẻ tệp",
-    creatorCenter: "Creator Center",
+    editData: "Chỉnh sửa thông tin",
+    shareFile: "Chia sẻ tập tin",
+    creatorCenter: "Trung tâm sáng tạo",
+    accountBind: "Tài khoản ràng buộc",
   },
   play: {
     sensitiveContent: "Nội dung nhạy cảm",
@@ -254,6 +270,7 @@ export default {
   },
   post: {
     publish: "Giải phóng",
+    confirmPublish: "Xác nhận bản phát hành",
     publishSetting: "Cài đặt phát hành",
     publishSettingTip: "Đăng ký cho người dùng",
     autoPublish: "Tự động phát hành",
@@ -286,6 +303,15 @@ export default {
     saveDraft: "Lưu dự thảo",
     saveDraftTip: "Dự thảo đã được lưu trữ",
     upload: "Tải lên",
+    discardPost: "Từ bỏ bài viết?",
+    discard: "Bỏ cuộc",
+    createNewPost: "Tạo một bài viết mới",
+    dragPhotoAndVideo: "Kéo ảnh và video ở đây",
+    selectFile: "Chọn một tập tin",
+    unsupportedFileType: "Các loại tệp không được hỗ trợ:",
+    imageSizeLimit: "Hình ảnh vượt quá giới hạn kích thước:",
+    videoSizeLimit: "Video vượt quá giới hạn kích thước:",
+    maxFileCount: "Nhiều nhất, bạn có thể chọn{num}các tệp",
   },
   search: {
     basedOnYourFollowing: "Theo sự chú ý của bạn",
@@ -327,6 +353,7 @@ export default {
     totalAmount: "Tổng số tiền đã trả hôm nay",
     confirmPayment: "Xác nhận thanh toán",
     amount: "Số lượng",
+    paymentAmount: "Số tiền thanh toán",
     timeError: "Lỗi thời gian",
     cardDetails: "Chi tiết thẻ",
     creditCardBank: "Ngân hàng thẻ tín dụng",
@@ -350,7 +377,7 @@ export default {
     autoRenewalTip:
       "Bút này được tự động gia hạn. Hôm nay là{today}và hệ thống sẽ tự động khấu trừ gia hạn trên{endDate}.",
     autoRenewalTip2:
-      'Nếu bạn không muốn tự động gia hạn, bạn có thể truy cập trang "Tài khoản cá nhân> Quản lý đăng ký" để hủy thủ công để tránh các khoản phí tiếp tục trong vấn đề tiếp theo.',
+      'Nếu bạn không muốn tự động gia hạn, bạn có thể truy cập trang "Quản lý đăng ký cá nhân> đăng ký" để hủy thủ công để tránh tiếp tục phí trong số tiếp theo.',
     withdrawableAmount: "Số tiền có thể được rút",
     transactionRecord: "Hồ sơ giao dịch",
     myIncome: "Tài khoản của tôi",
@@ -370,6 +397,9 @@ export default {
     alreadyWithdraw: "Đã nhận",
     withdrawAmount2: "Số tiền tài trợ",
     canWithdraw: "Có thể được chọn",
+    withdrawApplySuccess: "Đơn xin rút tiền đã được gửi",
+    withdrawDetail: "Chi tiết rút tiền",
+    orderDetail: "Chi tiết đặt hàng",
   },
   charts: {
     analysisReport: "Báo cáo phân tích",
@@ -384,6 +414,7 @@ export default {
     decrease: "Giảm bớt",
   },
   menu: {
+    viedeoHome: "Video Trang chủ",
     profile: "Hồ sơ cá nhân",
     statistics: "Dữ liệu cá nhân",
     wallet: "Quản lý ví",
@@ -391,6 +422,7 @@ export default {
     following: "Sự chú ý của tôi",
     service: "Liên hệ với dịch vụ khách hàng",
     logout: "Đăng xuất",
+    helper: "Trung tâm trợ giúp",
   },
   service: {
     pleaseEnter:
@@ -400,6 +432,7 @@ export default {
   },
   sponsor: {
     sponsor: "Phần thưởng và tài trợ",
+    sponsorTip: "Bạn muốn tài trợ bao nhiêu",
     sponsorAmount: "Số tiền thưởng",
   },
   payment: {
@@ -417,7 +450,15 @@ export default {
     subscriptionTip1:
       "Truy cập đầy đủ vào tất cả các đăng ký cho người tạo này",
     subscriptionTip2: "Ưu tiên các hoạt động của người sáng tạo",
+    subscriptionTip3: "Những lợi ích của đăng ký cho người sáng tạo",
+    subscriptionTip4: "Tăng người hâm mộ trung thành",
+    subscriptionTip5: "Xây dựng các kết nối gần hơn với người đăng ký",
+    subscriptionTip6: "Tăng trưởng thu nhập ổn định",
+    subscriptionTip7: "Đặt bộ phim số tiền không khóa",
+    subscriptionTip8: "Vui lòng đặt số tiền kế hoạch sau",
     subscriptionPlanChoose: "Vui lòng chọn sơ đồ sau để mở khóa",
+    toMemberMessage: "Cho các thành viên",
+    subscriptionCase: "Chương trình đăng ký",
   },
   report: {
     report: "Báo cáo",

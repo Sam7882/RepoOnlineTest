@@ -33,6 +33,7 @@ export default {
     thisYear: "ปีนี้",
     recommend: "แนะนำ",
     subscription: "การสมัครสมาชิก",
+    subscriptionSetting: "การตั้งค่าสมัครสมาชิก",
     followingNum: "จำนวนผู้ติดตาม",
     country: "ประเทศ",
     postalCode: "รหัสไปรษณีย์",
@@ -55,6 +56,7 @@ export default {
     resendCode: "ส่งคืน",
     close: "การปิด",
     postContent: "กรุณากรอกเนื้อหา",
+    inputMessage: "กรุณากรอกข้อความ",
     done: "เสร็จ",
     notYet: "อย่าทำตอนนี้",
     notInterest: "ไม่สนใจ",
@@ -105,6 +107,13 @@ export default {
     verifyFailed: "การตรวจสอบล้มเหลว",
     applied: "สมัครแล้ว",
     completed: "สมบูรณ์",
+    downloadApp: "ดาวน์โหลดแอพ",
+    user: "ผู้ใช้",
+    success: "ความสำเร็จ",
+    error: "ล้มเหลว",
+    confirmDelete: "ยืนยันการลบ",
+    pleaseEnterContent: "กรุณากรอกเนื้อหา",
+    alreadyRemoved: "ลบออก",
   },
   auth: {
     username: "ชื่อผู้ใช้",
@@ -116,6 +125,7 @@ export default {
     formatFailed: "{title}format ข้อผิดพลาดในการป้อนข้อมูล",
     login: "เข้าสู่ระบบ",
     logout: "ลงชื่อเข้าใช้",
+    confirmLogout: "ยืนยันว่าจะออกจากระบบ?",
     male: "ชาย",
     password: "รหัสผ่าน",
     confirmPassword: "ป้อนรหัสผ่านของคุณอีกครั้ง",
@@ -138,6 +148,8 @@ export default {
     verifyCodeTime: "เวลาที่ถูกต้องของรหัสการตรวจสอบ",
     verifyCodeTimeError: "เวลาที่ถูกต้องของรหัสการตรวจสอบหมดอายุแล้ว",
     checkAright: "โปรดตรวจสอบว่าอินพุตถูกต้องหรือไม่",
+    registerVerifySuccess: "การตรวจสอบการลงทะเบียนประสบความสำเร็จ",
+    loginSuccess: "เข้าสู่ระบบสำเร็จ",
     rules: {
       phone: {
         pattern: "โปรดป้อนหมายเลขโทรศัพท์มือถือที่ถูกต้อง",
@@ -204,6 +216,7 @@ export default {
     monthRank: "รายเดือน",
     accountManagement: "การจัดการบัญชี",
     privacySetting: "การตั้งค่าความเป็นส่วนตัว",
+    favoriteSetting: "บันทึกการตั้งค่าความเป็นส่วนตัว",
     messageSetting: "การตั้งค่าข้อความ",
     loginPassword: "รหัสผ่านเข้าสู่ระบบ",
     phoneNumber: "หมายเลขโทรศัพท์",
@@ -214,6 +227,8 @@ export default {
     email: "อีเมล",
     blocked: "ที่ถูกปิดกั้น",
     deleteAccount: "ลบบัญชี",
+    deleteAccountTip:
+      "แน่ใจหรือว่าต้องการลบบัญชีของคุณ? การดำเนินการนี้ไม่สามารถกู้คืนได้",
     switchAccount: "เปลี่ยนบัญชี",
     publicMyFavorites: "คอลเลกชันของฉันต่อสาธารณะ",
     publicMyFavoritesTip:
@@ -230,7 +245,8 @@ export default {
     alreadyCollect: "รวบรวมแล้ว",
     editData: "แก้ไขข้อมูล",
     shareFile: "แชร์ไฟล์",
-    creatorCenter: "ศูนย์รวมผู้สร้าง",
+    creatorCenter: "ศูนย์ผู้สร้าง",
+    accountBind: "การผูกมัดบัญชี",
   },
   play: {
     sensitiveContent: "เนื้อหาที่ละเอียดอ่อน",
@@ -247,6 +263,7 @@ export default {
   },
   post: {
     publish: "ปล่อย",
+    confirmPublish: "ยืนยันการเปิดตัว",
     publishSetting: "การตั้งค่าการปล่อย",
     publishSettingTip: "สมัครสมาชิกกับผู้ใช้",
     autoPublish: "การเปิดตัวอัตโนมัติ",
@@ -278,6 +295,15 @@ export default {
     saveDraft: "บันทึกร่าง",
     saveDraftTip: "ร่างถูกเก็บไว้",
     upload: "อัพโหลด",
+    discardPost: "เลิกโพสต์?",
+    discard: "ยอมแพ้",
+    createNewPost: "สร้างโพสต์ใหม่",
+    dragPhotoAndVideo: "ลากรูปภาพและวิดีโอที่นี่",
+    selectFile: "เลือกไฟล์",
+    unsupportedFileType: "ประเภทไฟล์ที่ไม่รองรับ:",
+    imageSizeLimit: "ภาพเกินขีด จำกัด ขนาด:",
+    videoSizeLimit: "วิดีโอเกินขีด จำกัด ขนาด:",
+    maxFileCount: "อย่างมากคุณสามารถเลือกไฟล์{num}",
   },
   search: {
     basedOnYourFollowing: "ตามความสนใจของคุณ",
@@ -319,6 +345,7 @@ export default {
     totalAmount: "จำนวนเงินทั้งหมดที่จ่ายในวันนี้",
     confirmPayment: "ยืนยันการชำระเงิน",
     amount: "จำนวน",
+    paymentAmount: "จำนวนเงินการชำระเงิน",
     timeError: "ข้อผิดพลาดเวลา",
     cardDetails: "รายละเอียดบัตร",
     creditCardBank: "ธนาคารบัตรเครดิต",
@@ -360,8 +387,11 @@ export default {
     completeTime: "เวลาเสร็จสิ้น",
     soonWithdraw: "เงินทุนกำลังจะได้รับการจัดสรร",
     alreadyWithdraw: "ได้รับ",
-    withdrawAmount2: "จำนวนเงินช่วยเหลือ",
+    withdrawAmount2: "จำนวนเงินทุน",
     canWithdraw: "สามารถรับได้",
+    withdrawApplySuccess: "ใบสมัครถอนได้ถูกส่งไปแล้ว",
+    withdrawDetail: "รายละเอียดการถอน",
+    orderDetail: "รายละเอียดสั่งซื้อ",
   },
   charts: {
     analysisReport: "รายงานการวิเคราะห์",
@@ -376,6 +406,7 @@ export default {
     decrease: "ลด",
   },
   menu: {
+    viedeoHome: "โฮมเพจวิดีโอ",
     profile: "โปรไฟล์ส่วนตัว",
     statistics: "ข้อมูลส่วนบุคคล",
     wallet: "การจัดการกระเป๋าเงิน",
@@ -383,6 +414,7 @@ export default {
     following: "ความสนใจของฉัน",
     service: "ติดต่อฝ่ายบริการลูกค้า",
     logout: "ลงชื่อเข้าใช้",
+    helper: "ศูนย์ช่วยเหลือ",
   },
   service: {
     pleaseEnter: "โปรดป้อนคำถามหรือคำขอของคุณและเราจะตอบกลับคุณโดยเร็วที่สุด:",
@@ -391,6 +423,7 @@ export default {
   },
   sponsor: {
     sponsor: "รางวัลและการสนับสนุน",
+    sponsorTip: "คุณต้องการสปอนเซอร์เท่าไหร่",
     sponsorAmount: "จำนวนรางวัล",
   },
   payment: {
@@ -408,7 +441,15 @@ export default {
     subscriptionTip1:
       "การเข้าถึงการสมัครสมาชิกทั้งหมดสำหรับผู้สร้างรายนี้เต็มรูปแบบ",
     subscriptionTip2: "ลำดับความสำคัญของกิจกรรมของผู้สร้าง",
+    subscriptionTip3: "ประโยชน์ของการสมัครสมาชิกสำหรับผู้สร้าง",
+    subscriptionTip4: "เพิ่มแฟน ๆ ที่ภักดี",
+    subscriptionTip5: "สร้างการเชื่อมต่อที่ใกล้ชิดกับสมาชิก",
+    subscriptionTip6: "การเติบโตของรายได้คงที่",
+    subscriptionTip7: "ตั้งค่าภาพยนตร์ที่ปลดล็อค",
+    subscriptionTip8: "กรุณากำหนดจำนวนแผนต่อไปนี้",
     subscriptionPlanChoose: "โปรดเลือกรูปแบบต่อไปนี้เพื่อปลดล็อก",
+    toMemberMessage: "สำหรับสมาชิก",
+    subscriptionCase: "โปรแกรมการสมัครสมาชิก",
   },
   report: {
     report: "รายงาน",

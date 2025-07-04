@@ -21,6 +21,11 @@
   src: url('@/assets/font/Yuanti TC Regular.ttf');
 }
 :root {
+  /* iphone homeBar 最高34px*/
+  --iphone-homeBar-height: 68rpx;
+  @media screen and (min-width: 768px) and (max-width: 960px) {
+    --iphone-homeBar-height: 34rpx;
+  }
   /* 主題顏色 */
   --primary-color: #907bfe;
   --secondary-color: #c1bbf9;
@@ -59,7 +64,7 @@
   --play-sponsor-color-tertiary: #ffedcc;
   --play-sponsor-color-quaternary: #ef7b91;
   // 背景色 與 背景1 / 背景2
-  --background-color: #ffffff;
+  --background-color: #040000;
   --background-color-dark: #040000;
   --background-color-light: #ffffff;
   --background-color-gray: #252525;
@@ -94,6 +99,7 @@
   }
   /* 字體大小 */
   --font-size-content-pc: 24rpx;
+  --font-size-content-pc-xsmall: 16rpx;
   --font-size-content-pc-small: 20rpx;
   --font-size-content-pc-large: 28rpx;
   --font-size-title-pc: 32rpx;
@@ -102,6 +108,7 @@
   --font-size-title-pc-xlarge: 36rpx;
   @media screen and (min-width: 768px) {
     --font-size-content-pc: 16rpx;
+    --font-size-content-pc-xsmall: 12rpx;
     --font-size-content-pc-small: 12rpx;
     --font-size-content-pc-large: 20rpx;
     --font-size-title-pc: 20rpx;
@@ -111,6 +118,7 @@
   }
   @media screen and (min-width: 961px) {
     --font-size-content-pc: 28rpx;
+    --font-size-content-pc-xsmall: 20rpx;
     --font-size-content-pc-small: 24rpx;
     --font-size-content-pc-large: 32rpx;
     --font-size-title-pc: 32rpx;
@@ -120,6 +128,7 @@
   }
   @media screen and (min-width: 1280px) {
     --font-size-content-pc: 32rpx;
+    --font-size-content-pc-xsmall: 24rpx;
     --font-size-content-pc-small: 28rpx;
     --font-size-content-pc-large: 36rpx;
     --font-size-title-pc: 36rpx;
@@ -129,6 +138,7 @@
   }
   @media screen and (min-width: 1920px) {
     --font-size-content-pc: 36rpx;
+    --font-size-content-pc-xsmall: 28rpx;
     --font-size-content-pc-small: 32rpx;
     --font-size-content-pc-large: 40rpx;
     --font-size-title-pc: 40rpx;
@@ -173,7 +183,7 @@ body {
   margin: 0;
   padding: 0;
   color: var(--text-color);
-  // background-color: var(--background-color);
+  background-color: var(--background-color);
   line-height: 1.5;
 }
 

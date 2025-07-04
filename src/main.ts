@@ -11,6 +11,9 @@ import '@/assets/styles/tailwind/tailwind.css';
 // Global CSS
 import '@/assets/styles/global.scss';
 
+// vConsole 調試工具
+import VConsole from 'vconsole';
+
 const i18n = createI18n({
   legacy: false,         // ✅ 關閉 legacy 模式
   globalInjection: true, // ✅ 讓 $t() 能用於 Options API
@@ -27,6 +30,13 @@ export function createApp() {
   app.use(pinia);
   // 安裝 i18n
   app.use(i18n);
+
+  // NOTE: 開發環境才使用 vConsole
+  // new VConsole({
+  //   theme: 'dark',
+  //   defaultPlugins: ['system', 'network', 'element', 'storage'],
+  //   maxLogNumber: 1000,
+  // });
 
   return {
     app,

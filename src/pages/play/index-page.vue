@@ -1,5 +1,5 @@
 <template>
-	<view :style="full" class="play-container">
+	<view class="play-container">
 		<!-- 返回上一页面 -->
 		<view class="header-nav">
 			<view class="header-left">
@@ -732,18 +732,24 @@ function getList() {
 </script>
 
 <style scoped lang="scss">
-pages {
-	background: var(--background-color-dark);
-}
-
 .play-container {
+	background: var(--background-color-dark);
 	/* #ifndef APP-NVUE */
 	width: 100vw;
-	height: 100%;
+	height: 100dvh;
 	color: #f3f3f3;
 	/* #endif */
 	background: #141c27;
 	position: relative;
+
+	display: flex;
+	flex-direction: column;
+
+	::v-deep(.bottom-nav-spacer) {
+		.bottom-nav-spacer>.bottom-nav-container {
+			position: relative;
+		}
+	}
 }
 
 // header
@@ -1054,6 +1060,7 @@ pages {
 	--bottomNav-margin-height: 32rpx; // 與底部導航的間距
 	--progress-bar-margin-height: 54rpx; // 影音進度條與底部導航的間距
 	--info-margin-height: 48rpx; // 影音資訊區塊與底部導航的間距
+	height: 100%;
 
 	.ml-swiper-v3-custom {}
 

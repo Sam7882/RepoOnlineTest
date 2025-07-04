@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<c-headerNav :title="'提款明細'" />
+		<c-headerNav :title="$t('wallet.withdrawDetail')" />
 		<view class="tip-container">
 			<text>{{ $t("wallet.expectedWithdrawTime2", { time: '2025年5月30日 15:50' }) }}</text>
 		</view>

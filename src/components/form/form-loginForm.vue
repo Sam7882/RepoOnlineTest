@@ -98,7 +98,7 @@ const handleLogin = () => {
 			console.log('✅ 驗證成功，送出資料:', formData.value);
 			// 顯示成功提示
 			openNotice({
-				title: '登入成功',
+				title: t('auth.loginSuccess'),
 				setTimeOut: false
 			})
 			// 這裡可以進行 API 提交

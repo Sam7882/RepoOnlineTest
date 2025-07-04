@@ -51,7 +51,7 @@ const close = () => {
 const handleVerify = () => {
 	close()
 	openNotice({
-		title: '註冊驗證成功',
+		title: t('auth.registerVerifySuccess'),
 		titleIcon: 'icon-common-confirm'
 	})
 }

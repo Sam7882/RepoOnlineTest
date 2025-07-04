@@ -3,7 +3,8 @@
     <!-- 發文輸入區 -->
     <!-- TODO:發文內容 反藍 -->
     <!-- <view class="editor" contenteditable="true" @input="handleInput" @keyup="handleKeyup" ref="editorRef"></view> -->
-    <uni-easyinput class="editor-input" type="textarea" v-model="postContent" placeholder="请输入内容"></uni-easyinput>
+    <uni-easyinput class="editor-input" type="textarea" v-model="postContent"
+      :placeholder="$t('common.postContent')"></uni-easyinput>
 
     <!-- 建議清單面板 -->
     <view class="suggestion-panel" v-show="showSuggestions" :style="panelStyle">

@@ -1,7 +1,8 @@
 <template>
 	<uni-forms ref="form" :model="formData" :rules="formRules" label-position="top">
 		<!-- name => 對應 uni-forms 的 表單參數名稱 , 與 規則名皆須一致 -->
-		<uni-forms-item class="pay-page-content-item" label="付款金額" label-width="150" name="payAmount">
+		<uni-forms-item class="pay-page-content-item" :label="$t('wallet.paymentAmount')" label-width="150"
+			name="payAmount">
 			<view class="pay-page-content-item-input-amount-container">
 				<text>{{ $t('wallet.singlePayment') }}</text>
 				<view class="pay-page-content-item-input-amount">

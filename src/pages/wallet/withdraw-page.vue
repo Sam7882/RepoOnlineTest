@@ -1,7 +1,7 @@
 <template>
 	<view class="withdraw-page">
 		<!-- header 導航-->
-		<c-headerNav :title="'提領'" :openQa="true" />
+		<c-headerNav :title="$t('wallet.withdrawal')" :openQa="true" />
 		<!-- 內容區塊 -->
 		<view class="withdraw-page-content">
 			<view class="withdraw-amount-container">

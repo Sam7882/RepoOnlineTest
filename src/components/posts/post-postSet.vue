@@ -37,7 +37,7 @@
 
         <!-- 確認按鈕 -->
         <view class="popup-confirm-container">
-          <button class="popup-confirm" @click="confirm">{{ '確認發布' }}</button>
+          <button class="popup-confirm" @click="confirm">{{ $t('post.confirmPublish') }}</button>
         </view>
       </view>
     </view>

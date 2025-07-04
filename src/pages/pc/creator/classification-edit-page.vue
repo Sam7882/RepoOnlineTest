@@ -148,7 +148,7 @@ const handleManage = () => {
 const deleteSelected = () => {
 	console.log("🚀 ~ 移除所選:")
 	openMessage({
-		content: '已移除',
+		content: t('common.alreadyRemoved'),
 		confirmBtnText: 'OK',
 		onConfirm: () => {
 			// 確認後關閉窗口
@@ -193,8 +193,8 @@ const confirmclassNamePopUp = () => {
 const deleteClassification = () => {
 	cancelclassNamePopUp()
 	openConfirm({
-		title: '刪除分類',
-		content: '確認要刪除分類?',
+		title: t('common.deleteClassification'),
+		content: t('common.deleteClassificationTip'),
 		onConfirm: () => {
 			console.log("🚀 ~ 刪除後跳轉:")
 

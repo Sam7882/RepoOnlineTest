@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<c-headerNav :title="'提款申請已送出'" />
+		<c-headerNav :title="$t('wallet.withdrawApplySuccess')" />
 		<view class="tip-container">
 			<text>{{ $t("wallet.withdrawTip", { startDate: '2025年5月30日', endDate: '2025年6月10日' }) }}</text>
 		</view>

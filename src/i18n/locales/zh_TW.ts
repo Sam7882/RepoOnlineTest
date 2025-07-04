@@ -56,6 +56,7 @@ export default {
     resendCode: "重新發送",
     close: "關閉",
     postContent: "請輸入內容",
+    inputMessage: "請輸入訊息",
     done: "完成",
     notYet: "暫時不要",
     notInterest: "不感興趣",
@@ -110,6 +111,8 @@ export default {
     success: "成功",
     error: "失敗",
     confirmDelete: "確定刪除",
+    pleaseEnterContent: "請輸入內容",
+    alreadyRemoved: "已移除",
   },
   auth: {
     username: '用戶名稱',
@@ -143,6 +146,8 @@ export default {
     verifyCodeTime: "驗證碼有效時間",
     verifyCodeTimeError: "驗證碼有效時間已過",
     checkAright: "請檢查是否輸入正確",
+    registerVerifySuccess: "註冊驗證成功",
+    loginSuccess: "登入成功",
     rules: {
       phone: {
         pattern: "請輸入正確的手機號碼",
@@ -248,6 +253,7 @@ export default {
   },
   post: {
     publish: "發布",
+    confirmPublish: "確認發布",
     publishSetting: "發布設定",
     publishSettingTip: "訂閱用戶",
     autoPublish: "自動發佈",
@@ -328,6 +334,7 @@ export default {
     totalAmount: "今日應付總額",
     confirmPayment: "確認付款",
     amount: "金額",
+    paymentAmount: "付款金額",
     timeError: "時間錯誤",
     cardDetails: "卡片詳情",
     creditCardBank: "信用卡銀行",
@@ -398,6 +405,7 @@ export default {
   service: {
     pleaseEnter: "請輸入您的問題或需求，我們會盡快回覆您：",
     theme: "主題",
+
     problemDescription: "問題描述",
   },
   sponsor: {

@@ -27,11 +27,13 @@
         <!-- 打賞金額 -->
         <view class="popup-content-item popup-content-item-money ">
           <text class="popup-content-item-money-text">$</text>
-          <uni-easyinput type="number" class="popup-content-input" placeholder="金額" :clearable="false" />
+          <uni-easyinput type="number" class="popup-content-input" :placeholder="$t('wallet.amount')"
+            :clearable="false" />
         </view>
         <!-- 留言輸入欄位 -->
         <view class="popup-content-item">
-          <uni-easyinput type="textarea" class="popup-content-textarea" placeholder="輸入訊息..." :clearable="false" />
+          <uni-easyinput type="textarea" class="popup-content-textarea" :placeholder="$t('common.inputMessage')"
+            :clearable="false" />
         </view>
       </view>
       <view class="popup-comment-container">

@@ -79,8 +79,8 @@
 
 		<!-- 底部 -->
 		<view class="message-bottom-container">
-			<uni-easyinput class="inputStyle" v-model="inputMessage" placeholder="請輸入訊息" @focus="handleFocus"
-				@blur="handleBlur" />
+			<uni-easyinput class="inputStyle" v-model="inputMessage" :placeholder="$t('common.inputMessage')"
+				@focus="handleFocus" @blur="handleBlur" />
 			<view class="message-input-send-button">
 				<template v-if="!showSend">
 					<view class="icon-container">

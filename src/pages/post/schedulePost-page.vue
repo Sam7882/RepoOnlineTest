@@ -17,9 +17,9 @@
 
 			<!-- 草稿清單 -->
 			<view class="draft-list">
-				<view v-for="(item, index) in drafts" :key="index" class="draft-card">
+				<view v-for="(item, index) in drafts" :key="index" class="draft-card" @click="handlePost(item)">
 					<view class="img-container">
-						<image :src="item.cover" class="draft-img" mode="aspectFill" />
+						<image :src="item.type === 'image' ? item.src : item.cover" class="draft-img" mode="aspectFill" />
 						<view class="icon-container">
 							<uni-icons class="icon-copy" type="icon-common-copy" custom-prefix="icon" size="20"
 								color="var(--text-color-secondary)" />
@@ -27,10 +27,12 @@
 					</view>
 					<view class="content-container">
 						<view class="draft-meta">
-							<text class="draft-date">{{ item.date }}</text>
-							<text class="draft-time">{{ item.time }}</text>
+							<text class="draft-date">{{ DayUtils.format(item.date, 'YYYY-MM-DD') }}</text>
+							<text class="draft-time">{{ DayUtils.format(item.date, 'HH:mm') }}</text>
 						</view>
-						<uni-icons type="more-filled" size="20" class="more-icon" @click="openCaption" />
+						<view class="icon-container more-icon-container" @click.stop="openCaption">
+							<uni-icons type="more-filled" size="20" class="more-icon" />
+						</view>
 					</view>
 				</view>
 			</view>
@@ -60,23 +62,40 @@
 <script setup>
 // TEMP: 發布頁-排定發布
 import { onLoad, onShow } from '@dcloudio/uni-app'
-import { toPostPreview, checkViewportAutoReplace } from '@/utils/routers'
+import { toPostPreview, toPostIndex, checkViewportAutoReplace } from '@/utils/routers'
 import { usePostData } from '@/stores/usePostData'
+import { DayUtils } from '@/utils/day'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const postDataStore = usePostData()
 const { setSelectedMedia } = postDataStore
 const drafts = ref([
 	{
-		cover: '/static/images/template/img-template-01.png',
-		date: '20250515',
-		time: '07:00',
+		id: '1',
+		type: 'image',
+		dataNum: '1',
+		num: "1688",
+		src: 'https://picsum.photos/id/1011/300/300',
+		date: '2025-05-15T07:00:00.000Z',
 	},
 	{
-		cover: '/static/images/template/img-template-02.png',
-		date: '20250515',
-		time: '07:00',
+		id: '2',
+		type: 'video',
+		dataNum: '1',
+		num: "1688",
+		src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4',
+		cover: 'https://picsum.photos/id/1012/300/300',
+		date: '2025-01-15T12:00:00.000Z',
 	},
+	{ id: '3', type: 'image', dataNum: '1', num: "1688", src: 'https://picsum.photos/id/1013/300/300', date: '2025-01-15T12:00:00.000Z', },
+	{ id: '4', type: 'video', dataNum: '1', num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1014/300/300', date: '2025-01-15T12:00:00.000Z', },
+	{ id: '5', type: 'image', dataNum: '1', num: "1688", src: 'https://picsum.photos/id/1015/300/300', date: '2025-01-15T12:00:00.000Z', },
+	{ id: '6', type: 'video', dataNum: '1', num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1016/300/300', date: '2025-01-15T12:00:00.000Z', },
+	{ id: '7', type: 'image', dataNum: '1', num: "1688", src: 'https://picsum.photos/id/1015/300/300', date: '2025-01-15T12:00:00.000Z', },
+	{ id: '8', type: 'video', dataNum: '1', num: "1688", src: 'https://sample-videos.com/video123/mp4/480/asdasdas.mp4', cover: 'https://picsum.photos/id/1018/300/300', date: '2025-01-15T12:00:00.000Z', },
+	{ id: '9', type: 'image', dataNum: '1', num: "1688", src: 'https://picsum.photos/id/1019/300/300', date: '2025-01-15T12:00:00.000Z', },
+	{ id: '10', type: 'image', dataNum: '1', num: "1688", src: 'https://picsum.photos/id/1011/300/300', date: '2025-01-15T12:00:00.000Z', },
+
 ])
 
 const goBack = () => {
@@ -123,6 +142,14 @@ const closeCaption = () => {
 const deleteDraft = () => {
 	console.log('deleteDraft')
 }
+
+
+const handlePost = (item) => {
+	console.log('handlePost', item)
+	setSelectedMedia([item])
+	toPostIndex()
+}
+
 
 onShow(() => {
 	checkViewportAutoReplace()
@@ -187,6 +214,17 @@ onShow(() => {
 .img-container {
 	display: flex;
 	position: relative;
+
+	.icon-container {
+		position: absolute;
+		bottom: 16rpx;
+		left: 24rpx;
+
+		.icon-copy {
+			font-size: var(--font-size-content-pc-large) !important;
+			color: var(--text-color-secondary) !important
+		}
+	}
 }
 
 .draft-img {
@@ -195,18 +233,10 @@ onShow(() => {
 	object-fit: cover;
 }
 
-.icon-container {
-	position: absolute;
-	bottom: 16rpx;
-	left: 24rpx;
 
-	.icon-copy {
-		font-size: var(--font-size-content-pc-large) !important;
-		color: var(--text-color-secondary) !important
-	}
-}
 
 .content-container {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -219,10 +249,15 @@ onShow(() => {
 	font-size: var(--font-size-content-pc);
 }
 
-.more-icon {
+.more-icon-container {
 	position: absolute;
-	bottom: 10rpx;
-	right: 10rpx;
+	top: 32rpx;
+	right: 32rpx;
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		top: 16rpx;
+		right: 16rpx;
+	}
 }
 
 /* 子元件-關注 */

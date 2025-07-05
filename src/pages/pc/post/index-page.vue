@@ -15,10 +15,10 @@
 				<view class="publish-page-container-left-item">
 					<image v-if="mediaList.type === 'image'" class="publish-media-preview" :src="mediaList.src"
 						mode="aspectFill" />
-					<video v-else id="storyVideo" class="video" :src="mediaList.src" loop :muted="playStatus === 'pause'"
-						:controls="true" :show-center-play-btn="true" object-fit="contain" :show-loading="false"
-						:enable-progress-gesture="false" :show-play-btn="false" :show-fullscreen-btn="false" :show-progress="true"
-						@click="switchVideoPlay" />
+					<video v-else-if="mediaList.type === 'video'" id="storyVideo" class="video" :src="mediaList.src" loop
+						:muted="playStatus === 'pause'" :controls="true" :show-center-play-btn="true" object-fit="contain"
+						:show-loading="false" :enable-progress-gesture="false" :show-play-btn="false" :show-fullscreen-btn="false"
+						:show-progress="true" @click="switchVideoPlay" />
 					<view class="icon-container" v-if="playStatus === 'pause'" @click="switchVideoPlay">
 						<uni-icons class="icons" type="icon-video-play" custom-prefix="icon" size="16" color="#fff" />
 					</view>

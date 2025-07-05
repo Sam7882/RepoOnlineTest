@@ -6,7 +6,8 @@
 		<!-- 圖片與輸入內容區 -->
 		<view class="publish-media-container">
 			<view class="publish-media-preview-container">
-				<image class="publish-media-preview" :src="mediaList.src" mode="aspectFill" />
+				<image class="publish-media-preview" :src="mediaList.type === 'image' ? mediaList.src : mediaList.cover"
+					mode="aspectFill" />
 			</view>
 			<!-- <uni-easyinput v-model="postContent" type="textarea" class="publish-input" placeholder="請輸入內容" :trim="true"
 				:clearable="false" /> -->

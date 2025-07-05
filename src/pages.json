@@ -18,356 +18,7 @@
   },
   "pages": [
     {
-      "path": "pages/launch/loading",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
       "path": "pages/auth/login",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/auth/register",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/auth/verify-phone",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-
-    {
-      "path": "pages/play/index",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-dark)"
-      }
-    },
-    {
-      "path": "pages/play/article-gallery",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/post/post-Preview",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/post/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/post/tagPeople",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/post/shortStory",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/post/schedulePost",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/post/draftBox",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-
-    {
-      "path": "pages/search/index",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-dark)"
-      }
-    },
-    {
-      "path": "pages/search/searchVideo",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-dark)"
-      }
-    },
-    {
-      "path": "pages/search/searchTheme",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-dark)"
-      }
-    },
-
-    {
-      "path": "pages/wallet/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/wallet/pay",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/wallet/withdraw",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/wallet/withdrawIn",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/wallet/withdrawRecord",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/wallet/orderDetail",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/wallet/withdrawDetail",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/wallet/withdrawApply",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/wallet/creditCardSelect",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/wallet/creditCardSetting",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/wallet/creditCardSave",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-
-    {
-      "path": "pages/creator/home",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/creator/message",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/creator/subscription-setting",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-grayLight)"
-      }
-    },
-    {
-      "path": "pages/creator/subscription-edit",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-grayLight)"
-      }
-    },
-    {
-      "path": "pages/creator/subscription-manage",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-grayLight)"
-      }
-    },
-    {
-      "path": "pages/creator/statistics",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-grayLight)"
-      }
-    },
-    {
-      "path": "pages/creator/favorites",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/creator/following",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/creator/rank",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/creator/tagRank",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/creator/subscription",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/creator/profile-edit",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/creator/selectMedia",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/creator/classification",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/creator/classification-edit",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/creator/share",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/creator/setMenu",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/creator/setMenuEdit",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/creator/blockadeEdit",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/creator/center",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/creator/applyCreator",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/creator/messageBox",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/common/select-source",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/common/crop-avatar",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-
-    {
-      "path": "pages/helper/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-
-    {
-      "path": "pages/pc/launch/loading",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color)"
@@ -381,7 +32,21 @@
       }
     },
     {
+      "path": "pages/auth/register",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
       "path": "pages/pc/auth/register",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/auth/verify-phone",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color)"
@@ -394,292 +59,22 @@
         "backgroundColor": "var(--background-color)"
       }
     },
-
     {
-      "path": "pages/pc/play/index",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-dark)"
-      }
-    },
-    {
-      "path": "pages/pc/play/article-gallery",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/pc/post/post-Preview",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/pc/post/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/pc/post/uploadPost",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/pc/post/tagPeople",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/pc/post/shortStory",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/pc/post/schedulePost",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/pc/post/draftBox",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-
-    {
-      "path": "pages/pc/search/index",
+      "path": "pages/common/crop-avatar",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color)"
       }
     },
     {
-      "path": "pages/pc/search/results",
+      "path": "pages/pc/common/crop-avatar",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color)"
       }
     },
     {
-      "path": "pages/pc/search/searchVideo",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/pc/search/searchTheme",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-
-    {
-      "path": "pages/pc/wallet/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/pc/wallet/pay",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/pc/wallet/withdraw",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/pc/wallet/withdrawIn",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/pc/wallet/withdrawRecord",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/pc/wallet/orderDetail",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/pc/wallet/withdrawDetail",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/pc/wallet/withdrawApply",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/pc/wallet/creditCardSelect",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/pc/wallet/creditCardSetting",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/pc/wallet/creditCardSave",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-
-    {
-      "path": "pages/pc/creator/home",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/message",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/subscription-setting",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-grayLight)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/subscription-edit",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-grayLight)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/statistics",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-grayLight)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/favorites",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/pc/creator/following",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/pc/creator/rank",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/pc/creator/tagRank",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/pc/creator/subscription",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/pc/creator/profile-edit",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/selectMedia",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/classification",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/classification-edit",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/share",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/setMenu",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/setMenuEdit",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/blockadeEdit",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/center",
+      "path": "pages/creator/applyCreator",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color)"
@@ -693,6 +88,121 @@
       }
     },
     {
+      "path": "pages/creator/blockadeEdit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/blockadeEdit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/creator/center",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/center",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/creator/classification",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/classification",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/creator/classification-edit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/classification-edit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/creator/favorites",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/creator/favorites",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/creator/following",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/creator/following",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/creator/home",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/home",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/creator/message",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/message",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/creator/messageBox",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
       "path": "pages/pc/creator/messageBox",
       "style": {
         "navigationStyle": "custom",
@@ -700,24 +210,489 @@
       }
     },
     {
-      "path": "pages/pc/common/select-source",
+      "path": "pages/creator/profile-edit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/profile-edit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/creator/rank",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/creator/rank",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/creator/selectMedia",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color)"
       }
     },
     {
-      "path": "pages/pc/common/crop-avatar",
+      "path": "pages/pc/creator/selectMedia",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color)"
       }
     },
-
+    {
+      "path": "pages/creator/setMenu",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/setMenu",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/creator/setMenuEdit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/setMenuEdit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/creator/share",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/share",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/creator/statistics",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-grayLight)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/statistics",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-grayLight)"
+      }
+    },
+    {
+      "path": "pages/creator/subscription",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/creator/subscription",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/creator/subscription-edit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-grayLight)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/subscription-edit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-grayLight)"
+      }
+    },
+    {
+      "path": "pages/creator/subscription-manage",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-grayLight)"
+      }
+    },
+    {
+      "path": "pages/creator/subscription-setting",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-grayLight)"
+      }
+    },
+    {
+      "path": "pages/pc/creator/subscription-setting",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-grayLight)"
+      }
+    },
+    {
+      "path": "pages/creator/tagRank",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/creator/tagRank",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/helper/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
     {
       "path": "pages/pc/helper/index",
       "style": {
         "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/launch/loading",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/launch/loading",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/play/index",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-dark)"
+      }
+    },
+    {
+      "path": "pages/pc/play/index",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-dark)"
+      }
+    },
+    {
+      "path": "pages/play/article-gallery",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/play/article-gallery",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/post/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/post/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/post/draftBox",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/post/draftBox",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/post/post-Preview",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/post/post-Preview",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/post/schedulePost",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/post/schedulePost",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/post/shortStory",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/post/shortStory",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/post/tagPeople",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/post/tagPeople",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/post/uploadPost",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/search/index",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-dark)"
+      }
+    },
+    {
+      "path": "pages/pc/search/index",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/search/searchTheme",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-dark)"
+      }
+    },
+    {
+      "path": "pages/pc/search/searchTheme",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/search/searchVideo",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-dark)"
+      }
+    },
+    {
+      "path": "pages/pc/search/searchVideo",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/search/results",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/creditCardSave",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/creditCardSave",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/creditCardSelect",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/creditCardSelect",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/creditCardSetting",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/creditCardSetting",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/wallet/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/orderDetail",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/orderDetail",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/pay",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/pay",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/withdraw",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/withdraw",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/withdrawApply",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/withdrawApply",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/withdrawDetail",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/withdrawDetail",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/withdrawIn",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/withdrawIn",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/pc/wallet/withdrawRecord",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
+      }
+    },
+    {
+      "path": "pages/wallet/withdrawRecord",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-light)"
       }
     }
   ],

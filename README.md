@@ -237,7 +237,8 @@ file path : FanceNew\src\pages.json
 - [設定選單-電子郵件表單] : form-setMenu-emailForm.vue
 - [設定選單-密碼表單] : form-setMenu-passwordForm.vue
 - [設定選單-手機綁定表單] : form-setMenu-phoneBindForm.vue
-### layouts	- [APP] [基礎佈局] : layout-appBase.vue
+### layouts	
+- [APP] [基礎佈局] : layout-appBase.vue
 - [PC] [基礎佈局] : layout-pcBase.vue
 ### pc/common
 - [PC] [側邊導航] : pc-SlideNav.vue

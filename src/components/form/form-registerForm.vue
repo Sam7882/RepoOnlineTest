@@ -77,9 +77,11 @@
 		</uni-forms-item>
 
 		<!-- 註冊按鈕 -->
-		<button type="button" class="register-btn" @click="handleRegister">
-			{{ $t('auth.register') }}
-		</button>
+		<view class="btn-container">
+			<button type="button" class="btn register-btn" @click="handleRegister">
+				{{ $t('auth.register') }}
+			</button>
+		</view>
 
 	</uni-forms>
 </template>
@@ -293,10 +295,10 @@ onMounted(() => {
 			z-index: 10;
 			transform: translateY(-50%);
 			margin-left: 32rpx;
-			font-size: 36rpx !important;
+			font-size: var(--font-size-title-pc-large) !important;
 
 			&.email {
-				font-size: 28rpx !important;
+				font-size: var(--font-size-content-pc-small) !important;
 			}
 		}
 	}
@@ -316,11 +318,9 @@ onMounted(() => {
 }
 
 .register-btn {
-	width: 100%;
-	height: 100rpx;
 	background-color: #9e80ff;
 	color: #fff;
-	font-size: 36rpx;
+	font-size: var(--font-size-title-pc);
 	border-radius: 50rpx;
 	margin-top: 20rpx;
 }
@@ -347,6 +347,11 @@ onMounted(() => {
 			border-radius: 64rpx;
 			padding: 8rpx 32rpx;
 			padding-left: 80rpx;
+
+			.uni-easyinput__placeholder-class,
+			.uni-input-input {
+				font-size: var(--font-size-content-pc);
+			}
 
 			&.is-focused {
 				border: 1px solid var(--primary-color) !important;
@@ -388,7 +393,7 @@ onMounted(() => {
 		}
 
 		.uni-date__x-input {
-			font-size: 22rpx;
+			font-size: var(--font-size-content-pc-small);
 			padding-left: 24rpx;
 		}
 	}

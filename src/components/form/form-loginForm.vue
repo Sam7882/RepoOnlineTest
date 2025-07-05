@@ -239,6 +239,11 @@ watch(loginRemember, (newValue, oldValue) => {
 			padding: 8rpx 32rpx;
 			padding-left: 80rpx;
 
+			.uni-easyinput__placeholder-class,
+			.uni-input-input {
+				font-size: var(--font-size-content-pc);
+			}
+
 			&.is-focused {
 				border: 1px solid var(--primary-color) !important;
 

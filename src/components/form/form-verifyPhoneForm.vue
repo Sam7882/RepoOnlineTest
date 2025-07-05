@@ -10,9 +10,11 @@
 		<text v-show="errors.verifyCode" class="error-text text-center">{{ errors.verifyCode }}</text>
 
 		<!-- 登入按鈕 -->
-		<button type="button" class="verify-btn" @click="handleVerify">
-			{{ $t('auth.verify') }}
-		</button>
+		<view class="btn-container">
+			<button type="button" class="btn verify-btn" @click="handleVerify">
+				{{ $t('auth.verify') }}
+			</button>
+		</view>
 
 		<!-- 倒數秒數 -->
 		<view class="register">
@@ -105,55 +107,24 @@ onUnload(() => {
 	margin-bottom: 20rpx;
 }
 
-.remember {
-	display: flex;
-	align-items: center;
-	margin: 20rpx 0;
-}
-
-.remember-text {
-	flex: 1;
-	color: #999;
-}
-
 .verify-btn {
-	width: 100%;
-	height: 100rpx;
 	background-color: #9e80ff;
 	color: #fff;
-	font-size: 36rpx;
+	font-size: var(--font-size-title-pc);
 	border-radius: 50rpx;
 	margin-top: 80rpx;
-}
-
-.social-login {
-	display: flex;
-	justify-content: center;
-	margin-top: 40rpx;
-	gap: 24rpx;
-}
-
-.social-icon {
-	width: 80rpx;
-	height: 80rpx;
 }
 
 .register {
 	margin-top: 54rpx;
 	text-align: center;
-	font-size: 24rpx;
+	font-size: var(--font-size-content-pc);
 	color: var(--text-color-primary);
 }
 
 .link {
 	color: var(--link-color);
 	margin-left: 10rpx;
-}
-
-.phone-verify-Info {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 80rpx;
 }
 
 /* 輸入欄位 */
@@ -171,9 +142,11 @@ onUnload(() => {
 			text-align: center;
 			margin: 0 auto;
 
-			.uni-easyinput__content-input {
-				font-size: 48rpx;
+			.uni-easyinput__placeholder-class,
+			.uni-input-input {
+				font-size: var(--font-size-title-pc-xlarge);
 			}
+
 
 			&.is-focused {
 				border: 1px solid var(--primary-color) !important;

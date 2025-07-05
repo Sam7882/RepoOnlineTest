@@ -60,8 +60,12 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .login-page {
-	background-color: var(--background-color);
+	background-color: var(--background-color-light);
 	padding: 100rpx;
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		padding: 25rpx 100rpx;
+	}
 }
 
 .header {
@@ -96,15 +100,10 @@ onShow(() => {
 
 }
 
-
-.lang-selector {
-	position: relative;
-}
-
 .register {
 	margin-top: 80rpx;
 	text-align: center;
-	font-size: 28rpx;
+	font-size: var(--font-size-content-pc-large);
 	color: var(--text-color-primary);
 }
 

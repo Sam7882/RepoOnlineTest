@@ -1,23 +1,21 @@
 <template>
-	<layout-appBase>
-		<view class="verify-page">
-			<!-- 頂部標題 -->
-			<view class="header">
-				<view class="header-title">
-					<text class="title">{{ $t('auth.phoneVerify') }}</text>
-					<text class="brand">Fance</text>
-					<view class="underline"></view>
-				</view>
+	<view class="verify-page">
+		<!-- 頂部標題 -->
+		<view class="header">
+			<view class="header-title">
+				<text class="title">{{ $t('auth.phoneVerify') }}</text>
+				<text class="brand">Fance</text>
+				<view class="underline"></view>
 			</view>
-			<!-- 驗證碼說明 -->
-			<view class="phone-verify-Info">
-				<text class="input-tip">{{ $t('auth.pleaseEnterVerifyCode', { phone: phone }) }}</text>
-			</view>
-
-			<form-verifyPhoneForm @verify="handleVerify" />
-
 		</view>
-	</layout-appBase>
+		<!-- 驗證碼說明 -->
+		<view class="phone-verify-Info">
+			<text class="input-tip">{{ $t('auth.pleaseEnterVerifyCode', { phone: phone }) }}</text>
+		</view>
+
+		<form-verifyPhoneForm @verify="handleVerify" />
+
+	</view>
 </template>
 
 <script setup>
@@ -64,8 +62,12 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .verify-page {
-	background-color: var(--background-color);
+	background-color: var(--background-color-light);
 	padding: 100rpx;
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		padding: 25rpx 100rpx;
+	}
 }
 
 .header {
@@ -100,111 +102,9 @@ onShow(() => {
 
 }
 
-
-.lang-selector {
-	position: relative;
-}
-
-.form {
-	display: flex;
-	flex-direction: column;
-	gap: 24rpx;
-}
-
-.phone-verify-form-item {
-	display: flex;
-	flex-direction: row;
-	gap: 8rpx;
-}
-
-.uni-easyinput {
-	margin-bottom: 20rpx;
-}
-
-.remember {
-	display: flex;
-	align-items: center;
-	margin: 20rpx 0;
-}
-
-.remember-text {
-	flex: 1;
-	color: #999;
-}
-
-.verify-btn {
-	width: 100%;
-	height: 100rpx;
-	background-color: #9e80ff;
-	color: #fff;
-	font-size: 36rpx;
-	border-radius: 50rpx;
-	margin-top: 80rpx;
-}
-
-.social-login {
-	display: flex;
-	justify-content: center;
-	margin-top: 40rpx;
-	gap: 24rpx;
-}
-
-.social-icon {
-	width: 80rpx;
-	height: 80rpx;
-}
-
-.register {
-	margin-top: 54rpx;
-	text-align: center;
-	font-size: 24rpx;
-	color: var(--text-color-primary);
-}
-
-.link {
-	color: var(--link-color);
-	margin-left: 10rpx;
-}
-
 .phone-verify-Info {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 80rpx;
-}
-
-/* 輸入欄位 */
-// INPUT 輸入欄位
-.inputStyle {
-	::v-deep(.uni-easyinput__content) {
-		margin-bottom: 0rpx;
-
-		&.is-input-border {
-			border: none;
-			background: var(--text-color-tertiary) !important;
-			border-radius: 24rpx;
-			width: 112rpx;
-			aspect-ratio: 1/1;
-			text-align: center;
-			margin: 0 auto;
-
-			.uni-easyinput__content-input {
-				font-size: 48rpx;
-			}
-
-			&.is-focused {
-				border: 1px solid var(--primary-color) !important;
-
-				.uniui-eye-filled {
-					color: var(--primary-color) !important;
-				}
-			}
-		}
-	}
-
-	&.errorStyle ::v-deep(.uni-easyinput__content) {
-		&.is-input-border {
-			border: 1px solid var(--text-color-error) !important;
-		}
-	}
 }
 </style>

@@ -40,6 +40,7 @@
 
 <script setup lang="ts">
 // TEMP: 組件-頂部導航列
+import { getElementInfo } from '@/utils/tools';
 import { router, toHelper } from '@/utils/routers';
 const props = defineProps({
 	title: {
@@ -96,6 +97,44 @@ const handleOpenQa = () => {
 	toHelper()
 	emit('openQa', true);
 }
+
+// 頂部導航容器高度
+const containerHeight = ref(75) // 預設高度 136rpx
+// 獲取頂部導航容器高度
+const updateContainerHeight = () => {
+	getElementInfo('.header-nav-container', (info) => {
+		if (info && info.height) {
+			containerHeight.value = info.height
+			// 將高度寫入到 CSS 變數
+			updateCSSVariable(info.height)
+		}
+	})
+}
+
+// 更新 CSS 變數
+const updateCSSVariable = (height: number) => {
+	// 獲取 .bottom-nav-spacer 元素
+	const headerNavContainer = document.querySelector('.header-nav-space')
+	if (headerNavContainer) {
+		(headerNavContainer as any).style.setProperty('--header-nav-space-height', `${height}px`)
+	}
+}
+
+// 組件掛載後獲取高度
+onMounted(() => {
+	// 延遲執行確保 DOM 已渲染
+	nextTick(() => {
+		updateContainerHeight()
+	})
+
+	// 監聽視窗大小變化
+	uni.onWindowResize(updateContainerHeight)
+})
+
+// 組件卸載時移除監聽
+onUnmounted(() => {
+	uni.offWindowResize(updateContainerHeight)
+})
 </script>
 
 <style lang="scss" scoped>

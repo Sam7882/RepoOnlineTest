@@ -12,11 +12,13 @@
 				</view>
 			</template>
 			<template #right>
-				<uni-icons v-if="!onDelete" class="header-gear-icon" type="icon-common-delete" custom-prefix="icon" size="20"
-					color="var(--text-color-primary)" @click="turnOnDelete" />
-				<text v-else @click="turnOffDelete">
-					{{ $t('common.cancel') }}
-				</text>
+				<view class="header-nav-right-position">
+					<uni-icons v-if="!onDelete" class="header-gear-icon" type="icon-common-delete" custom-prefix="icon" size="20"
+						color="var(--text-color-primary)" @click="turnOnDelete" />
+					<text v-else @click="turnOffDelete">
+						{{ $t('common.cancel') }}
+					</text>
+				</view>
 			</template>
 		</c-headerNav>
 		<view class="header">
@@ -51,6 +53,9 @@
 				}})</button>
 			</view>
 		</view>
+
+		<c-confirmPopUp ref="confirmPopUpRef" class="confirmPopUp"></c-confirmPopUp>
+		<c-messagePopUp ref="alertDialog" />
 	</view>
 </template>
 
@@ -60,8 +65,6 @@ import { onLoad, onShow } from '@dcloudio/uni-app'
 import { usePostData } from '@/stores/usePostData'
 import { router, toCreatorSelectMedia, checkViewportAutoReplace } from '@/utils/routers'
 import { useI18n } from 'vue-i18n'
-
-const { openConfirm, closeConfirm, openMessage } = inject('common')
 const { t } = useI18n()
 const { back } = router;
 const postDataStore = usePostData()
@@ -71,6 +74,7 @@ const renderMediaList = ref(manageMedia.value)
 const classTitle = ref('一號分類')
 const popupTitle = ref(t('common.edit'))
 const selectedIds = ref([])
+const alertDialog = ref(null)
 
 const onDelete = ref(false)
 
@@ -111,14 +115,14 @@ const closeTagging = () => {
 
 const confirmPopUpRef = ref(null)
 const deleteConfirmPopUp = () => {
-	openConfirm({
+	confirmPopUpRef.value.open({
 		title: t('post.deleteDraft'),
 		// content: '',
 		confirmBtnText: t('common.delete'),
 		cancelBtnText: t('common.keep'),
 		onConfirm: () => {
 			console.log("🚀 ~ 刪除:")
-			closeConfirm()
+			confirmPopUpRef.value.close()
 			onDelete.value = false
 			canTagging.value = false
 			selectedIds.value = []
@@ -150,19 +154,44 @@ onShow(() => {
 	--c-header-height: 124rpx;
 	--tab-height: 100rpx;
 
-	@media screen and (min-width: 768px) and (max-width: 960px) {
-		--header-height: 35rpx;
-		--footer-height: 100rpx;
-		--c-header-height: 100rpx;
-		--tab-height: 100rpx;
-		--setting-page-maxWidth: 1000rpx;
-	}
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
+	padding: 0 32rpx;
+	padding-top: 24rpx;
 	background-color: var(--background-color-light);
+	color: var(--text-color-primary);
+	position: relative;
+
+	// 設定窗口最大寬度
+	max-width: var(--setting-page-maxWidth);
+
+
+	::v-deep(.header-nav-space) {
+		.header-nav-space {
+			height: fit-content;
+			padding-top: 0;
+		}
+
+		.header-nav-container {
+			position: relative;
+		}
+
+		.header-nav-left-position {
+			left: 0;
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+
+		.header-nav-right-position {
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
 }
 
 .header-nav {
@@ -197,9 +226,10 @@ onShow(() => {
 .tab {
 	position: relative;
 	background: var(--background-color-light);
-	font-size: var(--font-size-title-pc-small);
+	font-size: var(--font-size-content-pc-small);
 	line-height: 1;
 	color: var(--text-color-gray3);
+	padding: 20rpx 0;
 }
 
 .tab.active {
@@ -210,31 +240,33 @@ onShow(() => {
 
 .grid-container {
 	width: 100%;
-	padding-top: var(--header-height);
+	height: 100%;
+	padding: 0 50rpx;
+	padding-top: 70rpx;
 	padding-bottom: var(--footer-height);
+	overflow-y: scroll;
 }
 
 .grid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 4rpx;
-	flex: 1;
 	width: 100%;
+	flex: 1;
 }
 
 
 
 .footer {
-	position: fixed;
+	position: absolute;
 	bottom: 0;
-	left: 0;
-	right: 0%;
 	z-index: 1;
 	padding: 20rpx;
 	height: var(--footer-height);
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
 	background: var(--background-color-light);
 
 	.icon-container {
@@ -257,7 +289,7 @@ onShow(() => {
 			color: var(--favorite-color-secondary);
 			padding: 0;
 			border-radius: 20rpx;
-			font-size: var(--font-size-title-pc-small);
+			font-size: var(--font-size-title-pc);
 			background: transparent;
 
 			&::after {
@@ -430,13 +462,13 @@ onShow(() => {
 		}
 
 		.confirm-btn {
-			font-size: var(--font-size-title-pc-small);
+			font-size: var(--font-size-title-pc);
 			background: transparent;
 			color: var(--favorite-color-secondary);
 		}
 
 		.cancel-btn {
-			font-size: var(--font-size-title-pc-small);
+			font-size: var(--font-size-title-pc);
 			color: var(--text-color-primary);
 		}
 

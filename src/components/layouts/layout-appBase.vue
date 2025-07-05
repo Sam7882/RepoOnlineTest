@@ -101,6 +101,10 @@ const openMessage = (data) => {
 		onConfirm
 	})
 }
+const closeMessage = () => {
+	console.log("🚀 ~ closeMessage ~ closeMessage :")
+	messagePopUp.value.close()
+}
 
 // 通知
 const noticePopUp = ref(null)
@@ -112,6 +116,10 @@ const openNotice = (data) => {
 		setTimeOut,
 		titleIcon
 	})
+}
+const closeNotice = () => {
+	console.log("🚀 ~ closeNotice ~ closeNotice :")
+	noticePopUp.value.close()
 }
 
 // 確認
@@ -129,6 +137,10 @@ const openConfirm = (data) => {
 		onConfirm
 	})
 }
+const closeConfirm = () => {
+	console.log("🚀 ~ closeConfirm ~ closeConfirm :")
+	confirmPopUp.value.close()
+}
 
 // 底部彈窗
 const bottomPopUp = ref(null)
@@ -140,6 +152,10 @@ const openBottomPopUp = (data) => {
 		content,
 	})
 }
+const closeBottomPopUp = () => {
+	console.log("🚀 ~ closeBottomPopUp ~ closeBottomPopUp :")
+	bottomPopUp.value.close()
+}
 
 // 分享
 
@@ -148,6 +164,11 @@ const openSharePopUp = () => {
 	console.log("🚀 ~ openSharePopUp ~ openSharePopUp :")
 	sharePopUp.value.open()
 }
+const closeSharePopUp = () => {
+	console.log("🚀 ~ closeSharePopUp ~ closeSharePopUp :")
+	sharePopUp.value.close()
+}
+
 
 // 圖片全螢幕
 const popImgFullScreen = ref(null)
@@ -159,7 +180,10 @@ const openPlayPopImgFullScreen = (data) => {
 		console.error('playPopImgFullScreen ref 未正確初始化或 open 方法不存在')
 	}
 }
-
+const closePopImgFullScreen = () => {
+	console.log("🚀 ~ closePopImgFullScreen ~ closePopImgFullScreen :")
+	popImgFullScreen.value.close()
+}
 // 使用 provide 提供方法
 provide('auth', {
 	openLogin,
@@ -172,14 +196,20 @@ provide('auth', {
 provide('common', {
 	openService,
 	openMessage,
+	closeMessage,
 	openNotice,
+	closeNotice,
 	openConfirm,
+	closeConfirm,
 	openBottomPopUp,
-	openSharePopUp
+	closeBottomPopUp,
+	openSharePopUp,
+	closeSharePopUp
 })
 
 provide('play', {
-	openPlayPopImgFullScreen
+	openPlayPopImgFullScreen,
+	closePopImgFullScreen
 })
 </script>
 

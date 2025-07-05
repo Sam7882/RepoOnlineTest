@@ -106,6 +106,10 @@ const openMessage = (data) => {
 		onConfirm
 	})
 }
+const closeMessage = () => {
+	console.log("🚀 ~ closeMessage ~ closeMessage :")
+	messagePopUp.value.close()
+}
 
 // 通知
 const noticePopUp = ref(null)
@@ -117,6 +121,10 @@ const openNotice = (data) => {
 		setTimeOut,
 		titleIcon
 	})
+}
+const closeNotice = () => {
+	console.log("🚀 ~ closeNotice ~ closeNotice :")
+	noticePopUp.value.close()
 }
 
 // 確認
@@ -145,6 +153,10 @@ const openBottomPopUp = (data) => {
 		content,
 	})
 }
+const closeBottomPopUp = () => {
+	console.log("🚀 ~ closeBottomPopUp ~ closeBottomPopUp :")
+	bottomPopUp.value.close()
+}
 
 // 分享
 const sharePopUp = ref(null)
@@ -152,11 +164,19 @@ const openSharePopUp = () => {
 	console.log("🚀 ~ openSharePopUp ~ openSharePopUp :")
 	sharePopUp.value.open()
 }
+const closeSharePopUp = () => {
+	console.log("🚀 ~ closeSharePopUp ~ closeSharePopUp :")
+	sharePopUp.value.close()
+}
 
 // 訂閱
 const videoPopSubscription = ref(null)
 const openPopSubscription = () => {
 	videoPopSubscription.value?.open()
+}
+const closePopSubscription = () => {
+	console.log("🚀 ~ closePopSubscription ~ closePopSubscription :")
+	videoPopSubscription.value?.close()
 }
 
 // 圖片全螢幕
@@ -165,6 +185,10 @@ const popImgFullScreen = ref(null)
 const openPopImgFullScreen = (data) => {
 	console.log("🚀 ~ openPopImgFullScreen ~ openPopImgFullScreen :")
 	popImgFullScreen.value.open(data)
+}
+const closePopImgFullScreen = () => {
+	console.log("🚀 ~ closePopImgFullScreen ~ closePopImgFullScreen :")
+	popImgFullScreen.value.close()
 }
 
 // 使用 provide 提供方法
@@ -179,15 +203,22 @@ provide('auth', {
 provide('common', {
 	openService,
 	openMessage,
+	closeMessage,
 	openNotice,
+	closeNotice,
 	openConfirm,
+	closeConfirm,
 	openBottomPopUp,
-	openSharePopUp
+	closeBottomPopUp,
+	openSharePopUp,
+	closeSharePopUp
 })
 
 provide('play', {
 	openPopSubscription,
-	openPopImgFullScreen
+	closePopSubscription,
+	openPopImgFullScreen,
+	closePopImgFullScreen
 })
 </script>
 

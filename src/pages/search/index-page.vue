@@ -178,7 +178,7 @@
 				</view>
 				<view class="recommend-top-more btn-container" @click="handleToTheme">
 					<button class="btn">
-						探索主題
+						{{ $t("search.exploreAllTheme") }}
 					</button>
 					<!-- <uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons> -->
 				</view>
@@ -470,6 +470,7 @@ onShow(() => {
 	background-color: var(--background-color-dark);
 	padding: 0 32rpx;
 	padding-top: 64rpx;
+	height: 100%;
 }
 
 .searchInput-container {}
@@ -497,12 +498,12 @@ onShow(() => {
 
 		.uni-input-placeholder {
 			color: var(--text-color-quaternary) !important;
-			font-size: 28rpx;
+			font-size: var(--font-size-content-pc-large);
 		}
 
 		.uni-easyinput__content-input {
 			color: var(--text-color-secondary) !important;
-			font-size: 28rpx;
+			font-size: var(--font-size-content-pc-large);
 		}
 	}
 
@@ -519,6 +520,10 @@ onShow(() => {
 	position: relative;
 	margin-top: 76rpx;
 
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		margin-top: 32rpx;
+	}
+
 	.right-arrow {
 		position: absolute;
 		right: 0;
@@ -527,7 +532,7 @@ onShow(() => {
 		background: linear-gradient(to left, var(--text-color-primary) 0%, var(--text-color-primary) 55%, transparent 100%);
 		color: #fff;
 		padding: 0 0.375rem;
-		font-size: 0.9375rem;
+		font-size: var(--font-size-content-pc-large);
 		z-index: 10;
 		height: 105%;
 		display: flex;
@@ -564,7 +569,7 @@ onShow(() => {
 
 					.searchTag-item {
 						white-space: nowrap;
-						font-size: 28rpx;
+						font-size: var(--font-size-content-pc-large);
 						color: var(--text-color-secondary);
 					}
 				}
@@ -613,7 +618,7 @@ onShow(() => {
 
 					.searchTag-item {
 						white-space: nowrap;
-						font-size: 28rpx;
+						font-size: var(--font-size-content-pc-large);
 						color: var(--text-color-quaternary);
 					}
 				}
@@ -639,30 +644,43 @@ onShow(() => {
 	.user-name {
 		color: var(--text-color-secondary);
 		margin-left: 24rpx;
-		font-size: 32rpx;
+		font-size: var(--font-size-title-pc);
 	}
 }
 
 .more-icon {
 	margin-left: auto;
 	color: var(--text-color-quaternary) !important;
-	font-size: 32rpx !important;
+	font-size: var(--font-size-title-pc) !important;
 }
 
 /* 關注推薦 */
 .recommend-container {
 	margin-top: 80rpx;
 
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		margin-top: 48rpx;
+	}
+
 	&.recommend-container-small {
 		uni-image {
 			width: 300rpx;
 			height: 300rpx;
 			border-radius: 32rpx;
+
+			@media screen and (min-width: 768px) and (max-width: 960px) {
+				width: 200rpx;
+				height: 200rpx;
+			}
 		}
 
 		.uni-list {
 			.uni-list-item {
 				width: 300rpx;
+
+				@media screen and (min-width: 768px) and (max-width: 960px) {
+					width: 200rpx;
+				}
 			}
 		}
 	}
@@ -684,6 +702,10 @@ onShow(() => {
 			overflow: hidden;
 			flex-shrink: 0;
 
+			@media screen and (min-width: 768px) and (max-width: 960px) {
+				width: 280rpx;
+			}
+
 			::v-deep(.uni-list-item__container) {
 				.uni-list-item__container {
 					flex: none;
@@ -695,7 +717,7 @@ onShow(() => {
 
 					.searchTag-item {
 						white-space: nowrap;
-						font-size: 28rpx;
+						font-size: var(--font-size-content-pc-large);
 						color: var(--text-color-quaternary);
 					}
 				}
@@ -716,6 +738,11 @@ onShow(() => {
 		width: 360rpx;
 		height: 360rpx;
 		border-radius: 32rpx;
+
+		@media screen and (min-width: 768px) and (max-width: 960px) {
+			width: 280rpx;
+			height: 280rpx;
+		}
 	}
 
 	.recommend-content-image-container {
@@ -737,7 +764,7 @@ onShow(() => {
 		.recommend-content-image-cover-icon {
 			margin-top: 24rpx;
 			margin-right: 32rpx;
-			font-size: 32rpx !important;
+			font-size: var(--font-size-title-pc) !important;
 			color: var(--text-color-secondary) !important;
 		}
 	}
@@ -758,7 +785,7 @@ onShow(() => {
 		}
 
 		.recommend-content-name {
-			font-size: 32rpx;
+			font-size: var(--font-size-title-pc);
 			max-height: 1.5em;
 			color: var(--text-color-secondary);
 			-webkit-line-clamp: 1;
@@ -767,7 +794,7 @@ onShow(() => {
 		}
 
 		.recommend-content-text {
-			font-size: 28rpx;
+			font-size: var(--font-size-content-pc-large);
 			color: var(--text-color-quaternary);
 			max-height: 4.5em;
 			/* 1.5 x 3行 */
@@ -801,7 +828,7 @@ onShow(() => {
 
 		.recommend-top-text-tip {
 			color: var(--text-color-secondary);
-			font-size: 30rpx;
+			font-size: var(--font-size-title-pc-small);
 		}
 
 		.recommend-top-text-title-container {
@@ -814,13 +841,13 @@ onShow(() => {
 			display: flex;
 			align-items: center;
 			gap: 4rpx;
-			font-size: 32rpx;
+			font-size: var(--font-size-title-pc);
 		}
 
 		.recommend-top-text-icon {
 			padding-top: 8rpx;
 			color: var(--text-color-quaternary) !important;
-			font-size: 32rpx !important;
+			font-size: var(--font-size-title-pc) !important;
 		}
 
 
@@ -828,6 +855,12 @@ onShow(() => {
 
 	// 右側箭頭
 	.recommend-top-more {
+		.btn {
+			font-size: var(--font-size-title-pc);
+			border-radius: 100rpx;
+		}
+
+
 		.recommend-top-more-icon {
 			background-color: var(--text-color-quinary);
 			border-radius: 100%;
@@ -883,14 +916,14 @@ onShow(() => {
 
 				.hot-recommend-list-item-info-name {
 					color: #fff;
-					font-size: 32rpx;
+					font-size: var(--font-size-title-pc);
 					max-height: 1.5em;
 					color: var(--text-color-secondary);
 				}
 
 				.hot-recommend-list-item-info-desc {
 					color: #999;
-					font-size: 28rpx;
+					font-size: var(--font-size-content-pc-large);
 					max-height: 1.5em;
 					color: var(--text-color-quaternary);
 				}
@@ -901,7 +934,7 @@ onShow(() => {
 				margin-left: auto;
 
 				.hot-recommend-list-item-info-more {
-					font-size: 24rpx !important;
+					font-size: var(--font-size-content-pc) !important;
 					color: var(--text-color-secondary) !important;
 				}
 			}
@@ -965,14 +998,14 @@ onShow(() => {
 
 				.theme-list-item-info-name {
 					color: #fff;
-					font-size: 32rpx;
+					font-size: var(--font-size-title-pc);
 					max-height: 1.5em;
 					color: var(--text-color-primary);
 				}
 
 				.theme-list-item-info-desc {
 					color: #999;
-					font-size: 28rpx;
+					font-size: var(--font-size-content-pc-large);
 					max-height: 1.5em;
 					color: var(--text-color-quaternary);
 				}

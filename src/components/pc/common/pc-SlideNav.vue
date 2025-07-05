@@ -2,7 +2,7 @@
 	<view class="slide-nav">
 		<!-- 可以根據需要支援多組欄位 -->
 		<!-- logo 區塊 -->
-		<view class="logo-container">
+		<view class="logo-container" @click="handleHome">
 			<view class="slogan">
 				<image class="logo" src="/static/logo.png" mode="widthFix" />
 				<view class="brand-container">
@@ -61,7 +61,7 @@
 <script setup>
 // TEMP: PC-側邊欄位
 import { useI18n } from 'vue-i18n';
-import { toPlayIndex, toPostUpload, toFavorites, toCreatorHome, toMessageBox } from '@/utils/routers';
+import { toPlayIndex, toPostUpload, toFavorites, toCreatorHome, toMessageBox, toSearchHome } from '@/utils/routers';
 const { t } = useI18n();
 
 const { openService, openConfirm } = inject('common');
@@ -78,6 +78,10 @@ const isLogin = computed(() => {
 const currentPath = computed(() => {
 	return getCurrentPages()[0].route;
 })
+
+const handleHome = () => {
+	toSearchHome()
+}
 
 
 const logout = () => {
@@ -214,6 +218,7 @@ const menu = [
 	background: #fff;
 	width: 100%;
 	padding-bottom: 80rpx;
+	cursor: pointer;
 
 	.logo {
 		width: 240rpx;

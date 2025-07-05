@@ -125,6 +125,9 @@ onShow(() => {
 	background-color: var(--background-color-dark);
 	padding: 0 32rpx;
 	padding-top: 64rpx;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .searchInput-container {
@@ -132,7 +135,7 @@ onShow(() => {
 	gap: 20rpx;
 
 	.icon-style {
-		font-size: 32rpx !important;
+		font-size: var(--font-size-title-pc) !important;
 	}
 }
 
@@ -159,12 +162,12 @@ onShow(() => {
 
 		.uni-input-placeholder {
 			color: var(--text-color-quaternary) !important;
-			font-size: 28rpx;
+			font-size: var(--font-size-content-pc-large);
 		}
 
 		.uni-easyinput__content-input {
 			color: var(--text-color-secondary) !important;
-			font-size: 28rpx;
+			font-size: var(--font-size-content-pc-large);
 		}
 	}
 
@@ -178,12 +181,14 @@ onShow(() => {
 .more-icon {
 	margin-left: auto;
 	color: var(--text-color-quaternary) !important;
-	font-size: 32rpx !important;
+	font-size: var(--font-size-title-pc) !important;
 }
 
 /* 關注推薦 */
 .recommend-container {
 	margin-top: 48rpx;
+	flex: 1;
+	overflow-y: auto;
 
 	// list
 	.uni-list {
@@ -215,7 +220,7 @@ onShow(() => {
 
 					.searchTag-item {
 						white-space: nowrap;
-						font-size: 28rpx;
+						font-size: var(--font-size-content-pc-large);
 						color: var(--text-color-quaternary);
 					}
 				}
@@ -236,6 +241,11 @@ onShow(() => {
 		width: 360rpx;
 		height: 360rpx;
 		border-radius: 32rpx;
+
+		@media screen and (min-width: 768px) and (max-width: 960px) {
+			width: 280rpx;
+			height: 280rpx;
+		}
 	}
 
 	.recommend-content-image-container {
@@ -258,7 +268,7 @@ onShow(() => {
 		.recommend-content-image-cover-icon {
 			margin-top: 24rpx;
 			margin-right: 32rpx;
-			font-size: 32rpx !important;
+			font-size: var(--font-size-title-pc) !important;
 			color: var(--text-color-secondary) !important;
 		}
 	}
@@ -279,7 +289,7 @@ onShow(() => {
 		}
 
 		.recommend-content-name {
-			font-size: 32rpx;
+			font-size: var(--font-size-title-pc);
 			max-height: 1.5em;
 			color: var(--text-color-secondary);
 			-webkit-line-clamp: 1;
@@ -288,7 +298,7 @@ onShow(() => {
 		}
 
 		.recommend-content-text {
-			font-size: 28rpx;
+			font-size: var(--font-size-content-pc-large);
 			color: var(--text-color-quaternary);
 			max-height: 4.5em;
 			/* 1.5 x 3行 */
@@ -319,7 +329,7 @@ onShow(() => {
 
 		.recommend-top-text-tip {
 			color: var(--text-color-quaternary);
-			font-size: 40rpx;
+			font-size: var(--font-size-title-pc-large);
 		}
 
 		.recommend-top-text-title-container {
@@ -332,13 +342,13 @@ onShow(() => {
 			display: flex;
 			align-items: center;
 			gap: 4rpx;
-			font-size: 48rpx;
+			font-size: var(--font-size-title-pc-xlarge);
 		}
 
 		.recommend-top-text-icon {
 			padding-top: 8rpx;
 			color: var(--text-color-quaternary) !important;
-			font-size: 32rpx !important;
+			font-size: var(--font-size-title-pc) !important;
 		}
 
 
@@ -348,6 +358,7 @@ onShow(() => {
 .btn-container {
 	.btn {
 		border-radius: 100rpx;
+		font-size: var(--font-size-title-pc);
 	}
 }
 </style>

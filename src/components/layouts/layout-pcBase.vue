@@ -142,6 +142,10 @@ const openConfirm = (data) => {
 		onConfirm
 	})
 }
+const closeConfirm = () => {
+	console.log("🚀 ~ closeConfirm ~ closeConfirm :")
+	confirmPopUp.value.close()
+}
 
 // 底部彈窗
 const bottomPopUp = ref(null)
@@ -231,6 +235,7 @@ page {
 	position: relative;
 	display: flex;
 	height: 100vh;
+	min-height: 100dvh;
 	/* 高度撐滿視窗 */
 	overflow: hidden;
 }

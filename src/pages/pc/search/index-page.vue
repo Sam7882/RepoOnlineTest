@@ -192,7 +192,7 @@
 				</view>
 				<view class="recommend-top-more btn-container" @click="handleToTheme">
 					<button class="btn">
-						探索主題
+						{{ $t("search.exploreAllTheme") }}
 					</button>
 					<!-- <uni-icons class="recommend-top-more-icon" type="right" size="30"></uni-icons> -->
 				</view>

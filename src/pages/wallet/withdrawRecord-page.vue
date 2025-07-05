@@ -131,7 +131,7 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .withdrawRecord-page {
-	background-color: var(--background-color);
+	background-color: var(--background-color-light);
 }
 
 uni-image {

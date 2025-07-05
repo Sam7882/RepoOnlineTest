@@ -271,8 +271,8 @@ img {
     border-radius: 20rpx;
 
     @media screen and (min-width: 768px) and (max-width: 960px) {
-      padding-top: 24rpx;
-      padding-bottom: 24rpx;
+      padding-top: 16rpx;
+      padding-bottom: 16rpx;
     }
 
     &.confirm-btn {
@@ -301,6 +301,9 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.icons {
+  cursor: pointer;
 }
 
 /* 提示 */

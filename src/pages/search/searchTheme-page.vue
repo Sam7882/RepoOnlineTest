@@ -62,6 +62,22 @@ const themeList = [
 	{ title: '小說創作', iconUrl: 'https://picsum.photos/32', themeColor: 'linear-gradient(to bottom, #24ffc1, #6e45ff)' },
 	{ title: '漫畫創作', iconUrl: 'https://picsum.photos/32', themeColor: 'linear-gradient(to bottom, #e2e205, #e2e205)' },
 	{ title: '同人創作', iconUrl: 'https://picsum.photos/32', themeColor: '#ff24fb' },
+	{ title: '娛樂歡笑', iconUrl: 'https://picsum.photos/32', themeColor: '#6e45ff' },
+	{ title: '音樂創作', iconUrl: 'https://picsum.photos/32', themeColor: '#ff0000' },
+	{ title: '西斯男女', iconUrl: 'https://picsum.photos/32', themeColor: 'linear-gradient(to bottom, #ff0000, #0000ff)' },
+	{ title: '手機遊戲', iconUrl: 'https://picsum.photos/32', themeColor: '#6e45ff' },
+	{ title: '單機遊戲', iconUrl: 'https://picsum.photos/32', themeColor: '#24ffc1' },
+	{ title: '小說創作', iconUrl: 'https://picsum.photos/32', themeColor: 'linear-gradient(to bottom, #24ffc1, #6e45ff)' },
+	{ title: '漫畫創作', iconUrl: 'https://picsum.photos/32', themeColor: 'linear-gradient(to bottom, #e2e205, #e2e205)' },
+	{ title: '同人創作', iconUrl: 'https://picsum.photos/32', themeColor: '#ff24fb' },
+	{ title: '娛樂歡笑', iconUrl: 'https://picsum.photos/32', themeColor: '#6e45ff' },
+	{ title: '音樂創作', iconUrl: 'https://picsum.photos/32', themeColor: '#ff0000' },
+	{ title: '西斯男女', iconUrl: 'https://picsum.photos/32', themeColor: 'linear-gradient(to bottom, #ff0000, #0000ff)' },
+	{ title: '手機遊戲', iconUrl: 'https://picsum.photos/32', themeColor: '#6e45ff' },
+	{ title: '單機遊戲', iconUrl: 'https://picsum.photos/32', themeColor: '#24ffc1' },
+	{ title: '小說創作', iconUrl: 'https://picsum.photos/32', themeColor: 'linear-gradient(to bottom, #24ffc1, #6e45ff)' },
+	{ title: '漫畫創作', iconUrl: 'https://picsum.photos/32', themeColor: 'linear-gradient(to bottom, #e2e205, #e2e205)' },
+	{ title: '同人創作', iconUrl: 'https://picsum.photos/32', themeColor: '#ff24fb' },
 ];
 
 
@@ -85,6 +101,10 @@ onShow(() => {
 	background-color: var(--background-color-dark);
 	padding: 0 32rpx;
 	padding-top: 64rpx;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 
 .searchInput-container {
@@ -92,7 +112,7 @@ onShow(() => {
 	gap: 20rpx;
 
 	.icon-style {
-		font-size: 32rpx !important;
+		font-size: var(--font-size-title-pc) !important;
 	}
 }
 
@@ -119,12 +139,12 @@ onShow(() => {
 
 		.uni-input-placeholder {
 			color: var(--text-color-quaternary) !important;
-			font-size: 28rpx;
+			font-size: var(--font-size-content-pc-large);
 		}
 
 		.uni-easyinput__content-input {
 			color: var(--text-color-secondary) !important;
-			font-size: 28rpx;
+			font-size: var(--font-size-content-pc-large);
 		}
 	}
 
@@ -138,12 +158,14 @@ onShow(() => {
 .more-icon {
 	margin-left: auto;
 	color: var(--text-color-quaternary) !important;
-	font-size: 32rpx !important;
+	font-size: var(--font-size-title-pc) !important;
 }
 
 /* 關注推薦 */
 .recommend-container {
 	margin-top: 48rpx;
+	flex: 1;
+	overflow-y: auto;
 
 	uni-image {
 		width: 360rpx;
@@ -171,7 +193,7 @@ onShow(() => {
 		.recommend-content-image-cover-icon {
 			margin-top: 24rpx;
 			margin-right: 32rpx;
-			font-size: 32rpx !important;
+			font-size: var(--font-size-title-pc) !important;
 			color: var(--text-color-secondary) !important;
 		}
 	}
@@ -192,7 +214,7 @@ onShow(() => {
 		}
 
 		.recommend-content-name {
-			font-size: 32rpx;
+			font-size: var(--font-size-title-pc);
 			max-height: 1.5em;
 			color: var(--text-color-secondary);
 			-webkit-line-clamp: 1;
@@ -201,7 +223,7 @@ onShow(() => {
 		}
 
 		.recommend-content-text {
-			font-size: 28rpx;
+			font-size: var(--font-size-content-pc-large);
 			color: var(--text-color-quaternary);
 			max-height: 4.5em;
 			/* 1.5 x 3行 */
@@ -232,7 +254,7 @@ onShow(() => {
 
 		.recommend-top-text-tip {
 			color: var(--text-color-secondary);
-			font-size: 40rpx;
+			font-size: var(--font-size-title-pc-large);
 		}
 
 		.recommend-top-text-title-container {
@@ -245,13 +267,13 @@ onShow(() => {
 			display: flex;
 			align-items: center;
 			gap: 4rpx;
-			font-size: 48rpx;
+			font-size: var(--font-size-title-pc-xlarge);
 		}
 
 		.recommend-top-text-icon {
 			padding-top: 8rpx;
 			color: var(--text-color-quaternary) !important;
-			font-size: 32rpx !important;
+			font-size: var(--font-size-title-pc) !important;
 		}
 
 
@@ -297,7 +319,7 @@ onShow(() => {
 
 			.theme-list-item-info-name {
 				color: #fff;
-				font-size: 32rpx;
+				font-size: var(--font-size-title-pc);
 				max-height: 1.5em;
 				color: var(--text-color-primary);
 			}
@@ -309,7 +331,7 @@ onShow(() => {
 			top: 10rpx;
 
 			.theme-list-item-icon {
-				font-size: 24rpx !important;
+				font-size: var(--font-size-content-pc) !important;
 				color: var(--text-color-secondary) !important;
 				opacity: 0.5;
 			}

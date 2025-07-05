@@ -100,6 +100,7 @@ onShow(() => {
 	padding-top: 64rpx;
 	background-color: var(--background-color-light);
 	width: 100%;
+	height: 100%;
 }
 
 .searchInput-container {

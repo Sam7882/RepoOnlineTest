@@ -218,6 +218,8 @@ provide('play', {
 	position: relative;
 	background-color: var(--background-color-light);
 	min-height: 100dvh;
+	height: 100dvh;
+	overflow-y: auto;
 	// display: flex;
 	// height: 100vh;
 	/* 高度撐滿視窗 */

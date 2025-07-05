@@ -17,10 +17,10 @@
 						{{ '搞笑風趣' }}
 					</text>
 				</view>
-				<view class="btn-container">
+				<!-- <view class="btn-container">
 					<button type="button" class="btn" @click="handleAllThemeClick">{{
 						$t('search.exploreAllTheme') }}</button>
-				</view>
+				</view> -->
 			</view>
 			<view class="recommend-container recommend-container-small ">
 				<view class="swiper-wrapper">
@@ -400,12 +400,12 @@ onShow(() => {
 
 		.uni-input-placeholder {
 			color: var(--text-color-quaternary) !important;
-			font-size: 28rpx;
+			font-size: var(--font-size-content-pc-large);
 		}
 
 		.uni-easyinput__content-input {
 			color: var(--text-color-secondary) !important;
-			font-size: 28rpx;
+			font-size: var(--font-size-content-pc-large);
 		}
 	}
 
@@ -491,7 +491,7 @@ onShow(() => {
 .more-icon {
 	margin-left: auto;
 	color: var(--text-color-quaternary) !important;
-	font-size: 32rpx !important;
+	font-size: var(--font-size-title-pc) !important;
 }
 
 
@@ -614,13 +614,13 @@ onShow(() => {
 			display: flex;
 			align-items: center;
 			gap: 4rpx;
-			font-size: 32rpx;
+			font-size: var(--font-size-title-pc);
 		}
 
 		.recommend-top-text-icon {
 			padding-top: 8rpx;
 			color: var(--text-color-quaternary) !important;
-			font-size: 32rpx !important;
+			font-size: var(--font-size-title-pc) !important;
 		}
 
 
@@ -632,7 +632,7 @@ onShow(() => {
 			background-color: var(--text-color-quinary);
 			border-radius: 100%;
 			padding: 10rpx;
-			font-size: 40rpx !important;
+			font-size: var(--font-size-title-pc-large) !important;
 			color: var(--text-color-secondary) !important;
 		}
 
@@ -675,7 +675,7 @@ onShow(() => {
 				right: 16rpx;
 
 				.icon-theme {
-					font-size: 26rpx !important;
+					font-size: var(--font-size-content-pc) !important;
 					color: rgba(255, 255, 255, 0.5) !important;
 				}
 
@@ -709,7 +709,7 @@ onShow(() => {
 
 				.theme-list-item-info-desc {
 					color: #999;
-					font-size: 28rpx;
+					font-size: var(--font-size-content-pc-large);
 					max-height: 1.5em;
 					color: var(--text-color-quaternary);
 				}

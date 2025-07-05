@@ -108,7 +108,7 @@ uni-image {
 }
 
 .withdraw-page {
-	background-color: var(--background-color);
+	background-color: var(--background-color-light);
 }
 
 .withdraw-page-content {

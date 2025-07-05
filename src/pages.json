@@ -81,21 +81,7 @@
       }
     },
     {
-      "path": "pages/pc/creator/applyCreator",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
       "path": "pages/creator/blockadeEdit",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/blockadeEdit",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color)"
@@ -183,13 +169,6 @@
     },
     {
       "path": "pages/creator/message",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/message",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color)"
@@ -285,21 +264,7 @@
       }
     },
     {
-      "path": "pages/pc/creator/share",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
       "path": "pages/creator/statistics",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-grayLight)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/statistics",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color-grayLight)"
@@ -312,20 +277,7 @@
       }
     },
     {
-      "path": "pages/pc/creator/subscription",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
       "path": "pages/creator/subscription-edit",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-grayLight)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/subscription-edit",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color-grayLight)"
@@ -340,13 +292,6 @@
     },
     {
       "path": "pages/creator/subscription-setting",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-grayLight)"
-      }
-    },
-    {
-      "path": "pages/pc/creator/subscription-setting",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color-grayLight)"
@@ -586,33 +531,13 @@
       }
     },
     {
-      "path": "pages/pc/wallet/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
       "path": "pages/wallet/index",
       "style": {
         "navigationStyle": "custom"
       }
     },
     {
-      "path": "pages/pc/wallet/orderDetail",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
       "path": "pages/wallet/orderDetail",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/pc/wallet/pay",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color-light)"
@@ -626,21 +551,7 @@
       }
     },
     {
-      "path": "pages/pc/wallet/withdraw",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
       "path": "pages/wallet/withdraw",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/pc/wallet/withdrawApply",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color-light)"
@@ -654,13 +565,6 @@
       }
     },
     {
-      "path": "pages/pc/wallet/withdrawDetail",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
       "path": "pages/wallet/withdrawDetail",
       "style": {
         "navigationStyle": "custom",
@@ -668,21 +572,7 @@
       }
     },
     {
-      "path": "pages/pc/wallet/withdrawIn",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
       "path": "pages/wallet/withdrawIn",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
-      }
-    },
-    {
-      "path": "pages/pc/wallet/withdrawRecord",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color-light)"

@@ -1,6 +1,7 @@
 // TEMP: 初始化資料 store
 import { defineStore } from 'pinia';
 import { router } from '@/utils/routers';
+import { DayUtils } from '@/utils/day';
 // 初始化資料型別定義
 interface InitState {
   // 網站資訊 暫定
@@ -72,6 +73,7 @@ export const useInitStore = defineStore('init', {
     // 切換語言
     changeLanguage(locale: string) {
       this.settings.language = locale;
+      DayUtils.setLocale(locale);
     },
     // 判斷該頁面是否有初始化資料強制跳轉到入口頁
     checkInitData() {

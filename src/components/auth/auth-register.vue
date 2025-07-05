@@ -67,6 +67,8 @@ defineExpose({ open, close })
 	border-radius: 60rpx 60rpx 0 0;
 	background-color: var(--background-color-light);
 	width: fit-content;
+	max-height: 100dvh;
+	overflow-y: auto;
 
 
 	@media screen and (min-width: 961px) {

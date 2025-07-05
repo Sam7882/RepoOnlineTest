@@ -1,5 +1,5 @@
 <template>
-	<view class="set-menu">
+	<view class="center-menu">
 		<view class="header">
 			<view class="header-title">
 				<text>{{ $t('creator.creatorCenter') }}</text>
@@ -94,10 +94,10 @@ onShow(() => {
 </script>
 
 <style scoped lang="scss">
-.set-menu {
+.center-menu {
 	--footer-height: 300rpx;
 	position: relative;
-	background: var(--background-color);
+	background: var(--background-color-light);
 	padding: 70rpx 75rpx;
 	box-shadow: 2rpx 0 8rpx rgba(0, 0, 0, 0.08);
 	display: flex;

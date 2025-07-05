@@ -99,7 +99,7 @@ onShow(() => {
 
 	// 標題容器
 	.header-nav-title-container {
-		font-size: 32rpx;
+		font-size: var(--font-size-title-pc);
 		color: var(--text-color-primary);
 	}
 

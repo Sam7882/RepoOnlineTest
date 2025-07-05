@@ -5,7 +5,9 @@
 
 		<!-- 圖片與輸入內容區 -->
 		<view class="publish-media-container">
-			<image class="publish-media-preview" src="/static/images/template/img-template-02.png" mode="aspectFill" />
+			<view class="publish-media-preview-container">
+				<image class="publish-media-preview" :src="mediaList.src" mode="aspectFill" />
+			</view>
 			<!-- <uni-easyinput v-model="postContent" type="textarea" class="publish-input" placeholder="請輸入內容" :trim="true"
 				:clearable="false" /> -->
 			<post-postContent ref="postContentRef" v-model="postContent" @update:modelValue="handleText" />
@@ -79,13 +81,16 @@ import { onShow } from '@dcloudio/uni-app'
 import { toTagPeople, checkViewportAutoReplace } from '@/utils/routers'
 import { usePostData } from '@/stores/usePostData';
 import { toPlayIndex, toCreatorHome } from '@/utils/routers';
-
 const postStore = usePostData();
 /*  */
 const postContentRef = ref()
 const postContent = ref('')
 const publishSettingRef = ref()
 const autoPublishRef = ref()
+const { selectedMedia } = storeToRefs(postStore)
+// 選擇第一則媒體
+const mediaList = computed(() => selectedMedia.value[0])
+console.log("🚀 ~ mediaList:", mediaList)
 // 發佈設定
 const publishSetting = ref('subscription')
 // TODO: 輸入框 文字變更
@@ -166,11 +171,18 @@ onShow(() => {
 	align-items: flex-start;
 	margin-bottom: 16rpx;
 
-	.publish-media-preview {
-		width: 140rpx;
-		height: 184rpx;
+	.publish-media-preview-container {
+		width: 100rpx;
+		height: 100%;
+		aspect-ratio: var(--media-aspect-ratio);
 		border-radius: 8rpx;
+		overflow: hidden;
+	}
 
+	.publish-media-preview {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 
 	::v-deep(.publish-media-preview) {
@@ -216,7 +228,7 @@ onShow(() => {
 				}
 
 				.uni-textarea-textarea {
-					font-size: 24rpx;
+					font-size: var(--font-size-content-pc);
 				}
 			}
 		}
@@ -240,7 +252,7 @@ onShow(() => {
 		background: #f2f2f2;
 		padding: 8rpx 16rpx;
 		border-radius: 12rpx;
-		font-size: 24rpx;
+		font-size: var(--font-size-content-pc);
 		color: #000;
 	}
 
@@ -261,22 +273,22 @@ onShow(() => {
 	justify-content: space-between;
 	align-items: center;
 	padding: 24rpx 0;
-	font-size: 28rpx;
+	font-size: var(--font-size-content-pc-large);
 	// border-bottom: 1px solid #eee;
 
 	.publish-setting-left {
 		display: flex;
 		flex-direction: column;
-		font-size: 32rpx;
+		font-size: var(--font-size-title-pc);
 
 		.desc {
-			font-size: 20rpx;
+			font-size: var(--font-size-content-pc-small);
 			color: #999;
 		}
 	}
 
 	.publish-setting-right {
-		font-size: 28rpx !important;
+		font-size: var(--font-size-content-pc-large) !important;
 		color: var(--text-color-gray3) !important;
 	}
 
@@ -317,7 +329,7 @@ onShow(() => {
 	.btn-publish {
 		flex: 1;
 		border-radius: 16rpx;
-		font-size: 28rpx;
+		font-size: var(--font-size-content-pc-large);
 		padding: 24rpx 0;
 		line-height: 1;
 	}

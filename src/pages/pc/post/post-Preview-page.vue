@@ -23,7 +23,7 @@
 		</view>
 		<view class="content">
 			<view class="preview-container-image">
-				<image class="preview-container-image-item" v-if="mediaList.length" :src="mediaList[currentIndex].url"
+				<image class="preview-container-image-item" v-if="mediaList.length" :src="mediaList[currentIndex].src"
 					mode="widthFix" />
 				<!-- 主圖預覽 -->
 				<view class="preview-container-footer" v-if="!isSingleImage">
@@ -222,8 +222,7 @@ uni-page-body {
 	position: relative;
 	width: 100%;
 	height: auto;
-	// TODO: 上傳圖片比例
-	aspect-ratio: 1/1.625;
+	aspect-ratio: var(--media-aspect-ratio);
 
 	::v-deep(.preview-container-image-item) {
 		uni-image {

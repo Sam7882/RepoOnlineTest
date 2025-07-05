@@ -13,8 +13,9 @@
 			<!-- 左側預覽圖 -->
 			<view class="publish-page-container-left">
 				<view class="publish-page-container-left-item">
-					<image v-if="mediaList.type === 'image'" class="publish-media-preview" :src="mediaList.url" mode="widthFix" />
-					<video v-else id="storyVideo" class="video" :src="mediaList.url" loop :muted="playStatus === 'pause'"
+					<image v-if="mediaList.type === 'image'" class="publish-media-preview" :src="mediaList.src"
+						mode="aspectFill" />
+					<video v-else id="storyVideo" class="video" :src="mediaList.src" loop :muted="playStatus === 'pause'"
 						:controls="true" :show-center-play-btn="true" object-fit="contain" :show-loading="false"
 						:enable-progress-gesture="false" :show-play-btn="false" :show-fullscreen-btn="false" :show-progress="true"
 						@click="switchVideoPlay" />
@@ -30,7 +31,7 @@
 				<!-- 圖片與輸入內容區 -->
 				<view class="publish-media-container">
 					<view class="publish-media-preview-container">
-						<image class="publish-media-preview" :src="mediaList.url" mode="widthFix" />
+						<image class="publish-media-preview" :src="mediaList.src" mode="aspectFill" />
 					</view>
 					<post-postContent ref="postContentRef" v-model="postContent" @update:modelValue="handleText" />
 				</view>
@@ -323,7 +324,7 @@ onLoad((options: any) => {
 		justify-content: center;
 		align-items: center;
 		// TODO: 影片比例設定
-		aspect-ratio: 1/1.625;
+		aspect-ratio: var(--media-aspect-ratio);
 
 
 		// 左側大型
@@ -375,14 +376,13 @@ onLoad((options: any) => {
 
 	.publish-media-preview-container {
 		position: relative;
-		width: 160rpx;
-		height: 100%;
+		width: 100rpx;
+		// height: 100rpx;
 		background: var(--background-color-dark);
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		// TODO: 影片比例設定
-		aspect-ratio: 1/1.625;
+		aspect-ratio: var(--media-aspect-ratio);
 
 
 		@media screen and (min-width: 1920px) {
@@ -390,7 +390,12 @@ onLoad((options: any) => {
 
 		}
 
-		@media screen and (min-width: 2560px) {}
+		.publish-media-preview {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
 	}
 
 	// 右側小型

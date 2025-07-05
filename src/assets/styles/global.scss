@@ -83,6 +83,9 @@
   // TODO: 影片最大寬度
   /* 影片最大寬度 */
   --video-maxWidth: 850rpx;
+  // TODO: 設定媒體比例
+  // 媒體比例 1 / (高度 / 寬度)
+  --media-aspect-ratio: 1/1.625;
   /* 設定窗口最大寬度 */
   --setting-page-maxWidth: 768rpx;
   --content-layout-maxWidth: 100%;

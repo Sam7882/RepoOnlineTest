@@ -1,7 +1,7 @@
 <template>
 	<view class="favorites-page pc-content-layout-center-style">
 		<!-- header 導航-->
-		<c-headerNav :title="$t('creator.myFavorites')" :bgColor="'var(--background-color-light)'" />
+		<c-headerNav :title="$t('creator.myFavorites')" />
 
 		<view class="favorites-page-content">
 			<!-- 統計數字 -->

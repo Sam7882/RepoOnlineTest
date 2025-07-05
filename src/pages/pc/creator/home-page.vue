@@ -544,6 +544,7 @@ const onUpload = () => {
 				type: 'image',
 				src
 			}))
+			console.log("🚀 ~ onUpload ~ fileList:", fileList)
 			setSelectedMedia(fileList)
 			toPostPreview()
 		},
@@ -737,6 +738,9 @@ onLoad((options) => {
 			border-radius: 100%;
 			overflow: hidden;
 
+			&:hover {
+				cursor: pointer;
+			}
 
 			// transform: translate(-50%, -50%);
 			::v-deep(.creator-home-page-avatar) {

@@ -126,7 +126,7 @@ defineExpose({ open, close })
   padding: 32rpx;
   border-radius: 60rpx 60rpx 0 0;
   background-color: var(--background-color-grayLight2);
-  width: fit-content;
+  width: 100%;
 
 
   @media screen and (min-width: 961px) {

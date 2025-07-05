@@ -111,9 +111,7 @@ defineExpose({ open, close })
 
 .popup-container {
   padding: 32rpx 24rpx;
-
-
-  width: fit-content;
+  width: 100%;
 
   @media screen and (min-width: 961px) {
     width: 80vw;

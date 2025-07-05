@@ -24,7 +24,7 @@
 		<view class="content">
 			<view class="preview-container-image">
 				<image class="preview-container-image-item" v-if="mediaList.length" :src="mediaList[currentIndex].src"
-					mode="widthFix" />
+					mode="aspectFill" />
 				<!-- 主圖預覽 -->
 				<view class="preview-container-footer" v-if="!isSingleImage">
 					<scroll-view class="list-scroll" scroll-x>
@@ -39,25 +39,16 @@
 							</uni-list-item>
 						</uni-list>
 					</scroll-view>
-					<!-- 多圖底部縮圖列 -->
-					<!-- <scroll-view v-if="!isSingleImage" class="thumb-strip" scroll-x>
-							<view class="scroll-view-item">
-								<image v-for="(item, i) in mediaList" :key="item.id" :src="item.src" class="thumb"
-									:class="{ active: currentIndex === i }" @click="currentIndex = i" mode="aspectFill" />
-							</view>
-						</scroll-view> -->
 				</view>
+			</view>
+			<!-- 預覽下一步 按鈕 -->
+			<view class="btn-container preview-container-button">
+				<button type="button" class="btn preview-container-button-item" @click="handleNext">
+					{{ $t('post.next') }}
+				</button>
 			</view>
 		</view>
 
-		<!-- 預覽下一步 按鈕 -->
-		<view class="preview-container-button">
-			<button type="button" class="preview-container-button-item" @click="handleNext">
-				{{ $t('post.next') }}
-			</button>
-		</view>
-
-		<c-messagePopUp class="messagePopUp" ref="messagePopUpRef" />
 	</view>
 </template>
 
@@ -68,6 +59,7 @@ import { onShow } from '@dcloudio/uni-app'
 import { usePostData } from '@/stores/usePostData'
 import { toPostIndex, checkViewportAutoReplace } from '@/utils/routers'
 import { useI18n } from 'vue-i18n'
+const { openMessage } = inject('common')
 const { t } = useI18n()
 const postDataStore = usePostData()
 const { selectedMedia } = storeToRefs(postDataStore)
@@ -86,19 +78,15 @@ const handleNext = () => {
 	console.log('next')
 }
 
-const messagePopUpRef = ref(null)
 const delMessagePopUp = () => {
 	handleClose()
 
 }
 
 const saveDraft = () => {
-	messagePopUpRef.value.open({
+	openMessage({
 		content: t('post.saveDraftTip'),
 		confirmBtnText: 'OK',
-		onConfirm: () => {
-			messagePopUpRef.value.close()
-		}
 	})
 }
 
@@ -164,7 +152,7 @@ uni-page-body {
 			border-bottom: 1rpx solid var(--background-color-grayLight2);
 
 			.previewPopup-text {
-				font-size: 30rpx;
+				font-size: var(--font-size-title-pc-small);
 				white-space: nowrap;
 				line-height: 1;
 			}
@@ -196,15 +184,21 @@ uni-page-body {
 // 圖片預覽
 .content {
 	position: relative;
-	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	width: 100dvw;
+	height: 100dvh;
 	// height: calc(100% - var(--footer-height));
-	padding-bottom: var(--footer-height);
+	// padding-bottom: var(--footer-height);
 }
 
 .preview-container-image {
 	position: relative;
-	width: 100%;
-	height: 100%;
+	width: 100dvw;
+	height: 100dvh;
+	aspect-ratio: var(--media-aspect-ratio);
+	overflow: hidden;
 
 	::v-deep(.preview-container-image-item) {
 		uni-image {
@@ -318,24 +312,26 @@ uni-page-body {
 
 // 預覽下一步 按鈕
 .preview-container-button {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	// height: 15%;
+	position: fixed;
+	bottom: 32rpx;
+	left: 50%;
+	transform: translateX(-50%);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 20rpx 40rpx;
-	padding-bottom: 52rpx;
+	// padding-bottom: 52rpx;
 	gap: 16rpx;
+	width: 100%;
+	opacity: 0.8;
+
 
 	.preview-container-button-item {
 		display: flex;
 		align-items: center;
 		flex: 1;
 		line-height: 1.2;
-		font-size: 32rpx;
+		font-size: var(--font-size-title-pc);
 		padding: 24rpx 32rpx;
 		border-radius: 16rpx;
 		gap: 8rpx;
@@ -352,20 +348,6 @@ uni-page-body {
 	.preview-container-button-item-icon {
 		width: 40rpx;
 		// height: 40rpx;
-	}
-}
-
-.messagePopUp {
-	::v-deep(.popup-box) {
-		.popup-content {
-			font-size: 32rpx;
-			color: var(--text-color-primary);
-		}
-
-		.btn {
-			font-size: 30rpx;
-		}
-
 	}
 }
 </style>

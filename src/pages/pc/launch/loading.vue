@@ -137,7 +137,7 @@ page {
 .desc {
 	font-family: 'Yuanti TC';
 	display: block;
-	font-size: 28rpx;
+	font-size: var(--font-size-content-pc-large);
 	color: #222;
 	margin-top: -4rpx;
 	letter-spacing: .5rpx;

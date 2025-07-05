@@ -750,8 +750,7 @@ function getList() {
 	background: var(--background-color-dark);
 	// 設定影片最大寬度
 	max-width: var(--video-maxWidth);
-	// TODO: 影片比例設定
-	aspect-ratio: 1 / 1.625;
+	aspect-ratio: var(--media-aspect-ratio);
 }
 
 // header

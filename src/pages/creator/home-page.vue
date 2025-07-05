@@ -680,8 +680,13 @@ onLoad((options) => {
 			width: 44rpx;
 			height: 44rpx;
 
+			@media screen and (min-width: 768px) and (max-width: 960px) {
+				width: 28rpx;
+				height: 28rpx;
+			}
+
 			.icon {
-				font-size: 24rpx !important;
+				font-size: var(--font-size-content-pc) !important;
 				color: var(--text-color-secondary) !important;
 			}
 		}

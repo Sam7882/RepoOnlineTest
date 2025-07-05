@@ -225,7 +225,7 @@ onShow(() => {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	aspect-ratio: 1 / 1.625;
+	aspect-ratio: var(--media-aspect-ratio);
 	width: 100%;
 	max-width: var(--video-maxWidth);
 	height: auto;

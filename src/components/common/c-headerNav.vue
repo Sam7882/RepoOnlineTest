@@ -68,7 +68,7 @@ const props = defineProps({
 	},
 	bgColor: {
 		type: String,
-		default: 'var(--background-color)'
+		default: 'var(--background-color-light)'
 	}
 })
 const emit = defineEmits(['search', 'openSetting', 'openQa'])

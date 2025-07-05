@@ -532,39 +532,4 @@ onShow(() => {
   font-weight: 500;
   color: var(--text-color-primary);
 }
-
-.switch-btn-container {
-  width: fit-content;
-  height: fit-content;
-
-  ::v-deep(.switch) {
-    .switch {
-      width: fit-content;
-      height: fit-content;
-      padding: 20rpx 36rpx;
-
-      @media screen and (min-width: 768px) and (max-width: 960px) {
-        padding: 16rpx 32rpx;
-      }
-
-      .switch-dot {
-        width: 30rpx;
-        height: 30rpx;
-        top: 50%;
-        translate: 0 -50%;
-
-        @media screen and (min-width: 768px) and (max-width: 960px) {
-          width: 24rpx;
-          height: 24rpx;
-        }
-      }
-
-      &.switch-checked {
-        .switch-dot {
-          left: calc(100% - 30rpx - 6rpx) !important;
-        }
-      }
-    }
-  }
-}
 </style>

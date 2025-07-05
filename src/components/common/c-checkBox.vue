@@ -29,12 +29,28 @@ const toggle = () => {
 }
 
 .switch {
-	width: 100%;
-	height: 100%;
+	width: fit-content;
+	height: fit-content;
+	padding: 20rpx 36rpx;
 	background-color: #ccc;
 	border-radius: 9999rpx;
 	position: relative;
 	transition: background-color 0.3s;
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		padding: 16rpx 32rpx;
+	}
+
+	&.switch-checked {
+		.switch-dot {
+			left: calc(100% - 30rpx - 6rpx) !important;
+
+			@media screen and (min-width: 768px) and (max-width: 960px) {
+				left: calc(100% - 30rpx) !important;
+			}
+		}
+	}
+
 }
 
 .switch-checked {
@@ -43,18 +59,19 @@ const toggle = () => {
 }
 
 .switch-dot {
-	width: 48rpx;
-	height: 48rpx;
+	width: 30rpx;
+	height: 30rpx;
+	top: 50%;
+	left: 6rpx;
+	translate: 0 -50%;
 	background-color: #fff;
 	border-radius: 50%;
 	position: absolute;
-	top: 6rpx;
-	left: 6rpx;
 	transition: all 0.3s;
-}
 
-.switch-checked .switch-dot {
-	left: 46rpx;
-	/* 移動到右邊 */
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		width: 24rpx;
+		height: 24rpx;
+	}
 }
 </style>

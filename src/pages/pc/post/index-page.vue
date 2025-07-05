@@ -561,32 +561,6 @@ onLoad((options: any) => {
 	}
 }
 
-.switch-btn-container {
-	width: fit-content;
-	height: fit-content;
-
-	::v-deep(.switch) {
-		.switch {
-			width: fit-content;
-			height: fit-content;
-			padding: 20rpx 36rpx;
-
-			.switch-dot {
-				width: 30rpx;
-				height: 30rpx;
-				top: 50%;
-				translate: 0 -50%;
-			}
-
-			&.switch-checked {
-				.switch-dot {
-					left: calc(100% - 30rpx - 6rpx) !important;
-				}
-			}
-		}
-	}
-}
-
 .confirm-pop-up {
 	::v-deep(.popup-box) {
 		.confirm-btn {

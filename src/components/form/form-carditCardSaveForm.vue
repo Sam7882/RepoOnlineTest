@@ -135,27 +135,6 @@ onShow(() => {
 	align-items: center;
 	justify-content: space-between;
 	font-size: var(--font-size-title-pc);
-
-	::v-deep(.switch-wrapper) {
-		.switch {
-			height: 44rpx;
-			width: 90rpx;
-		}
-
-		.switch-dot {
-			width: 34rpx;
-			height: 34rpx;
-			// left: calc(100% - 38rpx) !important;
-		}
-
-		.switch-checked {
-			// background-color: #FFD939;
-
-			.switch-dot {
-				left: calc(100% - 38rpx) !important;
-			}
-		}
-	}
 }
 
 .label-hidden {

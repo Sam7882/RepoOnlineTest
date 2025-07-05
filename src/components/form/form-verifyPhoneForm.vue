@@ -15,6 +15,12 @@
 				{{ $t('auth.verify') }}
 			</button>
 		</view>
+		<!-- 登入按鈕 -->
+		<view class="btn-container">
+			<button type="button" class="btn cancel-btn" @click="handleBack">
+				{{ $t('common.cancel') }}
+			</button>
+		</view>
 
 		<!-- 倒數秒數 -->
 		<view class="register" v-if="countdown > 0">
@@ -30,6 +36,7 @@
 // TEMP: 組件-PC手機驗證彈窗表單
 import { onShow, onUnload } from '@dcloudio/uni-app';
 import { useI18n } from 'vue-i18n';
+import { toLogin } from '@/utils/routers'
 const { t } = useI18n()
 
 const emit = defineEmits(['verify'])
@@ -73,6 +80,10 @@ const handleVerify = () => {
 	// 確認驗證碼是否正確
 	emit('verify')
 };
+
+const handleBack = () => {
+	toLogin()
+}
 
 const handleResendCode = () => {
 	initCountdown()

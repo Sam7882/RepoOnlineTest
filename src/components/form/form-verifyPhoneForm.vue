@@ -17,8 +17,11 @@
 		</view>
 
 		<!-- 倒數秒數 -->
-		<view class="register">
+		<view class="register" v-if="countdown > 0">
 			<text>{{ $t('auth.verifyCodeTime') }} : {{ formattedTime }}</text>
+		</view>
+		<view class="register" v-else>
+			<text @click="handleResendCode">{{ $t('common.resendCode') }}</text>
 		</view>
 	</view>
 </template>
@@ -40,7 +43,7 @@ const errors = ref({});
 
 
 // 時間倒數
-const COUNTDOWN_SECONDS = 60
+const COUNTDOWN_SECONDS = 10
 const countdown = ref(COUNTDOWN_SECONDS)
 let timer = null
 // 格式化時間
@@ -71,6 +74,15 @@ const handleVerify = () => {
 	emit('verify')
 };
 
+const handleResendCode = () => {
+	initCountdown()
+	timer = setInterval(() => {
+		if (countdown.value > 0) {
+			countdown.value--
+		}
+	}, 1000)
+}
+
 // 啟動倒數
 onShow(() => {
 	// 倒數計時器
@@ -78,8 +90,6 @@ onShow(() => {
 	timer = setInterval(() => {
 		if (countdown.value > 0) {
 			countdown.value--
-		} else {
-			initCountdown()
 		}
 	}, 1000)
 })

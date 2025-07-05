@@ -686,7 +686,7 @@ onShow(() => {
 	left: 0;
 	right: 0;
 	padding-top: 64rpx;
-	background: var(--background-color);
+	background: var(--background-color-light);
 
 	.btn-container {
 		padding: 0 40rpx;

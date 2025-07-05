@@ -1,7 +1,17 @@
 <template>
 	<view class="subscription-setting-page">
 		<!-- header 導航-->
-		<c-headerNav :title="$t('creator.subscriptionSetting')" :openBack="false" @openSetting="handleOpenSetting" />
+		<c-headerNav :title="$t('creator.subscriptionSetting')" :openBack="false">
+			<template #left>
+				<view class="header-nav-left-position header-nav-icon-container" @click="handleOpenManage">
+					<uni-icons class="header-nav-icon" type="left" size="20" color="var(--text-color-primary)"></uni-icons>
+				</view>
+			</template>
+			<template #right>
+				<uni-icons class="icons header-gear-icon" type="icon-common-gear" custom-prefix="icon" size="20"
+					color="var(--text-color-primary)" @click="handleOpenEdit"></uni-icons>
+			</template>
+		</c-headerNav>
 		<!-- 內容區塊 -->
 		<view class="subscription-setting-page-content-container">
 			<!-- 小提示 -->
@@ -44,8 +54,12 @@ import { onShow } from '@dcloudio/uni-app';
 import { toSubscriptionEdit, checkViewportAutoReplace } from '@/utils/routers';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
-const handleOpenSetting = () => {
-	toSubscriptionEdit()
+const { switchTab } = inject('center') as any
+const handleOpenManage = () => {
+	switchTab('subscriptionManage')
+}
+const handleOpenEdit = () => {
+	switchTab('subscriptionEdit')
 }
 const openStatus = ref(false)
 const openStatusList = ref([
@@ -89,7 +103,7 @@ onShow(() => {
 	width: 100%;
 	padding: 0 32rpx;
 	padding-top: 24rpx;
-	background-color: var(--background-color);
+	background-color: var(--background-color-light);
 	color: var(--text-color-primary);
 
 	// 設定窗口最大寬度
@@ -114,15 +128,35 @@ onShow(() => {
 	// padding: 0 100rpx;
 }
 
+// 圖標容器
+.header-nav-left-position {
+	position: absolute;
+	left: 48rpx;
+	top: 50%;
+	transform: translateY(-50%);
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.subscription-setting-page-content-container {
+	width: 100%;
+	height: 100%;
+	padding: 0 50rpx;
+	padding-top: 36rpx;
+	overflow-y: scroll;
+}
+
 .subscription-setting-page-tip-container {
 	padding: 48rpx 32rpx;
-	font-size: 20rpx;
+	font-size: var(--font-content-pc-small);
 	color: var(--text-color-primary);
 }
 
 .wallet-content-container-bottom-record-list-container {
 	padding: 0 32rpx;
-	font-size: 20rpx;
+	font-size: var(--font-content-pc-small);
 	gap: 48rpx;
 
 	::v-deep(.uni-list-item) {
@@ -142,14 +176,14 @@ onShow(() => {
 				flex: 1;
 
 				.subscription-setting-page-list-item-container-left-title {
-					font-size: 28rpx;
+					font-size: var(--font-content-pc-large);
 					color: var(--text-color-primary);
 					min-width: 25%;
 					margin-right: 1rem;
 				}
 
 				.subscription-setting-page-list-item-container-left-amount-unit {
-					font-size: 20rpx;
+					font-size: var(--font-content-pc-small);
 				}
 
 			}

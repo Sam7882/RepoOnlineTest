@@ -193,7 +193,6 @@ onShow(() => {
 	left: 0;
 	right: 0;
 	padding: 40rpx 44rpx 80rpx;
-	background-color: var(--background-color);
 
 	@media screen and (min-width: 768px) and (max-width: 960px) {
 		padding: 20rpx 24rpx 40rpx;

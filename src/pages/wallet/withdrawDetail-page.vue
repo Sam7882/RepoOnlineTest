@@ -82,6 +82,7 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .page {
+	background-color: var(--background-color-light);
 	// padding: 24rpx;
 }
 

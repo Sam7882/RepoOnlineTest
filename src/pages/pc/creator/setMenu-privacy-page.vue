@@ -29,8 +29,6 @@
 
 <script setup>
 // TEMP: 創作者設定-帳號設定 - 隱私設定頁
-import pcBlockadeEditPoPUp from '@/components/pc/common/pc-blockadeEditPoPUp.vue'
-import pcSetMenuPopUp from '@/components/pc/common/pc-setMenuPopUp.vue'
 import { onShow } from '@dcloudio/uni-app'
 import { router, toCreatorSetMenuEdit, toCreatorBlockadeEdit, checkViewportAutoReplace } from '@/utils/routers';
 import { useI18n } from 'vue-i18n'

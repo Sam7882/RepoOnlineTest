@@ -107,7 +107,7 @@ onShow(() => {
 	justify-content: space-between;
 	padding: 30rpx 46rpx;
 	border-bottom: 1rpx solid var(--text-color-denary);
-	font-size: 30rpx;
+	font-size: var(--font-size-title-pc-small);
 
 	.icon-container {
 		.icon-right {
@@ -118,7 +118,7 @@ onShow(() => {
 }
 
 .status-container {
-	font-size: 28rpx;
+	font-size: var(--font-size-content-pc-large);
 	color: var(--text-color-gray3);
 	margin-right: 24rpx;
 }

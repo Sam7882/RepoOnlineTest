@@ -1,7 +1,17 @@
 <template>
 	<view class="subscription-setting-page">
 		<!-- header 導航-->
-		<c-headerNav :title="$t('creator.subscriptionSetting')" :openSetting="true" @openSetting="handleOpenSetting" />
+		<c-headerNav :title="$t('creator.subscriptionSetting')" :openBack="false">
+			<template #left>
+				<view class="header-nav-left-position header-nav-icon-container" @click="handleOpenManage">
+					<uni-icons class="header-nav-icon" type="left" size="20" color="var(--text-color-primary)"></uni-icons>
+				</view>
+			</template>
+			<template #right>
+				<uni-icons class="icons header-gear-icon" type="icon-common-gear" custom-prefix="icon" size="20"
+					color="var(--text-color-primary)" @click="handleOpenEdit"></uni-icons>
+			</template>
+		</c-headerNav>
 		<!-- 內容區塊 -->
 		<view class="subscription-setting-page-content-container">
 			<!-- 小提示 -->
@@ -41,10 +51,13 @@
 <script setup lang="ts">
 // TEMP: 設定訂閱項目頁
 import { onShow } from '@dcloudio/uni-app';
-import { toSubscriptionEdit, checkViewportAutoReplace } from '@/utils/routers';
+import { toSubscriptionEdit, toSubscriptionManage, checkViewportAutoReplace, toSubscriptionSetting } from '@/utils/routers';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
-const handleOpenSetting = () => {
+const handleOpenManage = () => {
+	toSubscriptionManage()
+}
+const handleOpenEdit = () => {
 	toSubscriptionEdit()
 }
 const openStatus = ref(false)
@@ -83,8 +96,20 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .subscription-setting-page {
-	background-color: var(--background-color);
+	background-color: var(--background-color-light);
 	// padding: 0 100rpx;
+}
+
+// 圖標容器
+.header-nav-left-position {
+	position: absolute;
+	left: 48rpx;
+	top: 50%;
+	transform: translateY(-50%);
+
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 .subscription-setting-page-tip-container {

@@ -15,6 +15,9 @@ import CenterPage from '@/pages/pc/creator/center-page.vue'
 import StatisticsPage from '@/pages/pc/creator/statistics-page.vue'
 import SchedulePostPage from '@/pages/pc/post/schedulePost-page.vue'
 import SubscriptionManagePage from '@/pages/pc/creator/subscription-manage-page.vue'
+import SubscriptionSettingPage from '@/pages/pc/creator/subscription-setting-page.vue'
+import SubscriptionEditPage from '@/pages/pc/creator/subscription-edit-page.vue'
+
 import { onLoad } from '@dcloudio/uni-app'
 
 // 透過 tab 來進行內容區塊組件的替換
@@ -23,6 +26,8 @@ const pageComponent = ref({
 	'statistics': markRaw(StatisticsPage),
 	'schedulePost': markRaw(SchedulePostPage),
 	'subscriptionManage': markRaw(SubscriptionManagePage),
+	'subscriptionSetting': markRaw(SubscriptionSettingPage),
+	'subscriptionEdit': markRaw(SubscriptionEditPage),
 })
 const currentPageComponent = computed(() => {
 	if (!currentPage.value) {
@@ -43,4 +48,6 @@ onLoad((options) => {
 	console.log("🚀 ~ onLoad ~ options:", options)
 	currentPage.value = options.tab
 })
+
+provide('center', { switchTab })
 </script>

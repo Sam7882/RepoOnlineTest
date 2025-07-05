@@ -131,6 +131,48 @@ const followingList = ref([
 		name: 'i',
 		account: '@ef8f8e.88'
 	},
+	{
+		following: true,
+		avatar: '/static/images/template/img-template-01.png',
+		name: 'a2',
+		account: '@aaaew8.88'
+	},
+	{
+		following: false,
+		avatar: '/static/images/template/img-template-02.png',
+		name: 'd',
+		account: '@853588.88'
+	},
+	{
+		following: false,
+		avatar: '/static/images/template/img-template-03.png',
+		name: 'e',
+		account: '@aabb88.88'
+	},
+	{
+		following: false,
+		avatar: '/static/images/template/img-template-03.png',
+		name: 'f',
+		account: '@bbcc88.88'
+	},
+	{
+		following: true,
+		avatar: '/static/images/template/img-template-04.png',
+		name: 'g',
+		account: '@abcs88.88'
+	},
+	{
+		following: true,
+		avatar: '/static/images/template/img-template-03.png',
+		name: 'h',
+		account: '@ccdd88.88'
+	},
+	{
+		following: true,
+		avatar: '/static/images/template/img-template-03.png',
+		name: 'i',
+		account: '@ef8f8e.88'
+	},
 ])
 // 搜尋文字
 const searchText = ref('')
@@ -203,7 +245,6 @@ onShow(() => {
 <style lang="scss" scoped>
 .wallet-page {
 	background-color: var(--background-color);
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -246,6 +287,7 @@ onShow(() => {
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: 1px solid var(--text-color-octonary);
+	width: 95%;
 
 	.wallet-category-item {
 		flex: 1;
@@ -253,6 +295,7 @@ onShow(() => {
 		font-size: var(--font-size-title-pc-large);
 		color: var(--text-color-primary);
 		text-align: center;
+		cursor: pointer;
 
 		&.active {
 			border-bottom: 2px solid var(--text-color-primary);
@@ -260,8 +303,16 @@ onShow(() => {
 	}
 }
 
+.wallet-search-container {
+	width: 90%;
+}
+
 .wallet-content-container {
 	padding: 0 44rpx;
+	width: 90%;
+	height: 100%;
+	overflow-y: auto;
+	padding-bottom: 96rpx;
 
 	::v-deep(.uni-list-item__container) {
 		.uni-list-item__container {

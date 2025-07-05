@@ -220,7 +220,6 @@ onShow(() => {
 	bottom: 0;
 	width: 100%;
 	padding: 40rpx 44rpx 80rpx;
-	background-color: var(--background-color);
 
 	max-width: var(--setting-page-maxWidth);
 

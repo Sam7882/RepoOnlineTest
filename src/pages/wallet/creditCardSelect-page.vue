@@ -58,7 +58,7 @@
 			</uni-list>
 		</view>
 
-		<c-bottomNav />
+		<c-bottomNav bgColor="var(--background-color-light)" />
 	</view>
 </template>
 
@@ -110,7 +110,7 @@ uni-image {
 }
 
 .subscription-setting-page {
-	background-color: var(--background-color);
+	background-color: var(--background-color-light);
 	// padding: 0 100rpx;
 }
 

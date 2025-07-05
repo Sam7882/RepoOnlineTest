@@ -473,7 +473,7 @@ page {
 	right: 0;
 	padding-top: 20rpx;
 	padding-bottom: 60rpx;
-	background: var(--background-color);
+	background: var(--background-color-light);
 
 	.btn-container {
 		padding: 0 40rpx;

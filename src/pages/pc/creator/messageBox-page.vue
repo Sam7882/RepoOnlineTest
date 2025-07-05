@@ -187,6 +187,10 @@ onShow(() => {
 	padding: 0 44rpx;
 	padding-top: 20rpx;
 
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+
 	::v-deep(.uni-list-item__container) {
 		.uni-list-item__container {
 			padding: 20rpx 0;

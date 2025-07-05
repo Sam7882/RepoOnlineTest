@@ -151,7 +151,7 @@ onLoad((options) => {
 
 .title-container {
 	margin-top: 48rpx;
-	font-size: 36rpx;
+	font-size: var(--font-size-title-pc-large);
 	font-weight: 500;
 	text-align: center;
 	white-space: pre-line;
@@ -164,7 +164,7 @@ onLoad((options) => {
 	right: 0;
 	padding-top: 20rpx;
 	padding-bottom: 60rpx;
-	background: var(--background-color);
+	background: var(--background-color-light);
 
 	.btn-container {
 		padding: 0 40rpx;
@@ -172,7 +172,7 @@ onLoad((options) => {
 
 		.btn {
 			padding: 24rpx;
-			font-size: 30rpx;
+			font-size: var(--font-size-title-pc);
 		}
 
 		&.btn-waiting,

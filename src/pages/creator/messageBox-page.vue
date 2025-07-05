@@ -151,7 +151,8 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .messsageBox-page {
-	background-color: var(--background-color);
+	background-color: var(--background-color-light);
+	height: 100%;
 	// padding: 0 100rpx;
 }
 

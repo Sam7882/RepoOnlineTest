@@ -57,10 +57,10 @@ const fallbackVideoCover = 'https://via.placeholder.com/300x300?text=Video'
 <style lang="scss" scoped>
 /* 卡片區 */
 .content-card-container {
-  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  // gap: 16rpx;
+  flex: 1;
+  width: 100%;
 
   .content-card-container-item {
     position: relative;

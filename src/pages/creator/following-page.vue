@@ -202,8 +202,12 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .wallet-page {
-	background-color: var(--background-color);
-	// padding: 0 100rpx;
+	background-color: var(--background-color-light);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	height: 100%;
 }
 
 .wallet-page-header {
@@ -219,6 +223,7 @@ onShow(() => {
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: 1px solid var(--text-color-octonary);
+	width: 100%;
 
 	.wallet-category-item {
 		flex: 1;
@@ -233,8 +238,16 @@ onShow(() => {
 	}
 }
 
+.wallet-search-container {
+	width: 90%;
+}
+
 .wallet-content-container {
 	padding: 0 44rpx;
+	width: 100%;
+	height: 100%;
+	overflow-y: auto;
+	padding-bottom: 96rpx;
 
 	::v-deep(.uni-list-item__container) {
 		.uni-list-item__container {

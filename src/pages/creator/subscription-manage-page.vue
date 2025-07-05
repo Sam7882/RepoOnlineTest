@@ -1,6 +1,11 @@
 <template>
   <view class="container container-sponsor-confirm">
-    <c-headerNav :title="$t('common.subscription')" />
+    <c-headerNav :title="$t('common.subscription')">
+      <template #right>
+        <uni-icons class="icons header-gear-icon" type="icon-common-gear" custom-prefix="icon" size="20"
+          color="var(--text-color-primary)" @click="handleOpenSetting"></uni-icons>
+      </template>
+    </c-headerNav>
     <!-- bottom -->
     <view class="comment-container">
 
@@ -68,7 +73,7 @@
 // TEMP: 訂閱方案頁面
 
 import { onShow } from '@dcloudio/uni-app'
-import { toPay, checkViewportAutoReplace } from '@/utils/routers'
+import { toPay, checkViewportAutoReplace, toSubscriptionSetting } from '@/utils/routers'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -94,6 +99,10 @@ const openCaption = () => {
     title: t('common.subscriptionAgreement'),
     content: t('common.subscriptionAgreementTip2', { title: 'Fance' })
   })
+}
+
+const handleOpenSetting = () => {
+  toSubscriptionSetting()
 }
 
 onShow(() => {

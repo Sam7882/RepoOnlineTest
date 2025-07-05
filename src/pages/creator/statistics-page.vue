@@ -415,7 +415,7 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .statistics-page {
-	background-color: var(--background-color-grayLight);
+	background-color: var(--background-color-light);
 	// padding: 0 100rpx;
 }
 

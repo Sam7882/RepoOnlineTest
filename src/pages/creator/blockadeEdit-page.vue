@@ -187,7 +187,7 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .blockade-page {
-	background-color: var(--background-color);
+	background-color: var(--background-color-light);
 	--footer-height: 180rpx;
 }
 
@@ -487,7 +487,7 @@ onShow(() => {
 	right: 0;
 	padding-top: 20rpx;
 	padding-bottom: 60rpx;
-	background: var(--background-color);
+	background: var(--background-color-light);
 
 	@media screen and (min-width: 768px) and (max-width: 960px) {
 		padding-bottom: 32rpx;

@@ -3,170 +3,176 @@
 		<!-- header 導航-->
 		<c-headerNav class="rank-page-header" :title="$t('creator.rank')" />
 
-		<!-- 類別 -->
-		<view class="rank-category-container">
-			<template v-for="(item, index) in categoryList" :key="index">
-				<view class="rank-category-item" :class="{ active: categoryValue === item.value }"
-					@click="switchCategory(item.value)">
-					<text class="rank-category-item-text">{{ item.name }}</text>
-				</view>
-			</template>
-		</view>
+		<view class="rank-container">
 
-		<!-- 日期榜類別 -->
-		<view class="rankDate-category-container">
-			<template v-for="(item, index) in dateCategoryList" :key="index">
-				<view class="rankDate-category-item" :class="{ active: dateCategoryValue === item.value }"
-					@click="switchDateCategory(item.value)">
-					<text class="rankDate-category-item-text">{{ item.name }}</text>
-				</view>
-			</template>
-		</view>
-
-		<view class="firstRank-container">
-			<view class="firstRank-item" v-for="(item, index) in rankList.slice(0, 3)" :key="index">
-				<!-- 絕對位置 頭像 -->
-				<view class="firstRank-avatar-container">
-					<image class="firstRank-avatar" :src="item.avatar" mode="widthFix">
-					</image>
-				</view>
-
-				<view class="firstRank-medal-container">
-					<image v-if="item.rank === 1" class="firstRank-medal" src="/static/icons/rank/icon-rank-medal-1.png"
-						mode="widthFix">
-					</image>
-					<image v-if="item.rank === 2" class="firstRank-medal" src="/static/icons/rank/icon-rank-medal-2.png"
-						mode="widthFix">
-					</image>
-					<image v-if="item.rank === 3" class="firstRank-medal" src="/static/icons/rank/icon-rank-medal-3.png"
-						mode="widthFix">
-					</image>
-				</view>
-
-				<!-- 名稱與帳號 垂直排序 -->
-				<view class="firstRank-data-profile-container">
-					<!-- 創作者名稱與帳號 -->
-					<view class="firstRank-data-profile-container-item firstRank-data-profile-container-item-self-account">
-						<view class="firstRank-data-profile-container-item-text-container">
-							<text
-								class="firstRank-data-profile-container-item-text firstRank-data-profile-container-item-text-name">{{
-									item.name }}
-							</text>
-							<uni-icons class="firstRank-data-profile-container-item-text-name-icon" type="icon-community-prove"
-								custom-prefix="icon" size="24" color="var(--text-color-primary)"></uni-icons>
-						</view>
-						<text
-							class="firstRank-data-profile-container-item-text firstRank-data-profile-container-item-text-account">{{
-								item.account }}</text>
-						<text class="firstRank-data-profile-container-item-text firstRank-data-profile-container-item-text-num">{{
-							item.fansNum }}</text>
+			<!-- 類別 -->
+			<view class="rank-category-container">
+				<template v-for="(item, index) in categoryList" :key="index">
+					<view class="rank-category-item" :class="{ active: categoryValue === item.value }"
+						@click="switchCategory(item.value)">
+						<text class="rank-category-item-text">{{ item.name }}</text>
 					</view>
-				</view>
+				</template>
 			</view>
-		</view>
 
-		<!--內容容器 -->
-		<view class="rank-content-container">
-			<!-- 訂閱/購買紀錄 -->
-			<view class="rank-content-container-bottom-record-container">
-				<!-- 紀錄列表 垂直排序 -->
-				<uni-list :border="false" class="rank-content-container-bottom-record-list-container">
-					<!-- 紀錄 space-between 左右排列 -->
-					<template v-for="(item, index) in rankList.slice(3, 10)" :key="index">
-						<uni-list-item :border="false" class="rank-content-container-bottom-record-list-item">
-							<template #header>
-								<view class="rank-list-header-container">
-									<text>{{ item.rank }}</text>
-								</view>
-							</template>
-							<template #body>
-								<!-- 帳號頭像和錢包總額文字 水平排列 -->
-								<view class="rank-account-container rank-account-container-record">
-									<!-- 帳號頭像 垂直排列 -->
-									<view class="rank-account-info-container">
-										<!-- 頭像 -->
-										<view class="rank-account-avatar-container">
-											<image class="rank-account-avatar" :src="item.avatar" mode="widthFix">
-											</image>
-										</view>
-										<!-- 名稱與帳號 -->
-										<view class="rank-account-info-name-container">
-											<view class="rank-account-info-name-title-container">
-												<text class="rank-account-info-title">{{ item.name }}</text>
-												<!-- 認證圖標 -->
-												<view class="rank-account-info-prove-container">
-													<uni-icons type="icon-community-prove" custom-prefix="icon" size="16"
-														color="var(--text-color-senary)"></uni-icons>
-												</view>
-											</view>
-											<view class="rank-account-info-name-account-container">
-												<text class="rank-account-info-account">{{ item.account }}</text>
-											</view>
-										</view>
-									</view>
-									<!-- 靠右 -->
-									<view class="rank-content-container-bottom-following-list-item-button-container">
-										{{ item.fansNum }}
-									</view>
-								</view>
-							</template>
-						</uni-list-item>
-					</template>
-				</uni-list>
-			</view>
-		</view>
-
-		<view class="rank-bottom-myRank-container">
-			<view class="rank-bottom-myRank-item">
-				<view class="rank-bottom-myRank-title">
-					<text>{{ $t('creator.yourRank') }}</text>
-				</view>
-				<!-- 帳號頭像和錢包總額文字 水平排列 -->
-				<view class="rank-account-container rank-account-container-record">
-					<view class="rank-bottom-myRank-header-container">
-						<text>{{ '168' }}</text>
+			<!-- 日期榜類別 -->
+			<view class="rankDate-category-container">
+				<template v-for="(item, index) in dateCategoryList" :key="index">
+					<view class="rankDate-category-item" :class="{ active: dateCategoryValue === item.value }"
+						@click="switchDateCategory(item.value)">
+						<text class="rankDate-category-item-text">{{ item.name }}</text>
 					</view>
-					<view class="rank-account-info-container">
-						<!-- 頭像 -->
-						<view class="rank-account-avatar-container">
-							<image class="rank-account-avatar" src="/static/images/template/img-template-01.png" mode="widthFix">
+				</template>
+			</view>
+
+
+
+			<!--內容容器 -->
+			<view class="rank-content-container">
+				<view class="firstRank-container">
+					<view class="firstRank-item" v-for="(item, index) in rankList.slice(0, 3)" :key="index">
+						<!-- 絕對位置 頭像 -->
+						<view class="firstRank-avatar-container">
+							<image class="firstRank-avatar" :src="item.avatar" mode="widthFix">
 							</image>
 						</view>
-						<!-- 名稱與帳號 -->
-						<view class="rank-account-info-name-container">
-							<view class="rank-account-info-name-title-container">
-								<text class="rank-account-info-title">{{ 'a' }}</text>
-								<!-- 認證圖標 -->
-								<view class="rank-account-info-prove-container">
-									<uni-icons type="icon-community-prove" custom-prefix="icon" size="16"
-										color="var(--text-color-senary)"></uni-icons>
+
+						<view class="firstRank-medal-container">
+							<image v-if="item.rank === 1" class="firstRank-medal" src="/static/icons/rank/icon-rank-medal-1.png"
+								mode="widthFix">
+							</image>
+							<image v-if="item.rank === 2" class="firstRank-medal" src="/static/icons/rank/icon-rank-medal-2.png"
+								mode="widthFix">
+							</image>
+							<image v-if="item.rank === 3" class="firstRank-medal" src="/static/icons/rank/icon-rank-medal-3.png"
+								mode="widthFix">
+							</image>
+						</view>
+
+						<!-- 名稱與帳號 垂直排序 -->
+						<view class="firstRank-data-profile-container">
+							<!-- 創作者名稱與帳號 -->
+							<view class="firstRank-data-profile-container-item firstRank-data-profile-container-item-self-account">
+								<view class="firstRank-data-profile-container-item-text-container">
+									<text
+										class="firstRank-data-profile-container-item-text firstRank-data-profile-container-item-text-name">{{
+											item.name }}
+									</text>
+									<uni-icons class="firstRank-data-profile-container-item-text-name-icon" type="icon-community-prove"
+										custom-prefix="icon" size="24" color="var(--text-color-primary)"></uni-icons>
 								</view>
-							</view>
-							<view class="rank-account-info-name-account-container">
-								<text class="rank-account-info-account">{{ '@88qwe8.88' }}</text>
+								<text
+									class="firstRank-data-profile-container-item-text firstRank-data-profile-container-item-text-account">{{
+										item.account }}</text>
+								<text
+									class="firstRank-data-profile-container-item-text firstRank-data-profile-container-item-text-num">{{
+										item.fansNum }}</text>
 							</view>
 						</view>
 					</view>
-					<!-- 靠右 -->
 				</view>
-				<view class="rank-content-container-bottom-following-list-item-button-container">
-					{{ '1.5K' }}
+				<!-- 訂閱/購買紀錄 -->
+				<view class="rank-content-container-bottom-record-container">
+					<!-- 紀錄列表 垂直排序 -->
+					<uni-list :border="false" class="rank-content-container-bottom-record-list-container">
+						<!-- 紀錄 space-between 左右排列 -->
+						<template v-for="(item, index) in rankList.slice(3, 10)" :key="index">
+							<uni-list-item :border="false" class="rank-content-container-bottom-record-list-item">
+								<template #header>
+									<view class="rank-list-header-container">
+										<text>{{ item.rank }}</text>
+									</view>
+								</template>
+								<template #body>
+									<!-- 帳號頭像和錢包總額文字 水平排列 -->
+									<view class="rank-account-container rank-account-container-record">
+										<!-- 帳號頭像 垂直排列 -->
+										<view class="rank-account-info-container">
+											<!-- 頭像 -->
+											<view class="rank-account-avatar-container">
+												<image class="rank-account-avatar" :src="item.avatar" mode="widthFix">
+												</image>
+											</view>
+											<!-- 名稱與帳號 -->
+											<view class="rank-account-info-name-container">
+												<view class="rank-account-info-name-title-container">
+													<text class="rank-account-info-title">{{ item.name }}</text>
+													<!-- 認證圖標 -->
+													<view class="rank-account-info-prove-container">
+														<uni-icons type="icon-community-prove" custom-prefix="icon" size="16"
+															color="var(--text-color-senary)"></uni-icons>
+													</view>
+												</view>
+												<view class="rank-account-info-name-account-container">
+													<text class="rank-account-info-account">{{ item.account }}</text>
+												</view>
+											</view>
+										</view>
+										<!-- 靠右 -->
+										<view class="rank-content-container-bottom-following-list-item-button-container">
+											{{ item.fansNum }}
+										</view>
+									</view>
+								</template>
+							</uni-list-item>
+						</template>
+					</uni-list>
 				</view>
 			</view>
-			<view class="rank-bottom-distance-container">
-				<view class="icon-container">
-					<uni-icons class="icon-rank-up" type="icon-rank-up" custom-prefix="icon" size="24"
-						color="var(--text-color-primary)"></uni-icons>
+
+			<view class="rank-bottom-myRank-container">
+				<view class="rank-bottom-myRank-item">
+					<view class="rank-bottom-myRank-title">
+						<text>{{ $t('creator.yourRank') }}</text>
+					</view>
+					<!-- 帳號頭像和錢包總額文字 水平排列 -->
+					<view class="rank-account-container rank-account-container-record">
+						<view class="rank-bottom-myRank-header-container">
+							<text>{{ '168' }}</text>
+						</view>
+						<view class="rank-account-info-container">
+							<!-- 頭像 -->
+							<view class="rank-account-avatar-container">
+								<image class="rank-account-avatar" src="/static/images/template/img-template-01.png" mode="widthFix">
+								</image>
+							</view>
+							<!-- 名稱與帳號 -->
+							<view class="rank-account-info-name-container">
+								<view class="rank-account-info-name-title-container">
+									<text class="rank-account-info-title">{{ 'a' }}</text>
+									<!-- 認證圖標 -->
+									<view class="rank-account-info-prove-container">
+										<uni-icons type="icon-community-prove" custom-prefix="icon" size="16"
+											color="var(--text-color-senary)"></uni-icons>
+									</view>
+								</view>
+								<view class="rank-account-info-name-account-container">
+									<text class="rank-account-info-account">{{ '@88qwe8.88' }}</text>
+								</view>
+							</view>
+						</view>
+						<!-- 靠右 -->
+					</view>
+					<view class="rank-content-container-bottom-following-list-item-button-container">
+						{{ '1.5K' }}
+					</view>
 				</view>
-				<view class="distance-container">
-					<text>{{ $t('creator.yourRankDistance') }} </text>
-				</view>
-				<view class="distance-num-container">
-					<text class="distance-num">4576</text>
-					<text class="distance-unit">{{ $t("creator.fans") }}</text>
+				<view class="rank-bottom-distance-container">
+					<view class="icon-container">
+						<uni-icons class="icon-rank-up" type="icon-rank-up" custom-prefix="icon" size="24"
+							color="var(--text-color-primary)"></uni-icons>
+					</view>
+					<view class="distance-container">
+						<text>{{ $t('creator.yourRankDistance') }} </text>
+					</view>
+					<view class="distance-num-container">
+						<text class="distance-num">4576</text>
+						<text class="distance-unit">{{ $t("creator.fans") }}</text>
+					</view>
 				</view>
 			</view>
 		</view>
+
 	</view>
 </template>
 
@@ -329,8 +335,13 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .rank-page {
-	background-color: var(--background-color);
-	// padding: 0 100rpx;
+	background-color: var(--background-color-light);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	overflow-y: hidden;
 }
 
 .rank-page-header {
@@ -342,8 +353,14 @@ onShow(() => {
 	}
 }
 
+.rank-container {
+	width: 100%;
+	height: 100%;
+	overflow-y: hidden;
+}
 
 .rank-category-container {
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -363,6 +380,7 @@ onShow(() => {
 }
 
 .rankDate-category-container {
+	width: 90%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -390,6 +408,7 @@ onShow(() => {
 }
 
 .firstRank-container {
+	width: 100%;
 	display: flex;
 	justify-content: space-around;
 	align-items: flex-start;
@@ -578,7 +597,14 @@ onShow(() => {
 }
 
 .rank-content-container {
-	padding: 0 44rpx 280rpx;
+	width: 100%;
+	height: 100%;
+	overflow-y: auto;
+	padding: 0 44rpx 480rpx;
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		padding: 0 44rpx 360rpx;
+	}
 
 	::v-deep(.uni-list-item__container) {
 		.uni-list-item__container {

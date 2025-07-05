@@ -2,26 +2,27 @@
 	<view class="favorites-page">
 		<!-- header 導航-->
 		<c-headerNav :title="$t('creator.myFavorites')" />
+		<view class="favorites-page-content">
+			<!-- 統計數字 -->
+			<view class="statistics-container">
+				<view class="statistics-item" :class="{ active: type === 'all' }" @click="switchType('all')">
+					<text>{{ $t("common.all") }}</text>
+					<text>508</text>
+				</view>
+				<view class="statistics-item" :class="{ active: type === 'video' }" @click="switchType('video')">
+					<text>{{ $t("common.video") }}</text>
+					<text>55</text>
+				</view>
+				<view class="statistics-item" :class="{ active: type === 'photo' }" @click="switchType('photo')">
+					<text>{{ $t("common.photo") }}</text>
+					<text>453</text>
+				</view>
+			</view>
 
-		<!-- 統計數字 -->
-		<view class="statistics-container">
-			<view class="statistics-item" :class="{ active: type === 'all' }" @click="switchType('all')">
-				<text>{{ $t("common.all") }}</text>
-				<text>508</text>
+			<!-- 收藏列表 -->
+			<view class="grid-container">
+				<c-gridPhoto :data="gridPhotoData" @clickMedia="handleClickMedia" />
 			</view>
-			<view class="statistics-item" :class="{ active: type === 'video' }" @click="switchType('video')">
-				<text>{{ $t("common.video") }}</text>
-				<text>55</text>
-			</view>
-			<view class="statistics-item" :class="{ active: type === 'photo' }" @click="switchType('photo')">
-				<text>{{ $t("common.photo") }}</text>
-				<text>453</text>
-			</view>
-		</view>
-
-		<!-- 收藏列表 -->
-		<view>
-			<c-gridPhoto :data="gridPhotoData" @clickMedia="handleClickMedia" />
 		</view>
 	</view>
 </template>
@@ -83,9 +84,20 @@ onShow(() => {
 <style lang="scss" scoped>
 .favorites-page {
 	background-color: var(--background-color-light);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+}
+
+.favorites-page-content {
+	width: 100%;
+	height: 100%;
+	overflow-y: hidden;
 }
 
 .statistics-container {
+	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -105,5 +117,12 @@ onShow(() => {
 		}
 	}
 
+}
+
+.grid-container {
+	width: 100%;
+	height: 100%;
+	overflow-y: auto;
+	padding-bottom: 96rpx;
 }
 </style>

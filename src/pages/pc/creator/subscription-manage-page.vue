@@ -1,6 +1,11 @@
 <template>
   <view class="container container-sponsor-confirm">
-    <c-headerNav :title="$t('common.subscription')" :openBack="false" />
+    <c-headerNav :title="$t('common.subscription')" :openBack="false">
+      <template #right>
+        <uni-icons class="icons header-gear-icon" type="icon-common-gear" custom-prefix="icon" size="20"
+          color="var(--text-color-primary)" @click="handleOpenSetting"></uni-icons>
+      </template>
+    </c-headerNav>
     <!-- bottom -->
     <view class="comment-container">
       <view class="row-title bold">
@@ -69,6 +74,7 @@ import { onShow } from '@dcloudio/uni-app'
 import { toPay, checkViewportAutoReplace } from '@/utils/routers'
 import { useI18n } from 'vue-i18n'
 
+const { switchTab } = inject('center')
 const { t } = useI18n()
 
 const isOpen = ref(false)
@@ -92,6 +98,10 @@ const openCaption = () => {
     title: t('common.subscriptionAgreement'),
     content: t('common.subscriptionAgreementTip2', { title: 'Fance' })
   })
+}
+
+const handleOpenSetting = () => {
+  switchTab('subscriptionSetting')
 }
 
 onShow(() => {
@@ -421,6 +431,7 @@ onShow(() => {
   // justify-content: space-between;
   color: var(--text-color-secondary);
   gap: 20rpx;
+  width: 100%;
 
   .comment-container-item {
     display: flex;

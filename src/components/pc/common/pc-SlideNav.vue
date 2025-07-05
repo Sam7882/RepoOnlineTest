@@ -61,6 +61,7 @@
 <script setup>
 // TEMP: PC-側邊欄位
 import { useI18n } from 'vue-i18n';
+import { toPlayIndex, toPostUpload, toFavorites, toCreatorHome, toMessageBox } from '@/utils/routers';
 const { t } = useI18n();
 
 const { openService, openConfirm } = inject('common');
@@ -98,57 +99,84 @@ const menu = [
 		path: '/pages/pc/play/index',
 		text: t('menu.viedeoHome'),
 		icon: 'icon-common-home',
-		needLogin: false
+		needLogin: false,
+		fn: () => {
+			toPlayIndex()
+		}
 	},
 	// 影音頁
 	{
 		path: '/pages/pc/play/index',
 		text: t('common.video'),
 		icon: 'icon-common-video',
-		needLogin: false
+		needLogin: false,
+		fn: () => {
+			toPlayIndex()
+		}
 	},
 	{
 		path: '/pages/pc/play/index',
 		text: t('common.photo'),
 		icon: 'icon-common-photo',
-		needLogin: false
+		needLogin: false,
+		fn: () => {
+			toPlayIndex()
+		}
 	},
 	// 影音頁 我的關注
 	{
 		path: '/pages/pc/play/index',
 		text: t('creator.myFollowing'),
 		icon: 'icon-common-focus',
-		needLogin: true
+		needLogin: true,
+		fn: () => {
+			toPlayIndex()
+		}
 	},
 	{
 		path: '/pages/pc/play/index',
 		text: t('common.recommend'),
 		icon: 'icon-common-recommend',
-		needLogin: true
+		needLogin: true,
+		fn: () => {
+			toPlayIndex()
+		}
 	},
 	{
-		path: '/pages/pc/post/post-Preview',
+		path: '/pages/pc/post/uploadPost',
 		text: t('post.upload'),
 		icon: 'icon-common-plus',
-		needLogin: false
+		needLogin: false,
+		fn: () => {
+			toPostUpload()
+		}
 	},
 	{
 		path: '/pages/pc/creator/favorites',
 		text: t('creator.myFavorites'),
 		icon: 'icon-menu-wallet',
-		needLogin: true
+		needLogin: true,
+		fn: () => {
+			toFavorites()
+		}
 	},
 	{
-		path: '/pages/pc/creator/center',
+		path: '/pages/pc/creator/home',
 		text: t('menu.profile'),
 		icon: 'icon-common-person',
-		needLogin: true
+		needLogin: true,
+		fn: () => {
+			toCreatorHome()
+		}
 	},
 	{
 		path: '/pages/pc/creator/messageBox',
 		text: t('common.message'),
 		icon: 'icon-common-email',
-		needLogin: true
+		needLogin: true,
+		fn: () => {
+			toMessageBox()
+		}
 	},
 	{
 		path: '/pages/pc/search/index',
@@ -165,7 +193,7 @@ const menu = [
 <style lang="scss" scoped>
 .slide-nav {
 	position: relative;
-	background: var(--background-color);
+	background: var(--background-color-light);
 	padding: 70rpx 75rpx;
 	box-shadow: 2rpx 0 8rpx rgba(0, 0, 0, 0.08);
 	display: flex;

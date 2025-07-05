@@ -167,12 +167,10 @@ provide('common', {
 </script>
 
 <style lang="scss" scoped>
-page {
-	background-color: var(--background-color);
-}
-
 .app-layout {
 	position: relative;
+	background-color: var(--background-color-light);
+	min-height: 100dvh;
 	// display: flex;
 	// height: 100vh;
 	/* 高度撐滿視窗 */

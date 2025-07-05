@@ -41,7 +41,7 @@ const handleSearch = () => {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	background: var(--background-color);
+	background: var(--background-color-light);
 	border-bottom: 4rpx solid var(--text-color-denary);
 	padding-top: 64rpx !important;
 	padding-bottom: 48rpx !important;

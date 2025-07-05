@@ -156,7 +156,7 @@ onShow(() => {
 .messsageBox-page {
 	--footer-height: 300rpx;
 	position: relative;
-	background: var(--background-color);
+	background: var(--background-color-light);
 	padding: 70rpx 36rpx;
 	box-shadow: 2rpx 0 8rpx rgba(0, 0, 0, 0.08);
 	display: flex;

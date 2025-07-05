@@ -1,7 +1,7 @@
 <template>
 	<view class="favorites-page">
 		<!-- header 導航-->
-		<c-headerNav :title="$t('creator.myFavorites')" />
+		<c-headerNav :title="$t('creator.myFavorites')" :bgColor="'var(--background-color-light)'" />
 
 		<!-- 統計數字 -->
 		<view class="statistics-container">
@@ -87,7 +87,7 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .favorites-page {
-	background-color: var(--background-color);
+	background-color: var(--background-color-light);
 }
 
 .statistics-container {

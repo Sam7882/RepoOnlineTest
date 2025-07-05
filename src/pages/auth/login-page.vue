@@ -30,7 +30,7 @@
 // TEMP: 登入頁面
 import { onShow } from '@dcloudio/uni-app';
 import { useInitStore } from '@/stores/useInitDataStore'
-import { toRegister, checkViewportAutoReplace } from '@/utils/routers'
+import { toRegister, toPlayIndex, checkViewportAutoReplace } from '@/utils/routers'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const initStore = useInitStore()
@@ -43,6 +43,7 @@ if (!common) {
 
 const handleLogin = () => {
 	console.log("🚀 handleLogin 登入")
+	toPlayIndex()
 }
 
 const handleRegister = () => {

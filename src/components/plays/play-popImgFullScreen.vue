@@ -31,7 +31,7 @@ const props = defineProps({
 // 彈窗
 const popupRef = ref(null);
 // 圖片
-const images = computed(() => props.imgs);
+const images = ref([]);
 // 當前圖片索引
 const currentIndex = ref(0);
 // 是否顯示滑動圖片ICON提示
@@ -39,10 +39,15 @@ const isSlipIcon = ref(true);
 
 // 開啟
 const open = (imgs, index = 0) => {
+  images.value = imgs;
   currentIndex.value = index;
   isSlipIcon.value = true;
   popupRef.value?.open();
 };
+
+const close = () => {
+  popupRef.value?.close();
+}
 // 圖片變更
 const onChange = (e) => {
   currentIndex.value = e.detail.current;
@@ -53,7 +58,7 @@ const hideSlipIcon = () => {
   console.log("🚀 ~ 隱藏滑動圖片")
   isSlipIcon.value = false;
 }
-defineExpose({ open });
+defineExpose({ open, close });
 </script>
 
 <style scoped lang="scss">
@@ -62,14 +67,9 @@ defineExpose({ open });
 }
 
 ::v-deep(.uni-popup) {
-
-  // 需同時有圓弧，才能有效果
-  uni-view[name="content"] {
-    z-index: 100;
-    inset: 0;
+  & {
+    z-index: var(--z-index-max) !important;
   }
-
-  .uni-popup__wrapper {}
 }
 
 .fullscreen-popup {

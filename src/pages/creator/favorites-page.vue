@@ -23,11 +23,6 @@
 		<view>
 			<c-gridPhoto :data="gridPhotoData" @clickMedia="handleClickMedia" />
 		</view>
-
-
-		<!-- 圖片全螢幕 -->
-		<play-popImgFullScreen ref="videoPopImgFullScreen" :imgs="imageFullScreenImgs"></play-popImgFullScreen>
-
 	</view>
 </template>
 
@@ -35,7 +30,7 @@
 // TEMP: 我的收藏
 import { onShow } from '@dcloudio/uni-app';
 import { toPlayIndex, checkViewportAutoReplace } from '@/utils/routers';
-
+const { openPopImgFullScreen } = inject('play') as any
 const type = ref('all')
 const switchType = (val: string) => {
 	type.value = val
@@ -70,9 +65,9 @@ const handleClickMedia = (item: any) => {
 		fromPages: 'favorites',
 		...item
 	}
-	if (item.type === 'photos') {
+	if (item.type === 'image') {
 		imageFullScreenImgs.value = gridPhotoData.value.map(item => item.src)
-		videoPopImgFullScreen.value?.open()
+		openPopImgFullScreen(imageFullScreenImgs.value)
 	} else {
 		toPlayIndex(obj)
 	}

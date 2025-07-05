@@ -35,7 +35,7 @@ const props = defineProps({
 const emit = defineEmits(['clickMedia'])
 
 const handleClick = (item: { src: string; alt: string; type: string }) => {
-  if (item.type === 'photos') {
+  if (item.type === 'image') {
     emit('clickMedia', item)
     console.log('圖片');
   } else if (item.type === 'video') {

@@ -25,9 +25,6 @@
 				<c-gridPhoto :data="gridPhotoData" @clickMedia="handleClickMedia" />
 			</view>
 		</view>
-		<!-- 圖片全螢幕 -->
-		<play-popImgFullScreen ref="videoPopImgFullScreen" :imgs="imageFullScreenImgs"></play-popImgFullScreen>
-
 	</view>
 </template>
 
@@ -35,6 +32,7 @@
 // TEMP: 我的收藏
 import { onShow } from '@dcloudio/uni-app';
 import { toPlayIndex, checkViewportAutoReplace } from '@/utils/routers';
+const { openPopImgFullScreen } = inject('play') as any
 const gridPhotoData = ref([
 	{ id: '1', type: 'image', dataNum: 2, num: "1688", src: 'https://picsum.photos/id/1011/300/300' },
 	{ id: '2', type: 'video', dataNum: 1, num: "1688", src: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny.mp4', cover: 'https://picsum.photos/id/1012/300/300' },
@@ -69,9 +67,9 @@ const handleClickMedia = (item: any) => {
 		fromPages: 'favorites',
 		...item
 	}
-	if (item.type === 'photos') {
+	if (item.type === 'image') {
 		imageFullScreenImgs.value = gridPhotoData.value.map(item => item.src)
-		videoPopImgFullScreen.value?.open()
+		openPopImgFullScreen(imageFullScreenImgs.value)
 	} else {
 		toPlayIndex(obj)
 	}

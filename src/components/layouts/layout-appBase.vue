@@ -12,6 +12,8 @@
 		<c-confirmPopUp ref="confirmPopUp" />
 		<c-bottomPopUp ref="bottomPopUp" />
 		<c-sharePopUp ref="sharePopUp" />
+
+		<play-popImgFullScreen ref="popImgFullScreen" />
 	</view>
 </template>
 
@@ -147,6 +149,17 @@ const openSharePopUp = () => {
 	sharePopUp.value.open()
 }
 
+// 圖片全螢幕
+const popImgFullScreen = ref(null)
+const openPlayPopImgFullScreen = (data) => {
+	console.log("🚀 ~ openPlayPopImgFullScreen ~ openPlayPopImgFullScreen :")
+	if (popImgFullScreen.value && typeof popImgFullScreen.value.open === 'function') {
+		popImgFullScreen.value.open(data)
+	} else {
+		console.error('playPopImgFullScreen ref 未正確初始化或 open 方法不存在')
+	}
+}
+
 // 使用 provide 提供方法
 provide('auth', {
 	openLogin,
@@ -163,6 +176,10 @@ provide('common', {
 	openConfirm,
 	openBottomPopUp,
 	openSharePopUp
+})
+
+provide('play', {
+	openPlayPopImgFullScreen
 })
 </script>
 

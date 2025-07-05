@@ -187,7 +187,6 @@
 			:primaryMenu="'primary'" />
 		<play-popMessage ref="videoPopMessage"></play-popMessage>
 		<play-popSponsor ref="videoPopSponsor"></play-popSponsor>
-		<play-popImgFullScreen ref="videoPopImgFullScreen" :imgs="imageFullScreenImgs"></play-popImgFullScreen>
 	</view>
 </template>
 
@@ -199,6 +198,7 @@ import { useInitStore } from '@/stores/useInitDataStore';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 const { openSharePopUp, openConfirm } = inject('common')
+const { openPopImgFullScreen } = inject('play')
 const initStore = useInitStore();
 const { setCreatorId } = initStore;
 /* NOTE:非播放組件  */
@@ -322,7 +322,7 @@ const setFilter = () => {
 const openImageFullScreen = () => {
 	console.log("🚀 == 圖片全螢幕 == ")
 	imageFullScreenImgs.value = list.value[0].imgList
-	videoPopImgFullScreen.value?.open()
+	openPopImgFullScreen(imageFullScreenImgs.value)
 }
 
 const triggerFullScreen = () => {

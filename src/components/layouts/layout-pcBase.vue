@@ -17,6 +17,7 @@
 
 
 		<play-popSubscription ref="videoPopSubscription" />
+		<play-popImgFullScreen ref="popImgFullScreen" />
 		<!-- 聯繫客服 -->
 		<c-servicePopUp ref="servicePopUp" />
 		<auth-login ref="loginPopUp" />
@@ -158,6 +159,14 @@ const openPopSubscription = () => {
 	videoPopSubscription.value?.open()
 }
 
+// 圖片全螢幕
+
+const popImgFullScreen = ref(null)
+const openPopImgFullScreen = (data) => {
+	console.log("🚀 ~ openPopImgFullScreen ~ openPopImgFullScreen :")
+	popImgFullScreen.value.open(data)
+}
+
 // 使用 provide 提供方法
 provide('auth', {
 	openLogin,
@@ -177,7 +186,8 @@ provide('common', {
 })
 
 provide('play', {
-	openPopSubscription
+	openPopSubscription,
+	openPopImgFullScreen
 })
 </script>
 

@@ -56,7 +56,7 @@ file path : FanceNew\src\pages.json
 - [幫助中心] :
 	- [APP] : pages/helper/index
 	- [PC] :  pages/pc/creator/setmenu?tab=helper
-		-	setMenu設定
+		-	setMenu設定 - 幫助中心
 ### post
 - [發佈預覽頁] : 發文，選擇媒體時，進入該頁面
 	- [APP] : pages/post/post-Preview
@@ -78,7 +78,7 @@ file path : FanceNew\src\pages.json
 - [草稿箱] : 創作者主頁，草稿文章進入
 	- [APP] : pages/post/draftBox
 	- [PC] :  pages/pc/post/draftBox
-### searcxh
+### search
 - [搜尋首頁] :
 	- [APP] : pages/search/index
 	- [PC] :  pages/pc/search/index
@@ -134,6 +134,10 @@ file path : FanceNew\src\pages.json
 - [創作者首頁] :
 	- [APP] : pages/creator/home
 	- [PC] :  pages/pc/creator/home
+- [創作者設定-帳號設定頁面] :
+	- [APP] : pages/creator/setMenu
+	- [PC] :  pages/pc/creator/setMenu
+		- setMenu設定
 - [訊息箱] :
 	- [APP] : pages/creator/messageBox
 	- [PC] :  pages/pc/creator/messageBox
@@ -142,6 +146,43 @@ file path : FanceNew\src\pages.json
 	- [APP] : pages/creator/message
 	- [PC] :  pages/pc/creator/messageBox
 		- 訊息箱 - 訊息內容整合
+- [創作者設定-手機號碼] :
+	- [APP] : /#/pages/creator/setMenu 表單 src\components\form\form-setMenu-phoneBindForm.vue
+			-	setMenu設定 - 帳號管理 - 電子信箱
+	- [PC] :   pages/pc/creator/setmenu?tab=account 組件 src\components\pc\common\pc-setMenuPopUp.vue 表單 src\components\form\form-setMenu-phoneBindForm.vue
+		-	setMenu設定 - 帳號管理 - 電子信箱
+- [創作者設定-登入密碼] :
+	- [APP] : /#/pages/creator/setMenu 表單 src\components\form\form-setMenu-passwordForm.vue
+			-	setMenu設定 - 帳號管理 - 電子信箱
+	- [PC] :   pages/pc/creator/setmenu?tab=account 組件 src\components\pc\common\pc-setMenuPopUp.vue 表單 src\components\form\form-setMenu-passwordForm.vue
+		-	setMenu設定 - 帳號管理 - 電子信箱
+- [創作者設定-電子信箱設定] :
+	- [APP] : /#/pages/creator/setMenu 表單 src\components\form\form-setMenu-emailForm.vue
+		-	setMenu設定 - 帳號管理 - 電子信箱
+	- [PC] :   pages/pc/creator/setmenu?tab=account 組件 src\components\pc\common\pc-setMenuPopUp.vue 表單 src\components\form\form-setMenu-emailForm.vue
+		-	setMenu設定 - 帳號管理 - 電子信箱
+- [創作者設定-封鎖頁編輯] :
+	- [APP] : pages/creator/blockadeEdit
+		-	setMenu設定 - 隱私設定 - 已封鎖
+	- [PC] :   pages/pc/creator/setmenu?tab=privacy 組件 src\components\pc\common\pc-blockadeEditPopUp.vue
+		-	setMenu設定 - 隱私設定 - 已封鎖
+- [創作者設定-收藏隱私設定] :
+	- [APP] : /pages/creator/setMenuEdit?type=favorite 表單 src\components\form\form-setMenu-favoritePrivacyForm.vue
+		-	setMenu設定 - 隱私設定 - 我的收藏
+	- [PC] :   pages/pc/creator/setmenu?tab=privacy 組件 src\components\pc\common\pc-setMenuPopUp.vue
+		-	setMenu設定 - 隱私設定 - 我的收藏
+- [創作者設定-消息設定] :
+	- [APP] : /pages/creator/setMenuEdit?type=message 組件表單 src\components\form\form-setMenu-messageForm.vue
+		-	setMenu設定 - 消息設定
+	- [PC] :   pages/pc/creator/setmenu?tab=message 組件 src/pages/pc/creator/setMenu-message-page.vue
+		-	setMenu設定 - 消息設定
+- [創作者中心頁] :
+	- [APP] : pages/creator/center
+	- [PC] :  pages/pc/creator/center
+		- 側邊選單列，創作者中心
+- [創作者設定-申請創作者頁] :
+	- [APP] : pages/creator/applyCreator
+	- [PC] :  創作者中心列表按鈕 pages/pc/creator/center
 - [設定訂閱管理頁] :
 	- [APP] : pages/creator/subscription-manage
 	- [PC] :  pages/pc/creator/center?tab=subscriptionManage
@@ -157,6 +198,7 @@ file path : FanceNew\src\pages.json
 - [個人數據頁] :
 	- [APP] : pages/creator/statistics
 	- [PC] :  pages/pc/creator/center?tab=statistics
+		- center創作者中心 - 訂閱 - 個人數據頁
 - [我的收藏頁] :
 	- [APP] : pages/creator/favorites
 	- [PC] :  pages/pc/creator/favorites
@@ -169,10 +211,6 @@ file path : FanceNew\src\pages.json
 - [標籤排行榜頁] :
 	- [APP] : pages/creator/tagRank
 	- [PC] :  pages/pc/creator/tagRank
-- [訂閱方案頁面] :
-	- [APP] : pages/creator/subscription
-	- [PC] :  組件 src\components\plays\play-popSubscription.vue
-		- 創作者主頁，訪客模式，成為會員按鈕
 - [編輯個人資料] :
 	- [APP] : pages/creator/profile-edit
 	- [PC] :  pages/pc/creator/profile-edit
@@ -185,23 +223,14 @@ file path : FanceNew\src\pages.json
 - [分類編輯-選取作品] :
 	- [APP] : pages/creator/selectMedia
 	- [PC] :  pages/pc/creator/selectMedia
+- [訂閱方案頁面] :
+	- [APP] : pages/creator/subscription
+	- [PC] :  組件 src\components\plays\play-popSubscription.vue
+		- 創作者主頁，訪客模式，成為會員按鈕
 - [創作者分享頁] :
 	- [APP] : pages/creator/share
 	- [PC] :  組件 src\components\pc\common\pc-sharePopUp.vue
 		- 創作者主頁，分享檔案
-- [創作者設定-帳號設定頁面] :
-	- [APP] : pages/creator/setMenu
-	- [PC] :  pages/pc/creator/setMenu
-- [創作者設定-封鎖頁編輯] :
-	- [APP] : pages/creator/blockadeEdit
-	- [PC] :  組件 src\components\pc\common\pc-blockadeEditPopUp.vue
-- [創作者中心頁] :
-	- [APP] : pages/creator/center
-	- [PC] :  pages/pc/creator/center
-		- 側邊選單列，創作者中心
-- [創作者設定-申請創作者頁] :
-	- [APP] : pages/creator/applyCreator
-	- [PC] :  創作者中心列表按鈕 pages/pc/creator/center
 ---
 ## 元件總覽
 ### auth

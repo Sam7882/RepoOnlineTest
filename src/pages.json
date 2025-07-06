@@ -25,13 +25,6 @@
       }
     },
     {
-      "path": "pages/pc/auth/login",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
       "path": "pages/auth/register",
       "style": {
         "navigationStyle": "custom",
@@ -39,21 +32,7 @@
       }
     },
     {
-      "path": "pages/pc/auth/register",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
       "path": "pages/auth/verify-phone",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/pc/auth/verify-phone",
       "style": {
         "navigationStyle": "custom",
         "backgroundColor": "var(--background-color)"

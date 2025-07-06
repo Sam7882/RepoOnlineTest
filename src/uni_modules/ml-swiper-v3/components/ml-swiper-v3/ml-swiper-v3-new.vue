@@ -958,7 +958,7 @@ export default {
 
 			// 防止選字
 			event.preventDefault();
-			event.stopPropagation();
+			// event.stopPropagation();
 
 			this.mouseDown = true;
 			this.mouseStartY = event.clientY;
@@ -980,13 +980,13 @@ export default {
 			if (!this.mouseDragEnabled || !this.mouseDown || this.disabledChange) return;
 
 			event.preventDefault();
-			event.stopPropagation();
+			// event.stopPropagation();
 
 			// 在WEB環境下，不計算拖曳距離，避免item跟隨滑鼠移動
 			// 只記錄當前位置，但不觸發視覺上的拖曳效果
 			this.mouseCurrentY = event.clientY;
 			// 註釋掉拖曳距離計算，避免item跟隨移動
-			// this.mouseDragDistance = this.mouseStartY - this.mouseCurrentY;
+			this.mouseDragDistance = this.mouseStartY - this.mouseCurrentY;
 			// #endif
 		},
 
@@ -995,7 +995,7 @@ export default {
 			if (!this.mouseDragEnabled || !this.mouseDown) return;
 
 			event.preventDefault();
-			event.stopPropagation();
+			// event.stopPropagation();
 
 			// 恢復選字
 			if (typeof document !== 'undefined') {

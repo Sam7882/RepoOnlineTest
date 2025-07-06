@@ -214,20 +214,20 @@ const imageFullScreenImgs = ref([]) // 圖片全螢幕圖片列表
 
 // 頂部header fn
 const toFocus = () => {
-	console.log("🚀 == 關注中 == ")
+	// console.log("🚀 == 關注中 == ")
 }
 const toRecommend = () => {
-	console.log("🚀 == 推薦 == ")
+	// console.log("🚀 == 推薦 == ")
 }
 const toSearch = () => {
-	console.log("🚀 == 搜尋 == ")
+	// console.log("🚀 == 搜尋 == ")
 	toSearchHome()
 }
 
 // 右側工具欄位 fn
 // 創作者頭像
 const toCreator = (id) => {
-	console.log("🚀 == 創作者頭像 == ", id)
+	// console.log("🚀 == 創作者頭像 == ", id)
 	setCreatorId(id)
 	toCreatorHome()
 }
@@ -236,7 +236,7 @@ const isFollow = ref(false)
 const isTipVisible = ref(false) // 提示是否訂閱
 let timer = null // 訂閱提示計時器
 const toSubscription = () => {
-	console.log("🚀 == 訂閱 == ")
+	// console.log("🚀 == 訂閱 == ")
 	// 訂閱狀態
 	if (!isFollow.value) {
 		isFollow.value = true
@@ -256,7 +256,7 @@ const toSubscription = () => {
 				// 訂閱提示
 				isTipVisible.value = false
 				clearTimeout(timer)
-				console.log('使用者按下確定')
+				// console.log('使用者按下確定')
 			}
 		})
 	}
@@ -268,16 +268,16 @@ const likeThis = () => {
 // 聲音 靜音開關
 const toggleMute = (soundMute) => {
 	mlSwiper.value.toggleMute(soundMute)
-	console.log("🚀 == 聲音 == ", soundMute)
+	// console.log("🚀 == 聲音 == ", soundMute)
 }
 // 留言
 const openPopMessage = () => {
-	console.log("🚀 == 留言 == ")
+	// console.log("🚀 == 留言 == ")
 	videoPopMessage.value?.open()
 }
 // 分享
 const toShare = () => {
-	console.log("🚀 == 分享 == ")
+	// console.log("🚀 == 分享 == ")
 	openSharePopUp()
 	/* NOTE:暫代 去往該圖文的總攬 */
 	// toPlayArticleGallery()
@@ -287,7 +287,7 @@ const isCollectTipVisible = ref(false)
 const timerCollectTip = null
 const toCollect = () => {
 	isCollect.value = !isCollect.value;
-	console.log("🚀 == 收藏 == ")
+	// console.log("🚀 == 收藏 == ")
 	if (isCollect.value) {
 		isCollectTipVisible.value = true
 		timerCollectTip = setTimeout(() => {
@@ -301,7 +301,7 @@ const toCollect = () => {
 }
 // 打賞
 const openPopSponsor = () => {
-	console.log("🚀 == 打賞 == ")
+	// console.log("🚀 == 打賞 == ")
 	videoPopSponsor.value?.open()
 }
 // 過濾器
@@ -309,24 +309,24 @@ const closeFilter = (item) => {
 	item.ageChecked = false
 }
 const setFilter = () => {
-	console.log("🚀 == 過濾器 == ")
+	// console.log("🚀 == 過濾器 == ")
 	openConfirm({
 		title: t('play.disableFilter'),
 		content: t('play.disableFilterTip'),
 		onConfirm: () => {
-			console.log('使用者按下確定')
+			// console.log('使用者按下確定')
 		}
 	})
 }
 // 底部按鈕
 const openImageFullScreen = () => {
-	console.log("🚀 == 圖片全螢幕 == ")
+	// console.log("🚀 == 圖片全螢幕 == ")
 	imageFullScreenImgs.value = list.value[0].imgList
 	openPopImgFullScreen(imageFullScreenImgs.value)
 }
 
 const triggerFullScreen = () => {
-	console.log("🚀 ~ 影音全螢幕");
+	// console.log("🚀 ~ 影音全螢幕");
 	mlSwiper.value?.fullScreen?.(); // 呼叫子組件方法
 }
 
@@ -419,12 +419,12 @@ function selected(index) {
 /** 组件滑动事件 */
 function change(index) {
 	current.value = index;
-	console.log(" == 滑动事件 == ", index);
+	// console.log(" == 滑动事件 == ", index);
 }
 
 /** 加载更多 */
 function loadmore() {
-	console.log(" === 加载更多 === ");
+	// console.log(" === 加载更多 === ");
 	const result = getList().map(item => {
 		count.value++;
 		return { ...item, title: `${count.value}、${item.title}` };
@@ -439,38 +439,38 @@ function noTrigger(event) {
 
 /** 滑动动画：APP端需要useSwiper为true生效，其他端正常 */
 function transition(event) {
-	console.log(" == transition == ", event);
+	// console.log(" == transition == ", event);
 }
 
 /** 动画完成：APP端需要useSwiper为true生效，其他端正常 */
 function animationfinish(event) {
-	console.log(" == animationfinish == ", event);
+	// console.log(" == animationfinish == ", event);
 }
 
 /** 长按事件 */
 function longTap(event) {
-	console.log(" == longTap == ", event);
+	// console.log(" == longTap == ", event);
 }
 
 /** 点击事件 */
 function onclick(event) {
-	console.log(" == onclick == ", event);
+	// console.log(" == onclick == ", event);
 }
 
 /** 靜音事件 */
 function onmute(event) {
-	console.log(" == onmute == ", event);
+	// console.log(" == onmute == ", event);
 }
 
 /** 双击事件 */
 function ondblclick(event) {
-	console.log(" == ondblclick == ", event);
+	// console.log(" == ondblclick == ", event);
 }
 
 /** 播放事件 */
 function onplay(event) {
 	playing.value = event.playing;
-	console.log("🚀 == onplay == ", event);
+	// console.log("🚀 == onplay == ", event);
 	uni.showToast({
 		title: "開始播放",
 		icon: "none"
@@ -480,7 +480,7 @@ function onplay(event) {
 /** 暂停事件 */
 function onpause(event) {
 	playing.value = event.playing;
-	console.log("🚀 ~ onpause ~ event:", event)
+	// console.log("🚀 ~ onpause ~ event:", event)
 	uni.showToast({
 		title: "暫停播放",
 		icon: "none"
@@ -489,42 +489,42 @@ function onpause(event) {
 
 /** 结束事件 */
 function onended(event) {
-	console.log(" == onended == ", event);
+	// console.log(" == onended == ", event);
 }
 
 /** 进度条拖动事件 */
 function changing(event) {
-	console.log(" == changing == ", event);
+	// console.log(" == changing == ", event);
 }
 
 /** 进度条拖动结束事件 */
 function changed(event) {
-	console.log(" == changed == ", event);
+	// console.log(" == changed == ", event);
 }
 
 /** 进度变更事件 */
 function timeupdate(event) {
-	console.log(" == timeupdate == ", event);
+	// console.log(" == timeupdate == ", event);
 }
 
 /** 缓冲事件 */
 function waiting(event) {
-	console.log(" == waiting == ", event);
+	// console.log(" == waiting == ", event);
 }
 
 /** 全屏|退出全屏 变更事件 */
 function fullscreenchange(event) {
-	console.log(" == fullscreenchange == ", event);
+	// console.log(" == fullscreenchange == ", event);
 }
 
 /** 全屏点击事件 */
 function fullscreenclick(event) {
-	console.log(" == fullscreenclick == ", event);
+	// console.log(" == fullscreenclick == ", event);
 }
 
 /** 资源初始化完成事件 */
 function loadedmetadata(event) {
-	console.log("🚀 == loadedmetadata == ", event);
+	// console.log("🚀 == loadedmetadata == ", event);
 	uni.showToast({
 		title: "資源初始化完成",
 		icon: "none"
@@ -533,7 +533,7 @@ function loadedmetadata(event) {
 
 /** 资源加载完成事件 */
 function onloadeddata(event) {
-	console.log("🚀 == onloadeddata == ", event);
+	// console.log("🚀 == onloadeddata == ", event);
 	uni.showToast({
 		title: "資源加載完成",
 		icon: "none"
@@ -542,7 +542,7 @@ function onloadeddata(event) {
 
 /** 资源播放出错事件 */
 function error(event) {
-	console.log(" == error == ", event);
+	// console.log(" == error == ", event);
 	uni.showToast({
 		title: "資源播放出錯",
 		icon: "none"
@@ -764,11 +764,15 @@ function getList() {
 	width: 100%;
 	padding: 32rpx 32rpx 0;
 	color: var(--text-color-secondary);
-	font-size: 32rpx;
+	font-size: var(--font-size-title-pc);
 
 	.icon {
 		transform: translateY(2rpx);
-		font-size: 38rpx !important;
+		font-size: 48rpx !important;
+
+		@media screen and (min-width: 768px) and (max-width: 960px) {
+			font-size: 32rpx !important;
+		}
 	}
 
 	.header-left {
@@ -786,7 +790,7 @@ function getList() {
 
 	.header-right {
 		.icon {
-			font-size: 48rpx !important;
+			font-size: var(--font-size-title-pc-large) !important;
 		}
 	}
 }
@@ -817,6 +821,10 @@ function getList() {
 		position: relative;
 		margin-bottom: 112rpx;
 
+		@media screen and (min-width: 768px) and (max-width: 960px) {
+			margin-bottom: 64rpx;
+		}
+
 		.right-tool-avatar-container {
 			position: relative;
 			width: 96rpx;
@@ -825,6 +833,11 @@ function getList() {
 			background: var(--primary-color);
 			border-radius: 100%;
 			overflow: hidden;
+
+			@media screen and (min-width: 768px) and (max-width: 960px) {
+				width: 64rpx;
+				height: 64rpx;
+			}
 
 			::v-deep(.right-tool-avatar) {
 				uni-image {
@@ -858,20 +871,29 @@ function getList() {
 			left: 50%;
 			transform: translate(-50%, -50%);
 			z-index: 10;
-			display: inline-flex;
-			padding: 5rpx 10rpx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 48rpx;
+			height: 48rpx;
+			// padding: 5rpx 8rpx;
 			border-radius: 100%;
 			border: 2.5px solid var(--text-color-secondary);
 			background: var(--primary-color);
 
+			@media screen and (min-width: 768px) and (max-width: 960px) {
+				width: 32rpx;
+				height: 32rpx;
+			}
+
 			.right-tool-avatar-tip-icon {
 				transform: translateY(2rpx);
-				font-size: 20rpx !important;
+				font-size: var(--font-size-content-pc-small) !important;
 				color: var(--text-color-secondary);
 			}
 
 			&.active {
-				padding: 11rpx 11.5rpx;
+				// padding: 5rpx 8rpx;
 
 				.right-tool-avatar-tip-icon {
 					font-size: 12rpx !important;
@@ -890,6 +912,9 @@ function getList() {
 		gap: 16rpx;
 		margin-right: 8rpx;
 
+		@media screen and (min-width: 768px) and (max-width: 960px) {
+			gap: 8rpx;
+		}
 
 		.right-tool-item-container-item {
 			position: relative;
@@ -899,13 +924,22 @@ function getList() {
 
 			.icon {
 				color: var(--text-color-secondary) !important;
-				font-size: 54rpx !important;
+				font-size: 48rpx !important;
+
+				@media screen and (min-width: 768px) and (max-width: 960px) {
+					font-size: 40rpx !important;
+				}
+
 				transition: color 0.3s ease-in-out;
 			}
 
 			.icon-video-favorite {
 				// font-size: 64rpx !important;
 				scale: 1.3;
+
+				@media screen and (min-width: 768px) and (max-width: 960px) {
+					scale: 1;
+				}
 			}
 
 			&.active {
@@ -926,8 +960,17 @@ function getList() {
 			height: 80rpx;
 			// margin: 8rpx 0;
 
+			@media screen and (min-width: 768px) and (max-width: 960px) {
+				width: 48rpx;
+				height: 48rpx;
+			}
+
 			.icon {
 				font-size: 48rpx !important;
+
+				@media screen and (min-width: 768px) and (max-width: 960px) {
+					font-size: 32rpx !important;
+				}
 			}
 		}
 	}
@@ -977,14 +1020,14 @@ function getList() {
 		}
 
 		.mask-container-item-text-title {
-			font-size: 30rpx;
+			font-size: var(--font-size-title-pc-small);
 		}
 
 		.mask-container-item-text-content {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			font-size: 20rpx;
+			font-size: var(--font-size-content-pc-xsmall);
 			color: var(--text-color-octonary) !important;
 		}
 
@@ -999,7 +1042,7 @@ function getList() {
 				gap: 8rpx;
 				line-height: 1;
 				padding: 6rpx 12rpx 8rpx;
-				font-size: 20rpx;
+				font-size: var(--font-size-content-pc-xsmall);
 
 				&:first-child {
 					background: var(--primary-color);
@@ -1050,7 +1093,7 @@ function getList() {
 
 		.locked-container-item-text {
 			font-weight: 300;
-			font-size: 24rpx;
+			font-size: var(--font-size-content-pc);
 		}
 	}
 }
@@ -1109,7 +1152,7 @@ function getList() {
 				gap: 16rpx;
 
 				.bottom-tool-container-wrapper-name {
-					font-size: 32rpx;
+					font-size: var(--font-size-title-pc);
 					font-weight: 500;
 				}
 
@@ -1119,12 +1162,12 @@ function getList() {
 				}
 
 				.bottom-tool-container-wrapper-account {
-					font-size: 24rpx;
+					font-size: var(--font-size-content-pc);
 				}
 			}
 
 			.bottom-tool-container-title {
-				font-size: 32rpx;
+				font-size: var(--font-size-title-pc);
 			}
 		}
 
@@ -1158,6 +1201,30 @@ function getList() {
 			}
 		}
 
+		// 新組件進度條樣式
+		.progress-container {
+			bottom: calc(var(--bottomNav-margin-height) + var(--progress-bar-margin-height)) !important;
+			background: transparent;
+			z-index: 99;
+
+			.progress-info {
+				display: flex;
+				align-items: center;
+				gap: 20rpx;
+			}
+
+			.progress-time {
+				color: #fff;
+				font-size: var(--font-size-content-pc);
+				min-width: 80rpx;
+				text-align: center;
+			}
+
+			.progress-slider {
+				flex: 1;
+			}
+		}
+
 		// 全螢幕按鈕 16rpx 與底部導航 間距 全螢幕按鈕為 38+16=54rpx
 		.ml-swiper-v3-fullscreen-view {
 			z-index: 100;
@@ -1168,7 +1235,7 @@ function getList() {
 			padding: 0 40rpx;
 
 			.fullscreen-button {
-				font-size: 38rpx !important;
+				font-size: var(--font-size-title-pc) !important;
 			}
 		}
 
@@ -1184,7 +1251,7 @@ function getList() {
 
 .title {
 	color: #fff;
-	font-size: 14px;
+	font-size: var(--font-size-content-pc-xsmall);
 	font-weight: 400;
 }
 
@@ -1200,7 +1267,7 @@ function getList() {
 	.text {
 		color: #fff;
 		font-weight: 200;
-		font-size: 12px;
+		font-size: var(--font-size-content-pc-xsmall);
 		padding: 0 5px;
 		text-align: center;
 	}
@@ -1251,7 +1318,7 @@ function getList() {
 	border-radius: 20rpx;
 
 	.tooltip-text {
-		font-size: 24rpx;
+		font-size: var(--font-size-content-pc);
 		color: var(--text-color-secondary);
 		white-space: nowrap;
 	}

@@ -248,6 +248,8 @@ export default {
 			disabledChange: true,
 			lockedTimer: 0,
 			errorTimer: 0,
+			mountedTimer: 0,
+			innerChangeTimer: 0,
 			isImgList: false,
 			showInitText: true,
 			isChange: false,
@@ -416,10 +418,26 @@ export default {
 			// #ifdef APP
 			that.animation = useAnimation.createAnimation(that.aniOption, that);
 			// #endif
-			setTimeout(() => {
-				that.initVideoContext(that.current)
-				that.getContext(that.current).muted = true
-				that.getContext(that.current).play()
+			// 儲存 mounted timer 以便清理
+			that.mountedTimer = setTimeout(() => {
+				// 檢查組件是否仍然存在
+				if (!that.$el || that.$el.parentNode === null) {
+					console.log('🎯 Component unmounted, skipping video initialization');
+					return;
+				}
+
+				try {
+					that.initVideoContext(that.current);
+					const context = that.getContext(that.current);
+					if (context && context.muted !== undefined) {
+						context.muted = true;
+					}
+					if (context && context.play) {
+						context.play();
+					}
+				} catch (error) {
+					console.warn('🎯 Error initializing video in mounted:', error);
+				}
 			}, 500);
 		});
 	},
@@ -431,40 +449,66 @@ export default {
 			this.disabledChange = true;
 			clearTimeout(this.lockedTimer);
 			clearTimeout(this.noTriggerTimer);
-			this.getContext(this.current)?.pause();
-			// #ifdef H5 | WEB
-			this.pauseAll();
-			// #endif
-			this.resetprogressItem();
-			this.reset();
+
+			// 在滑動過程中，避免立即操作 video 元素
+			// 延遲到滑動完成後再處理
 			this.current = detail.current;
 			this.resetIndex(this.current);
-			// 移除對 useSwiper prop 的修改，因為 props 是唯讀的
 			this.playerId = `video_${this.current}`;
 			this.videoKey = Date.now();
+
+			// 延遲處理 video 操作，避免在滑動過程中操作不穩定的元素
 			const that = this;
 			this.lockedTimer = setTimeout(async () => {
+				// 檢查組件是否仍然存在
+				if (!that.$el || that.$el.parentNode === null) {
+					console.log('🎯 Component unmounted, skipping change logic');
+					return;
+				}
+
 				that.endTouchTop = 0;
 				that.isChange = false;
 				that.disabledChange = false;
-				await that.initVideoContext(that.current);
-				setTimeout(() => {
-					if (that.playing) {
-						that.toggleMute(true);
-					} else {
-						that.player.play();
-						that.toggleMute(true);
+
+				try {
+					await that.initVideoContext(that.current);
+
+					// 儲存內部 timer 以便清理
+					that.innerChangeTimer = setTimeout(() => {
+						if (!that.$el || that.$el.parentNode === null) return;
+
+						try {
+							if (that.playing) {
+								that.toggleMute(true);
+							} else {
+								if (that.player && that.player.play) {
+									that.player.play();
+								}
+								that.toggleMute(true);
+							}
+						} catch (error) {
+							console.warn('🎯 Error in inner change timer:', error);
+						}
+					}, 300);
+
+					if (that.currentItem && that.currentItem.playTime > 1) {
+						that.setSeek(that.currentItem.playTime);
 					}
-				}, 300);
-				if (that.currentItem && that.currentItem.playTime > 1) {
-					that.setSeek(that.currentItem.playTime);
+
+					const context = that.getContext(that.current);
+					if (context && context.play) {
+						that.context = context.play();
+					}
+
+					// #ifdef H5
+					if (that.player && that.player.play) that.player.play();
+					that.bindAutoChange(that.playerId);
+					// #endif
+				} catch (error) {
+					console.warn('🎯 Error in change timer:', error);
 				}
-				that.context = that.getContext(that.current)?.play();
-				// #ifdef H5
-				if (that.player && that.player.play) that.player.play();
-				that.bindAutoChange(that.playerId);
-				// #endif
 			}, 300);
+
 			this.loadmore();
 			this.$emit("onchange", this.emitParam());
 		},
@@ -913,7 +957,19 @@ export default {
 				this.player = document.querySelector(`#${this.playerId} video`);
 			}
 			// #endif
-			return document.getElementById(context);
+
+			// 檢查組件是否仍然存在於 DOM 中
+			const element = document.getElementById(context);
+			if (!element) {
+				// 在滑動過程中，video 元素可能正在重新渲染，這是正常的
+				// 只有在組件確實被卸載時才顯示警告
+				if (!this.$el || this.$el.parentNode === null) {
+					console.warn(`🎯 Video element not found for index ${index}, component may be unmounted`);
+				}
+				return { play() { }, pause() { }, seek() { } };
+			}
+
+			return element;
 		},
 		async initVideoContext(index) {
 			if (this.isImgList || !this.config.useVideo) {
@@ -933,11 +989,37 @@ export default {
 		},
 		pauseAll() {
 			if (!this.isImgList && this.config.useVideo) {
-				this.getContext(this.current)?.pause();
+				try {
+					const context = this.getContext(this.current);
+					if (context && context.pause) {
+						context.pause();
+					}
+				} catch (error) {
+					console.warn('🎯 Error pausing current video:', error);
+				}
 			}
-			Object.values(this.pagedatas).forEach((ctx) => ctx && ctx.pause && ctx.pause());
+
+			// 安全地暫停所有影片
+			Object.values(this.pagedatas).forEach((ctx) => {
+				try {
+					if (ctx && ctx.pause) {
+						ctx.pause();
+					}
+				} catch (error) {
+					console.warn('🎯 Error pausing video context:', error);
+				}
+			});
+
 			// #ifdef H5 | WEB
-			document.querySelectorAll("video").forEach((vid) => vid && vid.pause && vid.pause());
+			try {
+				document.querySelectorAll("video").forEach((vid) => {
+					if (vid && vid.pause) {
+						vid.pause();
+					}
+				});
+			} catch (error) {
+				console.warn('🎯 Error pausing all videos:', error);
+			}
 			// #endif
 		},
 		hidePause() {
@@ -947,7 +1029,14 @@ export default {
 		},
 		showPlay() {
 			if (!this.isImageList(this.currentItem) && this.config.useVideo) {
-				this.getContext(this.current)?.play();
+				try {
+					const context = this.getContext(this.current);
+					if (context && context.play) {
+						context.play();
+					}
+				} catch (error) {
+					console.warn('🎯 Error playing video:', error);
+				}
 			}
 		},
 
@@ -1058,14 +1147,40 @@ export default {
 		}
 	},
 	beforeDestroy() {
+		console.log('🎯 ml-swiper-v3-new component destroying...');
+
+		// 清理所有計時器
 		this.stop();
 		this.reset();
 		clearTimeout(this.errorTimer);
 		clearTimeout(this.noTriggerTimer);
-		Object.values(this.pagedatas).forEach((ctx) => ctx && ctx.pause && ctx.pause());
+		clearTimeout(this.lockedTimer);
+		clearTimeout(this.mountedTimer);
+		clearTimeout(this.slideTimer);
+		clearTimeout(this.innerChangeTimer);
+
+		// 安全地暫停所有影片
+		try {
+			Object.values(this.pagedatas).forEach((ctx) => {
+				if (ctx && ctx.pause) {
+					ctx.pause();
+				}
+			});
+		} catch (error) {
+			console.warn('🎯 Error pausing videos during destroy:', error);
+		}
+
 		// #ifdef H5 | WEB
-		this.remEvents(this.player);
-		document.querySelectorAll("video").forEach((video) => video && video.pause && video.pause());
+		try {
+			this.remEvents(this.player);
+			document.querySelectorAll("video").forEach((video) => {
+				if (video && video.pause) {
+					video.pause();
+				}
+			});
+		} catch (error) {
+			console.warn('🎯 Error cleaning up videos during destroy:', error);
+		}
 		// #endif
 
 		// 清理 mouse 相關狀態

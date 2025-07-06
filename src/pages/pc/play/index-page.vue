@@ -380,7 +380,15 @@ const full = computed(() => `width:${options.width}px;height:${options.height}px
 
 
 onHide(() => {
-	// if (mlSwiper.value?.hidePause) mlSwiper.value.hidePause();
+	console.log('🎯 PC 影音頁面隱藏，暫停播放');
+	// 安全地暫停播放
+	try {
+		if (mlSwiper.value?.hidePause) {
+			mlSwiper.value.hidePause();
+		}
+	} catch (error) {
+		console.warn('🎯 Error pausing video on hide:', error);
+	}
 });
 
 onShow(() => { });
@@ -396,6 +404,29 @@ onMounted(() => {
 
 onShow(() => {
 	checkViewportAutoReplace()
+})
+
+// 頁面卸載時清理資源
+onUnmounted(() => {
+	// 清理計時器
+	if (timer) {
+		clearTimeout(timer)
+		timer = null
+	}
+	if (timerCollectTip) {
+		clearTimeout(timerCollectTip)
+		timerCollectTip = null
+	}
+
+	// 重置狀態
+	isTipVisible.value = false
+	isCollectTipVisible.value = false
+	isFollow.value = false
+	isFavorite.value = false
+	isCollect.value = false
+	playing.value = true
+
+	console.log('🎯 PC 影音頁面資源已清理')
 })
 
 /** 返回上一页 */

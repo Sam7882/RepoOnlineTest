@@ -138,42 +138,89 @@ export default {
 	name: "mlSwiperV3PC2",
 	components: { mlSwiperImage },
 	props: {
-		list: { type: Array, default: [], required: true },
-		startIndex: { type: Number, default: 0, required: false },
-		force: { type: Boolean, default: false, required: false },
+		/** 数据列表 */
+		list: {
+			type: Array,
+			default: [],
+			required: true
+		},
+		/** 起始索引，从第 n 个资源开始 */
+		startIndex: {
+			type: Number,
+			default: 0,
+			required: false
+		},
+		/** 强制 触发变更事件 */
+		force: {
+			type: Boolean,
+			default: false,
+			required: false
+		},
+		// #ifdef APP
+		/** 是否使用 swiper 组件 */
+		useSwiper: {
+			type: Boolean,
+			default: true,
+			required: false
+		},
+		// #endif
+		/** 滑动配置 */
 		touch: {
 			type: Object,
 			default() {
 				return {
+					/** 上滑距离 */
 					upDistance: 20,
+					/** 下滑距离 */
 					downDistance: -40,
+					/** 滑动时间 */
 					slidTime: 200,
+					/** swiper 滑动距离 */
 					touchDistance: 80
 				};
 			},
 			required: false
 		},
+		/** 组件配置 */
 		options: {
 			type: Object,
 			default() {
 				return {
+					/** 组件宽度 */
 					width: uni.getSystemInfoSync().windowWidth,
+					/** 组件高度 */
 					height: uni.getSystemInfoSync().windowHeight,
+					/** 初始化提示内容 */
 					loadingText: "加载中...",
+					/** 临界值 */
 					criticalVal: 2,
+					/** 是否显示进度条 */
 					showProgress: true,
+					/** 是否自动切换 */
 					autoChange: false,
+					/** 是否显示全屏按钮 */
 					showFullScreen: true,
+					/** 全屏按钮配置 */
 					fullScreenOption: {
+						/** 按钮距底部高度 */
 						bottom: 100,
+						/** 按钮显示的内容 */
 						text: "全屏观看"
 					},
+					/** -90=屏幕顺时针90度、0=正常竖向、90=屏幕逆时针90度、 */
 					direction: '',
+					/** 是否显示loading控件 */
 					loading: false,
+					/** 是否使用默认的video组件，为 false 时可以自定义 video，提供有 video 插槽 */
 					useVideo: true,
+					/** swiper 滑动动画时长 */
 					duration: 300,
+					// TODO: 確認影片是否要整個影片展出，還是要經過COVER 裁切
+					/** contain：包含，fill：填充，cover：覆盖 */
 					objectFit: "contain",
+					/** hardware：硬解码，software：ffmpeg软解码 */
 					codec: "software",
+					/** 0：普通模式，1：平滑播放模式（降级），2： M3U8优化模式 */
 					playStrategy: 1
 				};
 			},
@@ -189,10 +236,15 @@ export default {
 			currentItem: {},
 			current: 0,
 			playing: false,
+			// #ifndef APP
+			useSwiper: false,
+			// #endif
 			touchable: false,
 			context: null,
 			videoKey: Date.now(),
-			pagedatas: { fullScreen: false },
+			pagedatas: {
+				fullScreen: false
+			},
 			disabledChange: true,
 			lockedTimer: 0,
 			errorTimer: 0,
@@ -219,27 +271,44 @@ export default {
 			},
 			player: null,
 			config: {
+				/** 组件宽度 */
 				width: uni.getSystemInfoSync().windowWidth,
+				/** 组件高度 */
 				height: uni.getSystemInfoSync().windowHeight,
+				/** 初始化提示内容 */
 				loadingText: "加载中...",
+				/** 临界值 */
 				criticalVal: 2,
+				/** 是否显示进度条 */
 				showProgress: true,
+				/** 是否自动切换 */
 				autoChange: false,
+				/** 是否显示全屏按钮 */
 				showFullScreen: true,
+				/** 全屏按钮配置 */
 				fullScreenOption: {
+					/** 按钮距底部高度 */
 					bottom: 100,
+					/** 按钮显示的内容 */
 					text: "全屏观看"
 				},
+				/** -90=屏幕顺时针90度、0=正常竖向、90=屏幕逆时针90度、 */
 				direction: '',
+				/** 是否显示loading控件 */
 				loading: false,
+				/** 是否使用默认的video组件，为 false 时可以自定义 video，提供有 video 插槽 */
 				useVideo: true,
+				/** swiper 滑动动画时长 */
 				duration: 300,
+				/** contain：包含，fill：填充，cover：覆盖 */
 				objectFit: "contain",
+				/** hardware：硬解码，software：ffmpeg软解码 */
 				codec: "software",
+				/** 0：普通模式，1：平滑播放模式（降级），2： M3U8优化模式 */
 				playStrategy: 1
 			},
-			soundMute: true,
-			isPc: false,
+			soundMute: true, // 預設為靜音
+			isPc: false, // PC 端判斷
 			// 本地響應式變數，用於替代 useSwiper prop
 			internalUseSwiper: true,
 			// PC 端 mouse 拖曳相關狀態
@@ -302,6 +371,7 @@ export default {
 		}
 	},
 	created() {
+		// 初始化 isPc 屬性
 		const viewportStore = useViewportStore();
 		this.isPc = viewportStore.isPc;
 

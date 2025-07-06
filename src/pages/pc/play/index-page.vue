@@ -21,7 +21,7 @@
 		</view>
 		<!-- 开始使用组件  -->
 		<view class="play-swiper-container">
-			<ml-swiper-v3 v-if="list.length > 0" :list="list" :startIndex="startIndex" :force="force" :touch="touch"
+			<ml-swiper-v3-new v-if="list.length > 0" :list="list" :startIndex="startIndex" :force="force" :touch="touch"
 				:options="options" @onchange="change" @transition="transition" @animationfinish="animationfinish"
 				@loadmore="loadmore" @longTap="longTap" @onclick="onclick" @ondblclick="ondblclick" @onplay="onplay"
 				@onpause="onpause" @onended="onended" @changing="changing" @changed="changed" @timeupdate="timeupdate"
@@ -180,7 +180,7 @@
 						<text class="text"> {{ index == current ? item.durationStr : '00' }} </text>
 					</view>
 				</template> -->
-			</ml-swiper-v3>
+			</ml-swiper-v3-new>
 		</view>
 
 		<play-popMessage ref="videoPopMessage"></play-popMessage>
@@ -212,20 +212,20 @@ const imageFullScreenImgs = ref([]) // 圖片全螢幕圖片列表
 
 // 頂部header fn
 const toFocus = () => {
-	console.log("🚀 == 關注中 == ")
+	// console.log("🚀 == 關注中 == ")
 }
 const toRecommend = () => {
-	console.log("🚀 == 推薦 == ")
+	// console.log("🚀 == 推薦 == ")
 }
 const toSearch = () => {
-	console.log("🚀 == 搜尋 == ")
+	// console.log("🚀 == 搜尋 == ")
 	toSearchHome()
 }
 
 // 右側工具欄位 fn
 // 創作者頭像
 const toCreator = (id) => {
-	console.log("🚀 == 創作者頭像 == ", id)
+	// console.log("🚀 == 創作者頭像 == ", id)
 	setCreatorId(id)
 	toCreatorHome()
 }
@@ -234,7 +234,7 @@ const isFollow = ref(false)
 const isTipVisible = ref(false) // 提示是否訂閱
 let timer = null // 訂閱提示計時器
 const toSubscription = () => {
-	console.log("🚀 == 訂閱 == ")
+	// console.log("🚀 == 訂閱 == ")
 	// 訂閱狀態
 	if (!isFollow.value) {
 		isFollow.value = true
@@ -254,7 +254,7 @@ const toSubscription = () => {
 				// 訂閱提示
 				isTipVisible.value = false
 				clearTimeout(timer)
-				console.log('使用者按下確定')
+				// console.log('使用者按下確定')
 			}
 		})
 	}
@@ -267,16 +267,16 @@ const likeThis = () => {
 // 聲音 靜音開關
 const toggleMute = (soundMute) => {
 	mlSwiper.value.toggleMute(soundMute)
-	console.log("🚀 == 聲音 == ", soundMute)
+	// console.log("🚀 == 聲音 == ", soundMute)
 }
 // 留言
 const openPopMessage = () => {
-	console.log("🚀 == 留言 == ")
+	// console.log("🚀 == 留言 == ")
 	videoPopMessage.value?.open()
 }
 // 分享
 const toShare = () => {
-	console.log("🚀 == 分享 == ")
+	// console.log("🚀 == 分享 == ")
 	openSharePopUp()
 	/* NOTE:暫代 去往該圖文的總攬 */
 	// toPlayArticleGallery()
@@ -286,7 +286,7 @@ const isCollectTipVisible = ref(false)
 const timerCollectTip = null
 const toCollect = () => {
 	isCollect.value = !isCollect.value;
-	console.log("🚀 == 收藏 == ")
+	// console.log("🚀 == 收藏 == ")
 	if (isCollect.value) {
 		isCollectTipVisible.value = true
 		timerCollectTip = setTimeout(() => {
@@ -300,7 +300,7 @@ const toCollect = () => {
 }
 // 打賞
 const openPopSponsor = () => {
-	console.log("🚀 == 打賞 == ")
+	// console.log("🚀 == 打賞 == ")
 	videoPopSponsor.value?.open()
 }
 // 過濾器
@@ -308,24 +308,24 @@ const closeFilter = (item) => {
 	item.ageChecked = false
 }
 const setFilter = () => {
-	console.log("🚀 == 過濾器 == ")
+	// console.log("🚀 == 過濾器 == ")
 	openConfirm({
 		title: t('play.disableFilter'),
 		content: t('play.disableFilterTip'),
 		onConfirm: () => {
-			console.log('使用者按下確定')
+			// console.log('使用者按下確定')
 		}
 	})
 }
 // 底部按鈕
 const openImageFullScreen = () => {
-	console.log("🚀 == 圖片全螢幕 == ")
+	// console.log("🚀 == 圖片全螢幕 == ")
 	imageFullScreenImgs.value = list.value[current.value.index]?.imgList || []
 	openPopImgFullScreen(imageFullScreenImgs.value)
 }
 
 const triggerFullScreen = () => {
-	console.log("🚀 ~ 影音全螢幕");
+	// console.log("🚀 ~ 影音全螢幕");
 	mlSwiper.value?.fullScreen?.(); // 呼叫子組件方法
 }
 
@@ -419,12 +419,12 @@ function selected(index) {
 /** 组件滑动事件 */
 function change(index) {
 	current.value = index;
-	console.log(" == 滑动事件 == ", index);
+	// console.log(" == 滑动事件 == ", index);
 }
 
 /** 加载更多 */
 function loadmore() {
-	console.log(" === 加载更多 === ");
+	// console.log(" === 加载更多 === ");
 	const result = getList().map(item => {
 		count.value++;
 		return { ...item, title: `${count.value}、${item.title}` };
@@ -439,38 +439,38 @@ function noTrigger(event) {
 
 /** 滑动动画：APP端需要useSwiper为true生效，其他端正常 */
 function transition(event) {
-	console.log(" == transition == ", event);
+	// console.log(" == transition == ", event);
 }
 
 /** 动画完成：APP端需要useSwiper为true生效，其他端正常 */
 function animationfinish(event) {
-	console.log(" == animationfinish == ", event);
+	// console.log(" == animationfinish == ", event);
 }
 
 /** 长按事件 */
 function longTap(event) {
-	console.log(" == longTap == ", event);
+	// console.log(" == longTap == ", event);
 }
 
 /** 点击事件 */
 function onclick(event) {
-	console.log(" == onclick == ", event);
+	// console.log(" == onclick == ", event);
 }
 
 /** 靜音事件 */
 function onmute(event) {
-	console.log(" == onmute == ", event);
+	// console.log(" == onmute == ", event);
 }
 
 /** 双击事件 */
 function ondblclick(event) {
-	console.log(" == ondblclick == ", event);
+	// console.log(" == ondblclick == ", event);
 }
 
 /** 播放事件 */
 function onplay(event) {
 	playing.value = event.playing;
-	console.log("🚀 == onplay == ", event);
+	// console.log("🚀 == onplay == ", event);
 	uni.showToast({
 		title: "開始播放",
 		icon: "none"
@@ -480,7 +480,7 @@ function onplay(event) {
 /** 暂停事件 */
 function onpause(event) {
 	playing.value = event.playing;
-	console.log("🚀 ~ onpause ~ event:", event)
+	// console.log("🚀 ~ onpause ~ event:", event)
 	uni.showToast({
 		title: "暫停播放",
 		icon: "none"
@@ -489,17 +489,17 @@ function onpause(event) {
 
 /** 结束事件 */
 function onended(event) {
-	console.log(" == onended == ", event);
+	// console.log(" == onended == ", event);
 }
 
 /** 进度条拖动事件 */
 function changing(event) {
-	console.log(" == changing == ", event);
+	// console.log(" == changing == ", event);
 }
 
 /** 进度条拖动结束事件 */
 function changed(event) {
-	console.log(" == changed == ", event);
+	// console.log(" == changed == ", event);
 }
 
 /** 进度变更事件 */
@@ -509,22 +509,22 @@ function timeupdate(event) {
 
 /** 缓冲事件 */
 function waiting(event) {
-	console.log(" == waiting == ", event);
+	// console.log(" == waiting == ", event);
 }
 
 /** 全屏|退出全屏 变更事件 */
 function fullscreenchange(event) {
-	console.log(" == fullscreenchange == ", event);
+	// console.log(" == fullscreenchange == ", event);
 }
 
 /** 全屏点击事件 */
 function fullscreenclick(event) {
-	console.log(" == fullscreenclick == ", event);
+	// console.log(" == fullscreenclick == ", event);
 }
 
 /** 资源初始化完成事件 */
 function loadedmetadata(event) {
-	console.log("🚀 == loadedmetadata == ", event);
+	// console.log("🚀 == loadedmetadata == ", event);
 	uni.showToast({
 		title: "資源初始化完成",
 		icon: "none"
@@ -533,7 +533,7 @@ function loadedmetadata(event) {
 
 /** 资源加载完成事件 */
 function onloadeddata(event) {
-	console.log("🚀 == onloadeddata == ", event);
+	// console.log("🚀 == onloadeddata == ", event);
 	uni.showToast({
 		title: "資源加載完成",
 		icon: "none"
@@ -542,7 +542,7 @@ function onloadeddata(event) {
 
 /** 资源播放出错事件 */
 function error(event) {
-	console.log(" == error == ", event);
+	// console.log(" == error == ", event);
 	uni.showToast({
 		title: "資源播放出錯",
 		icon: "none"
@@ -581,7 +581,7 @@ function getList() {
 			],
 			ageChecked: false,
 			locked: false,
-			id: 'test005'
+			id: 'test003'
 		},
 		// {
 		// 	title: "2、w_girl、御-3",
@@ -607,7 +607,7 @@ function getList() {
 			url: "https://alimov2.a.yximgs.com/upic/2020/07/02/14/BMjAyMDA3MDIxNDUyMDlfOTExMjIyMjRfMzE1OTEwNjAxNTRfMV8z_b_Bf3005d42ce9c01c0687147428c28d7e6.mp4",
 			ageChecked: false,
 			locked: true,
-			id: 'test006'
+			id: 'test005'
 		},
 		{
 			title: "7、虎、JKwu",

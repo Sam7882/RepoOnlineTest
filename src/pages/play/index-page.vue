@@ -21,7 +21,7 @@
 		</view>
 		<!-- 开始使用组件  -->
 		<view class="play-swiper-container">
-			<ml-swiper-v3 v-if="list.length > 0" :list="list" :startIndex="startIndex" :force="force" :touch="touch"
+			<ml-swiper-v3-new v-if="list.length > 0" :list="list" :startIndex="startIndex" :force="force" :touch="touch"
 				:options="options" @onchange="change" @transition="transition" @animationfinish="animationfinish"
 				@loadmore="loadmore" @longTap="longTap" @onclick="onclick" @ondblclick="ondblclick" @onplay="onplay"
 				@onpause="onpause" @onended="onended" @changing="changing" @changed="changed" @timeupdate="timeupdate"
@@ -180,7 +180,7 @@
 						<text class="text"> {{ index == current ? item.durationStr : '00' }} </text>
 					</view>
 				</template> -->
-			</ml-swiper-v3>
+			</ml-swiper-v3-new>
 		</view>
 		<!-- 底部導航 -->
 		<c-bottomNav :bgColor="'var(--background-color-dark)'" :iconColor="'var(--text-color-secondary)'"
@@ -321,10 +321,9 @@ const setFilter = () => {
 // 底部按鈕
 const openImageFullScreen = () => {
 	// console.log("🚀 == 圖片全螢幕 == ")
-	imageFullScreenImgs.value = list.value[0].imgList
+	imageFullScreenImgs.value = list.value[current.value.index]?.imgList || []
 	openPopImgFullScreen(imageFullScreenImgs.value)
 }
-
 const triggerFullScreen = () => {
 	// console.log("🚀 ~ 影音全螢幕");
 	mlSwiper.value?.fullScreen?.(); // 呼叫子組件方法

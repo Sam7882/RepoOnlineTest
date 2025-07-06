@@ -172,8 +172,8 @@ const closeSharePopUp = () => {
 
 // 圖片全螢幕
 const popImgFullScreen = ref(null)
-const openPlayPopImgFullScreen = (data) => {
-	console.log("🚀 ~ openPlayPopImgFullScreen ~ openPlayPopImgFullScreen :")
+const openPopImgFullScreen = (data) => {
+	console.log("🚀 ~ openPopImgFullScreen ~ openPopImgFullScreen :")
 	if (popImgFullScreen.value && typeof popImgFullScreen.value.open === 'function') {
 		popImgFullScreen.value.open(data)
 	} else {
@@ -208,7 +208,7 @@ provide('common', {
 })
 
 provide('play', {
-	openPlayPopImgFullScreen,
+	openPopImgFullScreen,
 	closePopImgFullScreen
 })
 </script>

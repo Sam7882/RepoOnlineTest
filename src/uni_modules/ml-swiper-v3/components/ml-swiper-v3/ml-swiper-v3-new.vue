@@ -1113,10 +1113,10 @@ export default {
 
 .ml-swiper-v3 {
 	position: relative;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	// top: 0;
+	// left: 0;
+	// right: 0;
+	// bottom: 0;
 	width: 100%;
 	height: 100%;
 	/* #ifndef APP-NVUE */
@@ -1162,6 +1162,15 @@ export default {
 	overflow: hidden;
 	background: #000;
 	z-index: 0;
+
+	::v-deep(.uni-video-container) {
+
+		// TODO: 設定影片是會展示全部 置中
+		.uni-video-video {
+			object-fit: contain !important;
+			object-position: center !important;
+		}
+	}
 }
 
 .ml-swiper-v3-body {

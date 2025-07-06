@@ -85,7 +85,7 @@
 								<uni-icons class="icon icon-common-share" type="icon-common-share" custom-prefix="icon" size="16" />
 							</view>
 							<!-- 收藏 -->
-							<view class="right-tool-item-container-item" :class="{ active: isCollect }" @click="toCollect">
+							<view class="right-tool-item-container-item" :class="{ active: isCollect }" @click="handleCollect">
 								<uni-icons class="icon icon-input-upload-file" type="icon-input-upload-file" custom-prefix="icon"
 									size="16" />
 								<!-- Tooltip 提示 -->
@@ -283,8 +283,8 @@ const toShare = () => {
 }
 // 收藏
 const isCollectTipVisible = ref(false)
-const timerCollectTip = null
-const toCollect = () => {
+let timerCollectTip = null
+const handleCollect = () => {
 	isCollect.value = !isCollect.value;
 	// console.log("🚀 == 收藏 == ")
 	if (isCollect.value) {
@@ -748,9 +748,13 @@ function getList() {
 	width: 100%;
 	color: var(--text-color-primary);
 	background: var(--background-color-dark);
-	// 設定影片最大寬度
-	max-width: var(--video-maxWidth);
+	// TODO:設定影片最大寬度 判斷滿版問題
+	// max-width: var(--video-maxWidth);
 	aspect-ratio: var(--media-aspect-ratio);
+}
+
+.icon {
+	cursor: pointer;
 }
 
 // header
@@ -780,6 +784,7 @@ function getList() {
 			display: flex;
 			gap: 12rpx;
 			align-items: center;
+			cursor: pointer;
 
 			.header-left-item-text {
 				font-size: var(--font-size-title-pc);
@@ -866,6 +871,8 @@ function getList() {
 			border-radius: 100%;
 			border: 2.5px solid var(--text-color-secondary);
 			background: var(--primary-color);
+
+			cursor: pointer;
 
 			.right-tool-avatar-tip-icon {
 				transform: translateY(2rpx);

@@ -85,7 +85,7 @@
 								<uni-icons class="icon icon-common-share" type="icon-common-share" custom-prefix="icon" size="16" />
 							</view>
 							<!-- 收藏 -->
-							<view class="right-tool-item-container-item" :class="{ active: isCollect }" @click="toCollect">
+							<view class="right-tool-item-container-item" :class="{ active: isCollect }" @click="handleCollect">
 								<uni-icons class="icon icon-input-upload-file" type="icon-input-upload-file" custom-prefix="icon"
 									size="16" />
 								<!-- Tooltip 提示 -->
@@ -193,7 +193,7 @@
 <script setup>
 // TEMP: 影音頁
 import { onShow, onHide } from '@dcloudio/uni-app'
-import { toSearchHome, toCreatorHome, toPlayArticleGallery, checkViewportAutoReplace } from '@/utils/routers'
+import { toSearchHome, toCreatorHome, checkViewportAutoReplace } from '@/utils/routers'
 import { useInitStore } from '@/stores/useInitDataStore';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
@@ -284,8 +284,8 @@ const toShare = () => {
 }
 // 收藏
 const isCollectTipVisible = ref(false)
-const timerCollectTip = null
-const toCollect = () => {
+let timerCollectTip = null
+const handleCollect = () => {
 	isCollect.value = !isCollect.value;
 	// console.log("🚀 == 收藏 == ")
 	if (isCollect.value) {

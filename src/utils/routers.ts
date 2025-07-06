@@ -1,4 +1,16 @@
 // TEMP: 路由工具
+import { pages } from '@/pages.json'
+
+// 預先建立 path Set，提升查詢效率（全域變數，只建立一次）
+const _pages = new Set(pages.map(page => page.path))
+
+// 檢查 url 是否存在於 pages.json
+export function checkUrlInPages(url: string): boolean {
+	if (!url || typeof url !== 'string') {
+		return false
+	}
+	return _pages.has(url)
+}
 
 // --- 將 params 轉成 query string
 function queryStringify(params: Record<string, string | number | boolean>) {
@@ -103,21 +115,28 @@ export function checkViewporReplace() {
 // 檢查視窗大小，跳轉到對應版面
 export function checkViewport(url: string, params = {}, onlyPc = false) {
 	console.log("🚀 ~ 檢查窗口跳轉頁 ~ url:", url)
+
 	// 取得螢幕寬度
 	const windowWidth = uni.getSystemInfoSync().windowWidth;
 	// 根據寬度決定跳轉路徑
 	const basePath = windowWidth <= 960 ? '/pages' : '/pages/pc';
 
+	let urlPath = ''
+
 	if (onlyPc) {
-		uni.navigateTo({
-			url: `/pages/pc${url}` + queryStringify(params)
-		})
+		urlPath = `/pages/pc${url}` + queryStringify(params)
 	}
 	else {
-		uni.navigateTo({
-			url: `${basePath}${url}` + queryStringify(params)
-		})
+		urlPath = `${basePath}${url}` + queryStringify(params)
 	}
+
+	// 加入除錯資訊，追蹤呼叫來源
+	console.log(`📍 checkViewport 呼叫來源:`, new Error().stack?.split('\n')[2]?.trim())
+	console.log(`🎯 準備跳轉到: ${urlPath}`)
+
+	uni.navigateTo({
+		url: urlPath
+	})
 }
 
 // 檢查視窗大小，並自動將當前頁面跳轉到正確版面，並帶入 query 參數

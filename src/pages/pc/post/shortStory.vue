@@ -225,10 +225,12 @@ onShow(() => {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+	width: auto;
+	height: 80dvh;
+	// TODO: 設定影片最大寬度
+	// max-width: var(--video-maxWidth);
+	// TODO: 設定影片比例
 	aspect-ratio: var(--media-aspect-ratio);
-	width: 100%;
-	max-width: var(--video-maxWidth);
-	height: auto;
 	background-color: black;
 }
 

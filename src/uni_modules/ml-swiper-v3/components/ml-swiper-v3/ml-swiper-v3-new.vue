@@ -910,9 +910,12 @@ export default {
 			if (!this.mouseDragEnabled || !this.mouseDown || this.disabledChange) return;
 
 			event.preventDefault();
-			// event.stopPropagation();
+			event.stopPropagation();
 
-			// this.mouseCurrentY = event.clientY;
+			// 在WEB環境下，不計算拖曳距離，避免item跟隨滑鼠移動
+			// 只記錄當前位置，但不觸發視覺上的拖曳效果
+			this.mouseCurrentY = event.clientY;
+			// 註釋掉拖曳距離計算，避免item跟隨移動
 			// this.mouseDragDistance = this.mouseStartY - this.mouseCurrentY;
 			// #endif
 		},
@@ -932,8 +935,13 @@ export default {
 				document.body.style.msUserSelect = '';
 			}
 
+			// 在WEB環境下，計算實際的拖曳距離來決定是否切換
+			const actualDragDistance = this.mouseStartY - this.mouseCurrentY;
+
 			// 檢查拖曳距離是否達到閾值
-			if (Math.abs(this.mouseDragDistance) >= this.mouseDragThreshold) {
+			if (Math.abs(actualDragDistance) >= this.mouseDragThreshold) {
+				// 臨時設置拖曳距離用於切換判斷
+				this.mouseDragDistance = actualDragDistance;
 				this.handleMouseSwipe();
 			}
 
@@ -1047,6 +1055,11 @@ export default {
 	margin: 0 auto;
 	will-change: transform;
 	/* #endif */
+	/* #ifdef H5 | WEB */
+	/* 在WEB環境下禁用拖曳跟隨效果 */
+	transform: none !important;
+	transition: none !important;
+	/* #endif */
 	padding: 0;
 	overflow: hidden;
 	background: rgba(0, 0, 22, 0.9);
@@ -1059,6 +1072,11 @@ export default {
 	width: 100%;
 	height: 100%;
 	margin: 0 auto;
+	/* #endif */
+	/* #ifdef H5 | WEB */
+	/* 在WEB環境下確保item不會跟隨滑鼠移動 */
+	transform: none !important;
+	transition: none !important;
 	/* #endif */
 	overflow: hidden;
 	z-index: 90;

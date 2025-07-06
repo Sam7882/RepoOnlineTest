@@ -1,6 +1,5 @@
 <template>
-  <uni-popup ref="popupRef" :type="isPc ? 'center' : 'bottom'" :borderRadius="isPc ? '32rpx' : '60rpx 60rpx 0 0'"
-    background-color="#f6f6f6">
+  <uni-popup ref="popupRef" type="center" borderRadius="32rpx" background-color="#f6f6f6">
     <view class="popup-container popup-container-sponsor-input" v-if="payProcess == 'bill'">
       <!-- 標題與關閉 -->
       <view class="popup-header">
@@ -215,7 +214,7 @@ defineExpose({ open, close })
 
 .popup-container {
   padding: 32rpx;
-  border-radius: 60rpx 60rpx 0 0;
+  border-radius: 32rpx;
   background-color: var(--background-color-dark);
   width: fit-content;
   overflow: visible;

@@ -45,6 +45,7 @@ const handleSearch = () => {
 	border-bottom: 4rpx solid var(--text-color-denary);
 	padding-top: 64rpx !important;
 	padding-bottom: 48rpx !important;
+	gap: 32rpx;
 
 	@media screen and (min-width: 961px) and (max-width: 1280px) {
 		align-items: stretch;

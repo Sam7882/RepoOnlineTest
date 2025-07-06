@@ -25,7 +25,7 @@ file path : FanceNew\src\pages.json
 - 入口頁 : pages 第一筆資料
 - tabBar : 為底部導航列設定
 ---
-## APP 網址對應頁面
+# 網址對應頁面
 - [入口加載頁] 
 	- [APP] [PC] :pages/launch/loading
 ### auth
@@ -232,7 +232,7 @@ file path : FanceNew\src\pages.json
 	- [PC] :  組件 src\components\pc\common\pc-sharePopUp.vue
 		- 創作者主頁，分享檔案
 ---
-## 元件總覽
+# 元件總覽
 ### auth
 - [登入元件] : auth-login.vue
 - [註冊元件] : auth-register.vue
@@ -293,11 +293,13 @@ file path : FanceNew\src\pages.json
 - [圓餅圖] : charts-pieChart.vue
 - [折線圖] : charts-lineChart.vue
 - [長條圖] : charts-barChart.vue
-
-## 登入頁須知
+---
+# 注意事項
+- 登入頁須知
 隨便輸入手機號碼和密碼即可跳轉到 影音首頁
-
-## 套件
+- todo標籤都需要注意
+---
+# 套件
 - vue3 ：核心前端框架  
 	- https://vuejs.org/
 - vite ：前端開發與建構工具  

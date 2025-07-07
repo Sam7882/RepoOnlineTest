@@ -22,7 +22,7 @@
 		</view>
 	</view>
 
-	<pc-blockadeEditPoPUp ref="blockadeEditPoPUpRef" />
+	<pc-blockadeEditPopUp ref="blockadeEditPoPUpRef" />
 	<pc-setMenuPopUp ref="setMenuPopUpRef" :type="popUpType" />
 
 </template>

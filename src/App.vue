@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
+import { onLaunch, onShow, onHide, onPageNotFound, onError } from "@dcloudio/uni-app";
 import { useViewportStore } from '@/stores/useViewportStore'
-import { checkViewporReplace, initFirstVisite } from '@/utils/routers'
-
+import { checkViewporReplace, initFirstVisite, checkUrlInPages, router } from '@/utils/routers'
+import { useRoute } from 'vue-router'
+const route = useRoute()
+// const router = useRouter() 
 const viewportStore = useViewportStore()
 
 // App 初始化完成標記
@@ -22,6 +24,21 @@ const handleResize = () => {
   })
 }
 
+/* 監聽路由變化，如果路徑不在 pages.json 中，則跳轉到 入口 頁面 */
+watch(route, (newVal) => {
+  // NOTE: 須注意 src\pages\launch\loading-page.vue 的跳轉時間
+  let _newVal = newVal.path.replace(/^[^a-zA-Z0-9]+/, '')
+  if (!checkUrlInPages(_newVal) && newVal.path !== '/') {
+    setTimeout(() => {
+      if (!checkUrlInPages(_newVal) && newVal.path !== '/') {
+        // window.location.replace('')
+        router.reLaunchLoading()
+      }
+      // TODO: 有可能這個時間需要調整
+    }, 1500)
+  }
+})
+
 /* 監聽視窗大小變化 */
 onMounted(() => {
   console.log("App onMounted")
@@ -32,6 +49,8 @@ onMounted(() => {
   window.addEventListener('resize', handleResize)
   isAppReady.value = true
 })
+
+
 
 onUnmounted(() => {
   console.log("App onUnmounted")
@@ -46,11 +65,20 @@ onLaunch(() => {
 
 onShow(() => {
   console.log("App Show");
-  initFirstVisite()
 });
 
 onHide(() => {
   console.log("App Hide");
+});
+
+// 當頁面不存在時，觸發，僅限用於 app.vue
+onPageNotFound(() => {
+  console.log("App Page Not Found");
+  initFirstVisite()
+});
+
+onError((error) => {
+  console.log("App Error", error);
 });
 </script>
 

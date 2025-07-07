@@ -16,10 +16,13 @@
 </template>
 
 <script setup lang="ts">
-// TEMP: 啟動頁面入口頁
+// TEMP: 啟動頁面入口頁 
 import { onShow } from '@dcloudio/uni-app';
-import { toLogin, checkViewportAutoReplace } from '@/utils/routers'
+import { toLogin, toSearchHome, checkViewportAutoReplace } from '@/utils/routers'
 import { useInitStore } from '@/stores/useInitDataStore'
+import { useViewportStore } from '@/stores/useViewportStore'
+const viewportStore = useViewportStore()
+const { isPc } = storeToRefs(viewportStore)
 
 const initStore = useInitStore()
 const siteInfo = computed(() => initStore.siteInfo)
@@ -37,7 +40,13 @@ async function fetchInitData() {
 async function nextPage() {
 	// 等待 1.5 秒 後跳轉
 	await new Promise(resolve => setTimeout(resolve, 1500))
-	toLogin()
+
+	// TODO: 入口頁面，指定跳轉頁面
+	if (!isPc.value) {
+		toLogin()
+	} else {
+		toSearchHome()
+	}
 }
 
 // onShow => uni-app 生命週期，每次回來都重新觸發
@@ -51,7 +60,7 @@ onShow(async () => {
 })
 
 onShow(() => {
-	checkViewportAutoReplace()
+	// checkViewportAutoReplace()
 })
 
 </script>

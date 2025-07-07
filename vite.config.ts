@@ -18,6 +18,15 @@ export default defineConfig(({ mode }) => ({
       dts: 'src/types/auto-imports.d.ts'
     }),
   ],
+  // 發布時刪除 console
+  build: {
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

@@ -12,6 +12,20 @@ export function checkUrlInPages(url: string): boolean {
 	return _pages.has(url)
 }
 
+/* 防止初次訪問與重整到 未知頁面，跳轉到入口頁 */
+export function initFirstVisite() {
+	const hash = window.location.hash
+	// 如果有# 則移除，有/ 移除，直到沒有# 或 / 為止
+	const _hash = hash.replace(/^#+\/+/, '')
+	if (!checkUrlInPages(_hash)) {
+		setTimeout(() => {
+			if (getCurrentPages().length === 0) {
+				window.location.replace('')
+			}
+		}, 1500);
+	}
+}
+
 // --- 將 params 轉成 query string
 function queryStringify(params: Record<string, string | number | boolean>) {
 	const query = Object.entries(params)
@@ -61,10 +75,10 @@ export function safeSwitchTab(targetUrl: string) {
 	}
 }
 
+/* 窗口大小 切換用 */
 // 檢查視窗大小，比對當前頁面是否正確，並跳轉到對應版面
 // 全域 flag: 是否正在跳轉中
 let isSwitchingLayout = false;
-
 export function checkViewporReplace() {
 	// 若正在跳轉 → 不做
 	if (isSwitchingLayout) {
@@ -112,6 +126,7 @@ export function checkViewporReplace() {
 }
 
 
+/* 跳轉到指定頁面，切換用 */
 // 檢查視窗大小，跳轉到對應版面
 export function checkViewport(url: string, params = {}, onlyPc = false) {
 	console.log("🚀 ~ 檢查窗口跳轉頁 ~ url:", url)

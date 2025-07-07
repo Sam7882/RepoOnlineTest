@@ -18,6 +18,13 @@
   },
   "pages": [
     {
+      "path": "pages/launch/loading",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
+      }
+    },
+    {
       "path": "pages/auth/login",
       "style": {
         "navigationStyle": "custom",
@@ -298,20 +305,6 @@
       "path": "pages/pc/helper/index",
       "style": {
         "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/launch/loading",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
-      }
-    },
-    {
-      "path": "pages/pc/launch/loading",
-      "style": {
-        "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color)"
       }
     },
     {

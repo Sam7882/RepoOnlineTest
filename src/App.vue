@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
 import { useViewportStore } from '@/stores/useViewportStore'
-import { checkViewporReplace } from '@/utils/routers'
+import { checkViewporReplace, initFirstVisite } from '@/utils/routers'
 
 const viewportStore = useViewportStore()
 
@@ -46,8 +46,9 @@ onLaunch(() => {
 
 onShow(() => {
   console.log("App Show");
-
+  initFirstVisite()
 });
+
 onHide(() => {
   console.log("App Hide");
 });

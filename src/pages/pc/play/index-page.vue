@@ -1108,6 +1108,7 @@ function getList() {
 	--info-margin-height: 48rpx; // 影音資訊區塊與底部導航的間距
 	width: 100%;
 	height: 100%;
+	z-index: 1 !important;
 
 
 	::v-deep(.uni-swiper-slides) {

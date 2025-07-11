@@ -1134,6 +1134,7 @@ function getList() {
 	--progress-bar-margin-height: 54rpx; // 影音進度條與底部導航的間距
 	--info-margin-height: 48rpx; // 影音資訊區塊與底部導航的間距
 	height: 100%;
+	z-index: 1 !important;
 
 	.ml-swiper-v3-custom {}
 

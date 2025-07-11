@@ -161,6 +161,8 @@ const handleClickToPage = (page) => {
 	// --bottom-nav-spacer-height: 100rpx;
 	// }
 	// padding-bottom: calc(var(--iphone-homeBar-height) - 17rpx);
+	z-index: var(--z-index-bottom-nav);
+
 }
 
 .bottom-nav-container {

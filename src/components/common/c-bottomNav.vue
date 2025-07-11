@@ -160,7 +160,7 @@ const handleClickToPage = (page) => {
 	// @media screen and (min-width: 768px) and (max-width: 960px) {
 	// --bottom-nav-spacer-height: 100rpx;
 	// }
-	padding-bottom: var(--iphone-homeBar-height);
+	// padding-bottom: calc(var(--iphone-homeBar-height) - 17rpx);
 }
 
 .bottom-nav-container {
@@ -174,14 +174,18 @@ const handleClickToPage = (page) => {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	padding: 18rpx 32rpx;
+	padding: 18rpx 40rpx;
 	background: var(--background-color);
-	padding-bottom: var(--iphone-homeBar-height);
+	padding-bottom: calc(var(--iphone-homeBar-height) / 1.5);
+
+	@media screen and (min-width: 768px) and (max-width: 960px) {
+		padding-bottom: calc(var(--iphone-homeBar-height) / 1.5);
+	}
 }
 
 .bottom-nav-item {
 	.bottom-nav-item-icon {
-		font-size: 54rpx !important;
+		font-size: 48rpx !important;
 		color: var(--text-color-secondary);
 
 		@media screen and (min-width: 768px) and (max-width: 960px) {
@@ -198,8 +202,8 @@ const handleClickToPage = (page) => {
 /* 中間按鈕 */
 .main-menu-btn-container {
 	position: relative;
-	width: 100rpx;
-	height: 100rpx;
+	width: 90rpx;
+	height: 90rpx;
 
 	@media screen and (min-width: 768px) and (max-width: 960px) {
 		width: 72rpx;
@@ -230,8 +234,8 @@ const handleClickToPage = (page) => {
 		border-radius: 100%;
 		color: var(--text-color-secondary) !important;
 		aspect-ratio: 1/1;
-		width: 96rpx;
-		font-size: 48rpx !important;
+		width: 80rpx;
+		font-size: 40rpx !important;
 		display: flex;
 		justify-content: center;
 		align-items: center;

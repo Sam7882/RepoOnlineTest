@@ -25,6 +25,11 @@ file path : FanceNew\src\pages.json
 - 入口頁 : pages 第一筆資料
 - tabBar : 為底部導航列設定
 ---
+# 版面設定
+所有頁面都是在 基礎版型組件 layout-pcBase / layout-appBase 中，使用slot 置入的，
+每個面檔案都有兩個檔案，分別為套用版型和頁面內容的檔案，
+PC部分頁面是在同一個頁面之中，進行 components 切換來顯示內容的，例如 setMenu, center創作者中心 
+---
 # 網址對應頁面
 - [入口加載頁] 
 	- [APP] [PC] :pages/launch/loading

@@ -64,7 +64,7 @@
   --play-sponsor-color-tertiary: #ffedcc;
   --play-sponsor-color-quaternary: #ef7b91;
   // 背景色 與 背景1 / 背景2
-  --background-color: #040000;
+  --background-color: #ffffff;
   --background-color-dark: #040000;
   --background-color-light: #ffffff;
   --background-color-gray: #252525;
@@ -186,8 +186,8 @@ body {
   margin: 0;
   padding: 0;
   color: var(--text-color);
-  background-color: var(--background-color);
   line-height: 1.5;
+  transition: background-color 0.3s ease;
 }
 
 // ✅ 常用樣式重置

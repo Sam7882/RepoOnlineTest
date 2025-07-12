@@ -42,6 +42,10 @@ watch(route, (newVal) => {
 /* 監聽視窗大小變化 */
 onMounted(() => {
   console.log("App onMounted")
+
+  // 初始化 pages store
+  pagesStore.initPagesStore()
+
   // 初始化視窗大小
   viewportStore.updateViewport()
 

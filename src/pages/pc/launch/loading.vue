@@ -2,16 +2,6 @@
 <template>
 	<view class="loading-container">
 		<image class="logo" src="/static/logo.png" mode="widthFix" />
-		<view class="slogan">
-			<view class="brand-container">
-				<text class="brand animate-brand brand-f">F</text>
-				<text class="brand animate-brand brand-a">A</text>
-				<text class="brand animate-brand brand-n">N</text>
-				<text class="brand animate-brand brand-c">C</text>
-				<text class="brand animate-brand brand-e">E</text>
-			</view>
-			<text class="desc">NO BOUNDARIES-JUST FANCE</text>
-		</view>
 	</view>
 </template>
 
@@ -77,7 +67,7 @@ onShow(() => {
 }
 
 .logo {
-	width: 320rpx;
+	width: 480rpx;
 }
 
 .slogan {

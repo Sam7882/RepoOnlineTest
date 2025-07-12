@@ -140,7 +140,8 @@
 				<!-- 底部工具栏插槽 -->
 				<template #bottom="{ item }">
 					<!-- 圖片用開啟類全螢幕 swiper -->
-					<view class="bottom-tool-container-wrapper-avatar-container">
+					<!-- TODO: 圖片全螢幕 需調整 -->
+					<view class="bottom-tool-container-wrapper-avatar-container" v-if="item?.imgList?.length > 0">
 						<uni-icons class="bottom-tool-container-wrapper-avatar-container-icon" type="icon-common-copy"
 							custom-prefix="icon" size="16" @click="openImageFullScreen" />
 					</view>

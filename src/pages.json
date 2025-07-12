@@ -118,25 +118,29 @@
     {
       "path": "pages/creator/favorites",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/pc/creator/favorites",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/creator/following",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/pc/creator/following",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
@@ -178,26 +182,28 @@
       "path": "pages/creator/profile-edit",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/pc/creator/profile-edit",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/creator/rank",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/pc/creator/rank",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
@@ -259,7 +265,8 @@
     {
       "path": "pages/creator/subscription",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
@@ -286,25 +293,29 @@
     {
       "path": "pages/creator/tagRank",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/pc/creator/tagRank",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/helper/index",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/pc/helper/index",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
@@ -324,91 +335,106 @@
     {
       "path": "pages/play/article-gallery",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/pc/play/article-gallery",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/post/index",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/pc/post/index",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/post/draftBox",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/pc/post/draftBox",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/post/post-Preview",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color-dark)"
       }
     },
     {
       "path": "pages/pc/post/post-Preview",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/post/schedulePost",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/pc/post/schedulePost",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/post/shortStory",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/pc/post/shortStory",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/post/tagPeople",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/pc/post/tagPeople",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/pc/post/uploadPost",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
@@ -464,97 +490,98 @@
       "path": "pages/pc/wallet/creditCardSave",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/wallet/creditCardSave",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/pc/wallet/creditCardSelect",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/wallet/creditCardSelect",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/pc/wallet/creditCardSetting",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/wallet/creditCardSetting",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/wallet/index",
       "style": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/wallet/orderDetail",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/wallet/pay",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/wallet/withdraw",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/wallet/withdrawApply",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/wallet/withdrawDetail",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/wallet/withdrawIn",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
+        "backgroundColor": "var(--background-color)"
       }
     },
     {
       "path": "pages/wallet/withdrawRecord",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "var(--background-color-light)"
+        "backgroundColor": "var(--background-color)"
       }
     }
   ],
@@ -569,6 +596,7 @@
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "FanceNew",
     "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
-  }
+    "backgroundColor": "var(--background-color)"
+  },
+  "entryPagePath": "pages/launch/loading"
 }

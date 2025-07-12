@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide, onPageNotFound, onError } from "@dcloudio/uni-app";
 import { useViewportStore } from '@/stores/useViewportStore'
+import { usePagesStore } from '@/stores/usePagesStore'
 import { checkViewporReplace, initFirstVisite, checkUrlInPages, router } from '@/utils/routers'
 import { useRoute } from 'vue-router'
+
 const route = useRoute()
 // const router = useRouter() 
 const viewportStore = useViewportStore()
+const pagesStore = usePagesStore()
 
 // App 初始化完成標記
 const isAppReady = ref(false)
@@ -26,6 +29,17 @@ const handleResize = () => {
 
 /* 監聽路由變化，如果路徑不在 pages.json 中，則跳轉到 入口 頁面 */
 watch(route, (newVal) => {
+  // 使用 pagesStore 來檢查頁面是否存在並獲取背景色
+  const nowBgColor = document.body.style.backgroundColor
+  const bgColor = pagesStore.getBackgroundColorByFullPath(newVal.path) || 'var(--background-color-light)'
+  if (nowBgColor !== bgColor) {
+    if (bgColor && typeof document !== 'undefined') {
+      nextTick(() => {
+        document.body.style.backgroundColor = bgColor
+      })
+    }
+  }
+
   // NOTE: 須注意 src\pages\launch\loading-page.vue 的跳轉時間
   let _newVal = newVal.path.replace(/^[^a-zA-Z0-9]+/, '')
   if (!checkUrlInPages(_newVal) && newVal.path !== '/') {
@@ -37,7 +51,10 @@ watch(route, (newVal) => {
       // TODO: 有可能這個時間需要調整
     }, 1500)
   }
+}, {
+  // immediate: true
 })
+
 
 /* 監聽視窗大小變化 */
 onMounted(() => {
@@ -54,14 +71,11 @@ onMounted(() => {
   isAppReady.value = true
 })
 
-
-
 onUnmounted(() => {
   console.log("App onUnmounted")
   // 移除 window resize 監聽
   window.removeEventListener('resize', handleResize)
 })
-
 
 onLaunch(() => {
   console.log("App Launch");

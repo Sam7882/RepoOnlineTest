@@ -67,7 +67,7 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .loading-container {
-	background-color: var(--background-color);
+	background-color: var(--background-color-light);
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;

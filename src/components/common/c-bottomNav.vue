@@ -94,7 +94,7 @@ const updateCSSVariable = (height) => {
 	// 獲取 .bottom-nav-spacer 元素
 	const spacerElement = document.querySelector('.bottom-nav-spacer')
 	if (spacerElement) {
-		spacerElement.style.setProperty('--bottom-nav-spacer-height', `${height}px`)
+		document.body.style.setProperty('--bottom-nav-spacer-height', `${height}px`)
 	}
 }
 

@@ -778,7 +778,8 @@ function getList() {
 
 	::v-deep(.bottom-nav-spacer) {
 		.bottom-nav-spacer>.bottom-nav-container {
-			position: relative;
+			// position: relative;
+			z-index: var(--z-index-bottom-nav);
 		}
 	}
 }
@@ -1134,7 +1135,7 @@ function getList() {
 	--bottomNav-margin-height: 32rpx; // 與底部導航的間距
 	--progress-bar-margin-height: 54rpx; // 影音進度條與底部導航的間距
 	--info-margin-height: 48rpx; // 影音資訊區塊與底部導航的間距
-	height: 100%;
+	height: calc(100% - var(--bottom-nav-spacer-height));
 	z-index: 1 !important;
 
 	.ml-swiper-v3-custom {}

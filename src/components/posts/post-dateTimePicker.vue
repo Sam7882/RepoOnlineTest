@@ -233,4 +233,10 @@ defineExpose({ open, close })
     border-radius: 24rpx !important;
   }
 }
+
+::v-deep(.uni-calendar) {
+  .uni-calendar--fixed {
+    z-index: calc(var(--z-index-max) + 9);
+  }
+}
 </style>

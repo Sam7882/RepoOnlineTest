@@ -126,6 +126,7 @@ const detectTagMode = (): { type: '#' | '@' | null; query: string; range: { star
       tagChar = char;
       break;
     }
+    // 如果遇到空格或換行，且還沒找到標籤符號，則結束搜索
     if (char === ' ' || char === '\n') {
       return { type: null, query: '', range: null };
     }
@@ -146,10 +147,12 @@ const detectTagMode = (): { type: '#' | '@' | null; query: string; range: { star
   const query = text.slice(startPos + 1, offset);
 
   // 檢查查詢文字是否包含空格或特殊字符（如果包含則結束標籤模式）
-  if (query.includes(' ') || query.includes('\n') || /[^\u4e00-\u9fa5\w]/.test(query)) {
+  // 允許中文字符、英文字母、數字和下劃線
+  if (query.includes(' ') || query.includes('\n') || /[^\u4e00-\u9fa5a-zA-Z0-9_]/.test(query)) {
     return { type: null, query: '', range: null };
   }
 
+  // 如果查詢文字為空，仍然顯示建議清單（讓使用者可以選擇）
   return {
     type: tagChar as '#' | '@',
     query,
@@ -190,6 +193,77 @@ const handleKeydown = (e: KeyboardEvent) => {
       e.preventDefault();
       // 這裡可以實現鍵盤導航功能
     }
+  }
+
+  // 處理空白鍵 - 當在標籤模式時按下空白鍵，結束當前標籤並插入空格
+  if (e.key === ' ' && showSuggestions.value) {
+    e.preventDefault();
+
+    const sel = window.getSelection();
+    if (!sel || !sel.rangeCount || !currentMatchRange.value) return;
+
+    const range = sel.getRangeAt(0);
+    const textNode = range.startContainer;
+
+    if (textNode.nodeType !== Node.TEXT_NODE) return;
+
+    const text = textNode.textContent || '';
+    const { start, end } = currentMatchRange.value;
+
+    // 替換匹配的文字，保留標籤符號和輸入的文字，並在後面加上空格
+    const before = text.slice(0, start);
+    const tagContent = text.slice(start, end); // 包含 # 或 @ 的完整標籤
+    const after = text.slice(end);
+
+    // 創建標籤元素（如果輸入了文字）
+    if (tagContent.length > 1) { // 不只是 # 或 @
+      const tagSpan = document.createElement('span');
+      tagSpan.className = 'hashtag';
+      tagSpan.textContent = tagContent;
+
+      // 創建空格
+      const spaceNode = document.createTextNode(' ');
+
+      // 替換文字節點
+      textNode.textContent = before;
+
+      // 插入標籤和空格
+      const parent = textNode.parentNode;
+      if (parent) {
+        parent.insertBefore(tagSpan, textNode.nextSibling);
+        parent.insertBefore(spaceNode, tagSpan.nextSibling);
+        parent.insertBefore(document.createTextNode(after), spaceNode.nextSibling);
+
+        // 設置光標到空格後面
+        const newRange = document.createRange();
+        newRange.setStart(spaceNode, 1);
+        newRange.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(newRange);
+      }
+    } else {
+      // 如果只是 # 或 @，直接插入空格
+      const before = text.slice(0, start);
+      const after = text.slice(end);
+
+      textNode.textContent = before + ' ' + after;
+
+      // 設置光標到空格後面
+      const newRange = document.createRange();
+      newRange.setStart(textNode, start + 1);
+      newRange.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(newRange);
+    }
+
+    // 隱藏建議清單
+    showSuggestions.value = false;
+    currentTagType.value = null;
+    mentionQuery.value = '';
+    currentMatchRange.value = null;
+
+    // 觸發更新
+    handleInput();
   }
 };
 

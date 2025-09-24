@@ -518,11 +518,30 @@ const handleShare = () => {
 	toShare()
 }
 
-// 上傳圖片
+// 上傳
 const onUpload = () => {
+	// 顯示選擇類型彈窗
+	uni.showActionSheet({
+		itemList: [t('common.photo'), t('common.video')],
+		success: (res) => {
+			const tapIndex = res.tapIndex
+			switch (tapIndex) {
+				case 0: // 選擇圖片
+					chooseImage()
+					break
+				case 1: // 選擇影片
+					chooseVideo()
+					break
+			}
+		}
+	})
+}
+
+// 選擇圖片
+const chooseImage = (sourceType = ['album', 'camera']) => {
 	uni.chooseImage({
 		count: 15,
-		sourceType: ['album'],
+		sourceType: sourceType,
 		success: (res) => {
 			const fileList = res.tempFilePaths.map((src, index) => ({
 				id: `${Date.now()}-${index}`,
@@ -533,7 +552,28 @@ const onUpload = () => {
 			toPostPreview()
 		},
 		fail: (err) => {
-			uni.showToast({ title: '選擇失敗', icon: 'none' })
+			console.error('選擇圖片失敗:', err)
+			uni.showToast({ title: t('common.selectFailed'), icon: 'none' })
+		}
+	})
+}
+
+// 選擇影片
+const chooseVideo = (sourceType = ['album', 'camera']) => {
+	uni.chooseVideo({
+		sourceType: sourceType,
+		success: (res) => {
+			const fileList = [{
+				id: `${Date.now()}-0`,
+				type: 'video',
+				src: res.tempFilePath
+			}]
+			setSelectedMedia(fileList)
+			toPostPreview()
+		},
+		fail: (err) => {
+			console.error('選擇影片失敗:', err)
+			uni.showToast({ title: t('common.selectFailed'), icon: 'none' })
 		}
 	})
 }

@@ -424,3 +424,13 @@ button:hover,
 .no-scroll {
   overflow: hidden !important;
 }
+
+// 上傳選擇類型彈窗
+#u-s-a-s {
+  uni-actionsheet {
+    .uni-mask,
+    .uni-actionsheet {
+      z-index: var(--z-index-max) !important;
+    }
+  }
+}

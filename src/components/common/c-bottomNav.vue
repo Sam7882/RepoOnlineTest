@@ -52,6 +52,13 @@
 // TEMP: 組件-底部導航列
 import { getElementInfo } from '@/utils/tools';
 import { toPlayIndex, toFavorites, toPostIndex, toMessageBox, toPostPreview } from '@/utils/routers';
+import { usePostData } from '@/stores/usePostData'
+import { useI18n } from 'vue-i18n'
+
+const postDataStore = usePostData()
+const { setSelectedMedia } = postDataStore
+const { t } = useI18n()
+
 const props = defineProps({
 	// 被景色
 	bgColor: {
@@ -127,6 +134,73 @@ const openSideNav = () => {
 	sideNavRef.value?.open()
 }
 
+// 上傳
+const onUpload = () => {
+	// 顯示選擇類型彈窗
+	uni.showActionSheet({
+		itemList: [t('common.photo'), t('common.video')],
+		success: (res) => {
+			const tapIndex = res.tapIndex
+			switch (tapIndex) {
+				case 0: // 選擇圖片
+					chooseImage()
+					break
+				case 1: // 選擇影片
+					chooseVideo()
+					break
+				case 2: // 拍照
+					chooseImage(['camera'])
+					break
+				case 3: // 錄影
+					chooseVideo(['camera'])
+					break
+			}
+		}
+	})
+}
+
+// 選擇圖片
+const chooseImage = (sourceType = ['album', 'camera']) => {
+	uni.chooseImage({
+		count: 15,
+		sourceType: sourceType,
+		success: (res) => {
+			const fileList = res.tempFilePaths.map((src, index) => ({
+				id: `${Date.now()}-${index}`,
+				type: 'image',
+				src
+			}))
+			setSelectedMedia(fileList)
+			toPostPreview()
+		},
+		fail: (err) => {
+			console.error('選擇圖片失敗:', err)
+			uni.showToast({ title: t('common.selectFailed'), icon: 'none' })
+		}
+	})
+}
+
+// 選擇影片
+const chooseVideo = (sourceType = ['album', 'camera']) => {
+	uni.chooseVideo({
+		sourceType: sourceType,
+		success: (res) => {
+			const fileList = [{
+				id: `${Date.now()}-0`,
+				type: 'video',
+				src: res.tempFilePath
+			}]
+			setSelectedMedia(fileList)
+			toPostPreview()
+		},
+		fail: (err) => {
+			console.error('選擇影片失敗:', err)
+			uni.showToast({ title: t('common.selectFailed'), icon: 'none' })
+		}
+	})
+}
+
+
 // 點擊按鈕 跳轉頁面
 const handleClickToPage = (page) => {
 	console.log("🚀 ~ handleClickToPage ~ page:", page)
@@ -138,7 +212,7 @@ const handleClickToPage = (page) => {
 			toFavorites()
 			break;
 		case 'post':
-			toPostPreview()
+			onUpload()
 			break;
 		case 'message':
 			toMessageBox()

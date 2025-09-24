@@ -102,11 +102,11 @@ const handleText = (e: any) => {
 
 // 新增標籤
 const addHashTag = () => {
-	postContentRef.value.insertText('#')
+	postContentRef.value.insertText(' #')
 	console.log('addTag')
 }
 const addMention = () => {
-	postContentRef.value.insertText('@')
+	postContentRef.value.insertText(' @')
 	console.log('addMention')
 }
 

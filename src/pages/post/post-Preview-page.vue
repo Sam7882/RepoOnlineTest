@@ -22,9 +22,15 @@
 			</view>
 		</view>
 		<view class="content">
-			<view class="preview-container-image">
-				<image class="preview-container-image-item" v-if="mediaList.length" :src="mediaList[currentIndex].src"
-					mode="aspectFill" />
+			<view class="preview-container-media">
+				<!-- 圖片預覽 -->
+				<image v-if="mediaList.length && mediaList[currentIndex].type === 'image'" class="preview-container-media-item"
+					:src="mediaList[currentIndex].src" mode="aspectFit" />
+				<!-- 影片預覽 -->
+				<video v-else-if="mediaList.length && mediaList[currentIndex].type === 'video'"
+					class="preview-container-media-item" :src="mediaList[currentIndex].src" :controls="false" :autoplay="true"
+					:loop="true" :muted="true">
+				</video>
 				<!-- 主圖預覽 -->
 				<view class="preview-container-footer" v-if="!isSingleImage">
 					<scroll-view class="list-scroll" scroll-x>
@@ -32,8 +38,17 @@
 							<uni-list-item title="留言" class="list-item" :class="{ active: currentIndex === i }" :border="false"
 								v-for="(item, i) in mediaList" :key="item.id">
 								<template #body>
-									<view class="image-container">
-										<image :src="item.src" class="image" mode="aspectFill" @click="currentIndex = i" />
+									<view class="media-container">
+										<!-- 圖片顯示 -->
+										<image v-if="item.type === 'image'" :src="item.src" class="media-item" mode="aspectFill"
+											@click="currentIndex = i" />
+										<!-- 影片顯示 -->
+										<video v-else-if="item.type === 'video'" :src="item.src" class="media-item" :controls="false"
+											:autoplay="false" :muted="true" @click="currentIndex = i">
+											<cover-view class="video-play-icon">
+												<uni-icons type="icon-common-play" custom-prefix="icon" size="24" color="white"></uni-icons>
+											</cover-view>
+										</video>
 									</view>
 								</template>
 							</uni-list-item>
@@ -132,6 +147,7 @@ uni-page-body {
 
 	.preview-container-close-icon {
 		font-size: 40rpx !important;
+		filter: contrast(.5);
 	}
 
 	.previewPopup-container {
@@ -193,24 +209,38 @@ uni-page-body {
 	// padding-bottom: var(--footer-height);
 }
 
-.preview-container-image {
+.preview-container-media {
 	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 100dvw;
 	height: 100dvh;
 	aspect-ratio: var(--media-aspect-ratio);
 	overflow: hidden;
 
-	::v-deep(.preview-container-image-item) {
-		uni-image {
-			width: 100%;
-			height: 100% !important;
-			object-fit: cover;
-		}
+	.preview-container-media-item {
+		width: 100%;
+		height: 100% !important;
+		object-fit: cover;
+	}
 
-		uni-image>div {
+	// 圖片樣式
+	::v-deep(uni-image) {
+		width: 100%;
+		height: 100% !important;
+		object-fit: cover;
+
+		>div {
 			background-size: cover !important;
 			background-position: center;
 		}
+	}
+
+	// 影片樣式
+	::v-deep(uni-video) {
+		width: 100%;
+		height: 100% !important;
 	}
 }
 
@@ -280,22 +310,28 @@ uni-page-body {
 	}
 }
 
-.image-container {
+.media-container {
 	width: 80rpx;
 	height: 80rpx;
+	position: relative;
 
+	::v-deep(.media-item) {
+		width: 100% !important;
+		height: 100% !important;
+		border-radius: 8rpx;
+		overflow: hidden;
+	}
 
-	::v-deep(.image) {
-		uni-image {
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			width: 100% !important;
-			height: 100% !important;
-		}
+	// 圖片樣式
+	::v-deep(uni-image) {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 100% !important;
+		height: 100% !important;
 
 		// 背景圖
-		uni-image>div {
+		>div {
 			background-position: center !important;
 			background-size: cover !important;
 		}
@@ -307,6 +343,28 @@ uni-page-body {
 			object-fit: cover;
 			object-position: center;
 		}
+	}
+
+	// 影片樣式
+	::v-deep(uni-video) {
+		width: 100% !important;
+		height: 100% !important;
+	}
+
+	// 影片播放圖標
+	.video-play-icon {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: rgba(0, 0, 0, 0.6);
+		border-radius: 50%;
+		width: 32rpx;
+		height: 32rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 1;
 	}
 }
 

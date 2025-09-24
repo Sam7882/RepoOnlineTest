@@ -27,11 +27,10 @@ export const usePostData = defineStore('postData', {
       poster: 'http://gips0.baidu.com/it/u=3602773692,1512483864&fm=3028',
       // url: "https://picsum.photos/id/1011/300/300",
       url: "https://alimov2.a.yximgs.com/upic/2020/07/02/14/BMjAyMDA3MDIxNDUyMDlfOTExMjIyMjRfMzE1OTEwNjAxNTRfMV8z_b_Bf3005d42ce9c01c0687147428c28d7e6.mp4",
-      ageChecked: false,
-      locked: true,
+      ageChecked: false, // 預設 true
+      locked: true, // 預設 true
       id: 'test006',
-      // type: 'image'
-      type: 'video'
+      type: 'video' // image | video
     }], // ✅ 新增：儲存選取的媒體資料
     manageMedia: [
       { id: '1', type: 'image', dataNum: '1', num: "1688", src: 'https://picsum.photos/id/1011/300/300' },
